@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T08:19:21Z",
+  "built_at": "2026-11-08T08:24:04Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 44,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 552,
+      "ms": 94,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 680,
+      "ms": 602,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 684,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 994,
+      "ms": 868,
       "total": null,
       "why": "ok"
     },
@@ -298,12 +298,6 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
@@ -314,6 +308,12 @@
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "综合",
@@ -340,15 +340,15 @@
     },
     {
       "name": "腾讯",
-      "ok": false,
-      "why": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+      "ok": true,
+      "bytes": 468
     }
   ],
   "external": [
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 45812
     },
     {
       "name": "EPG",
@@ -576,7 +576,7 @@
     "dead_vod": 2,
     "live_files": 3,
     "alive_parses": 0,
-    "alive_doh": 3
+    "alive_doh": 4
   },
   "output_check": [
     {
