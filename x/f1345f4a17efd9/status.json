@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T10:02:02Z",
+  "built_at": "2026-11-08T10:34:30Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 49,
+      "ms": 321,
       "total": null,
       "why": "ok"
     },
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 93,
+      "ms": 559,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 421,
+      "ms": 667,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 781,
+      "ms": 974,
       "total": null,
       "why": "ok"
     },
@@ -286,14 +286,20 @@
   ],
   "parses": [
     {
+      "name": "西瓜",
+      "url": "https://jx.xmflv.com/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "西瓜",
-      "url": "https://jx.xmflv.com/?url=",
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -308,12 +314,6 @@
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
-      "ok": false,
-      "why": "HTTP: <urlopen error timed out>"
     },
     {
       "name": "综合",
@@ -340,8 +340,8 @@
     },
     {
       "name": "腾讯",
-      "ok": true,
-      "bytes": 468
+      "ok": false,
+      "why": "<urlopen error _ssl.c:994: The handshake operation timed out>"
     }
   ],
   "external": [
@@ -352,8 +352,8 @@
     },
     {
       "name": "EPG",
-      "ok": false,
-      "why": "<urlopen error timed out>"
+      "ok": true,
+      "bytes": 2633
     }
   ],
   "channels": [
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 11
+      "files": 12
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 11
+      "files": 12
     }
   ],
   "issues": [
@@ -557,7 +557,7 @@
       "to": "https://www.agit.ai/fantaiying/dr_py/raw/branch/main/js/%E5%AD%90%E5%AD%90%E5%BD%B1%E8%A7%86.js"
     }
   ],
-  "epg_ok": false,
+  "epg_ok": true,
   "vod_total": 6,
   "summary": {
     "sub_configs": [
@@ -576,7 +576,7 @@
     "dead_vod": 2,
     "live_files": 3,
     "alive_parses": 0,
-    "alive_doh": 4
+    "alive_doh": 3
   },
   "output_check": [
     {
@@ -610,6 +610,12 @@
       "problems": []
     },
     {
+      "file": "fs4k3.json",
+      "sites": 14,
+      "lives": 0,
+      "problems": []
+    },
+    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -617,7 +623,7 @@
     }
   ],
   "verify": {
-    "files_checked": 6,
+    "files_checked": 7,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
