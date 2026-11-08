@@ -162,7 +162,7 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          for f in index.json c1.json c2.json c3.json 4k.json; do
+          for f in index.json c1.json c2.json c3.json 4k.json fs4k.json; do
             curl -sS -m 15 -X POST \
               "https://purge.jsdelivr.net/gh/${{ steps.cfg.outputs.user }}/${{ steps.cfg.outputs.repo }}@main/${{ steps.cfg.outputs.sub }}/$f" \
               > /dev/null || true
@@ -202,4 +202,5 @@ jobs:
               git push origin main && break || sleep 3
             done
           fi
+
 
