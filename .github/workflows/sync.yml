@@ -36,21 +36,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      # keepalive 独立于门禁：即使本次构建因上游全挂而中止，
-      # 也要产生一次提交，避免公开仓库 60 天无活动停用定时任务。
-      - name: 保持仓库活跃
-        if: always()
-        continue-on-error: true
-        shell: bash
-        run: |
-          git config user.name  "tvbox-bot"
-          git config user.email "tvbox-bot@users.noreply.github.com"
-          date -u +%Y-%m-%dT%H:%M:%SZ > .last-sync
-          git add .last-sync
-          git diff --cached --quiet || {
-            git commit -m "chore: keepalive $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git push || true
-          }
+      # keepalive 已挪到 job 最后（见文件末尾）：放在最前会在并发运行时
+# 抢先生成提交、把后面的主提交顶成 rejected，反而拖垮 Pages 部署。
 
       # configure-pages 只读取站点元数据。注意：它的 enablement=true 需要
       # 非 GITHUB_TOKEN 的 PAT，对 GITHUB_TOKEN 必然失败，所以这里不启用它；
@@ -127,7 +114,20 @@ jobs:
             echo "本次无变化，跳过提交。"
           else
             git commit -m "chore: sync $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
+            # 并发运行（schedule/dispatch/push 同时触发）时远端可能已有新提交，
+            # 直接 push 会被 rejected (fetch first)，导致后面的 Pages 部署被跳过。
+            # 先 rebase 到远端最新再推，最多重试 5 次。
+            for i in 1 2 3 4 5; do
+              git pull --rebase --autostash origin main || true
+              if git push origin main; then
+                echo "推送成功（第 $i 次）"; break
+              fi
+              if [ "$i" = "5" ]; then
+                echo "推送连续失败，放弃（不影响 Pages 部署，Pages 用的是本地 _site）"
+              else
+                echo "第 $i 次推送被拒，3 秒后重试"; sleep 3
+              fi
+            done
           fi
 
       # jsDelivr 对 @main 分支 URL 有 12h CDN / 7d 浏览器缓存，
@@ -156,3 +156,25 @@ jobs:
       - name: 发布到 GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v4
+
+      # 放在最后：公开仓库 60 天无活动会停用定时任务。
+      # 只有前面全部失败、没产生任何提交时才需要补一次 keepalive，
+      # 避免它抢在主页部署前制造 push 冲突。
+      - name: 保持仓库活跃（兜底）
+        if: failure()
+        continue-on-error: true
+        shell: bash
+        run: |
+          git config user.name  "tvbox-bot"
+          git config user.email "tvbox-bot@users.noreply.github.com"
+          date -u +%Y-%m-%dT%H:%M:%SZ > .last-sync
+          git add .last-sync
+          if git diff --cached --quiet; then
+            echo "无变化"
+          else
+            git commit -m "chore: keepalive $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            for i in 1 2 3; do
+              git pull --rebase --autostash origin main || true
+              git push origin main && break || sleep 3
+            done
+          fi
