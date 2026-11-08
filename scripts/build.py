@@ -1140,6 +1140,51 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         os.makedirs(site_root, exist_ok=True)
         with open(os.path.join(site_root, ".nojekyll"), "w", encoding="utf-8") as f:
             f.write("")
+        # 独立 4K 配置：放在站点根目录 /4konly/index.json，
+        # 与主配置完全隔离（不同 spider jar，切换时才加载，避免互相覆盖导致闪退）。
+        try:
+            _emit_4konly(site_root, templates)
+        except Exception as e:
+            print("  [warn] 4konly 生成失败：", e)
+
+
+def _emit_4konly(site_root, templates):
+    """生成独立的纯 4K 配置到 /4konly/index.json。
+
+    与主配置隔离的原因：影视仓全局只保留一个 spider jar，主配置用的是
+    gao / candymuj 的 jar，4K 线路需要 easy11.05 那个 jar（194 个类）。
+    两者混在同一个多仓里切换时会互相覆盖 → csp_ 类找不到 → 客户端闪退。
+    所以 4K 单独一套地址，用户切换过去时只加载它自己的 jar。
+    """
+    jar = K4_SPIDER + ";md5;" + K4_SPIDER_MD5
+    sites = []
+    for s in SITES_4K:
+        api = str(s.get("api") or "")
+        # 只收 jar 里确认存在的类（PantaAmns 实测不存在，必须排除）
+        if api[4:] in ("PantaAmns",):
+            continue
+        sites.append(dict(s))
+    if not sites:
+        return
+    cfg = {
+        "wallpaper": WALLPAPER,
+        "spider": jar,
+        "sites": sites,
+        "lives": [],
+        "parses": [
+            {"name": "聚合", "type": 0, "url": "Web"},
+            {"name": "并行", "type": 0, "url": "Parallel"},
+        ],
+        "flags": ["youku", "qq", "iqiyi", "qiyi", "letv", "sohu", "tudou",
+                  "pptv", "mgtv", "wasu", "bilibili"],
+        "ads": ADS,
+        "doh": CONF_DOH,
+    }
+    d = os.path.join(site_root, "4konly")
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
+        json.dump(cfg, f, ensure_ascii=False, indent=2)
+    print("   4konly/index.json 已生成（%d 条 4K 线路）" % len(sites))
 
 
 def _inspect_output(templates, report):
