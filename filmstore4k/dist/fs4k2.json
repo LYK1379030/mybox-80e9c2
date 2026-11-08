@@ -15,7 +15,7 @@
     },
     {
       "key": "jian",
-      "name": "建安资源·618ms",
+      "name": "建安资源·489ms",
       "type": 1,
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
       "searchable": 1,
@@ -24,7 +24,7 @@
     },
     {
       "key": "c276",
-      "name": "影视 • 非凡[直连]·723ms",
+      "name": "影视 • 非凡[直连]·646ms",
       "type": 1,
       "api": "http://ffzy.tv/api.php/provide/vod/",
       "searchable": 1,
@@ -32,17 +32,17 @@
       "changeable": 1
     },
     {
-      "key": "360zy",
-      "name": "360资源·836ms",
+      "key": "bfzy",
+      "name": "暴风资源·700ms",
       "type": 1,
-      "api": "https://360zy.com/api.php/provide/vod/",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
     },
     {
       "key": "ffzy",
-      "name": "非凡影视·875ms",
+      "name": "非凡影视·804ms",
       "type": 1,
       "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -51,7 +51,7 @@
     },
     {
       "key": "dytt",
-      "name": "电影天堂·986ms",
+      "name": "电影天堂·838ms",
       "type": 1,
       "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -59,17 +59,26 @@
       "changeable": 1
     },
     {
-      "key": "bfzy",
-      "name": "暴风资源·1231ms",
+      "key": "tyys",
+      "name": "天涯资源·870ms",
       "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "360zy",
+      "name": "360资源·888ms",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
     },
     {
       "key": "lzi",
-      "name": "量子资源·2424ms",
+      "name": "量子资源·897ms",
       "type": 1,
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -77,26 +86,35 @@
       "changeable": 1
     },
     {
-      "key": "modu",
-      "name": "魔都资源·4910ms",
+      "key": "jinying",
+      "name": "金鹰资源·2282ms",
       "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
     },
     {
-      "key": "c5_35",
-      "name": "百度·5320ms",
+      "key": "subo",
+      "name": "速播资源·4009ms",
       "type": 1,
-      "api": "https://api.apibdzy.com/api.php/provide/vod/",
+      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "yinghua",
+      "name": "樱花资源·4678ms",
+      "type": 1,
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
     },
     {
       "key": "sony",
-      "name": "索尼资源·6987ms",
+      "name": "索尼资源·4732ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -104,10 +122,19 @@
       "changeable": 1
     },
     {
-      "key": "subo",
-      "name": "速播资源·8251ms",
+      "key": "c2_5",
+      "name": "影视 • 极速[直连]·4746ms",
       "type": 1,
-      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "c5_35",
+      "name": "百度·4917ms",
+      "type": 1,
+      "api": "https://api.apibdzy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
@@ -121,11 +148,11 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T10:26:33.995Z",
+    "generated": "2026-11-08T10:54:26.972Z",
     "probed": 21,
-    "alive": 11,
-    "hardDead": 7,
-    "totalResources": 1164578,
-    "note": "③线：jar 复用②线 candymuj（切换零成本），玩偶4K + 实测直连源。快映/八零/闪电 已移至③C 大 jar 专线。"
+    "alive": 14,
+    "hardDead": 6,
+    "totalResources": 1485974,
+    "note": "③线稳版：jar 复用②线 candymuj（切线零重载），玩偶4K(csp_Wogg) + 实测直连源。快映/八零/闪电在③C专线。"
   }
 }
