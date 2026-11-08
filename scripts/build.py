@@ -729,6 +729,24 @@ def dedup_sites(sites):
     return out
 
 
+def normalize_ext(site):
+    """把 site["ext"] 统一成 JSON 字符串。
+
+    FongMi 的 Site.java 里 ext 是 String：
+        @SerializedName("ext") private String ext;
+    上游很多配置把 ext 写成 JSON 对象，Gson 解析成 String 会抛
+    「Expected a string but was BEGIN_OBJECT」→ 整个配置解析失败 → 客户端闪退。
+    所以输出前必须把对象/数组序列化成字符串。
+    """
+    if not isinstance(site, dict):
+        return site
+    ext = site.get("ext")
+    if isinstance(ext, (dict, list)):
+        site = dict(site)
+        site["ext"] = json.dumps(ext, ensure_ascii=False, separators=(",", ":"))
+    return site
+
+
 def tune(cfg, health, lives):
     kept, dropped = [], []
     # 先把实测可用的直连采集站塞到最前面：这类点开就出 m3u8，
@@ -770,7 +788,7 @@ def tune(cfg, health, lives):
             s["name"] = str(s.get("name") or s.get("key") or "线路") \
                 + "·" + str(r["ms"]) + "ms"
         kept.append(s)
-    kept = dedup_sites(kept)
+    kept = [normalize_ext(x) for x in dedup_sites(kept)]
     # 排序：先按「能否点开即播」分组（直连 > csp > 网盘），
     # 同组内按实测延迟从低到高，延迟数字最小的排最前。
     for s in kept:
@@ -981,7 +999,7 @@ def main():
         seen.add(k)
         s = dict(s)
         s["name"] = tag + str(s.get("name") or s.get("key") or "线路")
-        hd_sites.append(s)
+        hd_sites.append(normalize_ext(s))
     # 直连专区：先放 4 个实测直连站（点开即播），再补上游里其它直连线路
     for d in DIRECT_SITES:
         add(dict(d), "【直连】")
