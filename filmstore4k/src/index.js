@@ -110,6 +110,12 @@ async function handleCms(url, env, sources, profile) {
   const only4k = profile === "4k";
 
   if (ac === "list") {
+    // ── v2 层级分类体系 ──
+    // 顶级 8 个大区（语义归并）+ 二级子类（源站子类归并到标准名）
+    // type_id 格式：
+    //   "m:<catId>"            顶级虚拟聚合（点击跨源路由）
+    //   "s:<源key>:<源type_id>" 二级单源精确路由
+    //   "q4k" / "new"          虚拟分类（画质/最新）
     if (only4k) {
       return json({
         code: 1,
@@ -122,22 +128,59 @@ async function handleCms(url, env, sources, profile) {
         list: [],
       });
     }
+
+    // 拉全部源的分类，映射进大区
     const types = await aggregateTypes(sources, env);
-    const cls = [];
-    const seen = new Set();
-    for (const c of VIRTUAL_CATS) {
-      cls.push({ type_id: c.type_id, type_pid: "0", type_name: c.type_name });
-      seen.add(c.type_id);
+    const { TOP_CATS, VIRTUAL_TOP, classifySourceCat } = await import("./cats.js");
+
+    // 大区 → 子类归并桶
+    const topBuckets = new Map(); // topId -> { name, subs: Map<std -> [{source_key,type_id}]> }
+    for (const t of TOP_CATS) {
+      topBuckets.set(t.id, { name: t.name, subs: new Map() });
     }
+
     for (const t of types) {
       for (const c of t.class || []) {
-        // 用 "源key-原始typeid" 避免各源 type_id 冲突
-        const tid = `${t.source_key}-${c.type_id}`;
-        if (seen.has(tid)) continue;
-        seen.add(tid);
-        cls.push({ type_id: tid, type_pid: "0", type_name: `${c.type_name}` });
+        const mapped = classifySourceCat({ ...c, source_key: t.source_key });
+        if (!mapped) continue;
+        const bucket = topBuckets.get(mapped.topId);
+        if (!bucket) continue;
+        if (mapped.sub) {
+          // 有归并子类：同一标准子名下的多个源类目共用一个二级入口，
+          // 点击时跨源路由（同顶级虚拟路由逻辑）
+          if (!bucket.subs.has(mapped.sub.std)) {
+            bucket.subs.set(mapped.sub.std, { typeId: mapped.sub.typeId, sources: [] });
+          }
+          bucket.subs.get(mapped.sub.std).sources.push({
+            source_key: t.source_key,
+            type_id: c.type_id,
+          });
+        }
       }
     }
+
+    // 组装 class 数组（两级：pid=0 顶级，pid=顶级id 二级）
+    const cls = [];
+    // 虚拟分类排最前
+    for (const v of VIRTUAL_TOP) {
+      cls.push({ type_id: v.id, type_pid: "0", type_name: v.name });
+    }
+    // 大区 + 二级
+    for (const t of TOP_CATS) {
+      const tid = `m:${t.id}`;
+      cls.push({ type_id: tid, type_pid: "0", type_name: t.name });
+      const bucket = topBuckets.get(t.id);
+      if (bucket) {
+        for (const [std, info] of bucket.subs) {
+          cls.push({
+            type_id: `x:${t.id}:${encodeURIComponent(std)}`, // 跨源二级路由
+            type_pid: tid,
+            type_name: "  " + std, // 缩进表示层级
+          });
+        }
+      }
+    }
+
     return json({
       code: 1,
       msg: "数据列表",
@@ -209,7 +252,104 @@ async function handleCms(url, env, sources, profile) {
     );
   }
 
-  // "源key-原始typeid"
+  // ── v2 层级分类路由 ──
+
+  // "m:<catId>" 顶级虚拟聚合：跨源拉对应大区的条目
+  if (typeId.startsWith("m:")) {
+    const catId = typeId.slice(2);
+    const { TOP_CATS } = await import("./cats.js");
+    const top = TOP_CATS.find((t) => t.id === catId);
+    if (!top) return json(cmsResponse({ page: pg, list: [] }));
+    const r = await cached(`cms:top:${catId}:${pg}`, ttl(env, 300), async () => {
+      // 每源查其所属该大区的主类目第一页，聚合去重
+      const results = await Promise.all(sources.map(async (s) => {
+        try {
+          const cls = (await typesFromSource(s, s.timeout)).class || [];
+          // 找该源里匹配大区的类目（优先 pid=0 根类目，其次子类）
+          const matched = cls.filter((c) => top.re.test(String(c.type_name || "")));
+          if (!matched.length) return [];
+          // 优先根类目（条目最全），否则取第一个匹配子类
+          const root = matched.find((c) => String(c.type_pid) === "0") || matched[0];
+          const d = await listFromSource(s, { pg, typeId: root.type_id, timeoutMs: s.timeout });
+          return d.list || [];
+        } catch { return []; }
+      }));
+      const merged = results.flat().map(annotate4k);
+      merged.sort((a, b) => (b.vod_time || "").localeCompare(a.vod_time || ""));
+      return { list: merged.slice(0, 60), count: merged.length };
+    }, env);
+    return json(
+      cmsResponse({ page: pg, pagecount: 20, limit: 60, total: r.value.count || 0, list: r.value.list || [] })
+    );
+  }
+
+  // "x:<catId>:<std>" 跨源二级：聚合所有源里该子类的条目
+  if (typeId.startsWith("x:")) {
+    const parts = typeId.split(":");
+    const catId = parts[1];
+    const std = decodeURIComponent(parts[2] || "");
+    const { TOP_CATS } = await import("./cats.js");
+    const top = TOP_CATS.find((t) => t.id === catId);
+    if (!top || !std) return json(cmsResponse({ page: pg, list: [] }));
+    const subRule = top.subs.find((s) => s.std === std);
+    if (!subRule) return json(cmsResponse({ page: pg, list: [] }));
+    const r = await cached(`cms:sub:${catId}:${std}:${pg}`, ttl(env, 300), async () => {
+      const results = await Promise.all(sources.map(async (s) => {
+        try {
+          const cls = (await typesFromSource(s, s.timeout)).class || [];
+          // 该源里名字匹配子规则的类目（可能有多个，全部取）
+          const matched = cls.filter((c) => subRule.re.test(String(c.type_name || "")) && top.re.test(String(c.type_name || "")));
+          const lists = [];
+          for (const c of matched.slice(0, 2)) { // 每源最多查 2 个匹配类目
+            try {
+              const d = await listFromSource(s, { pg, typeId: c.type_id, timeoutMs: s.timeout });
+              lists.push(...(d.list || []));
+            } catch {}
+          }
+          return lists;
+        } catch { return []; }
+      }));
+      const merged = results.flat().map(annotate4k);
+      // 跨源同名去重
+      const seen = new Set();
+      const uniq = merged.filter((it) => {
+        const k = `${it.vod_name}|${it.vod_year || ""}`;
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      });
+      uniq.sort((a, b) => (b.vod_time || "").localeCompare(a.vod_time || ""));
+      return { list: uniq.slice(0, 60), count: uniq.length };
+    }, env);
+    return json(
+      cmsResponse({ page: pg, pagecount: 20, limit: 60, total: r.value.count || 0, list: r.value.list || [] })
+    );
+  }
+
+  // "s:<源key>:<源type_id>" 单源精确路由
+  if (typeId.startsWith("s:")) {
+    const seg = typeId.split(":");
+    const sk = seg[1];
+    const rawTid = seg[2];
+    const src = sources.find((s) => s.key === sk);
+    if (src) {
+      const r = await cached(`cms:st:${sk}:${rawTid}:${pg}`, ttl(env), async () => {
+        const d = await listFromSource(src, { pg, typeId: rawTid, timeoutMs: src.timeout });
+        return { list: d.list.map(annotate4k), total: d.total, pagecount: d.pagecount };
+      }, env);
+      return json(
+        cmsResponse({
+          page: pg,
+          pagecount: r.value.pagecount || 1,
+          limit: 60,
+          total: r.value.total || 0,
+          list: r.value.list || [],
+        })
+      );
+    }
+  }
+
+  // 旧格式兼容："源key-原始typeid"
   if (typeId.includes("-")) {
     const cut = typeId.indexOf("-");
     const sk = typeId.slice(0, cut);
