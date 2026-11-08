@@ -1,95 +1,113 @@
 {
-  "updatedAt": "2026-11-08T10:26:33.999Z",
+  "updatedAt": "2026-11-08T10:54:26.978Z",
   "alive": [
     {
       "key": "jian",
       "name": "建安资源",
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-      "ms": 618,
+      "ms": 489,
       "total": 65123
     },
     {
       "key": "c276",
       "name": "影视 • 非凡[直连]",
       "api": "http://ffzy.tv/api.php/provide/vod/",
-      "ms": 723,
+      "ms": 646,
       "total": 99009
     },
     {
-      "key": "360zy",
-      "name": "360资源",
-      "api": "https://360zy.com/api.php/provide/vod/",
-      "ms": 836,
-      "total": 74666
+      "key": "bfzy",
+      "name": "暴风资源",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "ms": 700,
+      "total": 171196
     },
     {
       "key": "ffzy",
       "name": "非凡影视",
       "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-      "ms": 875,
+      "ms": 804,
       "total": 99009
     },
     {
       "key": "dytt",
       "name": "电影天堂",
       "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "ms": 986,
+      "ms": 838,
       "total": 85036
     },
     {
-      "key": "bfzy",
-      "name": "暴风资源",
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
-      "ms": 1231,
-      "total": 171196
+      "key": "tyys",
+      "name": "天涯资源",
+      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "ms": 870,
+      "total": 73732
+    },
+    {
+      "key": "360zy",
+      "name": "360资源",
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "ms": 888,
+      "total": 74668
     },
     {
       "key": "lzi",
       "name": "量子资源",
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
-      "ms": 2424,
+      "ms": 897,
       "total": 163132
     },
     {
-      "key": "modu",
-      "name": "魔都资源",
-      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
-      "ms": 4910,
-      "total": 91497
-    },
-    {
-      "key": "c5_35",
-      "name": "百度",
-      "api": "https://api.apibdzy.com/api.php/provide/vod/",
-      "ms": 5320,
-      "total": 49596
-    },
-    {
-      "key": "sony",
-      "name": "索尼资源",
-      "api": "https://suoniapi.com/api.php/provide/vod/",
-      "ms": 6987,
-      "total": 148575
+      "key": "jinying",
+      "name": "金鹰资源",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "ms": 2282,
+      "total": 117810
     },
     {
       "key": "subo",
       "name": "速播资源",
       "api": "https://subocaiji.com/api.php/provide/vod/",
-      "ms": 8251,
-      "total": 117739
+      "ms": 4009,
+      "total": 117750
+    },
+    {
+      "key": "yinghua",
+      "name": "樱花资源",
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+      "ms": 4678,
+      "total": 105181
+    },
+    {
+      "key": "sony",
+      "name": "索尼资源",
+      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "ms": 4732,
+      "total": 148575
+    },
+    {
+      "key": "c2_5",
+      "name": "影视 • 极速[直连]",
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "ms": 4746,
+      "total": 116157
+    },
+    {
+      "key": "c5_35",
+      "name": "百度",
+      "api": "https://api.apibdzy.com/api.php/provide/vod/",
+      "ms": 4917,
+      "total": 49596
     }
   ],
   "dead": {
-    "haiwaikan.com": 7,
-    "kuaifan.tv": 7,
-    "wolongzyw.com": 7,
-    "ukuapi.com": 7,
-    "jinchancaiji.com": 7,
-    "okcdn100.top": 7,
-    "jszyapi.com": 5,
-    "tyyszy.com": 1,
-    "apiyhzy.com": 1,
-    "jyzyapi.com": 1
+    "haiwaikan.com": 8,
+    "kuaifan.tv": 8,
+    "wolongzyw.com": 8,
+    "ukuapi.com": 8,
+    "jinchancaiji.com": 8,
+    "okcdn100.top": 8,
+    "mdzyapi.com": 1
   },
   "hardDead": [
     "haiwaikan.com",
@@ -97,7 +115,6 @@
     "wolongzyw.com",
     "ukuapi.com",
     "jinchancaiji.com",
-    "okcdn100.top",
-    "jszyapi.com"
+    "okcdn100.top"
   ]
 }
