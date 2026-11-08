@@ -1024,7 +1024,7 @@ def main():
     _ = fourk_real
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
-    entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
+    entries = [{"name": "%s" % (names.get(u, u)),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
     # ---- ③ 聚合·实时筛选线路（filmstore4k 产物，构建期自动实测源存活）----
     # 产物由 filmstore4k/build-fs4k.js 生成（node filmstore4k/build-fs4k.js），
