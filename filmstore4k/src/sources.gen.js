@@ -1,0 +1,76 @@
+// 自动生成，请勿手改。改完 sources.json 后运行： node scripts/gen-sources.js
+export default {
+  "version": 2,
+  "defaults": {
+    "timeout": 6000,
+    "cacheTtl": 120
+  },
+  "sources": [
+    {
+      "key": "bfzy",
+      "name": "暴风资源",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "note": "171111 条，最快最稳"
+    },
+    {
+      "key": "lzi",
+      "name": "量子资源",
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "note": "163082 条"
+    },
+    {
+      "key": "ffzy",
+      "name": "非凡影视",
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "note": "99007 条"
+    },
+    {
+      "key": "dytt",
+      "name": "电影天堂",
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+      "note": "85034 条"
+    },
+    {
+      "key": "tyys",
+      "name": "天涯资源",
+      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "note": "73731 条，稍慢"
+    },
+    {
+      "key": "jian",
+      "name": "建安资源",
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+      "note": "65123 条"
+    },
+    {
+      "key": "jisu",
+      "name": "极速资源",
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "note": "116079 条，偶发超时"
+    },
+    {
+      "key": "360zy",
+      "name": "360资源",
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "note": "74657 条"
+    },
+    {
+      "key": "subo",
+      "name": "速播资源",
+      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "note": "117672 条，响应较慢"
+    },
+    {
+      "key": "yinghua",
+      "name": "樱花资源",
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+      "note": "105181 条"
+    },
+    {
+      "key": "jinying",
+      "name": "金鹰资源",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "note": "117731 条"
+    }
+  ]
+};
