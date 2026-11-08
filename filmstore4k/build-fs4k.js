@@ -82,10 +82,45 @@ async function fetchText(url, timeout = 25000) {
   } catch { return null; }
 }
 
+/** 候选合法性预检：挡掉投毒/内网/回环/带凭据的 api（故障注入5的修复） */
+function isSafeCandidate(api) {
+  const s = String(api || "");
+  if (!/^https?:\/\//i.test(s)) return false;
+  try {
+    const u = new URL(s);
+    // 凭据不允许出现在 URL 里
+    if (u.username || u.password) return false;
+    const host = u.hostname.toLowerCase();
+    // 回环 / 内网段 / 本机名 / 元数据端点
+    if (
+      host === "localhost" ||
+      /^127\./.test(host) ||
+      /^10\./.test(host) ||
+      /^192\.168\./.test(host) ||
+      /^172\.(1[6-9]|2\d|3[01])\./.test(host) ||
+      /^169\.254\./.test(host) ||
+      /^0\./.test(host) ||
+      host === "metadata.google.internal" ||
+      host.endsWith(".local") ||
+      host.endsWith(".internal")
+    ) return false;
+    // 必须是苹果CMS 形态
+    if (!/api\.php|provide\/vod/i.test(s)) return false;
+    return true;
+  } catch { return false; }
+}
+
 /** 实测一个源：ac=videolist 必须返回 code=1 + 非空 list */
 async function probeSource(s) {
   const t0 = Date.now();
-  const u = new URL(s.api);
+  // new URL 必须在 try 内：源池记忆可能被写坏（故障注入1/2 的修复），
+  // 单条坏数据只能影响自己，绝不能让整条构建链崩掉
+  let u;
+  try {
+    u = new URL(s.api);
+  } catch (e) {
+    return { ...s, ok: false, ms: 0, err: "api 非法" };
+  }
   u.searchParams.set("ac", "videolist");
   u.searchParams.set("pg", "1");
   try {
@@ -119,7 +154,8 @@ function harvestApis(jsonText, seen, keyByApi) {
   const sites = Array.isArray(j?.sites) ? j.sites : [];
   for (const s of sites) {
     const api = String(s.api || "");
-    if (!/^https?:\/\//i.test(api) || !/api\.php|provide\/vod/i.test(api)) continue;
+    // 社区源投毒门禁：内网/回环/凭据/非CMS形态全部拦掉（isSafeCandidate）
+    if (!isSafeCandidate(api)) continue;
     const k = normKey(api);
     if (seen.has(k)) continue;
     seen.add(k);
@@ -169,8 +205,14 @@ for (const s of CORE_SOURCES) {
   if (!seen.has(k)) { seen.add(k); keyByApi.set(s.key, k); candidates.push(s); }
 }
 for (const s of pool.alive || []) {
+  // 记忆池可能被写坏/投毒：过 isSafeCandidate 门禁再入候选
   const k = normKey(s.api);
-  if (!seen.has(k)) { seen.add(k); keyByApi.set(s.key, k); candidates.push({ key: s.key, name: s.name, api: s.api, from: "pool" }); }
+  if (seen.has(k)) continue;
+  if (!isSafeCandidate(s.api)) {
+    console.log(`[门禁] 记忆池脏数据已拦截: ${String(s.api).slice(0, 60)}`);
+    continue;
+  }
+  seen.add(k); keyByApi.set(s.key, k); candidates.push({ key: s.key, name: s.name, api: s.api, from: "pool" });
 }
 const fresh = [];
 for (const feed of DISCOVERY_FEEDS) {
