@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T12:46:18Z",
+  "built_at": "2026-11-08T12:49:02Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 310,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 560,
+      "ms": 33,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 560,
+      "ms": 358,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 506,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 892,
+      "ms": 1087,
       "total": null,
       "why": "ok"
     },
@@ -286,22 +286,28 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
       "name": "综合",
       "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "771949",
@@ -313,13 +319,7 @@
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
