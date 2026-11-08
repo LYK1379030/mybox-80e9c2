@@ -1,0 +1,15 @@
+{
+  "sites": [
+    {
+      "key": "k4",
+      "name": "测试-无jar",
+      "type": 1,
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    }
+  ],
+  "lives": [],
+  "parses": []
+}
