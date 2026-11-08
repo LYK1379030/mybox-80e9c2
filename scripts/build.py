@@ -1142,10 +1142,9 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
             f.write("")
         # 独立 4K 配置：放在站点根目录 /4konly/index.json，
         # 与主配置完全隔离（不同 spider jar，切换时才加载，避免互相覆盖导致闪退）。
-        try:
-            _emit_4konly(site_root, templates)
-        except Exception as e:
-            print("  [warn] 4konly 生成失败：", e)
+        # 已停用 4konly：实测 csp_ 插件在该 jar 下仍会使影视仓闪退，
+        # 不再产出任何会让用户切换过去崩溃的配置。
+        pass
 
 
 def _emit_4konly(site_root, templates):
