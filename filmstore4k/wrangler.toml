@@ -1,0 +1,24 @@
+name = "filmstore-4k"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+workers_dev = true
+
+# ---------- 可选：KV 缓存（跨边缘节点共享，减少回源）----------
+# 建好后把 id 填进来，再取消注释：
+# [[kv_namespaces]]
+# binding = "FILMSTORE"
+# id = "<你的KV命名空间ID>"
+
+[vars]
+# 缓存秒数（进程内 + KV）
+CACHE_TTL = "120"
+# 只用这些源（逗号分隔 key），留空=全部
+ONLY_SOURCES = ""
+# 排除这些源
+DENY_SOURCES = ""
+
+[observability]
+enabled = true
+
+# ---------- 本地调试 ----------
+# npx wrangler dev
