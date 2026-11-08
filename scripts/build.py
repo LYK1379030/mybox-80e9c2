@@ -1041,6 +1041,11 @@ def main():
                 # fs4k2 = 版本化副本（全新缓存键）：jsDelivr 对改坏过的路径可能钉死旧缓存，
                 # index 指向 fs4k2.json 绕开一切历史污染（实战教训）
                 templates["fs4k2.json"] = _fs4k_text
+                # fs4k3 = 纯直连保底线（零 jar 依赖），任何客户端保证可用
+                const _fs4k3_direct = _fs4k["sites"].filter(s => /^https?:\\/\\/.test(String(s.api || "")));
+                if (_fs4k3_direct.length) {
+                    templates["fs4k3.json"] = JSON.stringify({..._fs4k, spider: "", sites: _fs4k3_direct}, null, 2).replace(/^/, "");
+                }
                 entries.insert(2, {"name": "③ 聚合·实时筛选（%d 站·%s）" % (
                     len(_fs4k["sites"]),
                     (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
