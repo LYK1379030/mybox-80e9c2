@@ -1035,9 +1035,8 @@ def main():
             with open(_fs4k_path, encoding="utf-8") as _f:
                 _fs4k = json.load(_f)
             if _fs4k.get("sites"):
-                # 同步到输出目录，作为多仓子线路
-                with open(os.path.join(OUT, SUB, "fs4k.json"), "w", encoding="utf-8") as _of:
-                    json.dump(_fs4k, _of, ensure_ascii=False, indent=2)
+                # 注册进 templates：随双通道一起输出 + 通过自检校验
+                templates["fs4k.json"] = json.dumps(_fs4k, ensure_ascii=False, indent=2)
                 entries.insert(2, {"name": "③ 聚合·实时筛选（%d 站·%s）" % (
                     len(_fs4k["sites"]),
                     (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
