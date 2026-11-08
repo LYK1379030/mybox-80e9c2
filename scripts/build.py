@@ -1046,7 +1046,7 @@ def main():
                 _fs4k3_direct = [s for s in _fs4k["sites"] if str(s.get("api", "")).startswith("http")]
                 if _fs4k3_direct:
                     _fs4k3 = dict(_fs4k)
-                    _fs4k3["spider"] = ""
+                    # spider 继承 config（candymuj）——无 jar 方案实测切线会触发影视仓 BadTokenException
                     _fs4k3["sites"] = _fs4k3_direct
                     templates["fs4k3.json"] = json.dumps(_fs4k3, ensure_ascii=False, indent=2)
                     print("   ③B fs4k3.json 纯直连保底线已接入（%d 站）" % len(_fs4k3_direct))
@@ -1055,7 +1055,7 @@ def main():
                     (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
                     "url": SELF + "/fs4k2.json"})
                 if templates.get("fs4k3.json"):
-                    entries.insert(1, {"name": " 2 备用·纯直连保底（最稳·无4K网盘）",
+                    entries.insert(1, {"name": " 2 备用·纯直连保底（最稳）",
                                        "url": SELF + "/fs4k3.json"})
                 if os.path.isfile(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json")):
                     templates["fs4kc.json"] = open(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json"), encoding="utf-8").read()
