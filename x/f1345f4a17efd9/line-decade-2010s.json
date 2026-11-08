@@ -1,0 +1,101 @@
+{
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
+  "wallpaper": "https://picsum.photos/1280/720",
+  "sites": [
+    {
+      "key": "decade_2010s_jian_0",
+      "name": "【2010年代】建安资源",
+      "type": 1,
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_c276_1",
+      "name": "【2010年代】影视 • 非凡[直连]",
+      "type": 1,
+      "api": "http://ffzy.tv/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_bfzy_2",
+      "name": "【2010年代】暴风资源",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_ffzy_3",
+      "name": "【2010年代】非凡影视",
+      "type": 1,
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_dytt_4",
+      "name": "【2010年代】电影天堂",
+      "type": 1,
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_360zy_5",
+      "name": "【2010年代】360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_lzi_6",
+      "name": "【2010年代】量子资源",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    }
+  ],
+  "lives": [],
+  "parses": [],
+  "flags": [
+    "m3u8",
+    "mp4"
+  ],
+  "ads": [],
+  "_meta": {
+    "generated": "2026-11-08T14:03:15.549Z",
+    "producer": "scripts/build-lines.mjs",
+    "jar": "candymuj（与★1/②一致，切线零重载）",
+    "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",
+    "kind": "decade",
+    "decade": "2010年代",
+    "slug": "2010s",
+    "realCount": 10,
+    "emptyFallback": false
+  }
+}
