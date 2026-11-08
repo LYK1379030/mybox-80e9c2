@@ -1,5 +1,5 @@
 {
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar",
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
@@ -25,10 +25,10 @@
       "ext": ""
     },
     {
-      "key": "sports_bfzy_2",
-      "name": "【体育】暴风资源",
+      "key": "sports_jinying_2",
+      "name": "【体育】金鹰资源",
       "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -58,10 +58,10 @@
       "ext": ""
     },
     {
-      "key": "sports_jinying_5",
-      "name": "【体育】金鹰资源",
+      "key": "sports_bfzy_5",
+      "name": "【体育】暴风资源",
       "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -69,21 +69,21 @@
       "ext": ""
     },
     {
-      "key": "sports_lzi_6",
-      "name": "【体育】量子资源",
-      "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "sports_360zy_7",
+      "key": "sports_360zy_6",
       "name": "【体育】360资源",
       "type": 1,
       "api": "https://360zy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "sports_lzi_7",
+      "name": "【体育】量子资源",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -99,7 +99,7 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T14:17:53.138Z",
+    "generated": "2026-11-08T15:39:31.585Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",

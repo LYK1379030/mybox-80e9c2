@@ -1,5 +1,5 @@
 {
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar",
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
@@ -36,10 +36,10 @@
       "ext": ""
     },
     {
-      "key": "decade_2010s_bfzy_3",
-      "name": "【2010年代】暴风资源",
+      "key": "decade_2010s_jinying_3",
+      "name": "【2010年代】金鹰资源",
       "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -58,18 +58,7 @@
       "ext": ""
     },
     {
-      "key": "decade_2010s_dytt_5",
-      "name": "【2010年代】电影天堂",
-      "type": 1,
-      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_2010s_subo_6",
+      "key": "decade_2010s_subo_5",
       "name": "【2010年代】速播资源",
       "type": 1,
       "api": "https://subocaiji.com/api.php/provide/vod/",
@@ -80,7 +69,29 @@
       "ext": ""
     },
     {
-      "key": "decade_2010s_tyys_7",
+      "key": "decade_2010s_dytt_6",
+      "name": "【2010年代】电影天堂",
+      "type": 1,
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_bfzy_7",
+      "name": "【2010年代】暴风资源",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_tyys_8",
       "name": "【2010年代】天涯资源",
       "type": 1,
       "api": "http://tyyszy.com/api.php/provide/vod/",
@@ -91,29 +102,7 @@
       "ext": ""
     },
     {
-      "key": "decade_2010s_jian_8",
-      "name": "【2010年代】建安资源",
-      "type": 1,
-      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_2010s_jinying_9",
-      "name": "【2010年代】金鹰资源",
-      "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_2010s_ffzy_10",
+      "key": "decade_2010s_ffzy_9",
       "name": "【2010年代】非凡影视",
       "type": 1,
       "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
@@ -124,10 +113,10 @@
       "ext": ""
     },
     {
-      "key": "decade_2010s_lzi_11",
-      "name": "【2010年代】量子资源",
+      "key": "decade_2010s_jian_10",
+      "name": "【2010年代】建安资源",
       "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -135,10 +124,21 @@
       "ext": ""
     },
     {
-      "key": "decade_2010s_360zy_12",
+      "key": "decade_2010s_360zy_11",
       "name": "【2010年代】360资源",
       "type": 1,
       "api": "https://360zy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2010s_lzi_12",
+      "name": "【2010年代】量子资源",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -154,14 +154,15 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T14:17:54.924Z",
+    "generated": "2026-11-08T15:39:33.589Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",
     "kind": "decade",
     "decade": "2010年代",
     "slug": "2010s",
-    "realCount": 14,
-    "emptyFallback": false
+    "sampledCount": 16,
+    "sampledListed": 16,
+    "empty": false
   }
 }

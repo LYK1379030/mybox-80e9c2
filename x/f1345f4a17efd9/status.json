@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T14:17:55Z",
+  "built_at": "2026-11-08T15:39:33Z",
   "upstreams": [
     {
       "id": "c1",
@@ -18,48 +18,38 @@
   ],
   "spider_md5": [
     {
-      "url": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/jar/custom_spider.jar",
-      "old_md5": "41c87635d7592069884a5dafa12acabe",
-      "new_md5": "41c87635d7592069884a5dafa12acabe",
-      "match": true,
-      "bytes": 266777,
-      "ok": true
-    },
-    {
       "url": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar",
-      "old_md5": "ec8ab1bcb078290e4f5a0d1449393a69",
-      "new_md5": "9f391d889e28d3c40092fabb562f408c",
-      "match": false,
-      "bytes": 685892,
-      "ok": true
+      "stripped_md5": true,
+      "ok": true,
+      "match": true
     }
   ],
   "vod_lines": [
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 117,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 301,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 615,
+      "ms": 71,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 672,
+      "ms": 416,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 421,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 866,
       "total": null,
       "why": "ok"
     },
@@ -286,28 +276,22 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
       "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "爱酷",
@@ -316,10 +300,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     }
   ],
   "doh": [
@@ -348,7 +338,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 23401
     },
     {
       "name": "EPG",
@@ -372,9 +362,12 @@
   ],
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
-    "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> 9f391d889e28d3c40092fabb562f408c",
+    "已剥离 spider 的 ;md5; 校验段: candymuj.jar",
+    "已剥离 spider 的 ;md5; 校验段（纯 URL 策略）",
     "已剔除 2 条失活点播线路（正常自愈）"
   ],
+  "stale": false,
+  "stale_reason": "",
   "url_fixes": [
     {
       "field": "url_encode",
@@ -623,37 +616,37 @@
     },
     {
       "file": "line-movie.json",
-      "sites": 15,
+      "sites": 14,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-tv.json",
-      "sites": 15,
+      "sites": 14,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-anime.json",
-      "sites": 15,
+      "sites": 14,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-variety.json",
-      "sites": 15,
+      "sites": 14,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-doc.json",
-      "sites": 15,
+      "sites": 13,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-short.json",
-      "sites": 1,
+      "sites": 12,
       "lives": 0,
       "problems": []
     },
@@ -677,7 +670,7 @@
     },
     {
       "file": "line-decade-2020s.json",
-      "sites": 15,
+      "sites": 14,
       "lives": 0,
       "problems": []
     },
@@ -695,25 +688,25 @@
     },
     {
       "file": "line-decade-90s.json",
-      "sites": 15,
+      "sites": 0,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-decade-80s.json",
-      "sites": 1,
+      "sites": 0,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-decade-older.json",
-      "sites": 15,
+      "sites": 0,
       "lives": 0,
       "problems": []
     },
     {
       "file": "line-decade-unknown.json",
-      "sites": 15,
+      "sites": 0,
       "lives": 0,
       "problems": []
     },
@@ -735,7 +728,7 @@
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
-    "issues": 3,
+    "issues": 4,
     "dead_vod_removed": 2,
     "all_absolute": true
   },

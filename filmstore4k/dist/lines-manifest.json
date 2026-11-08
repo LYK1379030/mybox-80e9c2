@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-08T14:02:48.627Z",
+  "generated": "2026-11-08T15:39:30.469Z",
   "producer": "scripts/build-lines.mjs",
   "currentUtcYear": 2026,
   "yearMax": 2027,
@@ -12,7 +12,7 @@
     "更早",
     "年代不详"
   ],
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar",
   "lines": [
     {
       "file": "line-movie.json",
@@ -20,16 +20,9 @@
       "kind": "category",
       "catId": "movie",
       "label": "电影",
-      "sitesCount": 11,
-      "matchedClasses": 105,
+      "sitesCount": 14,
+      "matchedClasses": 121,
       "catMap": [
-        {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "1",
-          "type_name": "电影",
-          "sub": ""
-        },
         {
           "source_key": "c276",
           "source_api": "http://ffzy.tv/api.php/provide/vod/",
@@ -89,13 +82,461 @@
         {
           "source_key": "c276",
           "source_api": "http://ffzy.tv/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "记录片",
+          "type_id": "34",
+          "type_name": "伦理片",
+          "sub": "伦理"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电影",
           "sub": ""
         },
         {
-          "source_key": "c276",
-          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "62",
+          "type_name": "4K电影",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "70",
+          "type_name": "邵氏电影",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "71",
+          "type_name": "Netflix电影",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "电影",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "伦理片",
+          "sub": "伦理"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "电影",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "伦理片",
+          "sub": "伦理"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "电影",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "39",
+          "type_name": "伦理片",
+          "sub": "伦理"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电影",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "22",
+          "type_name": "伦理片",
+          "sub": "伦理"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电影片",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "34",
+          "type_name": "伦理片",
+          "sub": "伦理"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电影",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
           "type_id": "34",
           "type_name": "伦理片",
           "sub": "伦理"
@@ -159,13 +600,6 @@
         {
           "source_key": "bfzy",
           "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "28",
-          "type_name": "纪录片",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
           "type_id": "29",
           "type_name": "理论片",
           "sub": "伦理"
@@ -178,146 +612,6 @@
           "sub": ""
         },
         {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "1",
-          "type_name": "电影片",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "6",
-          "type_name": "动作片",
-          "sub": "动作"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "7",
-          "type_name": "喜剧片",
-          "sub": "喜剧"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "8",
-          "type_name": "爱情片",
-          "sub": "爱情"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "9",
-          "type_name": "科幻片",
-          "sub": "科幻"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "10",
-          "type_name": "恐怖片",
-          "sub": "恐怖"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "11",
-          "type_name": "剧情片",
-          "sub": "剧情"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "12",
-          "type_name": "战争片",
-          "sub": "战争"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "记录片",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "34",
-          "type_name": "伦理片",
-          "sub": "伦理"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "1",
-          "type_name": "电影片",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "6",
-          "type_name": "动作片",
-          "sub": "动作"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "7",
-          "type_name": "喜剧片",
-          "sub": "喜剧"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "8",
-          "type_name": "爱情片",
-          "sub": "爱情"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "9",
-          "type_name": "科幻片",
-          "sub": "科幻"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "10",
-          "type_name": "恐怖片",
-          "sub": "恐怖"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "11",
-          "type_name": "剧情片",
-          "sub": "剧情"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "12",
-          "type_name": "战争片",
-          "sub": "战争"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "记录片",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "34",
-          "type_name": "伦理片",
-          "sub": "伦理"
-        },
-        {
           "source_key": "tyys",
           "source_api": "http://tyyszy.com/api.php/provide/vod/",
           "type_id": "1",
@@ -374,10 +668,73 @@
           "sub": "战争"
         },
         {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "纪录片",
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电影片",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "动作片",
+          "sub": "动作"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "喜剧片",
+          "sub": "喜剧"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "爱情片",
+          "sub": "爱情"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "科幻片",
+          "sub": "科幻"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "10",
+          "type_name": "恐怖片",
+          "sub": "恐怖"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "剧情片",
+          "sub": "剧情"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "12",
+          "type_name": "战争片",
+          "sub": "战争"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "34",
+          "type_name": "伦理片",
+          "sub": "伦理"
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电影",
           "sub": ""
         },
         {
@@ -444,13 +801,6 @@
           "sub": "战争"
         },
         {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "27",
-          "type_name": "纪录片",
-          "sub": ""
-        },
-        {
           "source_key": "lzi",
           "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
           "type_id": "1",
@@ -505,13 +855,6 @@
           "type_id": "12",
           "type_name": "战争片",
           "sub": "战争"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "记录片",
-          "sub": ""
         },
         {
           "source_key": "lzi",
@@ -526,251 +869,23 @@
           "type_id": "35",
           "type_name": "电影解说",
           "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "电影",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "8",
-          "type_name": "伦理片",
-          "sub": "伦理"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "9",
-          "type_name": "动作片",
-          "sub": "动作"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "10",
-          "type_name": "爱情片",
-          "sub": "爱情"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "11",
-          "type_name": "喜剧片",
-          "sub": "喜剧"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "12",
-          "type_name": "科幻片",
-          "sub": "科幻"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "恐怖片",
-          "sub": "恐怖"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "剧情片",
-          "sub": "剧情"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "战争片",
-          "sub": "战争"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "记录片",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "1",
-          "type_name": "电影",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "5",
-          "type_name": "纪录片",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "6",
-          "type_name": "动作片",
-          "sub": "动作"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "7",
-          "type_name": "爱情片",
-          "sub": "爱情"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "8",
-          "type_name": "科幻片",
-          "sub": "科幻"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "9",
-          "type_name": "战争片",
-          "sub": "战争"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "10",
-          "type_name": "剧情片",
-          "sub": "剧情"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "11",
-          "type_name": "恐怖片",
-          "sub": "恐怖"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "12",
-          "type_name": "喜剧片",
-          "sub": "喜剧"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "动漫电影",
-          "sub": "动画电影"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "22",
-          "type_name": "伦理片",
-          "sub": "伦理"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "1",
-          "type_name": "电影",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "6",
-          "type_name": "动作片",
-          "sub": "动作"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "7",
-          "type_name": "喜剧片",
-          "sub": "喜剧"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "8",
-          "type_name": "爱情片",
-          "sub": "爱情"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "9",
-          "type_name": "科幻片",
-          "sub": "科幻"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "10",
-          "type_name": "恐怖片",
-          "sub": "恐怖"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "11",
-          "type_name": "剧情片",
-          "sub": "剧情"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "12",
-          "type_name": "战争片",
-          "sub": "战争"
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "纪录片",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "62",
-          "type_name": "4K电影",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "70",
-          "type_name": "邵氏电影",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "71",
-          "type_name": "Netflix电影",
-          "sub": ""
         }
       ],
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
+        "sony",
+        "c2_5",
         "jinying",
+        "modu",
         "subo",
-        "sony"
+        "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -779,59 +894,10 @@
       "kind": "category",
       "catId": "tv",
       "label": "剧集",
-      "sitesCount": 11,
-      "matchedClasses": 120,
+      "sitesCount": 14,
+      "matchedClasses": 134,
       "catMap": [
         {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "剧集",
-          "sub": ""
-        },
-        {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "7",
-          "type_name": "喜剧",
-          "sub": ""
-        },
-        {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "11",
-          "type_name": "剧情",
-          "sub": ""
-        },
-        {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "国产剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "港台剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "日韩剧",
-          "sub": "韩国"
-        },
-        {
           "source_key": "c276",
           "source_api": "http://ffzy.tv/api.php/provide/vod/",
           "type_id": "2",
@@ -893,636 +959,6 @@
           "type_id": "24",
           "type_name": "泰国剧",
           "sub": "泰国"
-        },
-        {
-          "source_key": "c276",
-          "source_api": "http://ffzy.tv/api.php/provide/vod/",
-          "type_id": "36",
-          "type_name": "短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "连续剧",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "31",
-          "type_name": "国产剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "32",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "33",
-          "type_name": "香港剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "34",
-          "type_name": "韩国剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "35",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "36",
-          "type_name": "日本剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "37",
-          "type_name": "海外剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "38",
-          "type_name": "泰国剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "58",
-          "type_name": "短剧大全",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "68",
-          "type_name": "AI漫剧",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "连续剧",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "国产剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "香港剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "韩国剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "21",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "22",
-          "type_name": "日本剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "23",
-          "type_name": "海外剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "24",
-          "type_name": "泰国剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "36",
-          "type_name": "短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "连续剧",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "国产剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "香港剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "韩国剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "21",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "22",
-          "type_name": "日本剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "23",
-          "type_name": "海外剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "24",
-          "type_name": "泰国剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "36",
-          "type_name": "短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "电视剧",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "国产剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "韩国剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "日本剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "17",
-          "type_name": "港台剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "18",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "19",
-          "type_name": "泰国剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "23",
-          "type_name": "海外剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "54",
-          "type_name": "短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "65",
-          "type_name": "反转爽剧",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "73",
-          "type_name": "ai短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "连续剧",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "国产剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "香港剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "韩国剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "31",
-          "type_name": "日本剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "32",
-          "type_name": "海外剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "33",
-          "type_name": "泰国剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "46",
-          "type_name": "爽文短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "51",
-          "type_name": "反转爽剧",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "连续剧",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "13",
-          "type_name": "国产剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "香港剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "韩国剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "21",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "22",
-          "type_name": "日本剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "23",
-          "type_name": "海外剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "24",
-          "type_name": "泰国剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "46",
-          "type_name": "短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "52",
-          "type_name": "AI漫剧",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "1",
-          "type_name": "电视剧",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "3",
-          "type_name": "欧美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "4",
-          "type_name": "香港剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "5",
-          "type_name": "韩剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "6",
-          "type_name": "日剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "7",
-          "type_name": "马泰剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "内地剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "28",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "45",
-          "type_name": "反转爽剧",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "47",
-          "type_name": "擦边短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "48",
-          "type_name": "AI漫剧",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "2",
-          "type_name": "电视剧",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "14",
-          "type_name": "大陆剧",
-          "sub": "国产"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "15",
-          "type_name": "台湾剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "16",
-          "type_name": "韩剧",
-          "sub": "韩国"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "17",
-          "type_name": "美剧",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "18",
-          "type_name": "港澳剧",
-          "sub": "港台"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "20",
-          "type_name": "日剧",
-          "sub": "日本"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "21",
-          "type_name": "泰剧",
-          "sub": "泰国"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "27",
-          "type_name": "短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "42",
-          "type_name": "反转爽剧",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "44",
-          "type_name": "擦边短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "45",
-          "type_name": "AI漫剧",
-          "sub": ""
         },
         {
           "source_key": "sony",
@@ -1590,13 +1026,6 @@
         {
           "source_key": "sony",
           "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "54",
-          "type_name": "爽文短剧",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
           "type_id": "65",
           "type_name": "反转爽剧",
           "sub": ""
@@ -1611,30 +1040,817 @@
         {
           "source_key": "sony",
           "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "73",
-          "type_name": "擦边短剧",
+          "type_id": "76",
+          "type_name": "漫剧",
           "sub": ""
         },
         {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "76",
-          "type_name": "漫剧",
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电视剧",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "5",
+          "type_name": "韩剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "日剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "马泰剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "内地剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "50",
+          "type_name": "反转爽剧",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "54",
+          "type_name": "AI漫剧",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "电视剧",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "5",
+          "type_name": "韩剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "日剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "马泰剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "内地剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "45",
+          "type_name": "反转爽剧",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "48",
+          "type_name": "AI漫剧",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "8",
+          "type_name": "连续剧",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "泰国剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "42",
+          "type_name": "AI漫剧",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "电视剧",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "大陆剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "韩剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "17",
+          "type_name": "美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "18",
+          "type_name": "港澳剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "日剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "21",
+          "type_name": "泰剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "42",
+          "type_name": "反转爽剧",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "45",
+          "type_name": "AI漫剧",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "连续剧",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "21",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "22",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "泰国剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "连续剧",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "连续剧",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "34",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "35",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "36",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "37",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "38",
+          "type_name": "泰国剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "68",
+          "type_name": "AI漫剧",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "电视剧",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "17",
+          "type_name": "港台剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "18",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "19",
+          "type_name": "泰国剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "65",
+          "type_name": "反转爽剧",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "连续剧",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "21",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "22",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "泰国剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "剧集",
+          "sub": ""
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "7",
+          "type_name": "喜剧",
+          "sub": ""
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "11",
+          "type_name": "剧情",
+          "sub": ""
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "港台剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "日韩剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "连续剧",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "泰国剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "51",
+          "type_name": "反转爽剧",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "连续剧",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "国产剧",
+          "sub": "国产"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "14",
+          "type_name": "香港剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "15",
+          "type_name": "韩国剧",
+          "sub": "韩国"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "欧美剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "21",
+          "type_name": "台湾剧",
+          "sub": "港台"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "22",
+          "type_name": "日本剧",
+          "sub": "日本"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "海外剧",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "泰国剧",
+          "sub": "泰国"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "52",
+          "type_name": "AI漫剧",
           "sub": ""
         }
       ],
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
+        "sony",
+        "c2_5",
         "jinying",
+        "modu",
         "subo",
-        "sony"
+        "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -1643,17 +1859,10 @@
       "kind": "category",
       "catId": "anime",
       "label": "动漫",
-      "sitesCount": 11,
-      "matchedClasses": 63,
+      "sitesCount": 14,
+      "matchedClasses": 81,
       "catMap": [
         {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-          "type_id": "4",
-          "type_name": "动漫",
-          "sub": ""
-        },
-        {
           "source_key": "c276",
           "source_api": "http://ffzy.tv/api.php/provide/vod/",
           "type_id": "4",
@@ -1694,342 +1903,6 @@
           "type_id": "33",
           "type_name": "海外动漫",
           "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "39",
-          "type_name": "动漫片",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "40",
-          "type_name": "国产动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "41",
-          "type_name": "日韩动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "42",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "43",
-          "type_name": "港台动漫",
-          "sub": "港台"
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "44",
-          "type_name": "海外动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "50",
-          "type_name": "动画片",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "4",
-          "type_name": "动漫片",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "29",
-          "type_name": "国产动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "日韩动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "31",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "32",
-          "type_name": "港台动漫",
-          "sub": "港台"
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "33",
-          "type_name": "海外动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "4",
-          "type_name": "动漫片",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "29",
-          "type_name": "国产动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "日韩动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "31",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "32",
-          "type_name": "港台动漫",
-          "sub": "港台"
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "33",
-          "type_name": "海外动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "37",
-          "type_name": "动画片",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "4",
-          "type_name": "动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "29",
-          "type_name": "国产动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "日韩动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "31",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "39",
-          "type_name": "动画片",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "44",
-          "type_name": "港台动漫",
-          "sub": "港台"
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "45",
-          "type_name": "海外动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "4",
-          "type_name": "动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "29",
-          "type_name": "动画片",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "38",
-          "type_name": "国产动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "39",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "40",
-          "type_name": "日韩动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "4",
-          "type_name": "动漫片",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "29",
-          "type_name": "国产动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "日韩动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "31",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "32",
-          "type_name": "港台动漫",
-          "sub": "港台"
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "33",
-          "type_name": "海外动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "49",
-          "type_name": "动画片",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "17",
-          "type_name": "动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "23",
-          "type_name": "动画片",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "24",
-          "type_name": "中国动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "25",
-          "type_name": "日本动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "26",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "3",
-          "type_name": "动漫",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "24",
-          "type_name": "中国动漫",
-          "sub": "国产"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "25",
-          "type_name": "日本动漫",
-          "sub": "日韩"
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "26",
-          "type_name": "欧美动漫",
-          "sub": "欧美"
         },
         {
           "source_key": "sony",
@@ -2086,20 +1959,492 @@
           "type_id": "63",
           "type_name": "有声动漫",
           "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "17",
+          "type_name": "动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "动画片",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "中国动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "日本动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "17",
+          "type_name": "动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "动画片",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "中国动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "日本动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "1",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "2",
+          "type_name": "日韩动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "港台动漫",
+          "sub": "港台"
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "5",
+          "type_name": "动漫电影",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "6",
+          "type_name": "里番动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "13",
+          "type_name": "动漫电影",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "中国动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "日本动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "动漫片",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "日韩动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "港台动漫",
+          "sub": "港台"
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "海外动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "37",
+          "type_name": "动画片",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "22",
+          "type_name": "动画电影",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "日本动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "海外动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "39",
+          "type_name": "动漫片",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "40",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "41",
+          "type_name": "日韩动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "42",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "43",
+          "type_name": "港台动漫",
+          "sub": "港台"
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "44",
+          "type_name": "海外动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "50",
+          "type_name": "动画片",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "日韩动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "39",
+          "type_name": "动画片",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "44",
+          "type_name": "港台动漫",
+          "sub": "港台"
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "45",
+          "type_name": "海外动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "动漫片",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "日韩动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "港台动漫",
+          "sub": "港台"
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "海外动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "动画片",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "38",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "39",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "40",
+          "type_name": "日韩动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "4",
+          "type_name": "动漫片",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "国产动漫",
+          "sub": "国产"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "日韩动漫",
+          "sub": "日韩"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "31",
+          "type_name": "欧美动漫",
+          "sub": "欧美"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "港台动漫",
+          "sub": "港台"
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "海外动漫",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "49",
+          "type_name": "动画片",
+          "sub": ""
         }
       ],
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
+        "sony",
+        "c2_5",
         "jinying",
+        "modu",
         "subo",
-        "sony"
+        "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -2108,258 +2453,111 @@
       "kind": "category",
       "catId": "variety",
       "label": "综艺",
-      "sitesCount": 11,
-      "matchedClasses": 51,
+      "sitesCount": 14,
+      "matchedClasses": 66,
       "catMap": [
         {
-          "source_key": "jian",
-          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "source_key": "c276",
+          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "综艺片",
+          "sub": ""
+        },
+        {
+          "source_key": "c276",
+          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "c276",
+          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "c276",
+          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "c276",
+          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
           "type_id": "3",
           "type_name": "综艺",
           "sub": ""
         },
         {
-          "source_key": "c276",
-          "source_api": "http://ffzy.tv/api.php/provide/vod/",
-          "type_id": "3",
-          "type_name": "综艺片",
-          "sub": ""
-        },
-        {
-          "source_key": "c276",
-          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
           "type_id": "25",
           "type_name": "大陆综艺",
           "sub": ""
         },
         {
-          "source_key": "c276",
-          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
           "type_id": "26",
-          "type_name": "港台综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "c276",
-          "source_api": "http://ffzy.tv/api.php/provide/vod/",
-          "type_id": "27",
           "type_name": "日韩综艺",
           "sub": ""
         },
         {
-          "source_key": "c276",
-          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
           "type_id": "28",
           "type_name": "欧美综艺",
           "sub": ""
         },
         {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "45",
-          "type_name": "综艺片",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "46",
-          "type_name": "大陆综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "47",
-          "type_name": "港台综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "48",
-          "type_name": "日韩综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "bfzy",
-          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
-          "type_id": "49",
-          "type_name": "欧美综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "3",
-          "type_name": "综艺片",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "25",
-          "type_name": "大陆综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "26",
-          "type_name": "港台综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
           "type_id": "27",
-          "type_name": "日韩综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "ffzy",
-          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-          "type_id": "28",
-          "type_name": "欧美综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "3",
-          "type_name": "综艺片",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "25",
-          "type_name": "大陆综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "26",
-          "type_name": "港台综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "27",
-          "type_name": "日韩综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "dytt",
-          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-          "type_id": "28",
-          "type_name": "欧美综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "3",
           "type_name": "综艺",
           "sub": ""
         },
         {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "25",
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "30",
           "type_name": "大陆综艺",
           "sub": ""
         },
         {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "26",
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "31",
           "type_name": "日韩综艺",
           "sub": ""
         },
         {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "27",
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "32",
           "type_name": "港台综艺",
           "sub": ""
         },
         {
-          "source_key": "tyys",
-          "source_api": "http://tyyszy.com/api.php/provide/vod/",
-          "type_id": "28",
-          "type_name": "欧美综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "3",
-          "type_name": "综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "34",
-          "type_name": "大陆综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "35",
-          "type_name": "港台综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "36",
-          "type_name": "日韩综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "360zy",
-          "source_api": "https://360zy.com/api.php/provide/vod/",
-          "type_id": "37",
-          "type_name": "欧美综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "3",
-          "type_name": "综艺片",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "25",
-          "type_name": "大陆综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "26",
-          "type_name": "港台综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "27",
-          "type_name": "日韩综艺",
-          "sub": ""
-        },
-        {
-          "source_key": "lzi",
-          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
-          "type_id": "28",
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "33",
           "type_name": "欧美综艺",
           "sub": ""
         },
@@ -2399,6 +2597,41 @@
           "sub": ""
         },
         {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "9",
+          "type_name": "综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "34",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "35",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "36",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "37",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
           "source_key": "subo",
           "source_api": "https://subocaiji.com/api.php/provide/vod/",
           "type_id": "4",
@@ -2434,53 +2667,273 @@
           "sub": ""
         },
         {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
           "type_id": "3",
-          "type_name": "综艺",
+          "type_name": "综艺片",
           "sub": ""
         },
         {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
           "type_id": "25",
           "type_name": "大陆综艺",
           "sub": ""
         },
         {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "45",
+          "type_name": "综艺片",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "46",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "47",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "48",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "49",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
           "type_id": "26",
           "type_name": "日韩综艺",
           "sub": ""
         },
         {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
           "type_id": "27",
           "type_name": "港台综艺",
           "sub": ""
         },
         {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "综艺片",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "jian",
+          "source_api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "34",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "35",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "36",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "37",
+          "type_name": "欧美综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "3",
+          "type_name": "综艺片",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "25",
+          "type_name": "大陆综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "26",
+          "type_name": "港台综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "日韩综艺",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
           "type_id": "28",
           "type_name": "欧美综艺",
           "sub": ""
         }
       ],
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
+        "sony",
+        "c2_5",
         "jinying",
+        "modu",
         "subo",
-        "sony"
+        "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -2489,24 +2942,115 @@
       "kind": "category",
       "catId": "doc",
       "label": "纪录",
-      "sitesCount": 14,
-      "matchedClasses": 0,
-      "catMap": [],
+      "sitesCount": 13,
+      "matchedClasses": 13,
+      "catMap": [
+        {
+          "source_key": "c276",
+          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "记录片",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "纪录片",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "记录片",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "16",
+          "type_name": "记录片",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "24",
+          "type_name": "记录片",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "5",
+          "type_name": "纪录片",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "记录片",
+          "sub": ""
+        },
+        {
+          "source_key": "yinghua",
+          "source_api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+          "type_id": "21",
+          "type_name": "纪录片",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "28",
+          "type_name": "纪录片",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "纪录片",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "记录片",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "纪录片",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "20",
+          "type_name": "记录片",
+          "sub": ""
+        }
+      ],
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "yinghua",
         "sony",
         "c2_5",
-        "c5_35"
+        "jinying",
+        "modu",
+        "subo",
+        "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -2515,19 +3059,149 @@
       "kind": "category",
       "catId": "short",
       "label": "短剧",
-      "sitesCount": 1,
-      "matchedClasses": 1,
+      "sitesCount": 12,
+      "matchedClasses": 18,
       "catMap": [
+        {
+          "source_key": "c276",
+          "source_api": "http://ffzy.tv/api.php/provide/vod/",
+          "type_id": "36",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "54",
+          "type_name": "爽文短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "73",
+          "type_name": "擦边短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "38",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "53",
+          "type_name": "擦边短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "47",
+          "type_name": "擦边短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "38",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "27",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "44",
+          "type_name": "擦边短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "dytt",
+          "source_api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+          "type_id": "36",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "bfzy",
+          "source_api": "https://bfzyapi.com/api.php/provide/vod/",
+          "type_id": "58",
+          "type_name": "短剧大全",
+          "sub": ""
+        },
         {
           "source_key": "bfzy",
           "source_api": "https://bfzyapi.com/api.php/provide/vod/",
           "type_id": "62",
           "type_name": "反转爽文",
           "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "54",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "tyys",
+          "source_api": "http://tyyszy.com/api.php/provide/vod/",
+          "type_id": "73",
+          "type_name": "ai短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "ffzy",
+          "source_api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+          "type_id": "36",
+          "type_name": "短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "360zy",
+          "source_api": "https://360zy.com/api.php/provide/vod/",
+          "type_id": "46",
+          "type_name": "爽文短剧",
+          "sub": ""
+        },
+        {
+          "source_key": "lzi",
+          "source_api": "https://cj.lziapi.com/api.php/provide/vod/",
+          "type_id": "46",
+          "type_name": "短剧",
+          "sub": ""
         }
       ],
       "sources": [
-        "bfzy"
+        "c276",
+        "sony",
+        "c2_5",
+        "jinying",
+        "modu",
+        "subo",
+        "dytt",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -2536,9 +3210,114 @@
       "kind": "category",
       "catId": "sports",
       "label": "体育",
-      "sitesCount": 6,
-      "matchedClasses": 22,
+      "sitesCount": 8,
+      "matchedClasses": 27,
       "catMap": [
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "48",
+          "type_name": "体育赛事",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "49",
+          "type_name": "篮球",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "50",
+          "type_name": "足球",
+          "sub": ""
+        },
+        {
+          "source_key": "sony",
+          "source_api": "https://suoniapi.com/api.php/provide/vod/",
+          "type_id": "52",
+          "type_name": "斯诺克",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "体育赛事",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "40",
+          "type_name": "足球",
+          "sub": ""
+        },
+        {
+          "source_key": "c2_5",
+          "source_api": "https://jszyapi.com/api.php/provide/vod/",
+          "type_id": "41",
+          "type_name": "篮球",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "体育赛事",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "32",
+          "type_name": "足球",
+          "sub": ""
+        },
+        {
+          "source_key": "jinying",
+          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
+          "type_id": "33",
+          "type_name": "篮球",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "40",
+          "type_name": "体育",
+          "sub": ""
+        },
+        {
+          "source_key": "modu",
+          "source_api": "https://www.mdzyapi.com/api.php/provide/vod/",
+          "type_id": "41",
+          "type_name": "足球",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "23",
+          "type_name": "体育赛事",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "29",
+          "type_name": "足球",
+          "sub": ""
+        },
+        {
+          "source_key": "subo",
+          "source_api": "https://subocaiji.com/api.php/provide/vod/",
+          "type_id": "30",
+          "type_name": "篮球",
+          "sub": ""
+        },
         {
           "source_key": "bfzy",
           "source_api": "https://bfzyapi.com/api.php/provide/vod/",
@@ -2622,85 +3401,17 @@
           "type_id": "40",
           "type_name": "斯诺克",
           "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "29",
-          "type_name": "体育赛事",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "32",
-          "type_name": "足球",
-          "sub": ""
-        },
-        {
-          "source_key": "jinying",
-          "source_api": "https://jyzyapi.com/api.php/provide/vod/",
-          "type_id": "33",
-          "type_name": "篮球",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "23",
-          "type_name": "体育赛事",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "29",
-          "type_name": "足球",
-          "sub": ""
-        },
-        {
-          "source_key": "subo",
-          "source_api": "https://subocaiji.com/api.php/provide/vod/",
-          "type_id": "30",
-          "type_name": "篮球",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "48",
-          "type_name": "体育赛事",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "49",
-          "type_name": "篮球",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "50",
-          "type_name": "足球",
-          "sub": ""
-        },
-        {
-          "source_key": "sony",
-          "source_api": "https://suoniapi.com/api.php/provide/vod/",
-          "type_id": "52",
-          "type_name": "斯诺克",
-          "sub": ""
         }
       ],
       "sources": [
+        "sony",
+        "c2_5",
+        "jinying",
+        "modu",
+        "subo",
         "bfzy",
         "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "sony"
+        "lzi"
       ]
     },
     {
@@ -2708,22 +3419,23 @@
       "name": "🔥4K专区",
       "kind": "virtual",
       "virtualId": "q4k",
-      "sitesCount": 14,
+      "sitesCount": 15,
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "yinghua",
         "sony",
         "c2_5",
-        "c5_35"
+        "jinying",
+        "modu",
+        "u_65",
+        "subo",
+        "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -2731,22 +3443,23 @@
       "name": "🆕最新更新",
       "kind": "virtual",
       "virtualId": "new",
-      "sitesCount": 14,
+      "sitesCount": 15,
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "yinghua",
         "sony",
         "c2_5",
-        "c5_35"
+        "jinying",
+        "modu",
+        "u_65",
+        "subo",
+        "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
+        "360zy",
+        "lzi"
       ]
     },
     {
@@ -2755,15 +3468,23 @@
       "kind": "decade",
       "decade": "2020年代",
       "slug": "2020s",
-      "sitesCount": 7,
-      "realCount": 135,
-      "listed": 60,
+      "sitesCount": 14,
+      "sampledCount": 199,
+      "sampledListed": 60,
+      "empty": false,
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
+        "sony",
+        "c2_5",
+        "jinying",
+        "modu",
+        "subo",
         "dytt",
+        "yinghua",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
         "360zy",
         "lzi"
       ]
@@ -2774,15 +3495,22 @@
       "kind": "decade",
       "decade": "2010年代",
       "slug": "2010s",
-      "sitesCount": 7,
-      "realCount": 10,
-      "listed": 10,
+      "sitesCount": 13,
+      "sampledCount": 16,
+      "sampledListed": 16,
+      "empty": false,
       "sources": [
-        "jian",
         "c276",
-        "bfzy",
-        "ffzy",
+        "sony",
+        "c2_5",
+        "jinying",
+        "modu",
+        "subo",
         "dytt",
+        "bfzy",
+        "tyys",
+        "ffzy",
+        "jian",
         "360zy",
         "lzi"
       ]
@@ -2794,11 +3522,12 @@
       "decade": "2000年代",
       "slug": "2000s",
       "sitesCount": 2,
-      "realCount": 4,
-      "listed": 4,
+      "sampledCount": 3,
+      "sampledListed": 3,
+      "empty": false,
       "sources": [
-        "bfzy",
-        "dytt"
+        "sony",
+        "bfzy"
       ]
     },
     {
@@ -2807,25 +3536,11 @@
       "kind": "decade",
       "decade": "90年代",
       "slug": "90s",
-      "sitesCount": 14,
-      "realCount": 0,
-      "listed": 0,
-      "sources": [
-        "jian",
-        "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "yinghua",
-        "sony",
-        "c2_5",
-        "c5_35"
-      ]
+      "sitesCount": 0,
+      "sampledCount": 0,
+      "sampledListed": 0,
+      "empty": true,
+      "sources": []
     },
     {
       "file": "line-decade-80s.json",
@@ -2833,25 +3548,11 @@
       "kind": "decade",
       "decade": "80年代",
       "slug": "80s",
-      "sitesCount": 14,
-      "realCount": 0,
-      "listed": 0,
-      "sources": [
-        "jian",
-        "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "yinghua",
-        "sony",
-        "c2_5",
-        "c5_35"
-      ]
+      "sitesCount": 0,
+      "sampledCount": 0,
+      "sampledListed": 0,
+      "empty": true,
+      "sources": []
     },
     {
       "file": "line-decade-older.json",
@@ -2859,25 +3560,11 @@
       "kind": "decade",
       "decade": "更早",
       "slug": "older",
-      "sitesCount": 14,
-      "realCount": 0,
-      "listed": 0,
-      "sources": [
-        "jian",
-        "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "yinghua",
-        "sony",
-        "c2_5",
-        "c5_35"
-      ]
+      "sitesCount": 0,
+      "sampledCount": 0,
+      "sampledListed": 0,
+      "empty": true,
+      "sources": []
     },
     {
       "file": "line-decade-unknown.json",
@@ -2885,25 +3572,11 @@
       "kind": "decade",
       "decade": "年代不详",
       "slug": "unknown",
-      "sitesCount": 14,
-      "realCount": 0,
-      "listed": 0,
-      "sources": [
-        "jian",
-        "c276",
-        "bfzy",
-        "ffzy",
-        "dytt",
-        "tyys",
-        "360zy",
-        "lzi",
-        "jinying",
-        "subo",
-        "yinghua",
-        "sony",
-        "c2_5",
-        "c5_35"
-      ]
+      "sitesCount": 0,
+      "sampledCount": 0,
+      "sampledListed": 0,
+      "empty": true,
+      "sources": []
     }
   ],
   "totals": {
@@ -2911,30 +3584,47 @@
     "categoryLines": 7,
     "virtualLines": 2,
     "decadeLines": 7,
-    "aliveSources": 14,
-    "listOkSources": 11,
-    "rawVodItems": 280,
-    "mergedVodItems": 149
+    "aliveSources": 15,
+    "listOkSources": 14,
+    "rawVodItems": 560,
+    "mergedVodItems": 218
   },
   "categorySiteCounts": {
-    "movie": 11,
-    "tv": 11,
-    "anime": 11,
-    "variety": 11,
-    "doc": 14,
-    "short": 1,
-    "sports": 6,
-    "q4k": 14,
-    "new": 14
+    "movie": 14,
+    "tv": 14,
+    "anime": 14,
+    "variety": 14,
+    "doc": 13,
+    "short": 12,
+    "sports": 8,
+    "q4k": 15,
+    "new": 15
   },
   "decadeCounts": {
-    "2020年代": 135,
-    "2010年代": 10,
-    "2000年代": 4,
+    "2020年代": 199,
+    "2010年代": 16,
+    "2000年代": 3,
     "90年代": 0,
     "80年代": 0,
     "更早": 0,
     "年代不详": 0
+  },
+  "sampledDecadeCounts": {
+    "2020年代": 199,
+    "2010年代": 16,
+    "2000年代": 3,
+    "90年代": 0,
+    "80年代": 0,
+    "更早": 0,
+    "年代不详": 0
+  },
+  "sampling": {
+    "vodPages": 2,
+    "scope": "每日每源仅 ?ac=videolist&pg=1..2 的最新页抽样，不是全量片库",
+    "countUnit": "decadeCounts / sampledDecadeCounts / sampledCount = 抽样命中条目数（含多源重复、未去重）",
+    "listedUnit": "sampledListed = 抽样命中经归一化片名去重后再截断到 60 的条数",
+    "userVisible": "以上数字均不代表用户在电视上看到的条数；线路只下发动态源站，站内由源站自行分页",
+    "warning": "用户可见文案禁止引用这些数字，也禁止把线路名理解为站内筛选结果"
   },
   "presentDecades": [
     "2020年代",
@@ -2942,9 +3632,9 @@
     "2000年代"
   ],
   "yearFilter": {
-    "invalidVodYear": 0,
+    "invalidVodYear": 3,
     "missingVodYear": 0,
-    "rule": "只认 /^(19|20)\\d{2}$/ 且 1900<=y<=CURRENT_UTC_YEAR+1；vod_time 不参与；当前年份不补缺失；无硬编码年份选项"
+    "rule": "NFKC 归一 + 剥尾部「年」后只认 /^(19|20)\\d{2}$/ 且 1900<=y<=CURRENT_UTC_YEAR+1；vod_time 不参与；当前年份不补缺失；无硬编码年份选项"
   },
   "entries": [
     {
@@ -3016,9 +3706,11 @@
     "SiteApi.java 固定拼 ac/t/pg/wd/ids/f；静态托管忽略 query → sites[].api 必须为源站原生动态 api",
     "bean/Class.java 无 type_pid；层级靠 type_flag folder → 不下发 class 树 / type_pid",
     "Result.filters 结构不对会让整份 home 静默变空 → 顶层与站点均无 filters，filterable:0",
+    "【用户大白话】本频道=按主题/年代精选源站的线路分组；站内分类由源站原生 tab 提供；受影视仓客户端协议限制，无法在站内按年代或类型裁剪，线路名不代表站内筛选结果",
     "分组发生在子仓/线路层级；站点内分类由源站 ?ac=list 动态平铺，配置无法强制按大区/年代裁剪",
-    "年代档空档固定生成，防客户端缓存滞后（R28）",
-    "spider 复用★1/②的 candymuj.jar，切线零重载，避免 BadTokenException 闪退"
+    "年代档空档固定生成（sites: []，empty:true），防客户端缓存里档位消失；空档点进去显示空，绝不再回落全量源站（R28 不变）",
+    "spider 复用★1/②的 candymuj.jar 纯 URL（不带 ;md5;），切线零重载，避免 BadTokenException 闪退与上游换 jar 后整份拒载",
+    "decadeCounts / sampledCount / sampledListed 均为当日最新 2 页抽样统计，含多源重复，不代表用户可见条数"
   ],
   "deprecated": "静态 cats.json + cat-*.json + drpy 骨架已废弃，详见本脚本顶部说明"
 }
