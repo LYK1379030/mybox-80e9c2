@@ -61,17 +61,8 @@
       "timeout": 60
     },
     {
-      "key": "c9",
-      "name": "影视 • 暴風[直连]·206ms",
-      "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/?ac=list/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "jian",
-      "name": "建安资源·599ms",
+      "name": "建安资源·670ms",
       "type": 1,
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
       "searchable": 1,
@@ -79,8 +70,17 @@
       "changeable": 1
     },
     {
-      "key": "c0",
-      "name": "影视 • 非凡[直连]·880ms",
+      "key": "bfzy",
+      "name": "暴风资源·721ms",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "c276",
+      "name": "影视 • 非凡[直连]·737ms",
       "type": 1,
       "api": "http://ffzy.tv/api.php/provide/vod/",
       "searchable": 1,
@@ -89,7 +89,7 @@
     },
     {
       "key": "360zy",
-      "name": "360资源·894ms",
+      "name": "360资源·886ms",
       "type": 1,
       "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
@@ -97,17 +97,8 @@
       "changeable": 1
     },
     {
-      "key": "bfzy",
-      "name": "暴风资源·928ms",
-      "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "dytt",
-      "name": "电影天堂·986ms",
+      "name": "电影天堂·888ms",
       "type": 1,
       "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -116,7 +107,7 @@
     },
     {
       "key": "ffzy",
-      "name": "非凡影视·1033ms",
+      "name": "非凡影视·964ms",
       "type": 1,
       "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -125,7 +116,7 @@
     },
     {
       "key": "lzi",
-      "name": "量子资源·1148ms",
+      "name": "量子资源·1214ms",
       "type": 1,
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -133,8 +124,26 @@
       "changeable": 1
     },
     {
-      "key": "c8",
-      "name": "百度·1444ms",
+      "key": "yinghua",
+      "name": "樱花资源·1838ms",
+      "type": 1,
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "jinying",
+      "name": "金鹰资源·2205ms",
+      "type": 1,
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "c10",
+      "name": "百度·2291ms",
       "type": 1,
       "api": "https://api.apibdzy.com/api.php/provide/vod?ac=list/",
       "searchable": 1,
@@ -142,28 +151,19 @@
       "changeable": 1
     },
     {
-      "key": "c3",
-      "name": "影视 • 极速[直连]·1864ms",
-      "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/?ac=list/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "tyys",
-      "name": "天涯资源·1909ms",
-      "type": 1,
-      "api": "http://tyyszy.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "subo",
-      "name": "速播资源·5960ms",
+      "name": "速播资源·4324ms",
       "type": 1,
       "api": "https://subocaiji.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "modu",
+      "name": "魔都资源·7572ms",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
@@ -177,11 +177,11 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T08:59:13.653Z",
-    "probed": 24,
+    "generated": "2026-11-08T09:22:26.525Z",
+    "probed": 21,
     "alive": 12,
-    "hardDead": 0,
-    "totalResources": 1285525,
-    "note": "4K 原盘走 csp 网盘插件（jar 内置 16 类），1080P/HD 走构建期实测存活直连源。源池自愈：死源连续3次失败自动出池，社区新源每天自动入池。"
+    "hardDead": 5,
+    "totalResources": 1238935,
+    "note": "4K 原盘走 csp 网盘插件（jar 内置 16 类），1080P/HD 走构建期实测存活直连源。三层源池自愈，backendHost 统一去重。"
   }
 }
