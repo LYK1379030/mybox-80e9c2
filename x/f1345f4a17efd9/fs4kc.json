@@ -44,11 +44,11 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T10:26:33.995Z",
+    "generated": "2026-11-08T10:54:26.972Z",
     "probed": 21,
-    "alive": 11,
-    "hardDead": 7,
-    "totalResources": 1164578,
-    "note": "③C 专线：独立大 jar（194类），含快映/八零/闪电 4K 网盘站。切到本线会重载 jar，低配设备可能闪退——闪退就回③/③B。"
+    "alive": 14,
+    "hardDead": 6,
+    "totalResources": 1485974,
+    "note": "③C 专线：独立大 jar（194类含 PanWebShare 系），切线会重载 jar，低配设备闪退就回③/③B"
   }
 }
