@@ -1,5 +1,5 @@
 {
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/spider.jar;md5;c07ab2794d358d27d4a4e842712d3c16",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
@@ -8,39 +8,6 @@
       "type": 3,
       "api": "csp_Wogg",
       "ext": "{\"token\":\"影視天下第一\",\"filter\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/wogg.json\"}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "timeout": 60
-    },
-    {
-      "key": "快映4K",
-      "name": "🔥快映 | 4K",
-      "type": 3,
-      "api": "csp_PanWebShare",
-      "ext": "{\"site\":[\"http://xsayang.fun\"]}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "timeout": 60
-    },
-    {
-      "key": "八零4K",
-      "name": "🔥八零 | 4K",
-      "type": 3,
-      "api": "csp_PanWebShare",
-      "ext": "{\"site\":[\"https://www.80yy3.com\",\"https://woog.430520.xyz\"]}",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "timeout": 60
-    },
-    {
-      "key": "闪电4K",
-      "name": "🔥闪电 | 4K",
-      "type": 3,
-      "api": "csp_PanWebShare",
-      "ext": "{\"site\":[\"http://xhban.xyz\"]}",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
@@ -159,6 +126,6 @@
     "alive": 11,
     "hardDead": 7,
     "totalResources": 1164578,
-    "note": "4K 原盘走 csp 网盘插件（jar 内置 16 类），1080P/HD 走构建期实测存活直连源。三层源池自愈，backendHost 统一去重。"
+    "note": "③线：jar 复用②线 candymuj（切换零成本），玩偶4K + 实测直连源。快映/八零/闪电 已移至③C 大 jar 专线。"
   }
 }
