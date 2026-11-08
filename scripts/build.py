@@ -1292,7 +1292,7 @@ def _inspect_output(templates, report):
             continue
         rec = {"file": fn, "sites": len(o.get("sites", [])),
                "lives": len(o.get("lives", [])), "problems": []}
-        if fn != "index.json" and not o.get("sites"):
+        if fn not in ("index.json", "index-cats.json") and not o.get("sites"):
             rec["problems"].append("sites 为空")
         for i, l in enumerate(o.get("lives", [])):
             u = str(l.get("url", ""))
