@@ -45,8 +45,10 @@ const DISCOVERY_FEEDS = [
 ];
 
 const PAN_4K_SITES = [
-  { key: "玩偶4K", name: "🔥玩偶 | 4K原盘", type: 3, api: "csp_Wogg",
-    ext: { site: ["https://www.wogg.live", "https://woggpan.888484.xyz"] } },
+  // csp_Wogg 的 ext 必须是 {token, filter}（build.py 实录：{site:[...]} 会拿不到 token → 永远空转）
+  { key: "玩偶4K", name: "🔥玩偶 | 4K", type: 3, api: "csp_Wogg",
+    ext: { token: "影視天下第一",
+           filter: "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/wogg.json" } },
   { key: "快映4K", name: "🔥快映 | 4K", type: 3, api: "csp_PanWebShare",
     ext: { site: ["http://xsayang.fun"] } },
   { key: "八零4K", name: "🔥八零 | 4K", type: 3, api: "csp_PanWebShare",
@@ -294,13 +296,27 @@ const config = {
     note: "4K 原盘走 csp 网盘插件（jar 内置 16 类），1080P/HD 走构建期实测存活直连源。三层源池自愈，backendHost 统一去重。",
   },
 };
-// 双文件输出：fs4k.json（主名）+ fs4k2.json（版本化副本）
-// 为什么两个：jsDelivr 对 @main 路径有 12h 缓存，改坏过的文件即使 purge 也可能被二级缓存钉死；
-// fs4k2 是全新缓存键，index.json 指向它即可绕开任何历史污染（实战验证）。
-// 每日 CI 同时产出两份，保持同步。
+// 三文件输出（第六轮实战结论：jar 依赖是③线"整体失败"的最大嫌疑——
+// 客户端 jar 加载失败时所有 csp 站报错，用户感知为"整线失败"）：
+//   fs4k.json / fs4k2.json：混合线（4K 网盘 + 直连），fs4k2 = 版本化副本防 CDN 钉死
+//   fs4k3.json：纯直连线（零 jar 依赖，任何客户端保证能用）——保底可用性
+// index.json 的 ③ 线指 fs4k2（混合），新增 ③B 纯直连保底线指 fs4k3
 const cfgText = JSON.stringify(config, null, 2);
 writeFileSync(join(distDir, "fs4k.json"), cfgText, "utf8");
 writeFileSync(join(distDir, "fs4k2.json"), cfgText, "utf8");
+
+// 纯直连版：去掉所有 csp_ 站，只留实测存活直连源——不依赖任何 jar
+const directOnly = {
+  ...config,
+  spider: "",
+  sites: config.sites.filter((s) => /^https?:\/\//.test(s.api)),
+  _meta: {
+    ...config._meta,
+    note: "纯直连保底线：零 jar 依赖，全部为构建期实测存活的直连源。任何 TVBox 系客户端可直接用。",
+  },
+};
+const directText = JSON.stringify(directOnly, null, 2);
+writeFileSync(join(distDir, "fs4k3.json"), directText, "utf8");
 
 // 记忆池写入前去重（防重复自我繁殖——v2 的实战教训）
 const memSeen = new Set();
