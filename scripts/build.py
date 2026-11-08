@@ -1166,7 +1166,14 @@ def _emit_4konly(site_root, templates):
         # 只收 jar 里确认存在的类（PantaAmns 实测不存在，必须排除）
         if api[4:] in ("PantaAmns",):
             continue
-        sites.append(dict(s))
+        item = dict(s)
+        # 关键：FongMi 的 Site.ext 是 String 类型（@SerializedName("ext") private String ext），
+        # 写成 JSON 对象会让 Gson 解析抛异常 → 整个配置解析失败 → 客户端闪退。
+        # 必须序列化成 JSON 字符串。
+        ext = item.get("ext")
+        if isinstance(ext, (dict, list)):
+            item["ext"] = json.dumps(ext, ensure_ascii=False, separators=(",", ":"))
+        sites.append(item)
     if not sites:
         return
     cfg = {
