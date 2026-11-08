@@ -4,7 +4,7 @@
   "sites": [
     {
       "key": "索尼",
-      "name": "索尼 ·320ms",
+      "name": "索尼 ·92ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
@@ -12,7 +12,7 @@
     },
     {
       "key": "bfzy",
-      "name": "暴风·大库·603ms",
+      "name": "暴风·大库·617ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -21,7 +21,7 @@
     },
     {
       "key": "feifan",
-      "name": "非凡·最快·1129ms",
+      "name": "非凡·最快·900ms",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -30,7 +30,7 @@
     },
     {
       "key": "lzi",
-      "name": "量子·备用·2498ms",
+      "name": "量子·备用·3363ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -54,10 +54,7 @@
       "api": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/cat/js/bili_open.js",
       "searchable": 1,
       "changeable": 0,
-      "ext": {
-        "categories": "短剧#沙雕动画#沙雕穿越#沙雕",
-        "cookie": ""
-      }
+      "ext": "{\"categories\":\"短剧#沙雕动画#沙雕穿越#沙雕\",\"cookie\":\"\"}"
     },
     {
       "key": "JustLive",
@@ -78,11 +75,7 @@
         "type": "rect",
         "ratio": 1.433
       },
-      "ext": {
-        "json": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json",
-        "type": "帕梅拉#太极拳#广场舞#演唱会",
-        "cookie": ""
-      }
+      "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\",\"type\":\"帕梅拉#太极拳#广场舞#演唱会\",\"cookie\":\"\"}"
     },
     {
       "key": "商店",

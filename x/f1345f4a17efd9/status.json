@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T05:41:48Z",
+  "built_at": "2026-11-08T05:46:33Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 320,
+      "ms": 92,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 603,
+      "ms": 617,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1129,
+      "ms": 900,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 2498,
+      "ms": 3363,
       "total": null,
       "why": "ok"
     },
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 53314
     },
     {
       "name": "EPG",

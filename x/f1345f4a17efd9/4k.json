@@ -53,10 +53,7 @@
       "api": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/cat/js/bili_open.js",
       "searchable": 1,
       "changeable": 0,
-      "ext": {
-        "categories": "短剧#沙雕动画#沙雕穿越#沙雕",
-        "cookie": ""
-      }
+      "ext": "{\"categories\":\"短剧#沙雕动画#沙雕穿越#沙雕\",\"cookie\":\"\"}"
     },
     {
       "key": "csp_CandyMuj_duanju",
