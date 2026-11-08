@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T03:02:07Z",
+  "built_at": "2026-11-08T03:15:49Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 326,
+      "ms": 142,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 614,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 945,
+      "ms": 598,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1024,
+      "ms": 755,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 1184,
       "total": null,
       "why": "ok"
     },
@@ -298,12 +298,6 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
@@ -314,6 +308,12 @@
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "爱酷",
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 34961
     },
     {
       "name": "EPG",
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 10
+      "files": 9
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 10
+      "files": 9
     }
   ],
   "issues": [
@@ -598,12 +598,6 @@
       "problems": []
     },
     {
-      "file": "4kreal.json",
-      "sites": 14,
-      "lives": 3,
-      "problems": []
-    },
-    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -611,7 +605,7 @@
     }
   ],
   "verify": {
-    "files_checked": 5,
+    "files_checked": 4,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
