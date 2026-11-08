@@ -318,6 +318,15 @@ const directOnly = {
 const directText = JSON.stringify(directOnly, null, 2);
 writeFileSync(join(distDir, "fs4k3.json"), directText, "utf8");
 
+// ③C 专线：大 jar + PanWebShare 站（从本文件 config 里抽 csp_PanWebShare* 类站点）
+{
+  const pan = config.sites.filter((s) => /^csp_/.test(s.api) && s.api !== "csp_Wogg");
+  if (pan.length) {
+    writeFileSync(join(distDir, "fs4kc.json"), JSON.stringify({ ...config, sites: pan, _meta: { ...config._meta, note: "③C 专线：独立大 jar，切线重载 jar，低配设备闪退就回③/③B" } }, null, 2), "utf8");
+    console.log(`✅ fs4kc.json（${pan.length} 站 4K 网盘专线）`);
+  }
+}
+
 // 记忆池写入前去重（防重复自我繁殖——v2 的实战教训）
 const memSeen = new Set();
 const memAlive = [];
