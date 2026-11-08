@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T12:08:46Z",
+  "built_at": "2026-11-08T12:19:24Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 30,
+      "total": null,
+      "why": "ok"
+    },
+    {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 73,
+      "ms": 134,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 477,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 562,
+      "ms": 407,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 962,
+      "ms": 642,
       "total": null,
       "why": "ok"
     },
@@ -298,12 +298,6 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
@@ -314,6 +308,12 @@
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "综合",
@@ -352,8 +352,8 @@
     },
     {
       "name": "EPG",
-      "ok": false,
-      "why": "timed out"
+      "ok": true,
+      "bytes": 2633
     }
   ],
   "channels": [
@@ -557,7 +557,7 @@
       "to": "https://www.agit.ai/fantaiying/dr_py/raw/branch/main/js/%E5%AD%90%E5%AD%90%E5%BD%B1%E8%A7%86.js"
     }
   ],
-  "epg_ok": false,
+  "epg_ok": true,
   "vod_total": 6,
   "summary": {
     "sub_configs": [

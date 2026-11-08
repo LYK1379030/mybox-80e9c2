@@ -3,6 +3,15 @@
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
+      "key": "bfzy",
+      "name": "【直连】暴风·大库",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "索尼",
       "name": "索尼 ",
       "type": 1,
@@ -14,15 +23,6 @@
       "key": "feifan",
       "name": "【直连】非凡·最快",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "bfzy",
-      "name": "【直连】暴风·大库",
-      "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
@@ -78,21 +78,24 @@
       "type": 0,
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/live.txt",
       "playerType": 1,
-      "ua": "okhttp/3.15"
+      "ua": "okhttp/3.15",
+      "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
     },
     {
       "name": "直播·精简",
       "type": 0,
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/live2.txt",
       "playerType": 1,
-      "ua": "okhttp/3.15"
+      "ua": "okhttp/3.15",
+      "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
     },
     {
       "name": "直播·官方台",
       "type": 0,
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/live3.m3u",
       "playerType": 1,
-      "ua": "okhttp/3.15"
+      "ua": "okhttp/3.15",
+      "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
     }
   ],
   "parses": [
