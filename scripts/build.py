@@ -113,7 +113,7 @@ SITES_4K = [
 # 上游配置只作为「补充来源」，其网盘/磁力类线路会被过滤掉。
 UPSTREAMS = [
     {
-        "id": "c1", "name": "① 直连点开即播（主力）",
+        "id": "c1", "name": "老线·直连合集（21条）",
         "mirrors": [
             {"url": JSD + "0827.json", "base": JSD, "jar_base": GHP},
             {"url": "https://fastly.jsdelivr.net/gh/gaotianliuyun/gao@master/0827.json",
@@ -122,7 +122,7 @@ UPSTREAMS = [
         ],
     },
     {
-        "id": "c2", "name": "② 更多直连线路（补充）",
+        "id": "c2", "name": "老线·直连合集（46条）",
         "mirrors": [
             {"url": "https://gitlab.com/noimank/tvbox/-/raw/main/tvbox1.json",
              "base": "https://gitlab.com/noimank/tvbox/-/raw/main/", "jar_base": None},
@@ -1050,21 +1050,21 @@ def main():
                     _fs4k3["sites"] = _fs4k3_direct
                     templates["fs4k3.json"] = json.dumps(_fs4k3, ensure_ascii=False, indent=2)
                     print("   ③B fs4k3.json 纯直连保底线已接入（%d 站）" % len(_fs4k3_direct))
-                entries.insert(2, {"name": "③ 聚合·实时筛选（%d 站·%s）" % (
+                entries.insert(0, {"name": "★1 主用·聚合全站（%d 站·%s）" % (
                     len(_fs4k["sites"]),
                     (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
                     "url": SELF + "/fs4k2.json"})
                 if templates.get("fs4k3.json"):
-                    entries.insert(3, {"name": "③B 聚合·纯直连保底（免jar·最稳）",
+                    entries.insert(1, {"name": " 2 备用·纯直连保底（最稳·无4K网盘）",
                                        "url": SELF + "/fs4k3.json"})
                 if os.path.isfile(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json")):
                     templates["fs4kc.json"] = open(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json"), encoding="utf-8").read()
-                    entries.insert(4, {"name": "③C 4K网盘专线（快映/八零/闪电·切线会重载jar）",
+                    entries.insert(2, {"name": " 3 进阶·4K网盘专线（低配设备勿试）",
                                        "url": SELF + "/fs4kc.json"})
                 print("   ③ fs4k.json/fs4k2.json 已接入（%d 站，index 指向 fs4k2）" % len(_fs4k["sites"]))
         except Exception as _e:
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
-    entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
+    entries.append({"name": " 5 老线·4K直连专区（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
