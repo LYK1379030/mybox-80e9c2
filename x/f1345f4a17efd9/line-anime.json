@@ -3,10 +3,10 @@
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
-      "key": "anime_c276_0",
-      "name": "【动漫】影视 • 非凡[直连]",
+      "key": "anime_c2_5_0",
+      "name": "【动漫】影视 • 极速[直连]",
       "type": 1,
-      "api": "http://ffzy.tv/api.php/provide/vod/",
+      "api": "https://jszyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -25,10 +25,10 @@
       "ext": ""
     },
     {
-      "key": "anime_c2_5_2",
-      "name": "【动漫】影视 • 极速[直连]",
+      "key": "anime_c276_2",
+      "name": "【动漫】影视 • 非凡[直连]",
       "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "api": "http://ffzy.tv/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -36,10 +36,10 @@
       "ext": ""
     },
     {
-      "key": "anime_jinying_3",
-      "name": "【动漫】金鹰资源",
+      "key": "anime_bfzy_3",
+      "name": "【动漫】暴风资源",
       "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -47,40 +47,7 @@
       "ext": ""
     },
     {
-      "key": "anime_modu_4",
-      "name": "【动漫】魔都资源",
-      "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "anime_subo_5",
-      "name": "【动漫】速播资源",
-      "type": 1,
-      "api": "https://subocaiji.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "anime_dytt_6",
-      "name": "【动漫】电影天堂",
-      "type": 1,
-      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "anime_yinghua_7",
+      "key": "anime_yinghua_4",
       "name": "【动漫】樱花资源",
       "type": 1,
       "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
@@ -91,10 +58,43 @@
       "ext": ""
     },
     {
-      "key": "anime_bfzy_8",
-      "name": "【动漫】暴风资源",
+      "key": "anime_jinying_5",
+      "name": "【动漫】金鹰资源",
       "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "anime_modu_6",
+      "name": "【动漫】魔都资源",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "anime_subo_7",
+      "name": "【动漫】速播资源",
+      "type": 1,
+      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "anime_dytt_8",
+      "name": "【动漫】电影天堂",
+      "type": 1,
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -113,18 +113,7 @@
       "ext": ""
     },
     {
-      "key": "anime_ffzy_10",
-      "name": "【动漫】非凡影视",
-      "type": 1,
-      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "anime_jian_11",
+      "key": "anime_jian_10",
       "name": "【动漫】建安资源",
       "type": 1,
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
@@ -135,10 +124,10 @@
       "ext": ""
     },
     {
-      "key": "anime_360zy_12",
-      "name": "【动漫】360资源",
+      "key": "anime_ffzy_11",
+      "name": "【动漫】非凡影视",
       "type": 1,
-      "api": "https://360zy.com/api.php/provide/vod/",
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -146,10 +135,21 @@
       "ext": ""
     },
     {
-      "key": "anime_lzi_13",
+      "key": "anime_lzi_12",
       "name": "【动漫】量子资源",
       "type": 1,
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "anime_360zy_13",
+      "name": "【动漫】360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -165,7 +165,7 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T15:39:31.585Z",
+    "generated": "2026-11-08T16:07:36.817Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",
@@ -173,6 +173,7 @@
     "catId": "anime",
     "label": "动漫",
     "matchedClasses": 81,
-    "fallbackSites": false
+    "fallbackSites": false,
+    "userVisibleNote": "按主题/年代精选源站的线路分组；站内分类由源站原生标签提供。受影视仓客户端协议限制，站内无法按类型或年代裁剪，线路名不代表筛选结果。片量为每日最新两页抽样，不代表用户可见条数。"
   }
 }

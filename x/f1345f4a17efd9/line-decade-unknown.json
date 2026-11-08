@@ -10,7 +10,7 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T15:39:33.589Z",
+    "generated": "2026-11-08T16:07:39.433Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",
@@ -19,6 +19,8 @@
     "slug": "unknown",
     "sampledCount": 0,
     "sampledListed": 0,
-    "empty": true
+    "empty": true,
+    "userVisibleNote": "按主题/年代精选源站的线路分组；站内分类由源站原生标签提供。受影视仓客户端协议限制，站内无法按类型或年代裁剪，线路名不代表筛选结果。片量为每日最新两页抽样，不代表用户可见条数。",
+    "emptyNotice": "本年代档当日抽样无片，显示为空属正常，不代表源站没有该年代影片。"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T15:39:33Z",
+  "built_at": "2026-11-08T16:07:39Z",
   "upstreams": [
     {
       "id": "c1",
@@ -28,28 +28,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 71,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 416,
+      "ms": 82,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 421,
+      "ms": 576,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 727,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 866,
+      "ms": 901,
       "total": null,
       "why": "ok"
     },
@@ -276,22 +276,16 @@
   ],
   "parses": [
     {
-      "name": "西瓜",
-      "url": "https://jx.xmflv.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "西瓜",
+      "url": "https://jx.xmflv.com/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "爱酷",
@@ -300,16 +294,22 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
+      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -338,7 +338,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 23401
+      "bytes": 60000
     },
     {
       "name": "EPG",
@@ -351,18 +351,19 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 30
+      "files": 31
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 30
+      "files": 31
     }
   ],
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
     "已剥离 spider 的 ;md5; 校验段: candymuj.jar",
+    "已从产物剥离 1 处 ;md5; 校验段",
     "已剥离 spider 的 ;md5; 校验段（纯 URL 策略）",
     "已剔除 2 条失活点播线路（正常自愈）"
   ],
@@ -717,6 +718,12 @@
       "problems": []
     },
     {
+      "file": "lines-manifest.json",
+      "sites": 0,
+      "lives": 0,
+      "problems": []
+    },
+    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -724,11 +731,11 @@
     }
   ],
   "verify": {
-    "files_checked": 25,
+    "files_checked": 26,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
-    "issues": 4,
+    "issues": 5,
     "dead_vod_removed": 2,
     "all_absolute": true
   },

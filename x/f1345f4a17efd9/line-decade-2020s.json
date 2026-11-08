@@ -3,10 +3,10 @@
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
-      "key": "decade_2020s_c276_0",
-      "name": "【2020年代】影视 • 非凡[直连]",
+      "key": "decade_2020s_c2_5_0",
+      "name": "【2020年代】影视 • 极速[直连]",
       "type": 1,
-      "api": "http://ffzy.tv/api.php/provide/vod/",
+      "api": "https://jszyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -25,10 +25,10 @@
       "ext": ""
     },
     {
-      "key": "decade_2020s_c2_5_2",
-      "name": "【2020年代】影视 • 极速[直连]",
+      "key": "decade_2020s_c276_2",
+      "name": "【2020年代】影视 • 非凡[直连]",
       "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "api": "http://ffzy.tv/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -36,10 +36,10 @@
       "ext": ""
     },
     {
-      "key": "decade_2020s_jinying_3",
-      "name": "【2020年代】金鹰资源",
+      "key": "decade_2020s_bfzy_3",
+      "name": "【2020年代】暴风资源",
       "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -47,40 +47,7 @@
       "ext": ""
     },
     {
-      "key": "decade_2020s_modu_4",
-      "name": "【2020年代】魔都资源",
-      "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_2020s_subo_5",
-      "name": "【2020年代】速播资源",
-      "type": 1,
-      "api": "https://subocaiji.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_2020s_dytt_6",
-      "name": "【2020年代】电影天堂",
-      "type": 1,
-      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_2020s_yinghua_7",
+      "key": "decade_2020s_yinghua_4",
       "name": "【2020年代】樱花资源",
       "type": 1,
       "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
@@ -91,10 +58,43 @@
       "ext": ""
     },
     {
-      "key": "decade_2020s_bfzy_8",
-      "name": "【2020年代】暴风资源",
+      "key": "decade_2020s_jinying_5",
+      "name": "【2020年代】金鹰资源",
       "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2020s_modu_6",
+      "name": "【2020年代】魔都资源",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2020s_subo_7",
+      "name": "【2020年代】速播资源",
+      "type": 1,
+      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2020s_dytt_8",
+      "name": "【2020年代】电影天堂",
+      "type": 1,
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -113,18 +113,7 @@
       "ext": ""
     },
     {
-      "key": "decade_2020s_ffzy_10",
-      "name": "【2020年代】非凡影视",
-      "type": 1,
-      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_2020s_jian_11",
+      "key": "decade_2020s_jian_10",
       "name": "【2020年代】建安资源",
       "type": 1,
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
@@ -135,10 +124,10 @@
       "ext": ""
     },
     {
-      "key": "decade_2020s_360zy_12",
-      "name": "【2020年代】360资源",
+      "key": "decade_2020s_ffzy_11",
+      "name": "【2020年代】非凡影视",
       "type": 1,
-      "api": "https://360zy.com/api.php/provide/vod/",
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -146,10 +135,21 @@
       "ext": ""
     },
     {
-      "key": "decade_2020s_lzi_13",
+      "key": "decade_2020s_lzi_12",
       "name": "【2020年代】量子资源",
       "type": 1,
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_2020s_360zy_13",
+      "name": "【2020年代】360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -165,15 +165,16 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T15:39:33.589Z",
+    "generated": "2026-11-08T16:07:39.433Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",
     "kind": "decade",
     "decade": "2020年代",
     "slug": "2020s",
-    "sampledCount": 199,
+    "sampledCount": 202,
     "sampledListed": 60,
-    "empty": false
+    "empty": false,
+    "userVisibleNote": "按主题/年代精选源站的线路分组；站内分类由源站原生标签提供。受影视仓客户端协议限制，站内无法按类型或年代裁剪，线路名不代表筛选结果。片量为每日最新两页抽样，不代表用户可见条数。"
   }
 }

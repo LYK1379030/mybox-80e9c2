@@ -1,119 +1,119 @@
 {
-  "updatedAt": "2026-11-08T15:39:30.363Z",
+  "updatedAt": "2026-11-08T16:07:34.851Z",
   "alive": [
     {
-      "key": "c276",
-      "name": "影视 • 非凡[直连]",
-      "api": "http://ffzy.tv/api.php/provide/vod/",
-      "ms": 95,
-      "total": 99010
+      "key": "c2_5",
+      "name": "影视 • 极速[直连]",
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "ms": 111,
+      "total": 116176
     },
     {
       "key": "sony",
       "name": "索尼资源",
       "api": "https://suoniapi.com/api.php/provide/vod/",
-      "ms": 117,
+      "ms": 119,
       "total": 148586
     },
     {
-      "key": "c2_5",
-      "name": "影视 • 极速[直连]",
-      "api": "https://jszyapi.com/api.php/provide/vod/",
-      "ms": 150,
-      "total": 116176
+      "key": "c276",
+      "name": "影视 • 非凡[直连]",
+      "api": "http://ffzy.tv/api.php/provide/vod/",
+      "ms": 255,
+      "total": 99010
+    },
+    {
+      "key": "u_65",
+      "name": "影视 • 尤酷[直连]",
+      "api": "https://api.ukuapi.com/api.php/provide/vod/",
+      "ms": 488,
+      "total": 60342
+    },
+    {
+      "key": "bfzy",
+      "name": "暴风资源",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "ms": 505,
+      "total": 171200
+    },
+    {
+      "key": "yinghua",
+      "name": "樱花资源",
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+      "ms": 547,
+      "total": 105181
     },
     {
       "key": "jinying",
       "name": "金鹰资源",
       "api": "https://jyzyapi.com/api.php/provide/vod/",
-      "ms": 201,
+      "ms": 562,
       "total": 117828
     },
     {
       "key": "modu",
       "name": "魔都资源",
       "api": "https://www.mdzyapi.com/api.php/provide/vod/",
-      "ms": 226,
+      "ms": 616,
       "total": 91500
-    },
-    {
-      "key": "u_65",
-      "name": "影视 • 尤酷[直连]",
-      "api": "https://api.ukuapi.com/api.php/provide/vod/",
-      "ms": 279,
-      "total": 60337
     },
     {
       "key": "subo",
       "name": "速播资源",
       "api": "https://subocaiji.com/api.php/provide/vod/",
-      "ms": 490,
+      "ms": 705,
       "total": 117769
     },
     {
       "key": "dytt",
       "name": "电影天堂",
       "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "ms": 507,
+      "ms": 847,
       "total": 85036
-    },
-    {
-      "key": "yinghua",
-      "name": "樱花资源",
-      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
-      "ms": 507,
-      "total": 105181
-    },
-    {
-      "key": "bfzy",
-      "name": "暴风资源",
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
-      "ms": 579,
-      "total": 171199
     },
     {
       "key": "tyys",
       "name": "天涯资源",
       "api": "http://tyyszy.com/api.php/provide/vod/",
-      "ms": 615,
+      "ms": 861,
       "total": 73735
-    },
-    {
-      "key": "ffzy",
-      "name": "非凡影视",
-      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-      "ms": 635,
-      "total": 99010
     },
     {
       "key": "jian",
       "name": "建安资源",
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-      "ms": 778,
+      "ms": 1053,
       "total": 65123
     },
     {
-      "key": "360zy",
-      "name": "360资源",
-      "api": "https://360zy.com/api.php/provide/vod/",
-      "ms": 1048,
-      "total": 74670
+      "key": "ffzy",
+      "name": "非凡影视",
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "ms": 1095,
+      "total": 99010
     },
     {
       "key": "lzi",
       "name": "量子资源",
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
-      "ms": 1147,
+      "ms": 1600,
       "total": 163132
+    },
+    {
+      "key": "360zy",
+      "name": "360资源",
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "ms": 1691,
+      "total": 74671
     }
   ],
   "dead": {
-    "haiwaikan.com": 9,
-    "kuaifan.tv": 9,
-    "wolongzyw.com": 9,
-    "jinchancaiji.com": 9,
-    "okcdn100.top": 9,
-    "apibdzy.com": 1
+    "haiwaikan.com": 10,
+    "kuaifan.tv": 10,
+    "wolongzyw.com": 10,
+    "jinchancaiji.com": 10,
+    "okcdn100.top": 10,
+    "apibdzy.com": 2
   },
   "hardDead": [
     "haiwaikan.com",

@@ -44,11 +44,11 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T15:39:30.357Z",
+    "generated": "2026-11-08T16:07:34.843Z",
     "probed": 21,
     "alive": 15,
     "hardDead": 5,
-    "totalResources": 1425160,
+    "totalResources": 1513628,
     "note": "③C 专线：独立大 jar（194类含 PanWebShare 系），切线会重载 jar，低配设备闪退就回③/③B"
   }
 }

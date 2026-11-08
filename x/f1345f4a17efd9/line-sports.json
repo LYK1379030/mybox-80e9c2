@@ -3,18 +3,7 @@
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
-      "key": "sports_sony_0",
-      "name": "【体育】索尼资源",
-      "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "sports_c2_5_1",
+      "key": "sports_c2_5_0",
       "name": "【体育】影视 • 极速[直连]",
       "type": 1,
       "api": "https://jszyapi.com/api.php/provide/vod/",
@@ -25,10 +14,10 @@
       "ext": ""
     },
     {
-      "key": "sports_jinying_2",
-      "name": "【体育】金鹰资源",
+      "key": "sports_sony_1",
+      "name": "【体育】索尼资源",
       "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "api": "https://suoniapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -36,29 +25,7 @@
       "ext": ""
     },
     {
-      "key": "sports_modu_3",
-      "name": "【体育】魔都资源",
-      "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "sports_subo_4",
-      "name": "【体育】速播资源",
-      "type": 1,
-      "api": "https://subocaiji.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "sports_bfzy_5",
+      "key": "sports_bfzy_2",
       "name": "【体育】暴风资源",
       "type": 1,
       "api": "https://bfzyapi.com/api.php/provide/vod/",
@@ -69,10 +36,10 @@
       "ext": ""
     },
     {
-      "key": "sports_360zy_6",
-      "name": "【体育】360资源",
+      "key": "sports_jinying_3",
+      "name": "【体育】金鹰资源",
       "type": 1,
-      "api": "https://360zy.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -80,10 +47,43 @@
       "ext": ""
     },
     {
-      "key": "sports_lzi_7",
+      "key": "sports_modu_4",
+      "name": "【体育】魔都资源",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "sports_subo_5",
+      "name": "【体育】速播资源",
+      "type": 1,
+      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "sports_lzi_6",
       "name": "【体育】量子资源",
       "type": 1,
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "sports_360zy_7",
+      "name": "【体育】360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -99,7 +99,7 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T15:39:31.585Z",
+    "generated": "2026-11-08T16:07:36.817Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",
@@ -107,6 +107,7 @@
     "catId": "sports",
     "label": "体育",
     "matchedClasses": 27,
-    "fallbackSites": false
+    "fallbackSites": false,
+    "userVisibleNote": "按主题/年代精选源站的线路分组；站内分类由源站原生标签提供。受影视仓客户端协议限制，站内无法按类型或年代裁剪，线路名不代表筛选结果。片量为每日最新两页抽样，不代表用户可见条数。"
   }
 }
