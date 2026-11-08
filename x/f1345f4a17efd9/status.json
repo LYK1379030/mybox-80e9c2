@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T01:29:23Z",
+  "built_at": "2026-11-08T01:40:39Z",
   "upstreams": [
     {
       "id": "c1",
@@ -43,44 +43,44 @@
   ],
   "vod_lines": [
     {
-      "api": "https://ikunzyapi.com/api.php/provide/vod/from/ikm3u8/",
-      "alive": true,
-      "ms": 307,
-      "total": null,
-      "why": "ok"
-    },
-    {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 330,
+      "ms": 125,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://ikunzyapi.com/api.php/provide/vod/from/ikm3u8/",
+      "alive": true,
+      "ms": 305,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 643,
+      "ms": 709,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 645,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 713,
+      "ms": 711,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1110,
+      "ms": 1035,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 1101,
       "total": null,
       "why": "ok"
     },
@@ -100,7 +100,7 @@
       "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "非法 JSON"
+      "why": "Remote end closed connection without response"
     }
   ],
   "dropped": [
@@ -112,7 +112,7 @@
     {
       "name": "海外看",
       "api": "https://haiwaikan.com/api.php/provide/vod",
-      "why": "非法 JSON"
+      "why": "Remote end closed connection without response"
     },
     {
       "name": "快帆",
@@ -217,7 +217,7 @@
     {
       "name": "海外看(墙外)",
       "api": "https://haiwaikan.com/api.php/provide/vod",
-      "why": "非法 JSON"
+      "why": "Remote end closed connection without response"
     },
     {
       "name": "泥视频(墙外)",
@@ -263,26 +263,14 @@
   ],
   "parses": [
     {
-      "name": "西瓜",
-      "url": "https://jx.xmflv.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "西瓜",
+      "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -291,6 +279,18 @@
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "爱酷",
@@ -325,7 +325,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 41809
+      "bytes": 60000
     },
     {
       "name": "EPG",
