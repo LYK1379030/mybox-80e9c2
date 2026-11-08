@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T06:09:05Z",
+  "built_at": "2026-11-08T08:08:11Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 107,
+      "ms": 330,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 564,
+      "ms": 717,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 951,
+      "ms": 853,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1178,
+      "ms": 1369,
       "total": null,
       "why": "ok"
     },
@@ -352,8 +352,8 @@
     },
     {
       "name": "EPG",
-      "ok": true,
-      "bytes": 2633
+      "ok": false,
+      "why": "<urlopen error [Errno 101] Network is unreachable>"
     }
   ],
   "channels": [
@@ -557,7 +557,7 @@
       "to": "https://www.agit.ai/fantaiying/dr_py/raw/branch/main/js/%E5%AD%90%E5%AD%90%E5%BD%B1%E8%A7%86.js"
     }
   ],
-  "epg_ok": true,
+  "epg_ok": false,
   "vod_total": 6,
   "summary": {
     "sub_configs": [
