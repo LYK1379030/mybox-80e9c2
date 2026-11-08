@@ -79,6 +79,56 @@ DIRECT_SITES = [
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
 ]
 
+# ---------------------------------------------------------------- 真 4K 线路
+# 来源：GitHub 活跃仓库 niubihu1/tvbox（211 星，2026-11 更新）实测提取。
+# 原理：csp_ 插件爬 4K 资源站的「公开分享链接」（网盘 /drive/v1/share），
+# 读公开分享链不需要用户授权，所以能在电视上直接点播 4K 原盘。
+# 依赖 spider jar（135 个爬虫类：4KZhinan/PanWebShare/SeedHub/Wogg…）。
+K4_SPIDER = "https://gitee.com/easy999/test1/raw/main/easy11.05.png"
+K4_SPIDER_MD5 = "c07ab2794d358d27d4a4e842712d3c16"
+
+SITES_4K = [
+    {"key": "玩偶4K", "name": "🔥玩偶 | 4K", "type": 3, "api": "csp_Wogg",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["https://www.wogg.live", "https://woggpan.888484.xyz"]}},
+    {"key": "快映4K", "name": "🔥快映 | 4K", "type": 3, "api": "csp_PanWebShare",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["http://xsayang.fun"]}},
+    {"key": "八零4K", "name": "🔥八零 | 4K", "type": 3, "api": "csp_PanWebShare",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["https://www.80yy3.com", "https://woog.430520.xyz"]}},
+    {"key": "虎斑4K", "name": "🔥虎斑 | 4K", "type": 3, "api": "csp_PanWebShare",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["http://xhban.xyz"]}},
+    {"key": "闪电4K", "name": "🔥闪电 | 4K", "type": 3, "api": "csp_PanWebShare",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["http://shandian.blog"]}},
+    {"key": "蜡笔4K", "name": "🔥蜡笔 | 4K", "type": 3, "api": "csp_PanWebShare",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["http://tvpanpan.site"]}},
+    {"key": "花卷4K", "name": "🔥花卷 | 4K", "type": 3, "api": "csp_PanWebShareHJ",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["https://www.hjzhencai.top"]}},
+    {"key": "种子4K", "name": "🧲种子 | 4K", "type": 3, "api": "csp_SeedHub",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["https://sidhub.cc", "https://seeduck.cc", "https://hubdog.cc"]}},
+    {"key": "指南4K", "name": "💎指南 | 4K", "type": 3, "api": "csp_4KZhinan",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["https://4kzn.cc"]}},
+    {"key": "小丑4K", "name": "💎小丑 | 4K", "type": 3, "api": "csp_4KZhinan",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["https://4kxc.com"]}},
+    {"key": "至臻4K", "name": "📂至臻 ┃ 4K极速", "type": 3, "api": "csp_PantaAmns",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
+     "ext": {"site": ["https://zhizhenpan.fun"]}},
+    {"key": "搬运4K", "name": "📦搬运 | 4K", "type": 3, "api": "csp_BanYunDao",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60},
+    {"key": "爱盼4K", "name": "🎬爱盼 ┃ 4K大片", "type": 3, "api": "csp_AiPan",
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60},
+    {"key": "移动4K", "name": "⚡移动 ┃ 4K极速", "type": 3, "api": "csp_Yidong4K",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60},
+]
+
 # 上游配置只作为「补充来源」，其网盘/磁力类线路会被过滤掉。
 UPSTREAMS = [
     {
@@ -956,15 +1006,33 @@ def main():
     fourk["sites"].sort(key=_ms)
     templates["4k.json"] = json.dumps(fourk, ensure_ascii=False, indent=2)
 
+    # ---- 真 4K 专仓：14 条 csp 插件线，自带 spider jar ----------
+    # 这些线路爬的是 4K 资源站的公开分享链，不需要用户授权网盘，
+    # 是「别人能免费看 4K」的真正原因。
+    fourk_real = {
+        "wallpaper": WALLPAPER,
+        "spider": K4_SPIDER + ";md5;" + K4_SPIDER_MD5,
+        "sites": [dict(s) for s in SITES_4K],
+        "lives": live_entries,
+        "parses": PARSE_BUILTIN + CONF_PARSES,
+        "ijk": IJK,
+        "doh": CONF_DOH,
+        "ads": ADS,
+    }
+    templates["4kreal.json"] = json.dumps(fourk_real, ensure_ascii=False, indent=2)
+
     names = {u["id"]: u["name"] for u in UPSTREAMS}
     entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
     entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
+    entries.append({"name": "⑤ 真 4K 原盘专区（%d 条·网盘分享链·免授权）"
+                             % len(SITES_4K), "url": SELF + "/4kreal.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
     report["summary"] = {
         "sub_configs": built, "4k_sites": len(hd_sites),
+        "real4k_sites": len(SITES_4K),
         "alive_vod": sum(1 for x in lines if x["alive"]),
         "dead_vod": sum(1 for x in lines if not x["alive"]),
         "live_files": len(live_texts),
