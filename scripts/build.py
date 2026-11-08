@@ -1421,7 +1421,11 @@ def _inspect_output(templates, report):
                         rec["problems"].append("残留死链 %s = %s" % (p, x[:70]))
                 if REL_FILE_RE.match(x):
                     rec["problems"].append("残留裸相对文件 %s = %s" % (p, x[:70]))
-        walk(o)
+        # lines-manifest.json 是统计/说明清单，里面的 lines[].file / entries[].file
+        # 是「相对文件名索引」，不是客户端要解析的资源 URL，不能按相对路径误判。
+        # 只保留上面的 JSON 合法性 + sites 豁免检查，跳过全文 walk。
+        if fn != "lines-manifest.json":
+            walk(o)
         ks = [str(s.get("key")) for s in o.get("sites", [])]
         dupk = sorted({k for k in ks if ks.count(k) > 1})
         if dupk:
