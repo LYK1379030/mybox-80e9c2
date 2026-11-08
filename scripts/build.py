@@ -95,13 +95,20 @@ K4_SPIDER = ("https://gh-proxy.com/raw.githubusercontent.com/"
 K4_SPIDER_MD5 = "9f391d889e28d3c40092fabb562f408c"
 
 SITES_4K = [
-    # candymuj.jar 里确认存在的两个 4K 类
+    # csp_Wogg 的 ext 必须是 {"token": ..., "filter": ...}，
+    # 写 {"site": [...]} 会导致插件拿不到 token → 搜不到任何片（一直空转）。
+    # 下面两条取自上游实测可用配置（gao 0827 / noimank tvbox1）。
     {"key": "玩偶4K", "name": "🔥玩偶 | 4K", "type": 3, "api": "csp_Wogg",
-     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://www.wogg.live", "https://woggpan.888484.xyz"]}},
+     "searchable": 1, "quickSearch": 1, "changeable": 0, "timeout": 60,
+     "ext": {"token": "影視天下第一",
+             "filter": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/wogg.json"}},
+    # 音范丝：ext 为空即可（上游原样）
     {"key": "音范丝4K", "name": "🔥音范丝 | 4K原盘", "type": 3,
      "api": "csp_CandyMuj_yinfans",
-     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60},
+     "searchable": 1, "quickSearch": 1, "filterable": 1, "timeout": 60},
+    # 磁力站：能搜到真 4K/蓝光原盘的种子（点开走磁力，需要设备能扛 P2P）
+    {"key": "磁力飘花", "name": "🧲磁力飘花", "type": 3, "api": "csp_BTPiaoHua",
+     "searchable": 1, "quickSearch": 1, "timeout": 60},
 ]
 # 上游配置只作为「补充来源」，其网盘/磁力类线路会被过滤掉。
 UPSTREAMS = [
