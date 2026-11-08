@@ -14,17 +14,8 @@
       "timeout": 60
     },
     {
-      "key": "sony",
-      "name": "索尼资源·96ms",
-      "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "c2_5",
-      "name": "影视 • 极速[直连]·126ms",
+      "name": "影视 • 极速[直连]·86ms",
       "type": 1,
       "api": "https://jszyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -33,7 +24,7 @@
     },
     {
       "key": "jinying",
-      "name": "金鹰资源·156ms",
+      "name": "金鹰资源·190ms",
       "type": 1,
       "api": "https://jyzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -41,8 +32,26 @@
       "changeable": 1
     },
     {
+      "key": "c276",
+      "name": "影视 • 非凡[直连]·278ms",
+      "type": 1,
+      "api": "http://ffzy.tv/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "sony",
+      "name": "索尼资源·394ms",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
       "key": "u_65",
-      "name": "影视 • 尤酷[直连]·195ms",
+      "name": "影视 • 尤酷[直连]·467ms",
       "type": 1,
       "api": "https://api.ukuapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -51,7 +60,7 @@
     },
     {
       "key": "modu",
-      "name": "魔都资源·331ms",
+      "name": "魔都资源·691ms",
       "type": 1,
       "api": "https://www.mdzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -60,7 +69,7 @@
     },
     {
       "key": "yinghua",
-      "name": "樱花资源·444ms",
+      "name": "樱花资源·874ms",
       "type": 1,
       "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
       "searchable": 1,
@@ -69,7 +78,7 @@
     },
     {
       "key": "subo",
-      "name": "速播资源·490ms",
+      "name": "速播资源·999ms",
       "type": 1,
       "api": "https://subocaiji.com/api.php/provide/vod/",
       "searchable": 1,
@@ -77,35 +86,8 @@
       "changeable": 1
     },
     {
-      "key": "ffzy",
-      "name": "非凡影视·554ms",
-      "type": 1,
-      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "tyys",
-      "name": "天涯资源·661ms",
-      "type": 1,
-      "api": "http://tyyszy.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "dytt",
-      "name": "电影天堂·708ms",
-      "type": 1,
-      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "jian",
-      "name": "建安资源·797ms",
+      "name": "建安资源·1076ms",
       "type": 1,
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
       "searchable": 1,
@@ -113,8 +95,35 @@
       "changeable": 1
     },
     {
+      "key": "dytt",
+      "name": "电影天堂·1300ms",
+      "type": 1,
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "tyys",
+      "name": "天涯资源·1300ms",
+      "type": 1,
+      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "ffzy",
+      "name": "非凡影视·1380ms",
+      "type": 1,
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
       "key": "bfzy",
-      "name": "暴风资源·876ms",
+      "name": "暴风资源·1505ms",
       "type": 1,
       "api": "https://bfzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -122,17 +131,8 @@
       "changeable": 1
     },
     {
-      "key": "c276",
-      "name": "影视 • 非凡[直连]·990ms",
-      "type": 1,
-      "api": "http://ffzy.tv/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "360zy",
-      "name": "360资源·1003ms",
+      "name": "360资源·1544ms",
       "type": 1,
       "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
@@ -148,7 +148,7 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T14:09:59.369Z",
+    "generated": "2026-11-08T14:10:43.769Z",
     "probed": 21,
     "alive": 15,
     "hardDead": 5,

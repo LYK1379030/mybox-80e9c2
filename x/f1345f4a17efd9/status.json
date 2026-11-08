@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T14:09:59Z",
+  "built_at": "2026-11-08T14:10:44Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 69,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 248,
+      "ms": 86,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 384,
+      "ms": 560,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 746,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 721,
+      "ms": 919,
       "total": null,
       "why": "ok"
     },
@@ -304,10 +304,10 @@
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "爱酷",
@@ -316,10 +316,10 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
+      "why": "返回站点首页 HTML，非解析结果"
     }
   ],
   "doh": [
@@ -327,11 +327,6 @@
       "name": "Cloudflare",
       "ok": true,
       "bytes": 65
-    },
-    {
-      "name": "腾讯",
-      "ok": true,
-      "bytes": 468
     },
     {
       "name": "AdGuard",
@@ -342,13 +337,18 @@
       "name": "阿里",
       "ok": true,
       "bytes": 76
+    },
+    {
+      "name": "腾讯",
+      "ok": false,
+      "why": "<urlopen error _ssl.c:994: The handshake operation timed out>"
     }
   ],
   "external": [
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 51445
+      "bytes": 45812
     },
     {
       "name": "EPG",
@@ -576,7 +576,7 @@
     "dead_vod": 2,
     "live_files": 3,
     "alive_parses": 0,
-    "alive_doh": 4
+    "alive_doh": 3
   },
   "output_check": [
     {
