@@ -1057,6 +1057,10 @@ def main():
                 if templates.get("fs4k3.json"):
                     entries.insert(3, {"name": "③B 聚合·纯直连保底（免jar·最稳）",
                                        "url": SELF + "/fs4k3.json"})
+                if os.path.isfile(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json")):
+                    templates["fs4kc.json"] = open(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json"), encoding="utf-8").read()
+                    entries.insert(4, {"name": "③C 4K网盘专线（快映/八零/闪电·切线会重载jar）",
+                                       "url": SELF + "/fs4kc.json"})
                 print("   ③ fs4k.json/fs4k2.json 已接入（%d 站，index 指向 fs4k2）" % len(_fs4k["sites"]))
         except Exception as _e:
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
