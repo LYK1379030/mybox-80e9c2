@@ -87,51 +87,22 @@ DIRECT_SITES = [
 # jar 自托管在本仓库 4konly/spider.jar（随 Pages 一起发布）。
 # 原来用 gitee 直链，客户端（okhttp）会被防盗链拦掉导致「配置解析失败」，
 # 改为同源托管后不再依赖第三方站点。
-K4_SPIDER = "https://LYK1379030.github.io/mybox-80e9c2/4konly/spider.jar"
-K4_SPIDER_MD5 = "c07ab2794d358d27d4a4e842712d3c16"
+# 用 candymuj.jar：这个 jar 在主配置 c2/4k 里长期正常加载，
+# 已确认含 Wogg（玩偶4K）与 CandyMuj_yinfans（音范丝4K）两个 4K 类。
+# 之前用 easy11.05 那个 194 类的 jar 会让摸鱼4K盒闪退，已弃用。
+K4_SPIDER = ("https://gh-proxy.com/raw.githubusercontent.com/"
+             "CandyMuj/ResourceInterface/main/TVBox/candymuj.jar")
+K4_SPIDER_MD5 = "9f391d889e28d3c40092fabb562f408c"
 
 SITES_4K = [
+    # candymuj.jar 里确认存在的两个 4K 类
     {"key": "玩偶4K", "name": "🔥玩偶 | 4K", "type": 3, "api": "csp_Wogg",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://www.wogg.live", "https://woggpan.888484.xyz"]}},
-    {"key": "快映4K", "name": "🔥快映 | 4K", "type": 3, "api": "csp_PanWebShare",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["http://xsayang.fun"]}},
-    {"key": "八零4K", "name": "🔥八零 | 4K", "type": 3, "api": "csp_PanWebShare",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://www.80yy3.com", "https://woog.430520.xyz"]}},
-    {"key": "虎斑4K", "name": "🔥虎斑 | 4K", "type": 3, "api": "csp_PanWebShare",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["http://xhban.xyz"]}},
-    {"key": "闪电4K", "name": "🔥闪电 | 4K", "type": 3, "api": "csp_PanWebShare",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["http://shandian.blog"]}},
-    {"key": "蜡笔4K", "name": "🔥蜡笔 | 4K", "type": 3, "api": "csp_PanWebShare",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["http://tvpanpan.site"]}},
-    {"key": "花卷4K", "name": "🔥花卷 | 4K", "type": 3, "api": "csp_PanWebShareHJ",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://www.hjzhencai.top"]}},
-    {"key": "种子4K", "name": "🧲种子 | 4K", "type": 3, "api": "csp_SeedHub",
      "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://sidhub.cc", "https://seeduck.cc", "https://hubdog.cc"]}},
-    {"key": "指南4K", "name": "💎指南 | 4K", "type": 3, "api": "csp_4KZhinan",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://4kzn.cc"]}},
-    {"key": "小丑4K", "name": "💎小丑 | 4K", "type": 3, "api": "csp_4KZhinan",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://4kxc.com"]}},
-    {"key": "至臻4K", "name": "📂至臻 ┃ 4K极速", "type": 3, "api": "csp_PantaAmns",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60,
-     "ext": {"site": ["https://zhizhenpan.fun"]}},
-    {"key": "搬运4K", "name": "📦搬运 | 4K", "type": 3, "api": "csp_BanYunDao",
-     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60},
-    {"key": "爱盼4K", "name": "🎬爱盼 ┃ 4K大片", "type": 3, "api": "csp_AiPan",
-     "searchable": 1, "quickSearch": 1, "filterable": 1, "changeable": 1, "timeout": 60},
-    {"key": "移动4K", "name": "⚡移动 ┃ 4K极速", "type": 3, "api": "csp_Yidong4K",
+     "ext": {"site": ["https://www.wogg.live", "https://woggpan.888484.xyz"]}},
+    {"key": "音范丝4K", "name": "🔥音范丝 | 4K原盘", "type": 3,
+     "api": "csp_CandyMuj_yinfans",
      "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 60},
 ]
-
 # 上游配置只作为「补充来源」，其网盘/磁力类线路会被过滤掉。
 UPSTREAMS = [
     {
