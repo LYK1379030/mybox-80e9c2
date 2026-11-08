@@ -1019,15 +1019,16 @@ def main():
         "doh": CONF_DOH,
         "ads": ADS,
     }
-    templates["4kreal.json"] = json.dumps(fourk_real, ensure_ascii=False, indent=2)
+    # 已停用：4kreal 使用独立 spider jar（gitee 1.9MB），
+    # 与 c1/c2 的 jar 在客户端里互相覆盖，实测会导致影视仓闪退。
+    # 保留代码以便后续在「单独一个仓」的场景启用。
+    _ = fourk_real
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
     entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
     entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
-    entries.append({"name": "⑤ 真 4K 原盘专区（%d 条·网盘分享链·免授权）"
-                             % len(SITES_4K), "url": SELF + "/4kreal.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
     report["summary"] = {
