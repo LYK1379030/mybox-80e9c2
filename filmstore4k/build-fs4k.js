@@ -262,13 +262,20 @@ try {
 
 // 生成配置
 const picked = alive.slice(0, 14);
+
+// jar 策略（第七轮闪退根因修复）：
+//   主配置的 4K 网盘站（csp_Wogg）复用②线的 candymuj.jar —— 用户从②切③零 jar 重载，不闪退
+//   大 jar（194 类）独立成 ③C 专线（fs4kc），愿意折腾的用户单独切
+const CANDYMUJ_JAR = "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar";
+const CANDYMUJ_MD5 = "9f391d889e28d3c40092fabb562f408c";
+
 const config = {
-  spider: `${SPIDER_JAR};md5;${jarMd5}`,
+  spider: `${CANDYMUJ_JAR};md5;${CANDYMUJ_MD5}`,
   wallpaper: "https://picsum.photos/1280/720",
   sites: [
-    // ext 强制字符串化：FongMi/影视仓的 Gson @SerializedName("ext") 是 String 类型，
-    // object 会导致解析异常 → 客户端闪退（build.py 实录的坑，第五轮 ④ 复审确认）
-    ...PAN_4K_SITES.map((s) => ({
+    // csp 站只保留 candymuj.jar 支持的（csp_Wogg，dex 验证过）
+    // PanWebShare 系（快映/八零/闪电）移到 ③C 专线，避免类缺失报错
+    ...PAN_4K_SITES.filter((s) => s.api === "csp_Wogg").map((s) => ({
       ...s,
       ext: JSON.stringify(s.ext, (k, v) => (v === undefined ? "" : v)),
       searchable: 1, quickSearch: 1, filterable: 1, timeout: 60,
@@ -293,7 +300,7 @@ const config = {
     alive: alive.length,
     hardDead: hardDead.length,
     totalResources: picked.reduce((s, x) => s + (x.total || 0), 0),
-    note: "4K 原盘走 csp 网盘插件（jar 内置 16 类），1080P/HD 走构建期实测存活直连源。三层源池自愈，backendHost 统一去重。",
+    note: "③线稳版：jar 复用②线 candymuj（切线零重载），玩偶4K(csp_Wogg) + 实测直连源。快映/八零/闪电在③C专线。",
   },
 };
 // 三文件输出（第六轮实战结论：jar 依赖是③线"整体失败"的最大嫌疑——
@@ -318,12 +325,22 @@ const directOnly = {
 const directText = JSON.stringify(directOnly, null, 2);
 writeFileSync(join(distDir, "fs4k3.json"), directText, "utf8");
 
-// ③C 专线：大 jar + PanWebShare 站（从本文件 config 里抽 csp_PanWebShare* 类站点）
+// ③C 专线：大 jar + PanWebShare 站（config 的 spider 现在是 candymuj，这里覆写回大 jar）
 {
-  const pan = config.sites.filter((s) => /^csp_/.test(s.api) && s.api !== "csp_Wogg");
+  // PanWebShare 站从 PAN_4K_SITES 全集里取（config 里已过滤掉，这里还原）
+  const pan = PAN_4K_SITES.filter((s) => s.api !== "csp_Wogg").map((s) => ({
+    ...s,
+    ext: JSON.stringify(s.ext, (k, v) => (v === undefined ? "" : v)),
+    searchable: 1, quickSearch: 1, filterable: 1, timeout: 60,
+  }));
   if (pan.length) {
-    writeFileSync(join(distDir, "fs4kc.json"), JSON.stringify({ ...config, sites: pan, _meta: { ...config._meta, note: "③C 专线：独立大 jar，切线重载 jar，低配设备闪退就回③/③B" } }, null, 2), "utf8");
-    console.log(`✅ fs4kc.json（${pan.length} 站 4K 网盘专线）`);
+    writeFileSync(join(distDir, "fs4kc.json"), JSON.stringify({
+      ...config,
+      spider: `${SPIDER_JAR};md5;${jarMd5}`,
+      sites: pan,
+      _meta: { ...config._meta, note: "③C 专线：独立大 jar（194类含 PanWebShare 系），切线会重载 jar，低配设备闪退就回③/③B" },
+    }, null, 2), "utf8");
+    console.log(`✅ fs4kc.json（${pan.length} 站 4K 网盘专线，jar=大jar）`);
   }
 }
 
