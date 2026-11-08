@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 TVBox / 影视仓 专属仓 构建器（对抗式自检版）
 =============================================
@@ -1036,12 +1036,16 @@ def main():
                 _fs4k = json.load(_f)
             if _fs4k.get("sites"):
                 # 注册进 templates：随双通道一起输出 + 通过自检校验
-                templates["fs4k.json"] = json.dumps(_fs4k, ensure_ascii=False, indent=2)
+                _fs4k_text = json.dumps(_fs4k, ensure_ascii=False, indent=2)
+                templates["fs4k.json"] = _fs4k_text
+                # fs4k2 = 版本化副本（全新缓存键）：jsDelivr 对改坏过的路径可能钉死旧缓存，
+                # index 指向 fs4k2.json 绕开一切历史污染（实战教训）
+                templates["fs4k2.json"] = _fs4k_text
                 entries.insert(2, {"name": "③ 聚合·实时筛选（%d 站·%s）" % (
                     len(_fs4k["sites"]),
                     (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
-                    "url": SELF + "/fs4k.json"})
-                print("   ③ fs4k.json 已接入（%d 站）" % len(_fs4k["sites"]))
+                    "url": SELF + "/fs4k2.json"})
+                print("   ③ fs4k.json/fs4k2.json 已接入（%d 站，index 指向 fs4k2）" % len(_fs4k["sites"]))
         except Exception as _e:
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
     entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
