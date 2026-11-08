@@ -1141,10 +1141,11 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         with open(os.path.join(site_root, ".nojekyll"), "w", encoding="utf-8") as f:
             f.write("")
         # 独立 4K 配置：放在站点根目录 /4konly/index.json，
-        # 与主配置完全隔离（不同 spider jar，切换时才加载，避免互相覆盖导致闪退）。
-        # 已停用 4konly：实测 csp_ 插件在该 jar 下仍会使影视仓闪退，
-        # 不再产出任何会让用户切换过去崩溃的配置。
-        pass
+        # 与主配置完全隔离（自带独立 spider jar，客户端切换时只加载它）。
+        try:
+            _emit_4konly(site_root, templates)
+        except Exception as e:
+            print("  [warn] 4konly 生成失败：", e)
 
 
 def _emit_4konly(site_root, templates):
