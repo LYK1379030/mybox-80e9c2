@@ -294,7 +294,13 @@ const config = {
     note: "4K 原盘走 csp 网盘插件（jar 内置 16 类），1080P/HD 走构建期实测存活直连源。三层源池自愈，backendHost 统一去重。",
   },
 };
-writeFileSync(join(distDir, "fs4k.json"), JSON.stringify(config, null, 2), "utf8");
+// 双文件输出：fs4k.json（主名）+ fs4k2.json（版本化副本）
+// 为什么两个：jsDelivr 对 @main 路径有 12h 缓存，改坏过的文件即使 purge 也可能被二级缓存钉死；
+// fs4k2 是全新缓存键，index.json 指向它即可绕开任何历史污染（实战验证）。
+// 每日 CI 同时产出两份，保持同步。
+const cfgText = JSON.stringify(config, null, 2);
+writeFileSync(join(distDir, "fs4k.json"), cfgText, "utf8");
+writeFileSync(join(distDir, "fs4k2.json"), cfgText, "utf8");
 
 // 记忆池写入前去重（防重复自我繁殖——v2 的实战教训）
 const memSeen = new Set();
