@@ -1,5 +1,5 @@
 {
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/spider.jar;md5;9f391d889e28d3c40092fabb562f408c",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/spider.jar;md5;c07ab2794d358d27d4a4e842712d3c16",
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
@@ -67,7 +67,7 @@
     },
     {
       "key": "jian",
-      "name": "建安资源·549ms",
+      "name": "建安资源·566ms",
       "type": 1,
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
       "searchable": 1,
@@ -75,17 +75,8 @@
       "changeable": 1
     },
     {
-      "key": "lzi",
-      "name": "量子资源·689ms",
-      "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "bfzy",
-      "name": "暴风资源·780ms",
+      "name": "暴风资源·833ms",
       "type": 1,
       "api": "https://bfzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -94,7 +85,7 @@
     },
     {
       "key": "360zy",
-      "name": "360资源·953ms",
+      "name": "360资源·1065ms",
       "type": 1,
       "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
@@ -102,17 +93,8 @@
       "changeable": 1
     },
     {
-      "key": "dytt",
-      "name": "电影天堂·1057ms",
-      "type": 1,
-      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "ffzy",
-      "name": "非凡影视·1075ms",
+      "name": "非凡影视·1120ms",
       "type": 1,
       "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -120,19 +102,46 @@
       "changeable": 1
     },
     {
-      "key": "yinghua",
-      "name": "樱花资源·1477ms",
+      "key": "dytt",
+      "name": "电影天堂·1142ms",
       "type": 1,
-      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
     },
     {
-      "key": "tyys",
-      "name": "天涯资源·4559ms",
+      "key": "lzi",
+      "name": "量子资源·1432ms",
       "type": 1,
-      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "sony",
+      "name": "索尼资源·1846ms",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "jinying",
+      "name": "金鹰资源·5323ms",
+      "type": 1,
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "modu",
+      "name": "魔都资源·8548ms",
+      "type": 1,
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
@@ -146,9 +155,9 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T07:59:55.011Z",
-    "alive": 8,
-    "totalResources": 837067,
+    "generated": "2026-11-08T08:06:34.953Z",
+    "alive": 9,
+    "totalResources": 1015975,
     "note": "4K 原盘走 csp 网盘插件（仓库 jar 内置），1080P/HD 走实测直连源。所有源构建时实测存活。"
   }
 }
