@@ -45,13 +45,13 @@ const DISCOVERY_FEEDS = [
 ];
 
 const PAN_4K_SITES = [
-  { key: "玩偶4K", name: "🔥玩偶 | 4K原盘", api: "csp_Wogg",
+  { key: "玩偶4K", name: "🔥玩偶 | 4K原盘", type: 3, api: "csp_Wogg",
     ext: { site: ["https://www.wogg.live", "https://woggpan.888484.xyz"] } },
-  { key: "快映4K", name: "🔥快映 | 4K", api: "csp_PanWebShare",
+  { key: "快映4K", name: "🔥快映 | 4K", type: 3, api: "csp_PanWebShare",
     ext: { site: ["http://xsayang.fun"] } },
-  { key: "八零4K", name: "🔥八零 | 4K", api: "csp_PanWebShare",
+  { key: "八零4K", name: "🔥八零 | 4K", type: 3, api: "csp_PanWebShare",
     ext: { site: ["https://www.80yy3.com", "https://woog.430520.xyz"] } },
-  { key: "闪电4K", name: "🔥闪电 | 4K", api: "csp_PanWebShare",
+  { key: "闪电4K", name: "🔥闪电 | 4K", type: 3, api: "csp_PanWebShare",
     ext: { site: ["http://xhban.xyz"] } },
 ];
 
