@@ -312,14 +312,17 @@ const cfgText = JSON.stringify(config, null, 2);
 writeFileSync(join(distDir, "fs4k.json"), cfgText, "utf8");
 writeFileSync(join(distDir, "fs4k2.json"), cfgText, "utf8");
 
-// 纯直连版：去掉所有 csp_ 站，只留实测存活直连源——不依赖任何 jar
+// 纯直连版：去掉所有 csp_ 站，只留实测存活直连源。
+// jar 策略（第七轮实战修正）：与★1 保持同一 jar（candymuj）——
+// 原"无 jar"设计在影视仓 V5.0.11 实测切线时易触发 BadTokenException 闪退
+// （切线瞬间弹窗撞上 Activity 销毁），同 jar 方案让切线行为与★1/② 完全一致。
 const directOnly = {
   ...config,
-  spider: "",
+  spider: config.spider, // 与★1 相同（candymuj）
   sites: config.sites.filter((s) => /^https?:\/\//.test(s.api)),
   _meta: {
     ...config._meta,
-    note: "纯直连保底线：零 jar 依赖，全部为构建期实测存活的直连源。任何 TVBox 系客户端可直接用。",
+    note: "备用·纯直连保底：源站直连。jar 与★1 一致以统一切线行为（无 jar 方案实测会触发影视仓切线闪退 bug）。",
   },
 };
 const directText = JSON.stringify(directOnly, null, 2);
