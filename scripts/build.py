@@ -1443,6 +1443,8 @@ def _inspect_output(templates, report):
         checks.append(rec)
         for pr in rec["problems"]:
             report["issues"].append("%s: %s" % (fn, pr))
+            # 临时诊断：把自检问题明细打进 CI 日志（定位 32 个问题后保留亦无害）
+            print("   [自检明细] %s: %s" % (fn, pr))
     report["output_check"] = checks
     report["verify"] = {
         "files_checked": len(checks),
