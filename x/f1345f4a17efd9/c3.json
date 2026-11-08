@@ -15,13 +15,13 @@
     },
     {
       "key": "暴风",
-      "name": "暴风·594ms",
+      "name": "暴风·643ms",
       "type": 1,
       "api": "https://bfzyapi.com/api.php/provide/vod"
     },
     {
       "key": "IK",
-      "name": "IK·196ms",
+      "name": "IK·307ms",
       "type": 1,
       "api": "https://ikunzyapi.com/api.php/provide/vod/from/ikm3u8/",
       "categories": [
