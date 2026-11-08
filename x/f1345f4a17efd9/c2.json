@@ -3,6 +3,42 @@
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
+      "key": "bfzy",
+      "name": "暴风·大库·604ms",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "feifan",
+      "name": "非凡·最快·1120ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "lzi",
+      "name": "量子·备用·1179ms",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "dytt",
+      "name": "电影天堂",
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "drpy_js_310直播",
       "name": "💥310直播(体育)",
       "type": 3,
@@ -418,58 +454,6 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
-    },
-    {
-      "key": "csp_WoGG",
-      "name": "【需授权】💖玩偶影视4K",
-      "type": 3,
-      "api": "csp_Wogg",
-      "searchable": 1,
-      "changeable": 0,
-      "ext": {
-        "token": "CandyMuj",
-        "filter": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/wogg.json"
-      }
-    },
-    {
-      "key": "csp_CandyMuj_yinfans",
-      "name": "【需授权】💖音范丝4K(磁力)",
-      "type": 3,
-      "api": "csp_CandyMuj_yinfans",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "csp_SixV",
-      "name": "【需授权】💕6V电影网(磁力)",
-      "type": 3,
-      "api": "csp_SixV",
-      "searchable": 1,
-      "ext": "https://www.6vdy.org/"
-    },
-    {
-      "key": "csp_AList",
-      "name": "【需授权】💕AList",
-      "type": 3,
-      "api": "csp_AList",
-      "searchable": 1,
-      "changeable": 0,
-      "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/alist.json"
-    },
-    {
-      "key": "csp_BTPiaoHua",
-      "name": "【需授权】💕新飘花电影网(磁力)",
-      "type": 3,
-      "api": "csp_BTPiaoHua",
-      "searchable": 1
-    },
-    {
-      "key": "push_agent",
-      "name": "【需授权】💤推送(播放页链接或磁力)",
-      "type": 3,
-      "api": "csp_PushAgent",
-      "searchable": 0
     }
   ],
   "lives": [

@@ -1,19 +1,15 @@
 {
   "urls": [
     {
-      "name": "① 高清直连主仓（硬解优化）（27 条线路）",
+      "name": "① 直连点开即播（主力）（21 条线路）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c1.json"
     },
     {
-      "name": "② 4K / 蓝光 / 原盘专仓（48 条线路）",
+      "name": "② 更多直连线路（补充）（46 条线路）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c2.json"
     },
     {
-      "name": "③ 备用全量仓（线路兜底）（43 条线路）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c3.json"
-    },
-    {
-      "name": "④ 高清 / 高速专区（7 条·实测低延迟）",
+      "name": "④ 直连专区·点开即播（8 条·免授权）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/4k.json"
     }
   ]

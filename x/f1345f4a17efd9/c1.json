@@ -4,35 +4,47 @@
   "sites": [
     {
       "key": "索尼",
-      "name": "索尼 ·125ms",
+      "name": "索尼 ·77ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
       "changeable": 1
     },
     {
-      "key": "暴風",
-      "name": "暴風·709ms",
-      "type": 1,
+      "key": "bfzy",
+      "name": "暴风·大库·604ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
+      "type": 1,
       "searchable": 1,
-      "changeable": 1
+      "changeable": 1,
+      "quickSearch": 1
     },
     {
-      "key": "量子",
-      "name": "量子·1035ms",
-      "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
-      "key": "非凡",
-      "name": "非凡·1101ms",
-      "type": 1,
+      "key": "feifan",
+      "name": "非凡·最快·1120ms",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
       "searchable": 1,
-      "changeable": 1
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "lzi",
+      "name": "量子·备用·1179ms",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "dytt",
+      "name": "电影天堂",
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
     },
     {
       "key": "bili_open",
@@ -183,68 +195,6 @@
       "type": 3,
       "api": "csp_Kugou",
       "searchable": 0,
-      "changeable": 0
-    },
-    {
-      "key": "AList",
-      "name": "【需授权】AList",
-      "type": 3,
-      "api": "csp_AList",
-      "searchable": 1,
-      "changeable": 0,
-      "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/alist.json"
-    },
-    {
-      "key": "WebDAV",
-      "name": "【需授权】WebDAV",
-      "type": 3,
-      "api": "csp_WebDAV",
-      "searchable": 0,
-      "changeable": 0,
-      "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/webdav.json"
-    },
-    {
-      "key": "易搜",
-      "name": "【需授权】易搜",
-      "type": 3,
-      "api": "csp_YiSo",
-      "searchable": 1,
-      "changeable": 0
-    },
-    {
-      "key": "玩偶",
-      "name": "【需授权】玩偶",
-      "type": 3,
-      "api": "csp_Wogg",
-      "searchable": 1,
-      "changeable": 0,
-      "ext": {
-        "token": "影視天下第一",
-        "filter": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/wogg.json"
-      }
-    },
-    {
-      "key": "盤搜索",
-      "name": "【需授权】盤搜索",
-      "type": 3,
-      "api": "csp_PanSearch",
-      "searchable": 1,
-      "changeable": 0
-    },
-    {
-      "key": "紙條搜",
-      "name": "【需授权】紙條搜",
-      "type": 3,
-      "api": "csp_XiaoZhiTiao",
-      "searchable": 1,
-      "changeable": 0
-    },
-    {
-      "key": "雲搜",
-      "name": "【需授权】雲搜",
-      "type": 3,
-      "api": "csp_UpYun",
-      "searchable": 1,
       "changeable": 0
     }
   ],
