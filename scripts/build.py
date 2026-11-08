@@ -591,6 +591,48 @@ def probe_simple(name, url, report, keyword=None):
 
 
 # ---------------------------------------------------------------- 渲染
+# 网盘 / 磁力类线路：点开需要先授权网盘（阿里云盘 Token 等），
+# 不能像采集站那样直接出 m3u8。用户要「点开就能看」时必须排到最后。
+CLOUD_HINTS = ["网盘", "云盘", "磁力", "阿里", "夸克", "115", "盘搜", "AList",
+               "WebDAV", "网盘搜索", "云搜", "盘搜索", "玩偶", "音范丝", "UP云",
+               "云资源", "秒传", "分享"]
+CLOUD_APIS = {"csp_Wogg", "csp_WoGG", "csp_CandyMuj_yinfans", "csp_AList",
+              "csp_WebDAV", "csp_PanSearch", "csp_PanSou", "csp_PanSso",
+              "csp_UpYun", "csp_XiaoZhiTiao", "csp_MIPanSo", "csp_KkSs",
+              "csp_UuSs", "csp_AliPS", "csp_YiSo", "csp_YpanSo", "csp_SixV"}
+
+
+def is_cloud(s):
+    """判断是否网盘/磁力类（需要授权才能播）。"""
+    if not isinstance(s, dict):
+        return False
+    api = str(s.get("api") or "")
+    if api in CLOUD_APIS:
+        return True
+    if "磁力" in api or "pan" in api.lower() or "alist" in api.lower():
+        return True
+    n = str(s.get("name") or "") + str(s.get("key") or "")
+    return any(h.lower() in n.lower() for h in CLOUD_HINTS)
+
+
+def play_rank(s):
+    """播放优先级：数字越大越该排前面。
+
+    「点开就能看」的直连采集站排第一，网盘类沉底，
+    这样用户不用每次点开都遇到授权弹窗。
+    """
+    if not isinstance(s, dict):
+        return -1
+    api = str(s.get("api") or "")
+    if is_cloud(s):
+        return 0                       # 需网盘授权 → 最后
+    if api.startswith("http") and ("api.php/provide/vod" in api or "/vod" in api):
+        return 100                     # 直连 m3u8，点开即播
+    if api.startswith("csp_") or api.startswith("http"):
+        return 50                      # csp 爬虫，多数能直出
+    return 10
+
+
 def hd_score(s):
     if not isinstance(s, dict):
         return 0
@@ -664,7 +706,16 @@ def tune(cfg, health, lives):
                 + "·" + str(r["ms"]) + "ms"
         kept.append(s)
     kept = dedup_sites(kept)
-    kept.sort(key=hd_score, reverse=True)
+    # 排序：先按「能否点开即播」分组（直连 > csp > 网盘），
+    # 同组内按实测延迟从低到高，延迟数字最小的排最前。
+    for s in kept:
+        if is_cloud(s) and not str(s.get("name", "")).startswith("【需授权】"):
+            s["name"] = "【需授权】" + str(s.get("name") or s.get("key") or "线路")
+    kept.sort(key=lambda s: (-play_rank(s),
+                             int(re.search(r"·(\d+)ms", str(s.get("name", "")) or "0")
+                                 .group(1)) if re.search(r"·(\d+)ms", str(s.get("name", ""))) else 9999,
+                             -hd_score(s),
+                             str(s.get("name", ""))))
     out = {
         "wallpaper": WALLPAPER,
         "spider": cfg.get("spider"),
@@ -885,6 +936,13 @@ def main():
         "parses": PARSE_BUILTIN + CONF_PARSES, "ijk": IJK,
         "doh": CONF_DOH, "ads": ADS,
     }
+    # 4K 专区也要「能点开即播的排前面」：直连采集站 > csp > 网盘
+    for s in fourk["sites"]:
+        if is_cloud(s) and "需授权" not in str(s.get("name", "")):
+            s["name"] = "【需授权】" + str(s.get("name") or "线路")
+    fourk["sites"].sort(key=lambda s: (-play_rank(s),
+                                       -hd_score(s),
+                                       str(s.get("name", ""))))
     templates["4k.json"] = json.dumps(fourk, ensure_ascii=False, indent=2)
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
