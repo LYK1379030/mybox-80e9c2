@@ -1,16 +1,16 @@
 {
-  "built_at": "2026-11-08T10:55:54Z",
+  "built_at": "2026-11-08T12:06:03Z",
   "upstreams": [
     {
       "id": "c1",
-      "name": "① 直连点开即播（主力）",
+      "name": "老线·直连合集（21条）",
       "source": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/0827.json",
       "ok": true,
       "sites": 33
     },
     {
       "id": "c2",
-      "name": "② 更多直连线路（补充）",
+      "name": "老线·直连合集（46条）",
       "source": "https://gitlab.com/noimank/tvbox/-/raw/main/tvbox1.json",
       "ok": true,
       "sites": 64
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 113,
+      "ms": 41,
       "total": null,
       "why": "ok"
     },
     {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 280,
+      "ms": 50,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 317,
+      "ms": 214,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 865,
+      "ms": 1199,
       "total": null,
       "why": "ok"
     },
@@ -286,26 +286,20 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -320,6 +314,12 @@
       "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
+      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
@@ -334,14 +334,14 @@
       "bytes": 65
     },
     {
-      "name": "腾讯",
-      "ok": true,
-      "bytes": 468
-    },
-    {
       "name": "阿里",
       "ok": true,
       "bytes": 76
+    },
+    {
+      "name": "腾讯",
+      "ok": true,
+      "bytes": 468
     }
   ],
   "external": [
@@ -352,8 +352,8 @@
     },
     {
       "name": "EPG",
-      "ok": true,
-      "bytes": 2633
+      "ok": false,
+      "why": "timed out"
     }
   ],
   "channels": [
@@ -557,7 +557,7 @@
       "to": "https://www.agit.ai/fantaiying/dr_py/raw/branch/main/js/%E5%AD%90%E5%AD%90%E5%BD%B1%E8%A7%86.js"
     }
   ],
-  "epg_ok": true,
+  "epg_ok": false,
   "vod_total": 6,
   "summary": {
     "sub_configs": [
