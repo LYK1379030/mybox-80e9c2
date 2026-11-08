@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T03:49:56Z",
+  "built_at": "2026-11-08T04:59:03Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 79,
+      "ms": 276,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 315,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 1127,
+      "ms": 607,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1192,
+      "ms": 923,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 1199,
       "total": null,
       "why": "ok"
     },
@@ -286,16 +286,16 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "综合",
@@ -329,11 +329,6 @@
       "bytes": 65
     },
     {
-      "name": "腾讯",
-      "ok": true,
-      "bytes": 468
-    },
-    {
       "name": "AdGuard",
       "ok": true,
       "bytes": 65
@@ -342,13 +337,18 @@
       "name": "阿里",
       "ok": true,
       "bytes": 76
+    },
+    {
+      "name": "腾讯",
+      "ok": true,
+      "bytes": 468
     }
   ],
   "external": [
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 59489
+      "bytes": 60000
     },
     {
       "name": "EPG",
