@@ -4,10 +4,10 @@
   "sites": [
     {
       "key": "玩偶4K",
-      "name": "🔥玩偶 | 4K原盘",
+      "name": "🔥玩偶 | 4K",
       "type": 3,
       "api": "csp_Wogg",
-      "ext": "{\"site\":[\"https://www.wogg.live\",\"https://woggpan.888484.xyz\"]}",
+      "ext": "{\"token\":\"影視天下第一\",\"filter\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/wogg.json\"}",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
@@ -47,71 +47,8 @@
       "timeout": 60
     },
     {
-      "key": "c2_5",
-      "name": "影视 • 极速[直连]·176ms",
-      "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "sony",
-      "name": "索尼资源·234ms",
-      "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "u_65",
-      "name": "影视 • 尤酷[直连]·270ms",
-      "type": 1,
-      "api": "https://api.ukuapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "bfzy",
-      "name": "暴风资源·338ms",
-      "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "jinying",
-      "name": "金鹰资源·421ms",
-      "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "modu",
-      "name": "魔都资源·457ms",
-      "type": 1,
-      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "subo",
-      "name": "速播资源·597ms",
-      "type": 1,
-      "api": "https://subocaiji.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "jian",
-      "name": "建安资源·809ms",
+      "name": "建安资源·618ms",
       "type": 1,
       "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
       "searchable": 1,
@@ -119,17 +56,8 @@
       "changeable": 1
     },
     {
-      "key": "dytt",
-      "name": "电影天堂·896ms",
-      "type": 1,
-      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
       "key": "c276",
-      "name": "影视 • 非凡[直连]·1027ms",
+      "name": "影视 • 非凡[直连]·723ms",
       "type": 1,
       "api": "http://ffzy.tv/api.php/provide/vod/",
       "searchable": 1,
@@ -137,17 +65,17 @@
       "changeable": 1
     },
     {
-      "key": "tyys",
-      "name": "天涯资源·1036ms",
+      "key": "360zy",
+      "name": "360资源·836ms",
       "type": 1,
-      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
     },
     {
       "key": "ffzy",
-      "name": "非凡影视·1198ms",
+      "name": "非凡影视·875ms",
       "type": 1,
       "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -155,8 +83,26 @@
       "changeable": 1
     },
     {
+      "key": "dytt",
+      "name": "电影天堂·986ms",
+      "type": 1,
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "bfzy",
+      "name": "暴风资源·1231ms",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
       "key": "lzi",
-      "name": "量子资源·1229ms",
+      "name": "量子资源·2424ms",
       "type": 1,
       "api": "https://cj.lziapi.com/api.php/provide/vod/",
       "searchable": 1,
@@ -164,10 +110,37 @@
       "changeable": 1
     },
     {
-      "key": "yinghua",
-      "name": "樱花资源·1619ms",
+      "key": "modu",
+      "name": "魔都资源·4910ms",
       "type": 1,
-      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "c5_35",
+      "name": "百度·5320ms",
+      "type": 1,
+      "api": "https://api.apibdzy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "sony",
+      "name": "索尼资源·6987ms",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "subo",
+      "name": "速播资源·8251ms",
+      "type": 1,
+      "api": "https://subocaiji.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
@@ -181,11 +154,11 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T10:02:02.622Z",
+    "generated": "2026-11-08T10:26:33.995Z",
     "probed": 21,
-    "alive": 15,
-    "hardDead": 5,
-    "totalResources": 1513469,
+    "alive": 11,
+    "hardDead": 7,
+    "totalResources": 1164578,
     "note": "4K 原盘走 csp 网盘插件（jar 内置 16 类），1080P/HD 走构建期实测存活直连源。三层源池自愈，backendHost 统一去重。"
   }
 }
