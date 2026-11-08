@@ -84,7 +84,10 @@ DIRECT_SITES = [
 # 原理：csp_ 插件爬 4K 资源站的「公开分享链接」（网盘 /drive/v1/share），
 # 读公开分享链不需要用户授权，所以能在电视上直接点播 4K 原盘。
 # 依赖 spider jar（135 个爬虫类：4KZhinan/PanWebShare/SeedHub/Wogg…）。
-K4_SPIDER = "https://gitee.com/easy999/test1/raw/main/easy11.05.png"
+# jar 自托管在本仓库 4konly/spider.jar（随 Pages 一起发布）。
+# 原来用 gitee 直链，客户端（okhttp）会被防盗链拦掉导致「配置解析失败」，
+# 改为同源托管后不再依赖第三方站点。
+K4_SPIDER = "https://LYK1379030.github.io/mybox-80e9c2/4konly/spider.jar"
 K4_SPIDER_MD5 = "c07ab2794d358d27d4a4e842712d3c16"
 
 SITES_4K = [
@@ -1182,6 +1185,15 @@ def _emit_4konly(site_root, templates):
     }
     d = os.path.join(site_root, "4konly")
     os.makedirs(d, exist_ok=True)
+    # 把 jar 复制进站点目录，让客户端从同源下载（避免第三方防盗链）
+    jar_src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "spider4k.jar")
+    if os.path.isfile(jar_src):
+        import shutil
+        shutil.copy2(jar_src, os.path.join(d, "spider.jar"))
+        print("   4konly/spider.jar 已复制（%.2f MB）"
+              % (os.path.getsize(jar_src) / 1048576.0))
+    else:
+        print("   [warn] 本地缺少 spider4k.jar")
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
     print("   4konly/index.json 已生成（%d 条 4K 线路）" % len(sites))
