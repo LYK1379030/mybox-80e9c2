@@ -1338,6 +1338,19 @@ def _inspect_output(templates, report):
       - 记录每条 ext / api 的 URL 总数，供 status.json 复核。
     """
     checks = []
+    # 空年代档（manifest.lines[].empty=true）设计上 sites 为空，属正常，不算 problem。
+    # 但其余线路若 sites 全空 = CI 出口被挡 / 构建失败（攻击报告 A01），必须报错拦截。
+    # 精确豁免而非一刀切：只放行 manifest 明确标记 empty 的那些文件名。
+    _empty_lines = set()
+    try:
+        _mpath = os.path.join(ROOT, "filmstore4k", "dist", "lines-manifest.json")
+        if os.path.isfile(_mpath):
+            _mf = json.load(open(_mpath, encoding="utf-8"))
+            for _ln in _mf.get("lines", []):
+                if _ln.get("empty"):
+                    _empty_lines.add(_ln.get("file"))
+    except Exception:
+        pass
     # 已知死链 / 假 200 HTML 源 / 坏 csp 类，生成物里一条都不许留
     dead_marks = [
         "ghp.ci/", "FongMi/CatVodSpider/main/json/wogg.json",
@@ -1355,7 +1368,7 @@ def _inspect_output(templates, report):
             continue
         rec = {"file": fn, "sites": len(o.get("sites", [])),
                "lives": len(o.get("lives", [])), "problems": []}
-        if fn not in ("index.json", "index-cats.json") and not o.get("sites"):
+        if fn not in ("index.json", "index-cats.json") and not o.get("sites") and fn not in _empty_lines:
             rec["problems"].append("sites 为空")
         for i, l in enumerate(o.get("lives", [])):
             u = str(l.get("url", ""))
