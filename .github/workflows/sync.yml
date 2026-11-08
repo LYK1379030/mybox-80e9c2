@@ -1,4 +1,4 @@
-name: 每日自动同步专属影视仓
+﻿name: 每日自动同步专属影视仓
 
 on:
   schedule:
@@ -11,6 +11,7 @@ on:
       - 'scripts/build.py'
       - 'box.json'
       - '.github/workflows/sync.yml'
+      - 'filmstore4k/**'
 
 permissions:
   contents: write
@@ -59,6 +60,10 @@ jobs:
               for k in ('user', 'repo', 'sub', 'pages', 'cdn'):
                   f.write('%s=%s\n' % (k, c.get(k, '')))
           PY
+
+      - name: 构建聚合线路（filmstore4k，实测源存活）
+        run: |
+          node filmstore4k/build-fs4k.js
 
       - name: 生成配置（单次构建，双通道共用同一份结果）
         # BOX_OUT 指向仓库根：build.py 会同时产出
