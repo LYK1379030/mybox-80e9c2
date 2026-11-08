@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 TVBox / 影视仓 专属仓 构建器（对抗式自检版）
 =============================================
@@ -1026,6 +1026,25 @@ def main():
     names = {u["id"]: u["name"] for u in UPSTREAMS}
     entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
+    # ---- ③ 聚合·实时筛选线路（filmstore4k 产物，构建期自动实测源存活）----
+    # 产物由 filmstore4k/build-fs4k.js 生成（node filmstore4k/build-fs4k.js），
+    # 若产物缺失则跳过（不影响主流程），绝不因可选线路挂掉整个构建。
+    _fs4k_path = os.path.join(ROOT, "filmstore4k", "dist", "fs4k.json")
+    if os.path.isfile(_fs4k_path):
+        try:
+            with open(_fs4k_path, encoding="utf-8") as _f:
+                _fs4k = json.load(_f)
+            if _fs4k.get("sites"):
+                # 同步到输出目录，作为多仓子线路
+                with open(os.path.join(OUT, SUB, "fs4k.json"), "w", encoding="utf-8") as _of:
+                    json.dump(_fs4k, _of, ensure_ascii=False, indent=2)
+                entries.insert(2, {"name": "③ 聚合·实时筛选（%d 站·%s）" % (
+                    len(_fs4k["sites"]),
+                    (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
+                    "url": SELF + "/fs4k.json"})
+                print("   ③ fs4k.json 已接入（%d 站）" % len(_fs4k["sites"]))
+        except Exception as _e:
+            print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
     entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
@@ -1306,3 +1325,4 @@ def _verify(report):
 
 if __name__ == "__main__":
     main()
+
