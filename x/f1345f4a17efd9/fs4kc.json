@@ -44,11 +44,11 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T12:19:24.331Z",
+    "generated": "2026-11-08T10:54:26.972Z",
     "probed": 21,
-    "alive": 15,
-    "hardDead": 5,
-    "totalResources": 1489249,
-    "note": "③C 专线：独立大 jar（194类含 PanWebShare 系），切线会重载 jar，低配设备闪退就回③/③B"
+    "alive": 14,
+    "hardDead": 6,
+    "totalResources": 1485974,
+    "note": "③C 4K网盘专线：切到本线会加载 194 类大 jar，**需要等待 10-30 秒**（按返回键会触发闪退 bug，等加载完成再操作）。低配设备建议用★1/②。"
   }
 }
