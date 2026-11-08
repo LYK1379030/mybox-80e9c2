@@ -1042,10 +1042,14 @@ def main():
                 # index 指向 fs4k2.json 绕开一切历史污染（实战教训）
                 templates["fs4k2.json"] = _fs4k_text
                 # fs4k3 = 纯直连保底线（零 jar 依赖），任何客户端保证可用
-                const _fs4k3_direct = _fs4k["sites"].filter(s => /^https?:\\/\\/.test(String(s.api || "")));
-                if (_fs4k3_direct.length) {
-                    templates["fs4k3.json"] = JSON.stringify({..._fs4k, spider: "", sites: _fs4k3_direct}, null, 2).replace(/^/, "");
-                }
+                import re as _re
+                _fs4k3_direct = [s for s in _fs4k["sites"] if str(s.get("api", "")).startswith("http")]
+                if _fs4k3_direct:
+                    _fs4k3 = dict(_fs4k)
+                    _fs4k3["spider"] = ""
+                    _fs4k3["sites"] = _fs4k3_direct
+                    templates["fs4k3.json"] = json.dumps(_fs4k3, ensure_ascii=False, indent=2)
+                    print("   ③B fs4k3.json 纯直连保底线已接入（%d 站）" % len(_fs4k3_direct))
                 entries.insert(2, {"name": "③ 聚合·实时筛选（%d 站·%s）" % (
                     len(_fs4k["sites"]),
                     (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
