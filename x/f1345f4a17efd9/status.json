@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T01:24:33Z",
+  "built_at": "2026-11-08T01:26:25Z",
   "upstreams": [
     {
       "id": "c1",
@@ -43,30 +43,44 @@
   ],
   "vod_lines": [
     {
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 69,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://ikunzyapi.com/api.php/provide/vod/from/ikm3u8/",
+      "alive": true,
+      "ms": 196,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 590,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 594,
+      "total": null,
+      "why": "ok"
+    },
+    {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 597,
+      "ms": 1125,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 638,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 741,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 747,
+      "ms": 1198,
       "total": null,
       "why": "ok"
     },
@@ -74,31 +88,19 @@
       "api": "https://api.kuaifan.tv/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "<urlopen error [Errno 11001] getaddrinfo failed>"
-    },
-    {
-      "api": "https://ikunzyapi.com/api.php/provide/vod/from/ikm3u8/",
-      "alive": false,
-      "ms": 0,
-      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
+      "why": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
+      "why": "非法 JSON"
     },
     {
       "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
-    },
-    {
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "alive": false,
-      "ms": 0,
-      "why": "The read operation timed out"
+      "why": "非法 JSON"
     }
   ],
   "dropped": [
@@ -110,17 +112,12 @@
     {
       "name": "海外看",
       "api": "https://haiwaikan.com/api.php/provide/vod",
-      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
-    },
-    {
-      "name": "索尼 ",
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "why": "The read operation timed out"
+      "why": "非法 JSON"
     },
     {
       "name": "快帆",
       "api": "https://api.kuaifan.tv/api.php/provide/vod",
-      "why": "<urlopen error [Errno 11001] getaddrinfo failed>"
+      "why": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "name": "櫻花",
@@ -218,14 +215,9 @@
       "why": "连接超时"
     },
     {
-      "name": "IK",
-      "api": "https://ikunzyapi.com/api.php/provide/vod/from/ikm3u8/",
-      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
-    },
-    {
       "name": "海外看(墙外)",
       "api": "https://haiwaikan.com/api.php/provide/vod",
-      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
+      "why": "非法 JSON"
     },
     {
       "name": "泥视频(墙外)",
@@ -271,28 +263,28 @@
   ],
   "parses": [
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno 11001] getaddrinfo failed"
-    },
-    {
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
-      "why": "DNS: [Errno 11001] getaddrinfo failed"
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "夜幕",
@@ -309,24 +301,24 @@
   ],
   "doh": [
     {
+      "name": "Cloudflare",
+      "ok": true,
+      "bytes": 65
+    },
+    {
+      "name": "AdGuard",
+      "ok": true,
+      "bytes": 65
+    },
+    {
       "name": "阿里",
       "ok": true,
       "bytes": 76
     },
     {
-      "name": "Cloudflare",
-      "ok": false,
-      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
-    },
-    {
       "name": "腾讯",
       "ok": true,
       "bytes": 468
-    },
-    {
-      "name": "AdGuard",
-      "ok": false,
-      "why": "<urlopen error timed out>"
     }
   ],
   "external": [
@@ -344,13 +336,13 @@
   "channels": [
     {
       "name": "pages",
-      "dest": "D:\\总文件夹\\个人资料\\文档\\deepseek-harness\\default-workspace\\deliverables\\tvbox-private\\_site\\x/f1345f4a17efd9",
+      "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
       "files": 10
     },
     {
       "name": "cdn",
-      "dest": "D:\\总文件夹\\个人资料\\文档\\deepseek-harness\\default-workspace\\deliverables\\tvbox-private\\x/f1345f4a17efd9",
+      "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
       "files": 10
     }
@@ -358,7 +350,7 @@
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
     "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> 9f391d889e28d3c40092fabb562f408c",
-    "已剔除 5 条失活点播线路（正常自愈）"
+    "已剔除 3 条失活点播线路（正常自愈）"
   ],
   "url_fixes": [
     {
@@ -689,7 +681,7 @@
     "sub_configs": [
       [
         "c1",
-        26
+        27
       ],
       [
         "c2",
@@ -697,20 +689,20 @@
       ],
       [
         "c3",
-        42
+        43
       ]
     ],
-    "4k_sites": 5,
-    "alive_vod": 4,
-    "dead_vod": 5,
+    "4k_sites": 7,
+    "alive_vod": 6,
+    "dead_vod": 3,
     "live_files": 3,
     "alive_parses": 0,
-    "alive_doh": 2
+    "alive_doh": 4
   },
   "output_check": [
     {
       "file": "c1.json",
-      "sites": 26,
+      "sites": 27,
       "lives": 3,
       "problems": []
     },
@@ -722,13 +714,13 @@
     },
     {
       "file": "c3.json",
-      "sites": 42,
+      "sites": 43,
       "lives": 3,
       "problems": []
     },
     {
       "file": "4k.json",
-      "sites": 5,
+      "sites": 7,
       "lives": 3,
       "problems": []
     },
@@ -745,7 +737,7 @@
     "total_problems": 0,
     "url_fixes_applied": 62,
     "issues": 3,
-    "dead_vod_removed": 5,
+    "dead_vod_removed": 3,
     "all_absolute": true
   },
   "entries": {
