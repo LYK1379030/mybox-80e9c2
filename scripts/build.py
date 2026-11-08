@@ -1066,6 +1066,30 @@ def main():
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
     entries.append({"name": " 5 老线·4K直连专区（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
+    # ---- 分类频道：按大区/年代分组的 16 条线路（团队 build-lines.mjs 每日产出）----
+    # 纯代码零账号：每条线路是完整动态 macCMS 子仓，客户端 t/pg/wd/ids 由源站原生处理。
+    # 分开放在 index-cats.json，避免主 index 被 22 条线路塞乱（lead 决策）。
+    try:
+        _lines_dir = os.path.join(ROOT, "filmstore4k", "dist")
+        _manifest_path = os.path.join(_lines_dir, "lines-manifest.json")
+        if os.path.isfile(_manifest_path):
+            _manifest = json.load(open(_manifest_path, encoding="utf-8"))
+            _cat_entries = []
+            for _e in _manifest.get("entries", []):
+                _f = _e.get("file", "")
+                _p = os.path.join(_lines_dir, _f)
+                if not os.path.isfile(_p):
+                    continue
+                templates[_f] = open(_p, encoding="utf-8").read()
+                _nm = _e.get("name", _f)
+                if not _nm.startswith("⏰"):
+                    _nm = "分类·" + _nm
+                _cat_entries.append({"name": _nm, "url": SELF + "/" + _f})
+            if _cat_entries:
+                templates["index-cats.json"] = json.dumps({"urls": _cat_entries}, ensure_ascii=False, indent=2)
+                print("   分类频道 index-cats.json 已接入（%d 条线路）" % len(_cat_entries))
+    except Exception as _e:
+        print("   ⚠ 分类频道接入失败（跳过，不影响主配置）: %s" % _e)
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
     report["summary"] = {
