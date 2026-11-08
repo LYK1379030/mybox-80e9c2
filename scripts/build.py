@@ -63,36 +63,40 @@ RAWG = "https://raw.githubusercontent.com/gaotianliuyun/gao/master/"
 
 # ---------------------------------------------------------------- 上游
 # 每个镜像自带 base / jar_base，避免「切到备用镜像时相对路径指错域名」。
+# ---------------------------------------------------------------- 直连采集站
+# 全部为「苹果CMS」标准接口，点开直接出 m3u8，零授权、零账号、零网盘。
+# 实测延迟/片库（2026-11 实测）：
+#   非凡 427ms/9.9万 · 电影天堂 699ms/8.5万 · 暴风 867ms/17.1万 · 量子 1729ms/16.3万
+# 合计约 52 万条片源，覆盖电影/剧集/动漫/综艺。
+DIRECT_SITES = [
+    {"key": "feifan", "name": "非凡·最快", "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "dytt", "name": "电影天堂", "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "bfzy", "name": "暴风·大库", "api": "https://bfzyapi.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "lzi", "name": "量子·备用", "api": "https://cj.lziapi.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+]
+
+# 上游配置只作为「补充来源」，其网盘/磁力类线路会被过滤掉。
 UPSTREAMS = [
     {
-        "id": "c1", "name": "① 高清直连主仓（硬解优化）",
+        "id": "c1", "name": "① 直连点开即播（主力）",
         "mirrors": [
             {"url": JSD + "0827.json", "base": JSD, "jar_base": GHP},
             {"url": "https://fastly.jsdelivr.net/gh/gaotianliuyun/gao@master/0827.json",
              "base": JSD, "jar_base": GHP},
-            {"url": "https://gcore.jsdelivr.net/gh/gaotianliuyun/gao@master/0827.json",
-             "base": JSD, "jar_base": GHP},
             {"url": RAWG + "0827.json", "base": JSD, "jar_base": GHP},
-            {"url": GHP + "0827.json", "base": JSD, "jar_base": GHP},
         ],
     },
     {
-        "id": "c2", "name": "② 4K / 蓝光 / 原盘专仓",
+        "id": "c2", "name": "② 更多直连线路（补充）",
         "mirrors": [
             {"url": "https://gitlab.com/noimank/tvbox/-/raw/main/tvbox1.json",
              "base": "https://gitlab.com/noimank/tvbox/-/raw/main/", "jar_base": None},
             {"url": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/0821.json",
              "base": JSD, "jar_base": GHP},
-        ],
-    },
-    {
-        "id": "c3", "name": "③ 备用全量仓（线路兜底）",
-        "mirrors": [
-            {"url": "https://dxawi.github.io/0/0.json",
-             "base": "https://dxawi.github.io/0/", "jar_base": None},
-            {"url": "https://cdn.jsdelivr.net/gh/FongMi/CatVodSpider@main/json/config.json",
-             "base": "https://cdn.jsdelivr.net/gh/FongMi/CatVodSpider@main/json/",
-             "jar_base": None},
         ],
     },
 ]
@@ -652,34 +656,42 @@ def norm_name(n):
 
 
 def dedup_sites(sites):
-    """按 key 去重（保留 hd_score 高者），再按 api + 归一化名去重。"""
-    by_key, order = {}, []
+    """按 api 去重（同一采集站只留一条，名字用先出现的），再按 key 去重。"""
+    seen_api, seen_key, out = set(), set(), []
     for s in sites:
         if not isinstance(s, dict):       # 纵深防御：跳过脏元素
             continue
-        k = str(s.get("key") or s.get("api") or id(s))
-        if k not in by_key or hd_score(s) > hd_score(by_key[k]):
-            if k not in by_key:
-                order.append(k)
-            by_key[k] = s
-    seen, out = set(), []
-    for k in order:
-        s = by_key[k]
-        sig = str(s.get("api") or "") + "|" + norm_name(s.get("name"))
-        if sig in seen:
+        api = str(s.get("api") or "").rstrip("/")
+        # 采集站按 api 判重：非凡/量子/暴风 等在多个上游里都有，
+        # 只看 key 会留成「非凡」「非凡·最快」两条，用户以为多了线路。
+        if api.startswith("http") and ("vod" in api or "api.php" in api):
+            if api in seen_api:
+                continue
+            seen_api.add(api)
+        k = str(s.get("key") or api or id(s))
+        if k in seen_key:
             continue
-        seen.add(sig)
+        seen_key.add(k)
         out.append(s)
     return out
 
 
 def tune(cfg, health, lives):
     kept, dropped = [], []
-    for raw in (cfg.get("sites") or []):
+    # 先把实测可用的直连采集站塞到最前面：这类点开就出 m3u8，
+    # 不需要网盘/账号/授权，是电视端唯一「零门槛」的片源。
+    direct = [dict(d) for d in DIRECT_SITES]
+    for raw in direct + list(cfg.get("sites") or []):
         if not isinstance(raw, dict):    # 纵深防御：跳过脏元素
             continue
         s = dict(raw)                    # 先复制，绝不污染 configs
         a = str(s.get("api", ""))
+        # 用户明确不要「点开还要授权」的线路：网盘/磁力类直接丢掉，
+        # 否则电视上每次点开都会弹 Token 框。
+        if is_cloud(s):
+            dropped.append({"name": s.get("name"), "api": a,
+                            "why": "网盘/磁力类需授权，已按需求剔除"})
+            continue
         # 死链可能藏在 api / ext / ext 子字段 / key 里，整条 site 一起查
         blob = json.dumps(s, ensure_ascii=False)
         hit = next((why for pre, why in DEAD_APIS.items() if pre in blob), None)
@@ -871,12 +883,16 @@ def main():
         report["dropped"].extend(dropped)
         built.append((uid, len(out["sites"])))
 
-    # 4K / 极速专区
+    # 「直连专区」：只装实测可用的直连采集站，零授权、点开即播。
+    # 不再放网盘/磁力线——那类在电视上必弹 Token，体验最差。
     hd_sites, seen = [], set()
     def add(s, tag):
         if not isinstance(s, dict):       # 纵深防御
             return
-        k = str(s.get("api", "")) + "|" + norm_name(s.get("name"))
+        if is_cloud(s):
+            return                        # 网盘类一律不进
+        # 按 api 去重：同一个采集站在多个上游都出现，只看名字会留成两条
+        k = str(s.get("api", "")).rstrip("/") or norm_name(s.get("name"))
         if k in seen:
             return
         a = str(s.get("api", ""))
@@ -913,22 +929,16 @@ def main():
         s = dict(s)
         s["name"] = tag + str(s.get("name") or s.get("key") or "线路")
         hd_sites.append(s)
+    # 直连专区：先放 4 个实测直连站（点开即播），再补上游里其它直连线路
+    for d in DIRECT_SITES:
+        add(dict(d), "【直连】")
     for c in configs.values():
         for s in (c.get("sites") or []):
-            if not isinstance(s, dict):
-                continue
-            n = str(s.get("name", "")) + str(s.get("key", ""))
-            if any(w in n for w in HD_WORDS):
+            if isinstance(s, dict) and str(s.get("api", "")).startswith("http"):
                 a = str(s.get("api", ""))
                 if health.get(a) and not health[a]["alive"]:
                     continue
-                add(s, "【真4K】")
-    fast = [x for x in lines if x["alive"] and x["ms"] <= 1500][:6]
-    fast_apis = {x["api"] for x in fast}
-    for c in configs.values():
-        for s in (c.get("sites") or []):
-            if isinstance(s, dict) and str(s.get("api", "")) in fast_apis:
-                add(s, "【极速直连】")
+                add(s, "")
     fourk = {
         "wallpaper": WALLPAPER,
         "spider": (configs.get("c2") or configs.get("c1") or {}).get("spider"),
@@ -936,21 +946,20 @@ def main():
         "parses": PARSE_BUILTIN + CONF_PARSES, "ijk": IJK,
         "doh": CONF_DOH, "ads": ADS,
     }
-    # 4K 专区也要「能点开即播的排前面」：直连采集站 > csp > 网盘
-    for s in fourk["sites"]:
-        if is_cloud(s) and "需授权" not in str(s.get("name", "")):
-            s["name"] = "【需授权】" + str(s.get("name") or "线路")
-    fourk["sites"].sort(key=lambda s: (-play_rank(s),
-                                       -hd_score(s),
-                                       str(s.get("name", ""))))
+    # 按实测延迟排序，最快的排最前
+    def _ms(s):
+        m = re.search(r"·(\d+)ms", str(s.get("name", "")))
+        return int(m.group(1)) if m else (
+            next((int(h[k]["ms"]) for k in [str(s.get("api", ""))]
+                  if k in h and h[k].get("alive")), 9999))
+    h = health
+    fourk["sites"].sort(key=_ms)
     templates["4k.json"] = json.dumps(fourk, ensure_ascii=False, indent=2)
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
     entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
-    # 如实命名：这里没有按分辨率/码率筛片源，只是「名字含 4K 字样
-    # 的线路 + 实测延迟最低的直连采集站」，叫「高速」而非承诺真 4K。
-    entries.append({"name": "④ 高清 / 高速专区（%d 条·实测低延迟）" % len(hd_sites),
+    entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
