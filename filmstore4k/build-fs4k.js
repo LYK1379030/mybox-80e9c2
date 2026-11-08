@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * 生成聚合接口配置（filmstore4k/）—— 静态构建版
  *
@@ -68,7 +68,7 @@ for (const a of alive) console.log(`  ✓ ${a.key.padEnd(9)} ${String(a.ms).padS
 
 // 生成聚合配置：全部存活源并列，TVBox 内建搜索聚合
 const config = {
-  spider: "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/4konly/spider.jar;md5;9f391d889e28d3c40092fabb562f408c",
+  spider: "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/spider.jar;md5;c07ab2794d358d27d4a4e842712d3c16",
   wallpaper: "https://picsum.photos/1280/720",
   sites: [
     // 4K 网盘原盘站（csp 插件，仓库 jar 已含）
