@@ -4,7 +4,7 @@
   "sites": [
     {
       "key": "索尼",
-      "name": "索尼 ·86ms",
+      "name": "索尼 ·117ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
@@ -12,7 +12,7 @@
     },
     {
       "key": "bfzy",
-      "name": "暴风·大库·560ms",
+      "name": "暴风·大库·301ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -20,18 +20,18 @@
       "quickSearch": 1
     },
     {
-      "key": "feifan",
-      "name": "非凡·最快·746ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "key": "lzi",
+      "name": "量子·备用·615ms",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
     },
     {
-      "key": "lzi",
-      "name": "量子·备用·919ms",
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "key": "feifan",
+      "name": "非凡·最快·672ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
@@ -197,21 +197,24 @@
       "type": 0,
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/live.txt",
       "playerType": 1,
-      "ua": "okhttp/3.15"
+      "ua": "okhttp/3.15",
+      "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
     },
     {
       "name": "直播·精简",
       "type": 0,
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/live2.txt",
       "playerType": 1,
-      "ua": "okhttp/3.15"
+      "ua": "okhttp/3.15",
+      "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
     },
     {
       "name": "直播·官方台",
       "type": 0,
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/live3.m3u",
       "playerType": 1,
-      "ua": "okhttp/3.15"
+      "ua": "okhttp/3.15",
+      "epg": "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
     }
   ],
   "parses": [
@@ -385,6 +388,13 @@
       "ips": [
         "223.5.5.5",
         "223.6.6.6"
+      ]
+    },
+    {
+      "name": "腾讯",
+      "url": "https://doh.pub/dns-query",
+      "ips": [
+        "119.29.29.29"
       ]
     },
     {

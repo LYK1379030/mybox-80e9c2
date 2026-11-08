@@ -2,67 +2,67 @@
   "urls": [
     {
       "name": "分类·🎬电影",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-movie.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-movie.json"
     },
     {
       "name": "分类·📺剧集",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-tv.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-tv.json"
     },
     {
       "name": "分类·🌸动漫",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-anime.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-anime.json"
     },
     {
       "name": "分类·🎤综艺",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-variety.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-variety.json"
     },
     {
       "name": "分类·🌍纪录",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-doc.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-doc.json"
     },
     {
       "name": "分类·📱短剧",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-short.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-short.json"
     },
     {
       "name": "分类·⚽体育",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-sports.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-sports.json"
     },
     {
       "name": "分类·🔥4K专区",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-q4k.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-q4k.json"
     },
     {
       "name": "分类·🆕最新更新",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-new.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-new.json"
     },
     {
       "name": "⏰2020年代",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-decade-2020s.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-decade-2020s.json"
     },
     {
       "name": "⏰2010年代",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-decade-2010s.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-decade-2010s.json"
     },
     {
       "name": "⏰2000年代",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-decade-2000s.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-decade-2000s.json"
     },
     {
       "name": "⏰90年代",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-decade-90s.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-decade-90s.json"
     },
     {
       "name": "⏰80年代",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-decade-80s.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-decade-80s.json"
     },
     {
       "name": "⏰更早",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-decade-older.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-decade-older.json"
     },
     {
       "name": "⏰年代不详",
-      "url": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/line-decade-unknown.json"
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-decade-unknown.json"
     }
   ]
 }

@@ -3,18 +3,7 @@
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
-      "key": "decade_90s_jian_0",
-      "name": "【90年代】建安资源",
-      "type": 1,
-      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_90s_c276_1",
+      "key": "decade_90s_c276_0",
       "name": "【90年代】影视 • 非凡[直连]",
       "type": 1,
       "api": "http://ffzy.tv/api.php/provide/vod/",
@@ -25,7 +14,40 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_bfzy_2",
+      "key": "decade_90s_sony_1",
+      "name": "【90年代】索尼资源",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_90s_c2_5_2",
+      "name": "【90年代】影视 • 极速[直连]",
+      "type": 1,
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_90s_u_65_3",
+      "name": "【90年代】影视 • 尤酷[直连]",
+      "type": 1,
+      "api": "https://api.ukuapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_90s_bfzy_4",
       "name": "【90年代】暴风资源",
       "type": 1,
       "api": "https://bfzyapi.com/api.php/provide/vod/",
@@ -36,10 +58,10 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_ffzy_3",
-      "name": "【90年代】非凡影视",
+      "key": "decade_90s_modu_5",
+      "name": "【90年代】魔都资源",
       "type": 1,
-      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -47,7 +69,7 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_dytt_4",
+      "key": "decade_90s_dytt_6",
       "name": "【90年代】电影天堂",
       "type": 1,
       "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
@@ -58,7 +80,18 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_tyys_5",
+      "key": "decade_90s_subo_7",
+      "name": "【90年代】速播资源",
+      "type": 1,
+      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_90s_tyys_8",
       "name": "【90年代】天涯资源",
       "type": 1,
       "api": "http://tyyszy.com/api.php/provide/vod/",
@@ -69,43 +102,10 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_360zy_6",
-      "name": "【90年代】360资源",
+      "key": "decade_90s_jian_9",
+      "name": "【90年代】建安资源",
       "type": 1,
-      "api": "https://360zy.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_90s_lzi_7",
-      "name": "【90年代】量子资源",
-      "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_90s_jinying_8",
-      "name": "【90年代】金鹰资源",
-      "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "decade_90s_subo_9",
-      "name": "【90年代】速播资源",
-      "type": 1,
-      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -124,10 +124,10 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_sony_11",
-      "name": "【90年代】索尼资源",
+      "key": "decade_90s_jinying_11",
+      "name": "【90年代】金鹰资源",
       "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -135,10 +135,10 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_c2_5_12",
-      "name": "【90年代】影视 • 极速[直连]",
+      "key": "decade_90s_ffzy_12",
+      "name": "【90年代】非凡影视",
       "type": 1,
-      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -146,10 +146,21 @@
       "ext": ""
     },
     {
-      "key": "decade_90s_c5_35_13",
-      "name": "【90年代】百度",
+      "key": "decade_90s_lzi_13",
+      "name": "【90年代】量子资源",
       "type": 1,
-      "api": "https://api.apibdzy.com/api.php/provide/vod/",
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "decade_90s_360zy_14",
+      "name": "【90年代】360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -165,7 +176,7 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T14:03:15.549Z",
+    "generated": "2026-11-08T14:17:54.924Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",

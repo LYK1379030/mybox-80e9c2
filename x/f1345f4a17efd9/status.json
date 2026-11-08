@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T14:10:44Z",
+  "built_at": "2026-11-08T14:17:55Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 86,
+      "ms": 117,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 560,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 746,
+      "ms": 301,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 919,
+      "ms": 615,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 672,
       "total": null,
       "why": "ok"
     },
@@ -298,16 +298,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "771949",
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "爱酷",
@@ -316,10 +316,10 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -340,20 +340,20 @@
     },
     {
       "name": "腾讯",
-      "ok": false,
-      "why": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+      "ok": true,
+      "bytes": 468
     }
   ],
   "external": [
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 45812
+      "bytes": 60000
     },
     {
       "name": "EPG",
-      "ok": false,
-      "why": "timed out"
+      "ok": true,
+      "bytes": 2633
     }
   ],
   "channels": [
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 13
+      "files": 30
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 13
+      "files": 30
     }
   ],
   "issues": [
@@ -557,7 +557,7 @@
       "to": "https://www.agit.ai/fantaiying/dr_py/raw/branch/main/js/%E5%AD%90%E5%AD%90%E5%BD%B1%E8%A7%86.js"
     }
   ],
-  "epg_ok": false,
+  "epg_ok": true,
   "vod_total": 6,
   "summary": {
     "sub_configs": [
@@ -576,7 +576,7 @@
     "dead_vod": 2,
     "live_files": 3,
     "alive_parses": 0,
-    "alive_doh": 3
+    "alive_doh": 4
   },
   "output_check": [
     {
@@ -622,6 +622,108 @@
       "problems": []
     },
     {
+      "file": "line-movie.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-tv.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-anime.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-variety.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-doc.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-short.json",
+      "sites": 1,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-sports.json",
+      "sites": 8,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-q4k.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-new.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-decade-2020s.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-decade-2010s.json",
+      "sites": 13,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-decade-2000s.json",
+      "sites": 2,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-decade-90s.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-decade-80s.json",
+      "sites": 1,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-decade-older.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "line-decade-unknown.json",
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "index-cats.json",
+      "sites": 0,
+      "lives": 0,
+      "problems": []
+    },
+    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -629,7 +731,7 @@
     }
   ],
   "verify": {
-    "files_checked": 8,
+    "files_checked": 25,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,

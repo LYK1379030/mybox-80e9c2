@@ -3,18 +3,7 @@
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
-      "key": "movie_jian_0",
-      "name": "【电影】建安资源",
-      "type": 1,
-      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "movie_c276_1",
+      "key": "movie_c276_0",
       "name": "【电影】影视 • 非凡[直连]",
       "type": 1,
       "api": "http://ffzy.tv/api.php/provide/vod/",
@@ -25,7 +14,40 @@
       "ext": ""
     },
     {
-      "key": "movie_bfzy_2",
+      "key": "movie_sony_1",
+      "name": "【电影】索尼资源",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_c2_5_2",
+      "name": "【电影】影视 • 极速[直连]",
+      "type": 1,
+      "api": "https://jszyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_u_65_3",
+      "name": "【电影】影视 • 尤酷[直连]",
+      "type": 1,
+      "api": "https://api.ukuapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_bfzy_4",
       "name": "【电影】暴风资源",
       "type": 1,
       "api": "https://bfzyapi.com/api.php/provide/vod/",
@@ -36,10 +58,10 @@
       "ext": ""
     },
     {
-      "key": "movie_ffzy_3",
-      "name": "【电影】非凡影视",
+      "key": "movie_modu_5",
+      "name": "【电影】魔都资源",
       "type": 1,
-      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "api": "https://www.mdzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -47,7 +69,7 @@
       "ext": ""
     },
     {
-      "key": "movie_dytt_4",
+      "key": "movie_dytt_6",
       "name": "【电影】电影天堂",
       "type": 1,
       "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
@@ -58,51 +80,7 @@
       "ext": ""
     },
     {
-      "key": "movie_tyys_5",
-      "name": "【电影】天涯资源",
-      "type": 1,
-      "api": "http://tyyszy.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "movie_360zy_6",
-      "name": "【电影】360资源",
-      "type": 1,
-      "api": "https://360zy.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "movie_lzi_7",
-      "name": "【电影】量子资源",
-      "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "movie_jinying_8",
-      "name": "【电影】金鹰资源",
-      "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 0,
-      "changeable": 1,
-      "ext": ""
-    },
-    {
-      "key": "movie_subo_9",
+      "key": "movie_subo_7",
       "name": "【电影】速播资源",
       "type": 1,
       "api": "https://subocaiji.com/api.php/provide/vod/",
@@ -113,10 +91,76 @@
       "ext": ""
     },
     {
-      "key": "movie_sony_10",
-      "name": "【电影】索尼资源",
+      "key": "movie_tyys_8",
+      "name": "【电影】天涯资源",
       "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_jian_9",
+      "name": "【电影】建安资源",
+      "type": 1,
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_yinghua_10",
+      "name": "【电影】樱花资源",
+      "type": 1,
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_jinying_11",
+      "name": "【电影】金鹰资源",
+      "type": 1,
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_ffzy_12",
+      "name": "【电影】非凡影视",
+      "type": 1,
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_lzi_13",
+      "name": "【电影】量子资源",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0,
+      "changeable": 1,
+      "ext": ""
+    },
+    {
+      "key": "movie_360zy_14",
+      "name": "【电影】360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 0,
@@ -132,14 +176,14 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T14:02:57.589Z",
+    "generated": "2026-11-08T14:17:53.138Z",
     "producer": "scripts/build-lines.mjs",
     "jar": "candymuj（与★1/②一致，切线零重载）",
     "protocol": "type:1 macCMS 动态 api；无 filters / 无 type_pid / 无 class 树",
     "kind": "category",
     "catId": "movie",
     "label": "电影",
-    "matchedClasses": 105,
+    "matchedClasses": 148,
     "fallbackSites": false
   }
 }
