@@ -1054,6 +1054,9 @@ def main():
                     len(_fs4k["sites"]),
                     (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
                     "url": SELF + "/fs4k2.json"})
+                if templates.get("fs4k3.json"):
+                    entries.insert(3, {"name": "③B 聚合·纯直连保底（免jar·最稳）",
+                                       "url": SELF + "/fs4k3.json"})
                 print("   ③ fs4k.json/fs4k2.json 已接入（%d 站，index 指向 fs4k2）" % len(_fs4k["sites"]))
         except Exception as _e:
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
