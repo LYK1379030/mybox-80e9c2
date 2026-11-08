@@ -68,6 +68,11 @@ jobs:
         run: |
           node filmstore4k/build-fs4k.js
 
+      - name: 构建分组线路（大区+年代分类频道，零账号纯代码）
+        continue-on-error: true
+        run: |
+          node filmstore4k/scripts/build-lines.mjs
+
       - name: 生成配置（单次构建，双通道共用同一份结果）
         # BOX_OUT 指向仓库根：build.py 会同时产出
         #   <SUB>/            → jsDelivr 备用通道（提交回仓库）
@@ -162,7 +167,7 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          for f in index.json c1.json c2.json c3.json 4k.json fs4k.json; do
+          for f in index.json index-cats.json c1.json c2.json c3.json 4k.json fs4k.json fs4k2.json fs4k3.json fs4kc.json line-*.json; do
             curl -sS -m 15 -X POST \
               "https://purge.jsdelivr.net/gh/${{ steps.cfg.outputs.user }}/${{ steps.cfg.outputs.repo }}@main/${{ steps.cfg.outputs.sub }}/$f" \
               > /dev/null || true
