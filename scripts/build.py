@@ -1068,25 +1068,54 @@ def main():
     # ---- 分类频道：按大区/年代分组的 16 条线路（团队 build-lines.mjs 每日产出）----
     # 纯代码零账号：每条线路是完整动态 macCMS 子仓，客户端 t/pg/wd/ids 由源站原生处理。
     # 分开放在 index-cats.json，避免主 index 被 22 条线路塞乱（lead 决策）。
+    # 独立复验 P1(cat-verifier)：诚实声明必须落到「用户可达的线上产物」，不能只在仓库 manifest。
+    # 影视仓 FongMi 壳不支持站内两级分类/筛选，线路名容易被误读为「站内按类型/年代筛过」，
+    # 因此三处都补用户可懂的口径：①线路名后缀 ②每份 line-*.json 的 _meta.userVisibleNote
+    # ③lines-manifest.json 随 Pages 发布（大白话 protocolNotes / sampling 用户可见）。
+    _USER_NOTE = ("按主题/年代精选源站的线路分组；站内分类由源站原生标签提供。"
+                  "受影视仓客户端协议限制，站内无法按类型或年代裁剪，线路名不代表筛选结果。"
+                  "片量为每日最新两页抽样，不代表用户可见条数。")
     try:
         _lines_dir = os.path.join(ROOT, "filmstore4k", "dist")
         _manifest_path = os.path.join(_lines_dir, "lines-manifest.json")
         if os.path.isfile(_manifest_path):
             _manifest = json.load(open(_manifest_path, encoding="utf-8"))
+            # file -> 是否空年代档（用于线路名标注「暂无片源」）
+            _empty_by_file = {}
+            _decade_by_file = {}
+            for _ln in _manifest.get("lines", []):
+                if _ln.get("file"):
+                    _empty_by_file[_ln["file"]] = bool(_ln.get("empty"))
+                    _decade_by_file[_ln["file"]] = _ln.get("kind") == "decade"
             _cat_entries = []
             for _e in _manifest.get("entries", []):
                 _f = _e.get("file", "")
                 _p = os.path.join(_lines_dir, _f)
                 if not os.path.isfile(_p):
                     continue
-                templates[_f] = open(_p, encoding="utf-8").read()
+                # 每份 line 配置补一句用户可懂的口径（客户端拉得到这份文件）
+                try:
+                    _cfg = json.load(open(_p, encoding="utf-8"))
+                    _meta = _cfg.setdefault("_meta", {})
+                    _meta["userVisibleNote"] = _USER_NOTE
+                    if _empty_by_file.get(_f):
+                        _meta["emptyNotice"] = "本年代档当日抽样无片，显示为空属正常，不代表源站没有该年代影片。"
+                    templates[_f] = json.dumps(_cfg, ensure_ascii=False, indent=2)
+                except Exception:
+                    templates[_f] = open(_p, encoding="utf-8").read()
                 _nm = _e.get("name", _f)
-                if not _nm.startswith("⏰"):
-                    _nm = "分类·" + _nm
+                if _empty_by_file.get(_f):
+                    _nm = _nm + "（暂无片源）"
+                elif _decade_by_file.get(_f):
+                    _nm = _nm + "（抽样·非站内筛选）"
+                elif not _nm.startswith("⏰"):
+                    _nm = "分类·" + _nm + "（线路分组）"
                 _cat_entries.append({"name": _nm, "url": SELF + "/" + _f})
             if _cat_entries:
                 templates["index-cats.json"] = json.dumps({"urls": _cat_entries}, ensure_ascii=False, indent=2)
-                print("   分类频道 index-cats.json 已接入（%d 条线路）" % len(_cat_entries))
+                print("   分类频道 index-cats.json 已接入（%d 条线路，名后缀+口径下沉）" % len(_cat_entries))
+            # manifest 随 Pages 发布（大白话 protocolNotes / sampling 用户可达）
+            templates["lines-manifest.json"] = json.dumps(_manifest, ensure_ascii=False, indent=2)
     except Exception as _e:
         print("   ⚠ 分类频道接入失败（跳过，不影响主配置）: %s" % _e)
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
@@ -1368,7 +1397,9 @@ def _inspect_output(templates, report):
             continue
         rec = {"file": fn, "sites": len(o.get("sites", [])),
                "lives": len(o.get("lives", [])), "problems": []}
-        if fn not in ("index.json", "index-cats.json") and not o.get("sites") and fn not in _empty_lines:
+        # index / index-cats / lines-manifest 是多仓清单与统计说明，本就没有 sites 字段，
+        # 不能按「子仓配置」判空；4 个设计空档由 _empty_lines 精确豁免。
+        if fn not in ("index.json", "index-cats.json", "lines-manifest.json") and not o.get("sites") and fn not in _empty_lines:
             rec["problems"].append("sites 为空")
         for i, l in enumerate(o.get("lives", [])):
             u = str(l.get("url", ""))
