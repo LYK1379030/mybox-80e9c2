@@ -13,6 +13,7 @@
  * 输出：dist/fs4k.json + dist/source-pool.json
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -235,15 +236,41 @@ for (const a of alive.slice(0, 14)) console.log(`  ✓ ${String(a.key).padEnd(12
 const deadCount = { ...(pool.dead || {}) };
 for (const d of dead) deadCount[backendHost(d.api)] = (deadCount[backendHost(d.api)] || 0) + 1;
 for (const a of alive) delete deadCount[backendHost(a.api)];
+// 死计数字典加上限：旧代 key 永不命中就永不清理会缓慢膨胀（第五轮攻击发现）
+// 保留策略：最多 80 条，超出删最早插入的（JS 对象键序 = 插入序）
+const _dcKeys = Object.keys(deadCount);
+if (_dcKeys.length > 80) {
+  for (const k of _dcKeys.slice(0, _dcKeys.length - 80)) delete deadCount[k];
+}
 const hardDead = Object.entries(deadCount).filter(([, n]) => n >= 3).map(([k]) => k);
+
+// jar md5 构建时重算（第五轮 5c：jar 被手动替换后配置仍用旧 md5 → 电视端拒载）
+// 拉取失败则沿用硬编码值（宁可保留旧值也不写坏）
+let jarMd5 = SPIDER_JAR_MD5;
+try {
+  const jr = await fetch(SPIDER_JAR, { signal: AbortSignal.timeout(45000) });
+  if (jr.ok) {
+    const jb = Buffer.from(await jr.arrayBuffer());
+    if (jb.length > 1024 && jb[0] === 0x50 && jb[1] === 0x4b) {
+      jarMd5 = createHash("md5").update(jb).digest("hex");
+      if (jarMd5 !== SPIDER_JAR_MD5) console.log(`[jar] md5 已更新: ${SPIDER_JAR_MD5} → ${jarMd5}`);
+    }
+  }
+} catch { /* 拉取失败沿用硬编码值 */ }
 
 // 生成配置
 const picked = alive.slice(0, 14);
 const config = {
-  spider: `${SPIDER_JAR};md5;${SPIDER_JAR_MD5}`,
+  spider: `${SPIDER_JAR};md5;${jarMd5}`,
   wallpaper: "https://picsum.photos/1280/720",
   sites: [
-    ...PAN_4K_SITES.map((s) => ({ ...s, searchable: 1, quickSearch: 1, filterable: 1, timeout: 60 })),
+    // ext 强制字符串化：FongMi/影视仓的 Gson @SerializedName("ext") 是 String 类型，
+    // object 会导致解析异常 → 客户端闪退（build.py 实录的坑，第五轮 ④ 复审确认）
+    ...PAN_4K_SITES.map((s) => ({
+      ...s,
+      ext: JSON.stringify(s.ext, (k, v) => (v === undefined ? "" : v)),
+      searchable: 1, quickSearch: 1, filterable: 1, timeout: 60,
+    })),
     ...picked.map((s) => ({
       key: s.key,
       name: `${s.name}·${s.ms}ms`,
