@@ -16,6 +16,8 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// A09：门禁与核心源清单抽到 src/safe.js，两个构建器共用同一份，避免逻辑漂移
+import { isSafeCandidate, CORE_SOURCES } from "./src/safe.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const distDir = process.env.FS4K_OUT || join(__dirname, "dist");
@@ -23,20 +25,8 @@ if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
 
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
-const CORE_SOURCES = [
-  { key: "bfzy",    name: "暴风资源", api: "https://bfzyapi.com/api.php/provide/vod/" },
-  { key: "lzi",     name: "量子资源", api: "https://cj.lziapi.com/api.php/provide/vod/" },
-  { key: "ffzy",    name: "非凡影视", api: "https://cj.ffzyapi.com/api.php/provide/vod/" },
-  { key: "dytt",    name: "电影天堂", api: "http://caiji.dyttzyapi.com/api.php/provide/vod/" },
-  { key: "jian",    name: "建安资源", api: "http://154.219.117.232:9981/jacloudapi.php/provide/vod/" },
-  { key: "tyys",    name: "天涯资源", api: "http://tyyszy.com/api.php/provide/vod/" },
-  { key: "360zy",   name: "360资源",  api: "https://360zy.com/api.php/provide/vod/" },
-  { key: "yinghua", name: "樱花资源", api: "https://m3u8.apiyhzy.com/api.php/provide/vod/" },
-  { key: "jinying", name: "金鹰资源", api: "https://jyzyapi.com/api.php/provide/vod/" },
-  { key: "modu",    name: "魔都资源", api: "https://www.mdzyapi.com/api.php/provide/vod/" },
-  { key: "sony",    name: "索尼资源", api: "https://suoniapi.com/api.php/provide/vod/" },
-  { key: "subo",    name: "速播资源", api: "https://subocaiji.com/api.php/provide/vod/" },
-];
+// CORE_SOURCES 现由 src/safe.js 统一导出（12 个），两个构建器共享。
+// build-lines.mjs 在 source-pool.json 为空时回落到同一份清单（A01 防级联）。
 
 const DISCOVERY_FEEDS = [
   "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/0827.json",
@@ -70,25 +60,6 @@ function backendHost(api) {
     if (/^\d{1,3}(\.\d{1,3}){3}$/.test(h)) return "ip:" + h + ":" + (u.port || "");
     return h.replace(/^(cj|api|caiji|collect|json)\./, "").split(".").slice(-2).join(".");
   } catch { return "bad:" + String(api); }
-}
-
-/** 投毒/内网/回环/凭据门禁 */
-function isSafeCandidate(api) {
-  const s = String(api || "");
-  if (!/^https?:\/\//i.test(s)) return false;
-  try {
-    const u = new URL(s);
-    if (u.username || u.password) return false;
-    const h = u.hostname.toLowerCase();
-    if (
-      h === "localhost" || /^127\./.test(h) || /^10\./.test(h) ||
-      /^192\.168\./.test(h) || /^172\.(1[6-9]|2\d|3[01])\./.test(h) ||
-      /^169\.254\./.test(h) || /^0\./.test(h) ||
-      h === "metadata.google.internal" || h.endsWith(".local") || h.endsWith(".internal")
-    ) return false;
-    if (!/api\.php|provide\/vod/i.test(s)) return false;
-    return true;
-  } catch { return false; }
 }
 
 async function fetchText(url, timeout = 25000) {
@@ -267,10 +238,13 @@ const picked = alive.slice(0, 14);
 //   主配置的 4K 网盘站（csp_Wogg）复用②线的 candymuj.jar —— 用户从②切③零 jar 重载，不闪退
 //   大 jar（194 类）独立成 ③C 专线（fs4kc），愿意折腾的用户单独切
 const CANDYMUJ_JAR = "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar";
+// A02 / 统一决策：spider 一律纯 URL，不再拼 ;md5;<hash>。
+// 硬编码 MD5 在上游换 jar 时会让整份配置被客户端拒载；md5 仅作缓存校验，
+// 去掉后每次多下 1 次 jar 但永久免除该故障。常量保留仅供历史对照 / 日志。
 const CANDYMUJ_MD5 = "9f391d889e28d3c40092fabb562f408c";
 
 const config = {
-  spider: `${CANDYMUJ_JAR};md5;${CANDYMUJ_MD5}`,
+  spider: CANDYMUJ_JAR,
   wallpaper: "https://picsum.photos/1280/720",
   sites: [
     // csp 站只保留 candymuj.jar 支持的（csp_Wogg，dex 验证过）
@@ -339,8 +313,8 @@ writeFileSync(join(distDir, "fs4k3.json"), directText, "utf8");
   if (pan.length) {
     writeFileSync(join(distDir, "fs4kc.json"), JSON.stringify({
       ...config,
-      spider: `${SPIDER_JAR};md5;${jarMd5}`,
-      sites: pan,
+    spider: SPIDER_JAR, // A02：纯 URL，不带 ;md5;（jarMd5 仍会重算并写进日志，不进配置）
+    sites: pan,
       _meta: { ...config._meta, note: "③C 专线：独立大 jar（194类含 PanWebShare 系），切线会重载 jar，低配设备闪退就回③/③B" },
     }, null, 2), "utf8");
     console.log(`✅ fs4kc.json（${pan.length} 站 4K 网盘专线，jar=大jar）`);
@@ -356,7 +330,37 @@ for (const a of alive) {
   memSeen.add(b);
   memAlive.push({ key: a.key, name: a.name, api: a.api, ms: a.ms, total: a.total });
 }
-writeFileSync(poolPath, JSON.stringify({
+
+// A01 / P0 空池级联防护：本轮全部源超时时，绝不把 alive:[] 写进 source-pool.json。
+// 否则同 run 的 build-lines.mjs 读到空池 → 16 条线路全空 → build.py 自检
+// sys.exit(2) 静默停更。保留上一版 pool（只更新 updatedAt/dead/hardDead 不覆盖 alive）。
+if (!memAlive.length && existsSync(poolPath)) {
+  let prev = null;
+  try { prev = JSON.parse(readFileSync(poolPath, "utf8")); } catch { /* 旧池损坏就走下面的兜底 */ }
+  if (prev && Array.isArray(prev.alive) && prev.alive.length) {
+    console.log(`[pool] 本轮存活 0，保留上一版 ${prev.alive.length} 个后端，不写空池`);
+    writeFileSync(poolPath, JSON.stringify({
+      ...prev,
+      dead: deadCount,
+      hardDead,
+      _note: "本轮实测全部超时，alive 沿用上一版（A01 防空池级联）",
+    }, null, 2), "utf8");
+  }
+}
+
+// alive 为空且已有上一版可保留时，只更新元信息不覆盖 alive 字段
+const poolPayload = (!memAlive.length && existsSync(poolPath))
+  ? (() => {
+      try {
+        const prev = JSON.parse(readFileSync(poolPath, "utf8"));
+        if (prev && Array.isArray(prev.alive) && prev.alive.length) {
+          return { ...prev, dead: deadCount, hardDead };
+        }
+      } catch { /* 落到正常写入 */ }
+      return null;
+    })()
+  : null;
+writeFileSync(poolPath, JSON.stringify(poolPayload || {
   updatedAt: new Date().toISOString(),
   alive: memAlive,
   dead: deadCount,

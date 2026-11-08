@@ -8,10 +8,11 @@ on:
   push:
     branches: [main, master]
     paths:
-      - 'scripts/build.py'
+      - 'scripts/**'
       - 'box.json'
       - '.github/workflows/sync.yml'
       - 'filmstore4k/**'
+      - '4konly/**'
 
 permissions:
   contents: write
@@ -64,14 +65,19 @@ jobs:
       - name: 构建聚合线路（filmstore4k，实测源存活）
         # continue-on-error：fs4k 是可选增强线路，构建失败绝不能拖死
         # c1/c2 主线路的更新（故障注入4的修复——CI 单点拆除）
+        # A04：只有本步骤成功才写 sentinel；build.py 读不到就在 status.json
+        # 标 stale=true，避免「built_at 新、内容却是旧 dist」被当成功发布。
         continue-on-error: true
         run: |
-          node filmstore4k/build-fs4k.js
+          rm -f .ok-fs4k
+          # 显式 && ：不依赖平台是否给 bash 加 -e，node 失败绝不写 sentinel。
+          node filmstore4k/build-fs4k.js && touch .ok-fs4k
 
       - name: 构建分组线路（大区+年代分类频道，零账号纯代码）
         continue-on-error: true
         run: |
-          node filmstore4k/scripts/build-lines.mjs
+          rm -f .ok-lines
+          node filmstore4k/scripts/build-lines.mjs && touch .ok-lines
 
       - name: 生成配置（单次构建，双通道共用同一份结果）
         # BOX_OUT 指向仓库根：build.py 会同时产出
@@ -92,25 +98,28 @@ jobs:
           # .nojekyll 是 0 字节标记文件，POSIX `test -s` 要求 size>0，
           # 对它必然返回假；只能用 -f 判断存在。
           test -f .nojekyll
-          # 子仓数量随上游变化（现在只有 c1/c2），不能硬编码文件名，
-          # 改为按 index.json 实际列出的仓逐个校验。
+          # C02：子仓数量随上游变化，且分类频道在 index-cats.json 里。
+          # 两份 index 都要逐个校验指向的文件真实存在（含双通道），
+          # 否则 build-lines.mjs 失败时 CI 全绿、用户切进分类线路 404 白屏。
           python - <<'PY'
           import json, os, sys
           d = os.environ['D']
-          idx = json.load(open(os.path.join(d, 'index.json'), encoding='utf-8'))
-          names = [u['url'].rsplit('/', 1)[-1] for u in idx.get('urls', [])]
-          names.append('status.json')
+          names = ['status.json']
+          for idx_name in ('index.json', 'index-cats.json'):
+              idx = json.load(open(os.path.join(d, idx_name), encoding='utf-8'))
+              names.extend(u['url'].rsplit('/', 1)[-1] for u in idx.get('urls', []))
           missing = []
           for fn in names:
               for p in (os.path.join(d, fn), os.path.join('_site', d, fn)):
                   if not (os.path.isfile(p) and os.path.getsize(p) > 0):
                       missing.append(p)
-          if not (os.path.isfile('index.json') or
-                  os.path.isfile(os.path.join(d, 'index.json'))):
-              missing.append('index.json')
+          for idx_name in ('index.json', 'index-cats.json'):
+              if not (os.path.isfile(idx_name) or
+                      os.path.isfile(os.path.join(d, idx_name))):
+                  missing.append(idx_name)
           if missing:
               print('缺失产物:', missing); sys.exit(1)
-          print('子仓文件齐全:', names)
+          print('子仓/分类文件齐全:', sorted(set(names)))
           PY
           # .nojekyll 必须在 _site 顶层，否则 Pages 会用 Jekyll 处理站点
           test -f _site/.nojekyll
@@ -127,6 +136,10 @@ jobs:
               print('生成物存在相对路径/死链残留，中止发布'); sys.exit(1)
           if not s['summary'].get('sub_configs'):
               print('未生成任何子仓，中止发布'); sys.exit(1)
+          # A04：stale 只告警不 FATAL，Pages 仍可发布上一版可用配置。
+          if s.get('stale'):
+              print('WARN 陈旧配置:', s.get('stale_reason', 'node 构建步骤未成功'))
+              print('::warning::本次 fs4k / 分类频道沿用上次 dist 产物，请检查 node 步骤日志')
           PY
         env:
           D: ${{ steps.cfg.outputs.sub }}
@@ -138,7 +151,10 @@ jobs:
           git config user.name  "tvbox-bot"
           git config user.email "tvbox-bot@users.noreply.github.com"
           date -u +%Y-%m-%dT%H:%MZ > .last-sync
-          git add .nojekyll .last-sync "${{ steps.cfg.outputs.sub }}"
+          # A05：源池与线路清单必须持久化，否则每天从同一份旧快照重算，
+          # dead 计数永远归零、hardDead 出池永不生效。
+          git add .nojekyll .last-sync "${{ steps.cfg.outputs.sub }}" \
+            filmstore4k/dist/source-pool.json filmstore4k/dist/lines-manifest.json
           if git diff --cached --quiet; then
             echo "本次无变化，跳过提交。"
           else
@@ -152,7 +168,10 @@ jobs:
                 echo "推送成功（第 $i 次）"; break
               fi
               if [ "$i" = "5" ]; then
-                echo "推送连续失败，放弃（不影响 Pages 部署，Pages 用的是本地 _site）"
+                # A06：连续 5 次推送失败必须让 job 标失败，否则 keepalive
+                # 不触发、双通道长期分叉且 CI 全绿。
+                echo "推送连续失败，job 标记失败（Pages 产物已生成但未发布备用通道）"
+                exit 1
               else
                 echo "第 $i 次推送被拒，3 秒后重试"; sleep 3
               fi
@@ -167,9 +186,18 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          for f in index.json index-cats.json c1.json c2.json c3.json 4k.json fs4k.json fs4k2.json fs4k3.json fs4kc.json line-*.json; do
+          # A03：必须开 nullglob。旧写法在仓库根对 line-*.json 零匹配，
+          # bash 不展开通配符 → $f 变成字面的 "line-*.json"，16 条分类线路
+          # 与 manifest / status.json 从未被 purge，被 12h CDN + 7d 浏览器缓存钉死。
+          shopt -s nullglob
+          sub="${{ steps.cfg.outputs.sub }}"
+          for f in "$sub"/index.json "$sub"/index-cats.json \
+                   "$sub"/c1.json "$sub"/c2.json "$sub"/4k.json "$sub"/4kreal.json \
+                   "$sub"/fs4k.json "$sub"/fs4k2.json "$sub"/fs4k3.json "$sub"/fs4kc.json \
+                   "$sub"/status.json "$sub"/lines-manifest.json \
+                   "$sub"/line-*.json; do
             curl -sS -m 15 -X POST \
-              "https://purge.jsdelivr.net/gh/${{ steps.cfg.outputs.user }}/${{ steps.cfg.outputs.repo }}@main/${{ steps.cfg.outputs.sub }}/$f" \
+              "https://purge.jsdelivr.net/gh/${{ steps.cfg.outputs.user }}/${{ steps.cfg.outputs.repo }}@main/$f" \
               > /dev/null || true
           done
           echo "已请求刷新备用地址缓存"

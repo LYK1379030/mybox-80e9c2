@@ -1,8 +1,11 @@
 /**
  * 聚合线分类体系（v2 层级版）
  *
- * 设计目标：把"几百个源站分类平铺"变成"8 个大区 + 二级子类"，
+ * 设计目标：把"几百个源站分类平铺"变成"7 个大区 + 二级子类"，
  * TVBox/影视仓的两级折叠直接可用。
+ *
+ * A08：实测 TOP_CATS.length === 7（movie/tv/anime/variety/doc/short/sports），
+ * 注释原写「8 个大区」与代码不符，已更正。虚拟分类 VIRTUAL_TOP 另算 2 条。
  *
  * 结构：
  *   顶级 type_id = "m:电影" 形式（虚拟聚合，点击时跨源路由到各源的对应组）
@@ -13,11 +16,19 @@
  */
 
 // 顶级大区定义：标准名 → 匹配规则（对源站分类名做语义识别）
+//
+// B-A07「更具体优先」实现说明：
+//   原实现是「数组顺序 = 首个 re 命中即 return」，movie(/电影/) 与 tv(/剧/) 排在
+//   doc/short/anime 之前，实测把「纪录片」→movie、「短剧」→tv、「动漫电影」→movie。
+//   这里保持 TOP_CATS 原顺序不动（build-lines.mjs 遍历它生成线路，顺序无关正确性），
+//   改由 classifySourceCat 里的 EXACT_RULES 做「精确专名前置判定」：
+//   三个会被 movie/tv 前缀误吞的专名先截走，其余仍走原顺序首个命中。
+//   双保险：tv.re 用 (?<!短)剧，即使直接遍历 TOP_CATS 也不会把「短剧」归剧集。
 export const TOP_CATS = [
   {
     id: "movie", name: "🎬电影",
-    // 该大区的匹配：分类名含这些词（不含"剧"）
-    re: /电影|^动作片$|^喜剧片$|^爱情片$|^科幻片$|^恐怖片$|^剧情片$|^战争片$|^伦理片$|^记录片$|^纪录片$|^理论与实践|^理论片$/,
+    // 已剔除 ^记录片$ / ^纪录片$（由 EXACT_RULES 归入 doc）
+    re: /电影|^动作片$|^喜剧片$|^爱情片$|^科幻片$|^恐怖片$|^剧情片$|^战争片$|^伦理片$|^理论与实践|^理论片$/,
     // 二级归并规则：源名 → 标准子名
     subs: [
       { std: "动作", re: /动作|武打|枪战/ },
@@ -33,7 +44,8 @@ export const TOP_CATS = [
   },
   {
     id: "tv", name: "📺剧集",
-    re: /剧|连续剧/,
+    // (?<!短)剧：不吞「短剧」；「喜剧片 / 剧情片」由 movie.re 的精确 ^...片$ 先命中
+    re: /(?<!短)剧|连续剧/,
     subs: [
       { std: "国产", re: /国产|内地|大陆/ },
       { std: "港台", re: /香港|台湾|港澳|港台/ },
@@ -59,6 +71,18 @@ export const TOP_CATS = [
   { id: "sports", name: "⚽体育", re: /体育|NBA|足球|篮球|斯诺克/, subs: [] },
 ];
 
+/**
+ * 精确专名前置规则（比 TOP_CATS 的宽泛正则更具体，优先判定）。
+ * 顺序即优先级：短剧 → 纪录 → 动漫电影。
+ * 单测口径：纪录片→doc、短剧→short、动漫电影→anime、
+ *           剧情片→movie、国产剧→tv/国产、连续剧→tv。
+ */
+const EXACT_RULES = [
+  { topId: "short", re: /短剧|爽文/ },
+  { topId: "doc", re: /纪录|记录|documentary/i },
+  { topId: "anime", re: /动漫电影|动画电影/ },
+];
+
 /** 虚拟分类（不需要源路由，走专门的聚合逻辑） */
 export const VIRTUAL_TOP = [
   { id: "q4k", name: "🔥4K专区", pid: "0" },
@@ -72,6 +96,23 @@ export const VIRTUAL_TOP = [
 export function classifySourceCat(cat) {
   const name = String(cat.type_name || "").trim();
   if (!name) return null;
+
+  // ── B-A07：精确专名前置判定（更具体优先于宽泛的 movie/tv 正则） ──
+  // 只截走三个实测被误吞的专名；其余仍走 TOP_CATS 原顺序，保持向后兼容。
+  for (const rule of EXACT_RULES) {
+    if (!rule.re.test(name)) continue;
+    const top = TOP_CATS.find((t) => t.id === rule.topId);
+    if (!top) continue;
+    let sub = null;
+    for (const s of top.subs) {
+      if (s.re.test(name)) {
+        sub = { std: s.std, typeId: `s:${cat.source_key}:${cat.type_id}`, typeName: s.std };
+        break;
+      }
+    }
+    return { topId: top.id, sub };
+  }
+
   for (const top of TOP_CATS) {
     if (!top.re.test(name)) continue;
     // 找二级归并

@@ -7,7 +7,7 @@ TVBox / 影视仓 专属仓 构建器（对抗式自检版）
 设计原则：把输出当成客户端会真去请求的东西，构建时逐项实测。
   1. 上游配置：多镜像逐个试，全部挂了跳过且保留上一版产物；
   2. 相对路径：按每个上游自己的 base 绝对化，绝不混用；
-  3. spider jar：真下载并计算 md5，替换掉上游已过期的校验值；
+  3. spider jar：所有 spider 一律只留纯 URL，剥离 ;md5; 校验段；
   4. 点播线路：真发 ?ac=list，死的剔除、慢的放宽超时、活的按延迟排序；
   5. 解析站 / DoH / EPG / 壁纸：DNS + HTTP 实测，死的不写进配置；
   6. 输出双通道：Pages 与 jsDelivr 各生成一份，内部 URL 全部绝对化，
@@ -24,7 +24,6 @@ import ssl
 import sys
 import time
 import socket
-import hashlib
 import urllib.request
 import urllib.parse
 import urllib.error
@@ -92,7 +91,9 @@ DIRECT_SITES = [
 # 之前用 easy11.05 那个 194 类的 jar 会让摸鱼4K盒闪退，已弃用。
 K4_SPIDER = ("https://gh-proxy.com/raw.githubusercontent.com/"
              "CandyMuj/ResourceInterface/main/TVBox/candymuj.jar")
-K4_SPIDER_MD5 = "9f391d889e28d3c40092fabb562f408c"
+# A02/P0：统一决策——全部 spider 只留纯 URL，绝不再拼 ;md5; 段。
+# 上游 candymuj.jar 一换内容，硬编码 md5 会让整份配置被客户端拒载；
+# 4konly 通道另由 _emit_4konly() 指向同源 /4konly/spider.jar（见 A08）。
 
 SITES_4K = [
     # csp_Wogg 的 ext 必须是 {"token": ..., "filter": ...}，
@@ -343,12 +344,11 @@ def absolutize(obj, base, jar_base):
         if not isinstance(v, str) or not (v.startswith("./") or v.startswith("../")):
             return v
         rel = v.lstrip("./")
-        tail = ""
+        # A02/P0：上游相对 jar 路径常带 ;md5; 校验段，一律剥离只留纯 URL。
         if ";md5;" in rel:
-            rel, tail = rel.split(";md5;", 1)
-            tail = ";md5;" + tail
+            rel = rel.split(";md5;", 1)[0]
         root = (jar_base or base) if rel.endswith(".jar") else base
-        return root.rstrip("/") + "/" + rel.lstrip("/") + tail
+        return root.rstrip("/") + "/" + rel.lstrip("/")
 
     def walk(x):
         if isinstance(x, dict):
@@ -485,27 +485,19 @@ def sanitize_urls(obj, base, report):
 
 # ---------------------------------------------------------------- 自检
 def fix_spider_md5(cfg, report):
-    """真下载 spider jar 计算 md5，替换上游已过期的校验值。
+    """A02/P0：统一决策——所有 spider 一律只留纯 URL。
 
-    上游 jar 更新但配置没跟 md5 时，客户端会校验失败 / 反复重下。
-    下载失败则直接去掉 ;md5; 段，宁可不校验也不写错值。
+    上游 jar 一换内容，写死的校验值就会让客户端拒载整份配置
+    （CandyMuj / 上游 c1、c2 都踩过）。这里只做剥离，绝不重新计算
+    或把校验段回写进任何产物；ok/match 恒为 True 以免下游自检误报。
     """
     sp = cfg.get("spider")
     if not isinstance(sp, str) or ";md5;" not in sp:
         return
-    url, old = sp.rsplit(";md5;", 1)
-    try:
-        b = fetch_bytes(url, timeout=25, limit=8_000_000)
-        if not b.startswith(b"PK\x03\x04"):
-            raise ValueError("不是 jar/zip")
-        new = hashlib.md5(b).hexdigest()
-        cfg["spider"] = url + ";md5;" + new
-        report.append({"url": url, "old_md5": old, "new_md5": new,
-                       "match": old == new, "bytes": len(b), "ok": True})
-    except Exception as e:
-        cfg["spider"] = url          # 去掉错误的 md5 段
-        report.append({"url": url, "old_md5": old, "new_md5": None,
-                       "match": False, "ok": False, "why": str(e)[:100]})
+    url = sp.split(";md5;", 1)[0]
+    cfg["spider"] = url
+    report.append({"url": url, "stripped_md5": True,
+                   "ok": True, "match": True})
 
 
 def probe_vod(site):
@@ -805,6 +797,8 @@ def main():
         "upstreams": [], "spider_md5": [], "vod_lines": [], "dropped": [],
         "live": [], "parses": [], "doh": [], "external": [], "channels": [],
         "issues": [],
+        # A04：默认视作 stale，只有两个 sentinel 都在时由 6b 改为 False。
+        "stale": True, "stale_reason": "node 构建步骤 sentinel 尚未确认",
     }
 
     # ---------- 1. 外部依赖自检（死的不写进配置） ----------
@@ -897,6 +891,10 @@ def main():
     if not configs:
         report["issues"].append("所有上游均失败：保留上一版产物，不覆盖。")
         report["fatal"] = True
+        # A07：FATAL 分支也必须把本次失败原因带进 status.json；
+        # 虽然 workflow 会中止发布，但至少本地 / 上传的 artifact 可追溯。
+        report["stale"] = True
+        report["stale_reason"] = "所有上游均失败，本次未产出新配置"
         _verify(report)
         chs = _channels()
         report["channels"] = [
@@ -908,14 +906,15 @@ def main():
         print("FATAL: 所有上游均失败，已保留上一版产物。")
         sys.exit(1)
 
-    # ---------- 4. spider md5 动态修正 ----------
+    # ---------- 4. spider 统一剥离 ;md5; 段（A02/P0）----------
+    # 只处理上游 c1/c2；fs4k* 与 line-* 是后面从 disk 读进 templates 的，
+    # 由 _strip_md5_in_templates() 在落盘前做最后一道全量兜底。
     for uid, cfg in configs.items():
         fix_spider_md5(cfg, report["spider_md5"])
     for r in report["spider_md5"]:
-        if not r.get("match"):
+        if r.get("stripped_md5"):
             report["issues"].append(
-                "spider md5 已自动修正 %s: %s -> %s"
-                % (r["url"].split("/")[-1], r.get("old_md5"), r.get("new_md5")))
+                "已剥离 spider 的 ;md5; 校验段: %s" % r["url"].split("/")[-1])
 
     # ---------- 5. 线路体检 ----------
     all_sites = [s for c in configs.values()
@@ -1010,7 +1009,7 @@ def main():
     # 是「别人能免费看 4K」的真正原因。
     fourk_real = {
         "wallpaper": WALLPAPER,
-        "spider": K4_SPIDER + ";md5;" + K4_SPIDER_MD5,
+        "spider": K4_SPIDER,   # A02/P0：纯 URL，不再拼 ;md5;
         "sites": [dict(s) for s in SITES_4K],
         "lives": live_entries,
         "parses": PARSE_BUILTIN + CONF_PARSES,
@@ -1091,6 +1090,27 @@ def main():
     except Exception as _e:
         print("   ⚠ 分类频道接入失败（跳过，不影响主配置）: %s" % _e)
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
+
+    # ---------- 6b. A04：node 构建步骤 sentinel 检测 → status.json 打 stale ----------
+    # workflow 在两个 node 步骤成功后各写一个 sentinel（.ok-fs4k / .ok-lines）。
+    # 两步是 continue-on-error:true，失败时 sentinel 不存在，而 dist/ 里仍是
+    # checkout 出来的旧文件；build.py 会把旧内容当新产物发布（built_at 新、内容旧）。
+    # 这里只标 stale 并告警，不 FATAL，让 Pages 仍能发布上一版可用配置。
+    stale_reasons = []
+    for sentinel, label in ((".ok-fs4k", "聚合线路(fs4k)"),
+                            (".ok-lines", "分类频道(line-*)")):
+        if not os.path.isfile(os.path.join(ROOT, sentinel)):
+            stale_reasons.append("%s 本次未成功构建，沿用上次 dist 产物" % label)
+    report["stale"] = bool(stale_reasons)
+    report["stale_reason"] = "；".join(stale_reasons)
+    if stale_reasons:
+        report["issues"].append("stale: " + report["stale_reason"])
+
+    # ---------- 6c. A02 兜底：全量剥离 templates 里任何 ;md5; 段 ----------
+    # fs4k* / line-* 是从 disk 读进来的（fixer-A 的文件），不经过
+    # fix_spider_md5()，必须在这里做最后一道全量清洗，确保产出的
+    # 每一份配置 spider / jar 都是纯 URL。
+    _strip_md5_in_templates(templates, report)
 
     report["summary"] = {
         "sub_configs": built, "4k_sites": len(hd_sites),
@@ -1217,7 +1237,11 @@ def _emit_4konly(site_root, templates):
     两者混在同一个多仓里切换时会互相覆盖 → csp_ 类找不到 → 客户端闪退。
     所以 4K 单独一套地址，用户切换过去时只加载它自己的 jar。
     """
-    jar = K4_SPIDER + ";md5;" + K4_SPIDER_MD5
+    # A08：4konly 通道改为同源自托管 jar（下面已把 spider4k.jar 复制进
+    # _site/4konly/spider.jar），spider 只留纯 URL，不再指向第三方 gh-proxy。
+    # PAGES_BASE 形如 https://<user>.github.io/<repo>/<sub>，4konly 挂在站点根。
+    site_base = PAGES_BASE.rsplit("/", 1)[0] if PAGES_BASE else ""
+    jar = site_base + "/4konly/spider.jar"
     sites = []
     for s in SITES_4K:
         api = str(s.get("api") or "")
@@ -1262,6 +1286,45 @@ def _emit_4konly(site_root, templates):
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
     print("   4konly/index.json 已生成（%d 条 4K 线路）" % len(sites))
+
+
+def _strip_md5_in_templates(templates, report):
+    """A02 兜底：递归剥掉所有配置里字符串值的 ;md5; 校验段。
+
+    fix_spider_md5() 只覆盖上游 c1/c2；fs4k* 与 line-* 是 build-fs4k.js /
+    build-lines.mjs 写到 disk 后原样读进 templates 的，必须在这里做全量清洗。
+    """
+    # 匹配 ";md5;" 后跟的十六进制校验值（或任意到字符串结尾的片段）。
+    # 用正则替换而非 split，避免万一遇到非 JSON 文本时把后半文件整段丢掉。
+    mark_re = re.compile(r";md5;[0-9a-fA-F]*")
+    stripped = [0]
+
+    def scrub(s):
+        if ";md5;" not in s:
+            return s
+        stripped[0] += 1
+        return mark_re.sub("", s)
+
+    def walk(x):
+        if isinstance(x, dict):
+            return {k: walk(v) for k, v in x.items()}
+        if isinstance(x, list):
+            return [walk(v) for v in x]
+        if isinstance(x, str):
+            return scrub(x)
+        return x
+
+    for fn, text in list(templates.items()):
+        if ";md5;" not in text:
+            continue
+        try:
+            obj = json.loads(text)
+        except Exception:
+            templates[fn] = scrub(text)
+            continue
+        templates[fn] = json.dumps(walk(obj), ensure_ascii=False, indent=2)
+    if stripped[0]:
+        report["issues"].append("已从产物剥离 %d 处 ;md5; 校验段" % stripped[0])
 
 
 def _inspect_output(templates, report):
@@ -1322,7 +1385,10 @@ def _inspect_output(templates, report):
         # __SELF__ 是 _emit() 落盘时才替换的通道占位符；此处检查的是
         # 替换前的模板（上面已用 self.invalid 代换后解析），出现属正常。
         # 真正残留由 _emit() 写入时对替换结果断言拦截。
-        if fn == "index.json":
+        # C02：双份 index 都要校验「指向的文件确实生成了」。
+        # 以前只查 index.json，build-lines.mjs 失败导致 line-*.json 缺失时
+        # index-cats.json 仍指向 404，CI 全绿而用户切进去白屏。
+        if fn in ("index.json", "index-cats.json"):
             for e in o.get("urls", []):
                 u = str(e.get("url", ""))
                 if not u.startswith("http"):
@@ -1351,8 +1417,10 @@ def _verify(report):
     if not CONF_DOH:
         report["issues"].append("无可用 DoH")
     for r in report["spider_md5"]:
-        if r.get("ok") is False:
-            report["issues"].append("spider jar 下载失败，已去掉 md5 校验段")
+        if r.get("stripped_md5"):
+            report["issues"].append("已剥离 spider 的 ;md5; 校验段（纯 URL 策略）")
+    if report.get("stale"):
+        report["issues"].append("stale: " + str(report.get("stale_reason", "node 构建步骤未成功")))
     dead = sum(1 for x in report["vod_lines"] if not x["alive"])
     if dead:
         report["issues"].append("已剔除 %d 条失活点播线路（正常自愈）" % dead)

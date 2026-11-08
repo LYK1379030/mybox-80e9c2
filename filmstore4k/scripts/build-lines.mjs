@@ -36,6 +36,8 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+// A09 / A01 / B-A10：与 build-fs4k.js 共用同一份安全门禁、核心源清单与文本净化
+import { isSafeSourceApi, CORE_SOURCES, sanitizeText } from "../src/safe.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, "..");
@@ -45,12 +47,13 @@ const poolPath = process.env.CATS_POOL || join(distDir, "source-pool.json");
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 const TIMEOUT_MS = 8000;         // 单请求 8s 超时
 const CONCURRENCY = 8;           // 并发闸门
-const VOD_PAGES = 2;             // 每源只取 ?ac=videolist&pg=1..2，防放大
+const VOD_PAGES = 2;             // B-A03/A04：每源只取最新 2 页抽样，防放大；所有统计口径按 sampled 标注
 
 // 与现有★1 / ② / build-fs4k.js 保持同一个 jar，避免影视仓切线闪退；别留空、别用大 jar。
+// A02 / 统一决策：spider 只留纯 URL，不拼 ;md5;（硬编码 MD5 在上游换 jar 时会整份拒载）。
 const CANDYMUJ_JAR = "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar";
-const CANDYMUJ_MD5 = "9f391d889e28d3c40092fabb562f408c";
-const SPIDER = CANDYMUJ_JAR + ";md5;" + CANDYMUJ_MD5;
+const CANDYMUJ_MD5 = "9f391d889e28d3c40092fabb562f408c"; // 保留定义仅供历史对照，不再拼进配置
+const SPIDER = CANDYMUJ_JAR;
 const WALLPAPER = "https://picsum.photos/1280/720";
 
 // 顶层兜底：任何漏网异常都吞掉，脚本始终以 0 退出码结束（CI 绝不中断）。
@@ -104,10 +107,13 @@ function writeJson(filename, obj) {
   } catch (e) { warn("写入失败 " + filename, e); return false; }
 }
 function buildUrl(api, params) {
+  // A09：发请求前再过一次门禁，防止 source-pool 在两处调用之间被改写
+  if (!isSafeSourceApi(api)) throw new Error("unsafe api rejected: " + String(api).slice(0, 80));
   const u = new URL(api);
   for (const [k, v] of Object.entries(params)) {
     if (v !== undefined && v !== null && v !== "") u.searchParams.set(k, String(v));
   }
+  // 重定向可能把公网 URL 引到内网；这里禁止自动跟随（A09 纵深防御）
   return u.toString();
 }
 async function fetchText(url, timeout = TIMEOUT_MS) {
@@ -117,7 +123,7 @@ async function fetchText(url, timeout = TIMEOUT_MS) {
     const r = await fetch(url, {
       headers: { "user-agent": UA, accept: "application/json,text/plain,*/*" },
       signal: ctrl.signal,
-      redirect: "follow",
+      redirect: "error", // A09：禁止跟随重定向到内网 / 元数据地址
     });
     if (!r.ok) throw new Error("HTTP " + r.status);
     return await r.text();
@@ -147,27 +153,54 @@ async function mapLimit(items, limit, fn) {
   await Promise.all(workers);
   return out;
 }
-/** 读存活源：只取 http(s) 开头的 api，按 api 去重；异常回落空列表 */
+/**
+ * 读存活源：A09 只收通过 isSafeSourceApi 的 http(s) macCMS 地址，按 api 去重；
+ * A01 空池 / 全被门禁拦掉时回落到 src/safe.js 的 CORE_SOURCES（12 个）；
+ * B-A10 源名 / key 走 sanitizeText 净化；异常一律回落核心源，绝不返回空池。
+ */
 function readPool() {
+  let alive = [];
+  let poolReadable = false;
   try {
-    if (!existsSync(poolPath)) { warn("source-pool.json 不存在，使用空源列表"); return []; }
-    const j = JSON.parse(readFileSync(poolPath, "utf8"));
-    const alive = Array.isArray(j?.alive) ? j.alive : (Array.isArray(j?.sources) ? j.sources : []);
-    const seen = new Set();
-    const out = [];
-    for (const s of alive) {
-      const api = String(s?.api || "").trim();
-      if (!/^https?:\/\//i.test(api)) continue;
-      if (seen.has(api)) continue;
-      seen.add(api);
-      out.push({
-        key: String(s.key || s.name || ("src" + out.length)).slice(0, 32),
-        name: String(s.name || s.key || "未命名").trim().slice(0, 24),
-        api,
-      });
+    if (!existsSync(poolPath)) {
+      warn("source-pool.json 不存在，回落 CORE_SOURCES");
+    } else {
+      const j = JSON.parse(readFileSync(poolPath, "utf8"));
+      alive = Array.isArray(j?.alive) ? j.alive : (Array.isArray(j?.sources) ? j.sources : []);
+      poolReadable = true;
+      log("读取源池 " + alive.length + " 条");
     }
-    return out;
-  } catch (e) { warn("读取 source-pool.json 失败，使用空源列表", e); return []; }
+  } catch (e) {
+    warn("读取 source-pool.json 失败，回落 CORE_SOURCES", e);
+  }
+
+  const seen = new Set();
+  const out = [];
+  let rejected = 0;
+  for (const s of alive) {
+    const api = String(s?.api || "").trim();
+    if (!isSafeSourceApi(api)) { rejected++; warn("门禁拦截源 " + String(s?.key || "?") + " " + api.slice(0, 70)); continue; }
+    if (seen.has(api)) continue;
+    seen.add(api);
+    out.push({
+      key: sanitizeText(s.key || s.name || ("src" + out.length), 32) || ("src" + out.length),
+      name: sanitizeText(s.name || s.key || "未命名", 24) || "未命名",
+      api,
+    });
+  }
+  if (rejected) log("安全门禁共拦截 " + rejected + " 条投毒 / 内网 / 非 CMS 地址");
+
+  // A01 / P0 空池级联：绝不让 16 条线路全空。
+  // 与 build-fs4k.js 共享同一份 CORE_SOURCES，同样过门禁。
+  if (!out.length) {
+    for (const s of CORE_SOURCES) {
+      if (!isSafeSourceApi(s.api) || seen.has(s.api)) continue;
+      seen.add(s.api);
+      out.push({ key: sanitizeText(s.key, 32), name: sanitizeText(s.name, 24), api: s.api });
+    }
+    log("空池回落 CORE_SOURCES：" + out.length + " 个源" + (poolReadable ? "（源池可读但无有效存活项）" : "（源池不可读）"));
+  }
+  return out;
 }
 /** 显示名 → 去 emoji 的中文短标签，用作站点名前缀 "【电影】" */
 function shortLabel(name) {
@@ -253,7 +286,7 @@ async function main() {
   const manifestLines = [];
   let report = {
     categoryLines: 0, virtualLines: 0, decadeLines: 0,
-    siteCounts: {}, decadeCounts: {},
+    siteCounts: {}, decadeCounts: {}, // B-A03：decadeCounts 为「当日抽样命中数」，非全量/非用户可见数
     presentDecades: [], invalidVodYear: 0, missingVodYear: 0,
     poolSize: 0, mergedSize: 0, aliveSources: 0, listOkSources: 0,
   };
@@ -307,9 +340,9 @@ async function main() {
         bucket.entries.push({
           source_key: st.source.key,
           source_api: st.source.api,
-          type_id: String(c?.type_id ?? ""),
-          type_name: String(c?.type_name ?? ""),
-          sub: mapped.sub?.std ? String(mapped.sub.std) : "",
+          type_id: sanitizeText(c?.type_id ?? "", 32),
+          type_name: sanitizeText(c?.type_name ?? "", 64), // B-A10：去控制 / HTML 字符，防污染公开 manifest
+          sub: mapped.sub?.std ? sanitizeText(mapped.sub.std, 32) : "",
         });
         bucket.sourceKeys.add(st.source.key);
       }
@@ -415,9 +448,15 @@ async function main() {
     log("年代档有片 " + report.presentDecades.length + "/" + decadeKeys.length +
       "：" + (report.presentDecades.join(" / ") || "无"));
 
-    // ⑨ 生成年代档线路：sites = 该档条目涉及的源站；空档回落全部源（固定生成防 R28）
+    // ⑨ 生成年代档线路：sites = 该档条目涉及的源站。
+    // B-A02：空档绝不回落全部源（旧行为让 0 条的 90年代/80年代/更早/年代不详
+    // 反而给 14 个源站全量最新片，用户点进去名不副实）。空档 sites: []，
+    // 但线路条目 / 文件仍固定生成并标 empty:true，防客户端缓存里档位消失（R28 不变）。
     for (const k of decadeKeys) {
       const b = bucketOf(k);
+      const sampledCount = report.decadeCounts[k] || 0;
+      const sampledListed = b ? b.list.length : 0;
+      const isEmpty = sampledCount === 0;
       const keysInBucket = new Set();
       if (b) {
         for (const it of b.rawItems || []) {
@@ -425,19 +464,16 @@ async function main() {
           for (const sk of arr) keysInBucket.add(String(sk));
         }
       }
-      let picked = sources.filter((s) => keysInBucket.has(s.key));
-      if (!picked.length) picked = sources; // 空档也保留完整线路骨架
+      const picked = isEmpty ? [] : sources.filter((s) => keysInBucket.has(s.key));
       const sites = picked.map((s, i) => siteFor(s, k, "decade_" + (decades?.decadeSlug?.(k) || i), i));
       const slug = decades?.decadeSlug ? decades.decadeSlug(k) : String(k).replace(/[^A-Za-z0-9_-]/g, "_");
       const file = "line-decade-" + slug + ".json";
       const cfg = buildConfig(sites, {
         kind: "decade", decade: k, slug,
-        realCount: report.decadeCounts[k] || 0,
-        emptyFallback: keysInBucket.size === 0,
+        sampledCount, sampledListed, empty: isEmpty,
       });
       putLine(file, "⏰" + k, "decade", { decade: k, slug }, cfg, {
-        realCount: report.decadeCounts[k] || 0,
-        listed: b ? b.list.length : 0,
+        sampledCount, sampledListed, empty: isEmpty,
         sources: picked.map((s) => s.key),
       });
       report.decadeLines++;
@@ -470,7 +506,8 @@ async function main() {
       const slug = decades?.decadeSlug ? decades.decadeSlug(k) : String(k).replace(/[^A-Za-z0-9_-]/g, "_");
       const file = "line-decade-" + slug + ".json";
       ensureSkeleton(file, "⏰" + k, "decade", { decade: k, slug },
-        { kind: "decade", decade: k, slug }, { realCount: 0, listed: 0, sources: [] });
+        { kind: "decade", decade: k, slug, sampledCount: 0, sampledListed: 0, empty: true },
+        { sampledCount: 0, sampledListed: 0, empty: true, sources: [] });
       if (!(k in report.decadeCounts)) report.decadeCounts[k] = 0;
     }
     // 计数以「实际落盘的文件」为准，避免部分生成时统计虚高 / 虚低
@@ -500,12 +537,22 @@ async function main() {
         mergedVodItems: report.mergedSize,
       },
       categorySiteCounts: report.siteCounts,
+      // B-A03/A04/A12：明确为「当日最新 2 页抽样」口径，且含多源重复、不代表用户可见条数
       decadeCounts: report.decadeCounts,
+      sampledDecadeCounts: report.decadeCounts,
+      sampling: {
+        vodPages: VOD_PAGES,
+        scope: "每日每源仅 ?ac=videolist&pg=1.." + VOD_PAGES + " 的最新页抽样，不是全量片库",
+        countUnit: "decadeCounts / sampledDecadeCounts / sampledCount = 抽样命中条目数（含多源重复、未去重）",
+        listedUnit: "sampledListed = 抽样命中经归一化片名去重后再截断到 60 的条数",
+        userVisible: "以上数字均不代表用户在电视上看到的条数；线路只下发动态源站，站内由源站自行分页",
+        warning: "用户可见文案禁止引用这些数字，也禁止把线路名理解为站内筛选结果",
+      },
       presentDecades: report.presentDecades,
       yearFilter: {
         invalidVodYear: report.invalidVodYear,
         missingVodYear: report.missingVodYear,
-        rule: "只认 /^(19|20)\\d{2}$/ 且 1900<=y<=CURRENT_UTC_YEAR+1；" +
+        rule: "NFKC 归一 + 剥尾部「年」后只认 /^(19|20)\\d{2}$/ 且 1900<=y<=CURRENT_UTC_YEAR+1；" +
               "vod_time 不参与；当前年份不补缺失；无硬编码年份选项",
       },
       // lead 接进 build.py 的 entries 时，用 SELF + "/" + file 拼绝对地址
@@ -514,9 +561,11 @@ async function main() {
         "SiteApi.java 固定拼 ac/t/pg/wd/ids/f；静态托管忽略 query → sites[].api 必须为源站原生动态 api",
         "bean/Class.java 无 type_pid；层级靠 type_flag folder → 不下发 class 树 / type_pid",
         "Result.filters 结构不对会让整份 home 静默变空 → 顶层与站点均无 filters，filterable:0",
+        "【用户大白话】本频道=按主题/年代精选源站的线路分组；站内分类由源站原生 tab 提供；受影视仓客户端协议限制，无法在站内按年代或类型裁剪，线路名不代表站内筛选结果",
         "分组发生在子仓/线路层级；站点内分类由源站 ?ac=list 动态平铺，配置无法强制按大区/年代裁剪",
-        "年代档空档固定生成，防客户端缓存滞后（R28）",
-        "spider 复用★1/②的 candymuj.jar，切线零重载，避免 BadTokenException 闪退",
+        "年代档空档固定生成（sites: []，empty:true），防客户端缓存里档位消失；空档点进去显示空，绝不再回落全量源站（R28 不变）",
+        "spider 复用★1/②的 candymuj.jar 纯 URL（不带 ;md5;），切线零重载，避免 BadTokenException 闪退与上游换 jar 后整份拒载",
+        "decadeCounts / sampledCount / sampledListed 均为当日最新 2 页抽样统计，含多源重复，不代表用户可见条数",
       ],
       deprecated: "静态 cats.json + cat-*.json + drpy 骨架已废弃，详见本脚本顶部说明",
     };

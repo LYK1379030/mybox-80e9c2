@@ -42,11 +42,14 @@ export const FULL_LABEL_FROM = 2000;
 
 /**
  * 解析 vod_year → 4 位年份整数；非法返回 null。
- * 只认 /^(19|20)\d{2}$/：8 位日期串、带横杠日期、空串、中文、0、未来年份全挡掉。
+ * B-A06：先做 NFKC 归一（全角数字 → 半角）、剥尾部「年」字与空白，
+ *        再过 /^(19|20)\d{2}$/ 与 1900 <= y <= YEAR_MAX。
+ *        8 位日期串、带横杠日期、空串、中文、0、未来年份仍全部挡掉。
  */
 export function parseVodYear(raw) {
   if (raw === null || raw === undefined) return null;
-  const s = String(raw).trim();
+  let s = String(raw).normalize("NFKC").trim();
+  s = s.replace(/年$/, "").trim();
   if (!/^(19|20)\d{2}$/.test(s)) return null;
   const n = Number(s);
   if (!Number.isInteger(n) || n < YEAR_MIN || n > YEAR_MAX) return null;
@@ -124,19 +127,43 @@ export function decadeSlug(key) {
 
 /**
  * 归一化片名（R29 跨源同名去重键）。
- * 去 4K / 蓝光 / HD / 全集 / 第X季 / 第X部 等后缀，避免同一部片因多源年份
- * 或画质标注不同而重复计数。只做字符归一，不猜年份、不补缺失值。
+ * 只剥离画质 / 版本 / 完结后缀（4K / 蓝光 / HD / 全集 …），
+ * **保留季 / 部 / 集序号**（B-A05）：原先直接把「第2部 / 第二部」删掉，
+ * 会把「流浪地球」「流浪地球 第2部」「流浪地球 第二部」误合并成一部并取最早年份，
+ * 续集被写成第一部年份、归错年代档。现在把它们转成稳定后缀 -s2 / -sⅡ 之类，
+ * 使不同续集互不相同；「流浪地球2」（数字紧连）本来就是独立 key，保持不变。
+ * 只做字符归一，不猜年份、不补缺失值。
  */
+const CN_NUM = { 一: 1, 二: 2, 两: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10, 零: 0, 百: 100 };
+function seqSuffix(numText, kind) {
+  let n = 0;
+  if (/^\d+$/.test(numText)) n = Number(numText);
+  else {
+    // 中文数字（十 / 十二 / 二十 / 二十三）做有限解析，够覆盖「第一季~第十季」
+    const s = String(numText);
+    if (s === "十") n = 10;
+    else if (s.startsWith("十")) n = 10 + (CN_NUM[s[1]] || 0);
+    else if (s.endsWith("十")) n = (CN_NUM[s[0]] || 0) * 10;
+    else n = CN_NUM[s] || 0;
+    if (!n) n = s; // 解析不了就原样保留，绝不丢信息
+  }
+  const k = kind === "季" ? "s" : kind === "部" ? "p" : "e";
+  return "-seq" + k + String(n);
+}
+
 export function normalizeVodName(name) {
-  let s = String(name || "").trim().toLowerCase();
+  let s = String(name || "").normalize("NFKC").trim().toLowerCase();
   // 统一分隔符与全角括号
   s = s.replace(/[\s\-_.·•【】\[\]()（）「」《》:：,，!！?？'"]+/g, "");
-  // 季 / 部 / 集 后缀（含中文数字与阿拉伯数字）
-  s = s.replace(/第[0-9一二三四五六七八九十百零两]+(季|部|集)$/g, "");
-  // 画质 / 版本 / 完结 后缀，可连续出现多次
+
+  // B-A05：季 / 部 / 集序号转成稳定后缀（保留信息，而不是删掉）
+  s = s.replace(/第([0-9一二三四五六七八九十百零两]+)(季|部|集)$/g, (_m, num, kind) => seqSuffix(num, kind));
+
+  // 画质 / 版本 / 完结后缀，可连续出现多次；不含「季/部/集」，避免再吃掉序号
   const tail = /(4k|8k|2k|蓝光|原盘|超清|高清|标清|hdr|杜比|remux|uhd|hd|bd|dvd|ts|tc|抢先|完整|全集|完结|国语|粤语|中字|字幕|修复|未删减|导演剪辑|加长|完整版|tv版|剧场版|dolby|vision|10bit|60帧|无损)+$/;
   let prev;
   do { prev = s; s = s.replace(tail, ""); } while (s !== prev);
+  // 序号后缀若被画质词包在中间（如「第2部4k」），上面的 tail 已剥掉画质，后缀仍在末尾
   return s;
 }
 
@@ -259,19 +286,8 @@ export function buildDecadeBuckets(items, opts = {}) {
   return { buckets, present, summary, invalidCount, missingCount, keys };
 }
 
-/**
- * 【废弃方案遗留，保留仅供兼容单测；新线路配置不下发 filters】
- * cat-verifier 报告：Result.filters 结构不对会让整份 home 静默变空。
- * build-lines.mjs 生成的配置顶层 / class 一律不放 filters，站点 filterable:0。
- */
-export function makeFilters(items, note) {
-  const years = listDecadeOptions(items);
-  const areas = listAreaOptions(items);
-  return {
-    "年代": { key: "年代", name: "年代", value: [{ n: "全部", v: "" }].concat(years.map((k) => ({ n: k, v: k }))) },
-    "地区": { key: "地区", name: "地区", value: [{ n: "全部", v: "" }].concat(areas.map((a) => ({ n: a, v: a }))) },
-    "排序": { key: "排序", name: "排序", value: [{ n: "最新", v: "最新" }, { n: "最热", v: "最热" }] },
-    _format: "deprecated-tolerant-v1",
-    _note: note || "废弃：静态 cats.json 方案遗留，禁止写入线路配置",
-  };
-}
+// B-A13：makeFilters 已删除。
+// 原因：cat-verifier 报告 Result.filters 结构不对时 FilterAdapter 抛异常，
+// objectFrom() 的 catch 会让整份 home 静默变空（比闪退更隐蔽）。
+// 静态 cats.json + drpy 方案已废弃，本模块不再提供任何 filters 生成能力，
+// 防止后续误用。build-lines.mjs 生成的配置顶层 / 站点一律 filterable:0。
