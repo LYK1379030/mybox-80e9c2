@@ -1,27 +1,23 @@
 {
   "urls": [
     {
-      "name": "① 直连点开即播（主力）（21 条线路）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c1.json"
-    },
-    {
-      "name": "② 更多直连线路（补充）（46 条线路）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c2.json"
-    },
-    {
-      "name": "③ 聚合·实时筛选（15 站·1513540条资源）",
+      "name": "★1 主用·聚合全站（直连源+玩偶4K，151万条）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4k2.json"
     },
     {
-      "name": "③B 聚合·纯直连保底（免jar·最稳）",
+      "name": " 2 备用·纯直连保底（最稳·无4K网盘）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4k3.json"
     },
     {
-      "name": "③C 4K网盘专线（快映/八零/闪电·切线会重载jar）",
+      "name": " 3 进阶·4K网盘专线（低配设备勿试）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4kc.json"
     },
     {
-      "name": "④ 直连专区·点开即播（8 条·免授权）",
+      "name": " 4 老线·直连合集46条（原②）",
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c2.json"
+    },
+    {
+      "name": " 5 老线·4K直连专区8条（原④）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/4k.json"
     }
   ]
