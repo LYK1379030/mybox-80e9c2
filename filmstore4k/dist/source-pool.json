@@ -1,0 +1,98 @@
+{
+  "updatedAt": "2026-11-08T08:37:03.066Z",
+  "alive": [
+    {
+      "key": "c9",
+      "name": "影视 • 暴風[直连]",
+      "api": "https://bfzyapi.com/api.php/provide/vod/?ac=list/",
+      "ms": 201,
+      "total": 171194
+    },
+    {
+      "key": "jian",
+      "name": "建安资源",
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+      "ms": 444,
+      "total": 65123
+    },
+    {
+      "key": "lzi",
+      "name": "量子资源",
+      "api": "https://cj.lziapi.com/api.php/provide/vod/",
+      "ms": 791,
+      "total": 163131
+    },
+    {
+      "key": "bfzy",
+      "name": "暴风资源",
+      "api": "https://bfzyapi.com/api.php/provide/vod/",
+      "ms": 876,
+      "total": 171194
+    },
+    {
+      "key": "c0",
+      "name": "影视 • 非凡[直连]",
+      "api": "http://ffzy.tv/api.php/provide/vod/",
+      "ms": 899,
+      "total": 99008
+    },
+    {
+      "key": "360zy",
+      "name": "360资源",
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "ms": 901,
+      "total": 74666
+    },
+    {
+      "key": "dytt",
+      "name": "电影天堂",
+      "api": "http://caiji.dyttzyapi.com/api.php/provide/vod/",
+      "ms": 1252,
+      "total": 85035
+    },
+    {
+      "key": "tyys",
+      "name": "天涯资源",
+      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "ms": 1368,
+      "total": 73731
+    },
+    {
+      "key": "ffzy",
+      "name": "非凡影视",
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod/",
+      "ms": 1755,
+      "total": 99008
+    },
+    {
+      "key": "c8",
+      "name": "百度",
+      "api": "https://api.apibdzy.com/api.php/provide/vod?ac=list/",
+      "ms": 5233,
+      "total": 49596
+    },
+    {
+      "key": "subo",
+      "name": "速播资源",
+      "api": "https://subocaiji.com/api.php/provide/vod/",
+      "ms": 5750,
+      "total": 117704
+    }
+  ],
+  "dead": {
+    "haiwaikan.com/api.php/provide/vod": 2,
+    "api.kuaifan.tv/api.php/provide/vod": 2,
+    "wolongzyw.com/api.php/provide/vod/?ac=list": 2,
+    "api.ukuapi.com/api.php/provide/vod/?ac=list": 2,
+    "zy.jinchancaiji.com/api.php/provide/vod": 2,
+    "www.mdzyapi.com/api.php/provide/vod": 2,
+    "suoniapi.com/api.php/provide/vod": 2,
+    "suoniapi.com/api.php/provide/vod/at/xml": 2,
+    "jszyapi.com/api.php/provide/vod/?ac=list": 2,
+    "vs.okcdn100.top/api.php/provide/vod": 2,
+    "m3u8.apiyhzy.com/api.php/provide/vod": 1,
+    "jyzyapi.com/api.php/provide/vod": 1,
+    "suoniapi.com/api.php/provide/vod/?ac=list": 1
+  },
+  "hardDead": []
+}
