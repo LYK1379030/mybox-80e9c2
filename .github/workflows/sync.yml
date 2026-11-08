@@ -1,4 +1,4 @@
-﻿name: 每日自动同步专属影视仓
+﻿﻿name: 每日自动同步专属影视仓
 
 on:
   schedule:
@@ -62,6 +62,9 @@ jobs:
           PY
 
       - name: 构建聚合线路（filmstore4k，实测源存活）
+        # continue-on-error：fs4k 是可选增强线路，构建失败绝不能拖死
+        # c1/c2 主线路的更新（故障注入4的修复——CI 单点拆除）
+        continue-on-error: true
         run: |
           node filmstore4k/build-fs4k.js
 
@@ -199,3 +202,4 @@ jobs:
               git push origin main && break || sleep 3
             done
           fi
+
