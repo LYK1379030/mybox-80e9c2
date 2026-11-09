@@ -45,7 +45,7 @@ var CONTRACT = {
   "categoryArg": "category(tid, page, filter, ext)：第 4 参 ext 拿点选值；第 3 参 filter 是布尔开关",
   "dataFile": "filter-data.json"
 };
-var GENERATED_AT = "2026-11-09T05:03:08.971Z";
+var GENERATED_AT = "2026-11-09T06:08:48.162Z";
 var CURRENT_UTC_YEAR = 2026;
 var DECADE_KEYS = ["2020年代","2010年代","2000年代","90年代","80年代","更早","年代不详"];
 var CLASSES = [{"type_id":"all","type_name":"全部"},{"type_id":"movie","type_name":"电影"},{"type_id":"tv","type_name":"剧集"},{"type_id":"anime","type_name":"动漫"},{"type_id":"variety","type_name":"综艺"},{"type_id":"doc","type_name":"纪录"},{"type_id":"short","type_name":"短剧"},{"type_id":"sports","type_name":"体育"}];
@@ -311,9 +311,23 @@ function play(flag, id, flags) {
   return jstr({ parse: 0, url: url, header: {} });
 }
 
-/** R01（DRPY2_REAL_CONTRACT）：导出 7 个内部名，Java 层自行映射 *Content */
+/** 真机反馈（2026-11-09 用户截图）：只导出 catvod 内部名时，moyu.tvcang.xi
+ *  (com.github.tvbox.osc) 只渲染出首页海报，class/filters 全丢 → 顶部只有「主页」。
+ *  故两套方法名同时导出：catvod 内部名 + TVBox/OSC 接口名（同一实现双挂），
+ *  壳认哪套都能命中；筛选/搜索逻辑一字不改。 */
+function homeContent(filter) { return home(filter); }
+function homeVodContent() { return homeVod(); }
+function categoryContent(tid, pg, filter, extend) { return category(tid, pg, filter, extend); }
+function detailContent(ids) {
+  var one = Array.isArray(ids) ? ids[0] : ids;
+  return detail(one);
+}
+function searchContent(wd, quick, pg) { return search(wd, quick, pg); }
+function playerContent(flag, id, flags) { return play(flag, id, flags); }
+
 export function __jsEvalReturn() {
   return {
+    // catvod 内部名
     init: init,
     home: home,
     homeVod: homeVod,
@@ -321,8 +335,15 @@ export function __jsEvalReturn() {
     detail: detail,
     play: play,
     search: search,
+    // TVBox/OSC 接口名（双挂，兼容不同壳）
+    homeContent: homeContent,
+    homeVodContent: homeVodContent,
+    categoryContent: categoryContent,
+    detailContent: detailContent,
+    searchContent: searchContent,
+    playerContent: playerContent,
     __contract: CONTRACT
   };
 }
-// fallback 分支（spider.js 的 default 分支）；同样返回 7 个内部名
+// fallback 分支（spider.js 的 default 分支）；同样返回双套方法名
 export default __jsEvalReturn;

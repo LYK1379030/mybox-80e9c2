@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T05:03:08.971Z",
+  "generated": "2026-11-09T06:08:48.162Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -16,6 +16,14 @@
       "detail",
       "play",
       "search"
+    ],
+    "contentMethods": [
+      "homeContent",
+      "homeVodContent",
+      "categoryContent",
+      "detailContent",
+      "searchContent",
+      "playerContent"
     ],
     "returnType": "JSON-string",
     "filtersShape": "object-of-arrays: {'<type_id>':[{key,name,value:[{n,v}]}]}",
@@ -57,16 +65,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 495528,
+    "bytes": 493981,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
-    "wdAdded": 251,
+    "wdAdded": 249,
     "seedCount": 16,
-    "searchIndexTerms": 4024,
+    "searchIndexTerms": 3972,
     "searchIndexNames": 800,
-    "searchIndexBytes": 98462,
+    "searchIndexBytes": 98088,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -81,38 +89,38 @@
     "buckets": {
       "type": {
         "科幻": 41,
-        "冒险": 43,
+        "冒险": 42,
         "灾难": 9,
         "纪录片": 9,
-        "悬疑": 49,
+        "悬疑": 46,
         "综艺": 60,
-        "动作": 51,
-        "惊悚": 20,
+        "动作": 48,
+        "惊悚": 19,
         "战争": 10,
         "剧情": 60,
-        "爱情": 57,
-        "犯罪": 32,
-        "喜剧": 47,
+        "爱情": 58,
+        "犯罪": 35,
+        "喜剧": 40,
         "短剧": 60,
         "武侠": 7,
         "奇幻": 60,
         "动画": 60,
         "历史": 8,
-        "传记": 5,
-        "恐怖": 18,
+        "传记": 4,
+        "恐怖": 17,
         "西部": 2,
-        "歌舞": 2
+        "歌舞": 1
       },
       "area": {
         "中国大陆": 60,
         "大陆": 60,
         "日本": 60,
-        "美国": 39,
+        "美国": 37,
         "香港": 14,
-        "台湾": 19,
+        "台湾": 20,
         "中国台湾": 2,
         "英国": 8,
-        "韩国": 33,
+        "韩国": 38,
         "韩国 捷克": 1,
         "加拿大": 5,
         "其它": 7,
@@ -120,27 +128,26 @@
         "美国 / 中国大陆 / 英国": 1,
         "美国,中国大陆,英国": 1,
         "中国": 1,
-        "马来西亚": 1,
-        "泰国": 28,
+        "意大利": 1,
+        "泰国": 26,
         "澳大利亚": 1,
         "中国香港": 2,
         "比利时,法国,荷兰": 1,
         "马来西亚 / 中国大陆": 1,
         "印度尼西亚": 4,
         "巴西": 1,
-        "中国香港,中国大陆": 1,
         "美国 / 英国": 1,
         "法国 / 日本": 1,
         "国产": 1,
         "印度": 1,
-        "内地": 9
+        "内地": 10
       },
       "decade": {
-        "2020年代": 661,
-        "2010年代": 83,
-        "2000年代": 24,
-        "90年代": 14,
-        "80年代": 5,
+        "2020年代": 663,
+        "2010年代": 85,
+        "2000年代": 22,
+        "90年代": 13,
+        "80年代": 4,
         "更早": 3,
         "年代不详": 10
       }
@@ -157,6 +164,7 @@
     "apiOk": true,
     "extOk": true,
     "methodsOk": true,
+    "contentOk": true,
     "filtersShapeValid": true,
     "idxOk": true,
     "searchOk": true,
@@ -207,6 +215,11 @@
         "actual": "init,home,homeVod,category,detail,play,search"
       },
       {
+        "name": "__jsEvalReturn 同时导出 6 个 *Content 接口名（真机必需）",
+        "pass": true,
+        "actual": "homeContent,homeVodContent,categoryContent,detailContent,searchContent,playerContent"
+      },
+      {
         "name": "filters object-of-arrays + key=type_id",
         "pass": true,
         "actual": "all,movie,tv,anime,variety,doc,short,sports"
@@ -214,7 +227,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=4024"
+        "actual": "names=800 terms=3972"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",
