@@ -26,7 +26,8 @@
  *   T5 补 4 条站点契约断言；T6 保留原 6 条回归。
  *
  * 运行：
- *   node scripts/test-filter-contract.mjs                         # 内联 fixture 自检
+ *   node scripts/test-filter-contract.mjs --fixture-index         # 内联 fixture 自检（用收敛后 2 条基线）
+ *   node scripts/test-filter-contract.mjs                         # 拉线上 index（集成后使用）
  *   node scripts/test-filter-contract.mjs --rule <spider-filter.js> \
  *        --data <filter-data.json> --line <filter-line.json> --index <index.json>
  *   node scripts/test-filter-contract.mjs --offline               # T6 不联网 -> SKIP
@@ -52,21 +53,26 @@ const OFFLINE = has("offline");
 const AS_JSON = has("json");
 
 const ONLINE_INDEX = "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/index.json";
+// lead 收敛前的线上 index 尚未上线 2 条版：给 --fixture-index 或 FILTER_FIXTURE_INDEX
+// 让 FIXTURE 自检跑「新基线」而非拉到旧的 7 条线上版（避免集成前必然误报）。
+// 集成后去掉此开关，默认拉线上即可。
+const FIXTURE_INDEX = has("fixture-index") || !!env("FILTER_FIXTURE_INDEX");
 
 // ---------------------------------------------------------------------------
-// T6 基线：2026-11-08 从线上 index.json 真拉的前 6 条。
-// ★1 名字里的「NNNN条资源」是 CI 每日动态数字 -> normalizeName 归一化；url 逐字严格比对。
-// 集成后索引为 7 条（尾部新增「筛选·自有」），前 6 条一个字都不许动。
+// T6 基线（2026-11-09 收敛后）：主入口恰好 2 条、人话命名。
+//   第 1 条「打开就能看」-> filter-line.json（规则站，用户不切线路就有四排筛选）
+//   第 2 条「看不了点这里」-> fs4k3.json（备用直连）
+// 其余 5 条（fs4k2/fs4kc/c1/c2/4k）后台仍生成、仍自愈，但**不进 index.json**。
+// 名字归一化仍兼容「NNNN条资源」这类每日动态数字（本轮两条名字无数字）。
 // ---------------------------------------------------------------------------
-const BASELINE_6 = [
-  { name: "★1 主用·聚合全站（15 站·1513628条资源）", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/fs4k2.json" },
-  { name: " 2 备用·纯直连保底（最稳）", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/fs4k3.json" },
-  { name: " 3 进阶·4K网盘专线（低配设备勿试）", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/fs4kc.json" },
-  { name: "老线·直连合集（21条）", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/c1.json" },
-  { name: "老线·直连合集（46条）", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/c2.json" },
-  { name: " 5 老线·4K直连专区（8 条·免授权）", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/4k.json" },
+const BASELINE_2 = [
+  { name: "打开就能看", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/filter-line.json" },
+  { name: "看不了点这里", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/fs4k3.json" },
 ];
 const normalizeName = (s) => String(s).replace(/\d+条资源/g, "<N>条资源");
+// 后台自愈产物：不进 index，但必须仍可拉到（宽松检查，不硬卡 200 内容）
+const BACKGROUND_FILES = ["fs4k2.json", "fs4k3.json", "fs4kc.json", "c1.json", "c2.json", "4k.json"];
+const PAGES_BASE = "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/";
 
 // ---------------------------------------------------------------------------
 // 内联 fixture（形态②）：只在未给 --rule / --line 时使用。
@@ -81,13 +87,26 @@ function decadeOf(y) {
 }
 const FIXTURE_DATA = {
   _meta: { generated: "2026-11-09T00:00:00Z", samplePages: 2, countIsSample: true, source: "inline-fixture" },
-  list: Array.from({ length: 30 }, (_, i) => ({
-    vod_id: String(1000 + i), vod_name: "测试影片" + (i + 1),
-    type_id: "all", type_name: TYPES[i % 5], vod_area: AREAS[i % 4],
-    vod_year: String(YEARS[i % 10]), vod_class: TYPES[i % 5], decade: decadeOf(YEARS[i % 10]),
-    vod_pic: "", vod_remarks: "", vod_play_from: "测试",
-    vod_play_url: "https://example.invalid/a.m3u8",
-  })),
+  list: [
+    // 蹭名片刻意排在正片「之前」，用来证明 T8 的相关性排序真的会拦住 FINAL_GOAL.md:13 那个 bug
+    ...["流浪地球之大夏战狼", "流浪地球2：再次冒险", "狂飙之特别行动", "周处除三害外传"].map((n, i) => ({
+      vod_id: "fake" + i, vod_name: n, type_id: "all", type_name: "剧情", vod_area: "华语",
+      vod_year: "2024", vod_class: "剧情", decade: "2020年代", vod_pic: "", vod_remarks: "",
+      vod_play_from: "测试", vod_play_url: "https://example.invalid/a.m3u8",
+    })),
+    ...["流浪地球", "狂飙", "周处除三害"].map((n, i) => ({
+      vod_id: "exact" + i, vod_name: n, type_id: "all", type_name: "剧情", vod_area: "华语",
+      vod_year: "2023", vod_class: "剧情", decade: "2020年代", vod_pic: "", vod_remarks: "",
+      vod_play_from: "测试", vod_play_url: "https://example.invalid/a.m3u8",
+    })),
+    ...Array.from({ length: 30 }, (_, i) => ({
+      vod_id: String(1000 + i), vod_name: "测试影片" + (i + 1),
+      type_id: "all", type_name: TYPES[i % 5], vod_area: AREAS[i % 4],
+      vod_year: String(YEARS[i % 10]), vod_class: TYPES[i % 5], decade: decadeOf(YEARS[i % 10]),
+      vod_pic: "", vod_remarks: "", vod_play_from: "测试",
+      vod_play_url: "https://example.invalid/a.m3u8",
+    })),
+  ],
 };
 
 const FIXTURE_RULE = String.raw`
@@ -158,7 +177,23 @@ function category(tid, pg, filter, extend) {
 }
 function detail() { return JSON.stringify({ list: [] }); }
 function play() { return JSON.stringify({ parse: 0, url: '' }); }
-function search() { return JSON.stringify({ list: [] }); }
+// 搜索相关性排序：精确相等 > 前缀 > 包含 > 蹭名长度惩罚。
+// 防止「流浪地球之大夏战狼」排在「流浪地球」正片前面（FINAL_GOAL.md:13）。
+function search(wd, quick, pg) {
+  var kw = String(wd || '').trim().toLowerCase();
+  var all = loadData().list || [], scored = [];
+  for (var i = 0; i < all.length; i++) {
+    var n = String(all[i].vod_name || ''), ln = n.toLowerCase();
+    var idx = ln.indexOf(kw);
+    if (kw && idx < 0) continue;
+    var extra = Math.max(0, n.length - kw.length) * 0.01;
+    var sc = ln === kw ? 0 : (idx === 0 ? 1 + extra : 2 + idx * 0.01 + extra);
+    scored.push({ it: all[i], sc: sc });
+  }
+  scored.sort(function (a, b) { return a.sc - b.sc; });
+  var out = scored.map(function (x) { return x.it; });
+  return JSON.stringify({ code: 1, page: 1, pagecount: 1, total: out.length, list: out });
+}
 
 // 7 个内部名（不是 homeContent/categoryContent —— 那是 Java 层接口名）
 export function __jsEvalReturn() {
@@ -504,9 +539,40 @@ async function main() {
     return `sites=${cfg.sites.length} spider="" jar="" api=.js ext=.json`;
   });
 
-  // ---------------- T6 回归：原 6 条不动 + 尾部第 7 条 ----------------
+  // ---------------- T8 搜索正确性（本轮用户核心诉求） ----------------
+  await check("T8", "搜索精确片名第 1 条必须是正片，蹭名片不得排前", async () => {
+    assert(SPIDER, "T1 未通过，跳过");
+    const probes = [
+      ["流浪地球", "流浪地球", "流浪地球之大夏战狼"],
+      ["狂飙", "狂飙", "狂飙之特别行动"],
+      ["周处除三害", "周处除三害", "周处除三害外传"],
+    ];
+    const out = [];
+    for (const [kw, exact, fake] of probes) {
+      const r = await call(SPIDER, "search", kw, false, 1);
+      assert(Array.isArray(r.list) && r.list.length > 0, `搜索「${kw}」返回 0 条`);
+      const first = String(r.list[0].vod_name || "");
+      assert(first === exact, `搜「${kw}」第 1 条是「${first}」，应为正片「${exact}」（蹭名片排前，FINAL_GOAL.md:13）`);
+      // 蹭名片若出现，必须排在正片之后
+      const fi = r.list.findIndex(x => String(x.vod_name || "").includes(fake));
+      if (fi >= 0) assert(fi > 0, `蹭名片「${fake}」排在正片前面`);
+      out.push(`${kw}->${first}`);
+    }
+    return out.join(" | ");
+  });
+  expectReject("T8-NEG", "负向对照：蹭名片排第 1 必须被拒", () => {
+    // 复用 T8 的判定逻辑：构造一个「第 1 条是蹭名片」的结果
+    const badFirst = "流浪地球之大夏战狼";
+    assert(badFirst === "流浪地球", `搜「流浪地球」第 1 条是「${badFirst}」，应为正片「流浪地球」`);
+  });
+
+  // ---------------- T6 回归：2 条人话线路（收敛后基线） ----------------
   let idxText = null, idxSrc = "<none>";
   if (INDEX_PATH) { idxText = readText(INDEX_PATH, "index"); idxSrc = INDEX_PATH; }
+  else if (FIXTURE_INDEX) {
+    idxText = JSON.stringify({ urls: BASELINE_2 }, null, 2);
+    idxSrc = "<fixture 2-line baseline>";
+  }
   else if (!OFFLINE) {
     try {
       const ctrl = new AbortController();
@@ -518,22 +584,57 @@ async function main() {
     } catch (e) { idxText = null; idxSrc = "fetch failed: " + e.message; }
   }
   if (!idxText) {
-    skip("T6", "原 6 条主线路不变 + 尾部筛选线路", OFFLINE ? "--offline 且未给 --index" : idxSrc);
+    skip("T6", "主入口恰好 2 条人话线路", OFFLINE ? "--offline 且未给 --index" : idxSrc);
   } else {
-    await check("T6", "原 6 条 name/顺序/url 不变 + 尾部新增线路以「筛选·」开头", () => {
+    await check("T6", "主入口恰好 2 条：打开就能看 -> filter-line.json / 看不了点这里 -> fs4k3.json", () => {
       const j = JSON.parse(idxText);
-      assert(Array.isArray(j.urls) && j.urls.length >= 6, `urls 数量=${j.urls?.length}，至少 6`);
-      for (let i = 0; i < 6; i++) {
-        const got = j.urls[i], want = BASELINE_6[i];
+      assert(Array.isArray(j.urls), "urls 不是数组");
+      assert(j.urls.length === 2, `urls 数量=${j.urls.length}，要求恰好 2（收敛后零门槛）`);
+      for (let i = 0; i < 2; i++) {
+        const got = j.urls[i], want = BASELINE_2[i];
         assert(normalizeName(got.name) === normalizeName(want.name),
-          `第 ${i + 1} 条 name 变更: got=${JSON.stringify(got.name)} want=${JSON.stringify(want.name)}`);
-        assert(got.url === want.url, `第 ${i + 1} 条 url 变更: got=${got.url} want=${want.url}`);
+          `第 ${i + 1} 条 name 不符: got=${JSON.stringify(got.name)} want=${JSON.stringify(want.name)}`);
+        assert(got.url === want.url, `第 ${i + 1} 条 url 不符: got=${got.url} want=${want.url}`);
       }
-      for (let i = 6; i < j.urls.length; i++)
-        assert(String(j.urls[i].name).startsWith("筛选·"), `尾部第 ${i + 1} 条未用「筛选·」前缀: ${j.urls[i].name}`);
-      return `first6=unchanged urls=${j.urls.length} extra=${j.urls.length - 6} src=${idxSrc}`;
+      assert(/filter-line\.json$/.test(j.urls[0].url), "第 1 条不是规则站 filter-line.json");
+      assert(/fs4k3\.json$/.test(j.urls[1].url), "第 2 条不是备用 fs4k3.json");
+      return `urls=2 first="${j.urls[0].name}"->filter-line.json second="${j.urls[1].name}"->fs4k3.json src=${idxSrc}`;
     });
   }
+
+  // ---------------- T6b 后台自愈产物仍存在（宽松，不进 index 也要在） ----------------
+  if (OFFLINE || !NATIVE_FETCH) {
+    skip("T6b", "后台 5 条自愈产物仍可拉到", "--offline 且未给 --data/--line 路径");
+  } else {
+    await check("T6b", "fs4k2/fs4k3/fs4kc/c1/c2/4k.json 后台仍生成（不进 index 但不许删）", async () => {
+      const got = [];
+      for (const f of BACKGROUND_FILES) {
+        let ok = false, size = 0;
+        try {
+          const ctrl = new AbortController();
+          const t = setTimeout(() => ctrl.abort(), 6000);
+          const r = await NATIVE_FETCH(PAGES_BASE + f, { signal: ctrl.signal, headers: { "User-Agent": "Mozilla/5.0 (Android TV)" } });
+          clearTimeout(t);
+          if (r.ok) { size = (await r.text()).length; ok = true; }
+        } catch { /* 记为不可达 */ }
+        got.push(`${f}=${ok ? "200/" + size : "MISS"}`);
+      }
+      const miss = got.filter(x => x.includes("MISS"));
+      assert(miss.length === 0, "后台自愈产物缺失: " + miss.join(","));
+      return got.join(" ");
+    });
+  }
+
+  // ---------------- T9 零门槛前提：默认第 1 条就是规则站 ----------------
+  await check("T9", "默认线路 filter-line.json 就是规则站（type3/.js api/spider 空），用户不切线路即有筛选", () => {
+    const cfg = JSON.parse(lineSrc);
+    assert(Array.isArray(cfg.sites) && cfg.sites.length >= 1, "默认子仓 sites 为空");
+    const s = cfg.sites[0];
+    assert(s.type === 3, `默认站点 type=${s.type}，要求 3`);
+    assert(typeof s.api === "string" && /\.js$/.test(s.api), `默认站点 api 不是 .js 规则: ${s.api}`);
+    assert(cfg.spider === "" || cfg.spider === undefined, `顶层 spider 非空: ${JSON.stringify(cfg.spider)}`);
+    return `default.type=3 api=.../${s.api.split("/").pop()} spider=""`;
+  });
 
   // ---------------- 汇总 ----------------
   const pass = results.filter(r => r.status === "PASS").length;
