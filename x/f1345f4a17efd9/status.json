@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T06:21:16Z",
+  "built_at": "2026-11-09T06:29:24Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 127,
+      "ms": 272,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 318,
+      "ms": 485,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 557,
+      "ms": 537,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 868,
+      "ms": 729,
       "total": null,
       "why": "ok"
     },
@@ -286,16 +286,22 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "771949",
@@ -314,12 +320,6 @@
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -562,7 +562,7 @@
   "stale": false,
   "stale_reason": "",
   "user_notice": "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。",
-  "default_entry": "filter-line.json",
+  "default_entry": "fs4k3.json",
   "visible_entries": 2,
   "filter_ok": true,
   "summary": {
