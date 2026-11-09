@@ -1,7 +1,7 @@
 {
   "urls": [
     {
-      "name": "★1 主用·聚合全站（15 站·1513628条资源）",
+      "name": "★1 主用·聚合全站（15 站·1485974条资源）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4k2.json"
     },
     {
@@ -23,6 +23,10 @@
     {
       "name": " 5 老线·4K直连专区（8 条·免授权）",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/4k.json"
+    },
+    {
+      "name": "筛选·自有（每日抽样·本地过滤）",
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/filter-line.json"
     }
   ]
 }

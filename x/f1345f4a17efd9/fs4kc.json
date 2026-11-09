@@ -1,5 +1,5 @@
 {
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/spider.jar",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/spider.jar;md5;c07ab2794d358d27d4a4e842712d3c16",
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
@@ -44,11 +44,11 @@
   ],
   "ads": [],
   "_meta": {
-    "generated": "2026-11-08T16:07:34.843Z",
+    "generated": "2026-11-08T10:54:26.972Z",
     "probed": 21,
-    "alive": 15,
-    "hardDead": 5,
-    "totalResources": 1513628,
+    "alive": 14,
+    "hardDead": 6,
+    "totalResources": 1485974,
     "note": "③C 专线：独立大 jar（194类含 PanWebShare 系），切线会重载 jar，低配设备闪退就回③/③B"
   }
 }

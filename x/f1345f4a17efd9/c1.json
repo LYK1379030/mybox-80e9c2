@@ -1,10 +1,10 @@
 {
   "wallpaper": "https://picsum.photos/1280/720",
-  "spider": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/jar/custom_spider.jar",
+  "spider": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/jar/custom_spider.jar;md5;41c87635d7592069884a5dafa12acabe",
   "sites": [
     {
       "key": "索尼",
-      "name": "索尼 ·82ms",
+      "name": "索尼 ·268ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
@@ -12,7 +12,7 @@
     },
     {
       "key": "bfzy",
-      "name": "暴风·大库·576ms",
+      "name": "暴风·大库·541ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -20,22 +20,23 @@
       "quickSearch": 1
     },
     {
-      "key": "feifan",
-      "name": "非凡·最快·727ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "key": "lzi",
+      "name": "量子·备用·916ms",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
     },
     {
-      "key": "lzi",
-      "name": "量子·备用·901ms",
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "key": "feifan",
+      "name": "非凡·最快·3702ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
-      "quickSearch": 1
+      "quickSearch": 1,
+      "timeout": 30
     },
     {
       "key": "dytt",
@@ -388,13 +389,6 @@
       "ips": [
         "223.5.5.5",
         "223.6.6.6"
-      ]
-    },
-    {
-      "name": "腾讯",
-      "url": "https://doh.pub/dns-query",
-      "ips": [
-        "119.29.29.29"
       ]
     },
     {

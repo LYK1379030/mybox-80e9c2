@@ -1,0 +1,183 @@
+{
+  "generated": "2026-11-09T00:20:03.763Z",
+  "producer": "scripts/build-filter-lines.mjs",
+  "currentUtcYear": 2026,
+  "contract": {
+    "source": "DESIGN_RESEARCH.md / DESIGN_ZERO_RISK.md / DESIGN_RISKS.md",
+    "engine": "drpy2-builtin（APK 内置 QuickJS，零 jar）",
+    "exportFn": "__jsEvalReturn",
+    "globalName": "__JS_SPIDER__",
+    "methods": [
+      "homeContent",
+      "homeVodContent",
+      "categoryContent",
+      "detailContent",
+      "searchContent",
+      "playerContent"
+    ],
+    "returnType": "JSON-string",
+    "filtersShape": "object-of-arrays: {'<type_id>':[{key,name,value:[{n,v}]}]}",
+    "filterKeys": [
+      "类型",
+      "地区",
+      "排序",
+      "年代"
+    ],
+    "categoryArg": "extend（第 4 参）；第 3 参 filter 是布尔开关，绝不作为值字典",
+    "siteType": 3,
+    "siteApi": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/spider-filter.js",
+    "spider": "",
+    "ext": "",
+    "requestCallPoints": 1,
+    "pendingResearcher": [
+      "site.type 精确取值（当前按同壳惯例 3，DESIGN_RISKS §1 标为真机未验）",
+      "site.api 是否必须含 .js 之外还要 assets:// 前缀（当前纯同源 URL）",
+      "__JS_SPIDER__ 方法返回 String 还是 Object（当前按 String）",
+      "extend 里筛选键名是中文『类型/地区/年代/排序』还是英文 key（当前中文优先 + 英文兜底）"
+    ]
+  },
+  "line": {
+    "name": "筛选·自有（每日抽样·本地过滤）",
+    "file": "filter-line.json",
+    "ruleFile": "spider-filter.js",
+    "dataFile": "filter-data.json",
+    "sitesCount": 1,
+    "jar": null,
+    "success": true
+  },
+  "data": {
+    "items": 232,
+    "bytes": 255911,
+    "maxBytes": 512000,
+    "samplePages": 2,
+    "countIsSample": true,
+    "perBucketMax": 60,
+    "stale": false,
+    "stale_reason": null,
+    "decades": [
+      "2020年代",
+      "2010年代",
+      "2000年代",
+      "90年代",
+      "80年代",
+      "更早",
+      "年代不详"
+    ],
+    "buckets": {
+      "type": {
+        "综艺": 36,
+        "悬疑": 12,
+        "冒险": 8,
+        "剧情": 60,
+        "犯罪": 10,
+        "动作": 10,
+        "动画": 27,
+        "爱情": 20,
+        "历史": 4,
+        "传记": 2,
+        "惊悚": 10,
+        "恐怖": 5,
+        "奇幻": 19,
+        "喜剧": 18,
+        "科幻": 5,
+        "短剧": 23,
+        "战争": 5,
+        "纪录片": 3,
+        "灾难": 1,
+        "武侠": 1
+      },
+      "area": {
+        "韩国": 16,
+        "中国大陆": 60,
+        "美国": 17,
+        "日本": 51,
+        "澳大利亚": 1,
+        "加拿大": 1,
+        "中国香港": 4,
+        "中国台湾": 1,
+        "泰国": 13,
+        "比利时,法国,荷兰": 1,
+        "马来西亚 / 中国大陆": 2,
+        "印度尼西亚": 1,
+        "巴西": 1,
+        "大陆": 6,
+        "英国": 5,
+        "香港": 6,
+        "意大利": 1,
+        "内地": 17,
+        "台湾": 4,
+        "比利时 / 法国 / 荷兰": 1,
+        "法国 / 日本": 1,
+        "法国": 2,
+        "新加坡": 2,
+        "中国": 3,
+        "西班牙": 1,
+        "英国 / 美国": 1
+      },
+      "decade": {
+        "2020年代": 215,
+        "2010年代": 14,
+        "2000年代": 2,
+        "90年代": 0,
+        "80年代": 0,
+        "更早": 0,
+        "年代不详": 1
+      }
+    }
+  },
+  "audit": {
+    "reqCalls": 1,
+    "urls": 1,
+    "md5": false,
+    "csp": false,
+    "spiderEmpty": true,
+    "filtersShapeValid": true,
+    "checks": [
+      {
+        "name": "零 jar（spider 为空）",
+        "pass": true,
+        "actual": "\"\""
+      },
+      {
+        "name": "无 ;md5;",
+        "pass": true,
+        "actual": "none"
+      },
+      {
+        "name": "无 csp_ 站点",
+        "pass": true,
+        "actual": "none"
+      },
+      {
+        "name": "request 调用点恰好 1",
+        "pass": true,
+        "actual": 1
+      },
+      {
+        "name": "规则内 URL 恰好 1",
+        "pass": true,
+        "actual": 1
+      },
+      {
+        "name": "filters object-of-arrays + key=type_id",
+        "pass": true,
+        "actual": "all,movie,tv,anime,variety,doc,short,sports"
+      }
+    ]
+  },
+  "degradation": [
+    "任何源挂掉 / 全失败都 exit 0，产出合法 filter-data.json（沿用上一版 stale:true 或空数据）",
+    "规则全文恰好 1 个 req 调用点、1 个 URL，零运行时抓源（R04 防 ANR）",
+    "spider 为空 → 走内置 QuickJS，零 jar（DESIGN_ZERO_RISK 指标 2）",
+    "filters 为 object-of-arrays，首层 key 严格等于 class type_id（R03）",
+    "categoryContent 只用第 4 参 extend 取点选值（R02）"
+  ],
+  "lines": [
+    {
+      "name": "筛选·自有（每日抽样·本地过滤）",
+      "file": "filter-line.json",
+      "success": true,
+      "sitesCount": 1
+    }
+  ]
+}

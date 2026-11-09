@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-08T16:07:39Z",
+  "built_at": "2026-11-09T00:20:08Z",
   "upstreams": [
     {
       "id": "c1",
@@ -18,38 +18,48 @@
   ],
   "spider_md5": [
     {
+      "url": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/jar/custom_spider.jar",
+      "old_md5": "41c87635d7592069884a5dafa12acabe",
+      "new_md5": "41c87635d7592069884a5dafa12acabe",
+      "match": true,
+      "bytes": 266777,
+      "ok": true
+    },
+    {
       "url": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar",
-      "stripped_md5": true,
-      "ok": true,
-      "match": true
+      "old_md5": "ec8ab1bcb078290e4f5a0d1449393a69",
+      "new_md5": "9f391d889e28d3c40092fabb562f408c",
+      "match": false,
+      "bytes": 685892,
+      "ok": true
     }
   ],
   "vod_lines": [
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 82,
+      "ms": 268,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 576,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 727,
+      "ms": 541,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 901,
+      "ms": 916,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 3702,
       "total": null,
       "why": "ok"
     },
@@ -294,16 +304,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "综合",
@@ -330,8 +340,8 @@
     },
     {
       "name": "腾讯",
-      "ok": true,
-      "bytes": 468
+      "ok": false,
+      "why": "<urlopen error _ssl.c:994: The handshake operation timed out>"
     }
   ],
   "external": [
@@ -343,7 +353,7 @@
     {
       "name": "EPG",
       "ok": true,
-      "bytes": 2633
+      "bytes": 3123
     }
   ],
   "channels": [
@@ -351,24 +361,20 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 31
+      "files": 17
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 31
+      "files": 17
     }
   ],
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
-    "已剥离 spider 的 ;md5; 校验段: candymuj.jar",
-    "已从产物剥离 1 处 ;md5; 校验段",
-    "已剥离 spider 的 ;md5; 校验段（纯 URL 策略）",
+    "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> 9f391d889e28d3c40092fabb562f408c",
     "已剔除 2 条失活点播线路（正常自愈）"
   ],
-  "stale": false,
-  "stale_reason": "",
   "url_fixes": [
     {
       "field": "url_encode",
@@ -570,7 +576,7 @@
     "dead_vod": 2,
     "live_files": 3,
     "alive_parses": 0,
-    "alive_doh": 4
+    "alive_doh": 3
   },
   "output_check": [
     {
@@ -616,109 +622,25 @@
       "problems": []
     },
     {
-      "file": "line-movie.json",
-      "sites": 14,
+      "file": "filter-line.json",
+      "sites": 1,
       "lives": 0,
       "problems": []
     },
     {
-      "file": "line-tv.json",
-      "sites": 14,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-anime.json",
-      "sites": 14,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-variety.json",
-      "sites": 14,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-doc.json",
-      "sites": 13,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-short.json",
-      "sites": 12,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-sports.json",
-      "sites": 8,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-q4k.json",
-      "sites": 15,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-new.json",
-      "sites": 15,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-decade-2020s.json",
-      "sites": 14,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-decade-2010s.json",
-      "sites": 13,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-decade-2000s.json",
-      "sites": 2,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-decade-90s.json",
+      "file": "filter-data.json",
       "sites": 0,
       "lives": 0,
       "problems": []
     },
     {
-      "file": "line-decade-80s.json",
+      "file": "spider-filter.js",
       "sites": 0,
       "lives": 0,
       "problems": []
     },
     {
-      "file": "line-decade-older.json",
-      "sites": 0,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-decade-unknown.json",
-      "sites": 0,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "index-cats.json",
-      "sites": 0,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "lines-manifest.json",
+      "file": "filter-manifest.json",
       "sites": 0,
       "lives": 0,
       "problems": []
@@ -731,11 +653,11 @@
     }
   ],
   "verify": {
-    "files_checked": 26,
+    "files_checked": 12,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
-    "issues": 5,
+    "issues": 3,
     "dead_vod_removed": 2,
     "all_absolute": true
   },

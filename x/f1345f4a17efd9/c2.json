@@ -1,10 +1,10 @@
 {
   "wallpaper": "https://picsum.photos/1280/720",
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
       "key": "bfzy",
-      "name": "暴风·大库·576ms",
+      "name": "暴风·大库·541ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -12,22 +12,23 @@
       "quickSearch": 1
     },
     {
-      "key": "feifan",
-      "name": "非凡·最快·727ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "key": "lzi",
+      "name": "量子·备用·916ms",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
     },
     {
-      "key": "lzi",
-      "name": "量子·备用·901ms",
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "key": "feifan",
+      "name": "非凡·最快·3702ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
-      "quickSearch": 1
+      "quickSearch": 1,
+      "timeout": 30
     },
     {
       "key": "dytt",
@@ -641,13 +642,6 @@
       "ips": [
         "223.5.5.5",
         "223.6.6.6"
-      ]
-    },
-    {
-      "name": "腾讯",
-      "url": "https://doh.pub/dns-query",
-      "ips": [
-        "119.29.29.29"
       ]
     },
     {
