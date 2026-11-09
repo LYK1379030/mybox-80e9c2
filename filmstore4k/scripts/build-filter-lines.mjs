@@ -28,18 +28,24 @@ import { dirname, join } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = join(__dirname, "..");
 
-/** 解析输出目录：CI 里是 <repo>/filmstore4k/dist；本地是 <project>/dist */
+/** 解析输出目录：CI 里是 <repo>/filmstore4k/dist；本地是 <project>/dist
+ *  生成器位于 <repo>/filmstore4k/scripts/，故仓库根 = dirname(dirname(dirname(__dirname)))。
+ *  build.py 读的正是 <repo>/filmstore4k/dist/filter-*.json，必须对齐。 */
 function resolveDist() {
   if (process.env.FILTER_OUT) return process.env.FILTER_OUT;
-  const ciDist = join(rootDir, "filmstore4k", "dist");
+  const repoRoot = dirname(dirname(rootDir));          // filmstore4k/scripts -> <repo>
+  const ciDist = join(repoRoot, "filmstore4k", "dist");
   if (existsSync(ciDist)) return ciDist;
-  return join(rootDir, "dist");
+  const localDist = join(rootDir, "dist");            // 本地开发：filmstore4k/dist
+  if (existsSync(localDist)) return localDist;
+  return ciDist;                                     // 首跑目录不存在也按 CI 路径返回，由 ensureDir 创建
 }
 function resolvePool(dist) {
   if (process.env.FILTER_POOL) return process.env.FILTER_POOL;
   const p = join(dist, "source-pool.json");
   if (existsSync(p)) return p;
-  const ci = join(rootDir, "filmstore4k", "dist", "source-pool.json");
+  const repoRoot = dirname(dirname(rootDir));
+  const ci = join(repoRoot, "filmstore4k", "dist", "source-pool.json");
   return existsSync(ci) ? ci : p;
 }
 const outDir = resolveDist();

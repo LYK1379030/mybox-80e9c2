@@ -67,7 +67,7 @@ jobs:
       - name: 生成自有筛选线路（零 jar / 静态数据）
         continue-on-error: true
         shell: bash
-        run: node scripts/build-filter-lines.mjs
+        run: node filmstore4k/scripts/build-filter-lines.mjs
 
       - name: 生成配置（单次构建，双通道共用同一份结果）
         # BOX_OUT 指向仓库根：build.py 会同时产出
