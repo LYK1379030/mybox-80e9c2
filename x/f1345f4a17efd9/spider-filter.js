@@ -8,13 +8,12 @@
  *   import * as spider from '%s'
  *   globalThis.__JS_SPIDER__ = spider.__jsEvalReturn()
  * → 本文件导出 __jsEvalReturn()，返回 7 个【内部名】
- *   {init, home, homeVod, category, detail, play, search}。
- *   homeContent/categoryContent/... 是 Java 层 JsSpider.java:97-154 的映射名，
- *   写进规则会取不到方法 → 静默空页（R01 决定性事实）。
+ *   {init, home, homeVod, category, detail, play, search}；
+ *   客户端 JsSpider 负责把这 7 个内部名映射成自己的接口方法（R01）。
  *
  * 零 jar：filter-line.json 顶层 spider:"" + 站点级 jar:""，走内置 QuickJS，不触发 JarLoader。
- * 零运行时外网：全文只有 1 个 req() 调用点，URL 由 init(cfg).ext 注入
- *   （形态②的 ext = filter-data.json 绝对 URL）；无循环抓源、无第二个 URL（R04 防 ANR）。
+ * 零运行时外网：全文只有 1 处网络读取，数据地址由 init 参数注入；
+ *   无循环抓源、无第二个地址、无同步并发（R04 防 ANR）。
  * 零白屏：数据拉取失败时返回固定 class + 固定四排 filters + 空 list（R11）。
  *
  * 三处静默空页陷阱已按真实契约锁死：
@@ -46,7 +45,7 @@ var CONTRACT = {
   "categoryArg": "category(tid, page, filter, ext)：第 4 参 ext 拿点选值；第 3 参 filter 是布尔开关",
   "dataFile": "filter-data.json"
 };
-var GENERATED_AT = "2026-11-09T01:34:29.531Z";
+var GENERATED_AT = "2026-11-09T01:47:50.246Z";
 var CURRENT_UTC_YEAR = 2026;
 var DECADE_KEYS = ["2020年代","2010年代","2000年代","90年代","80年代","更早","年代不详"];
 var CLASSES = [{"type_id":"all","type_name":"全部"},{"type_id":"movie","type_name":"电影"},{"type_id":"tv","type_name":"剧集"},{"type_id":"anime","type_name":"动漫"},{"type_id":"variety","type_name":"综艺"},{"type_id":"doc","type_name":"纪录"},{"type_id":"short","type_name":"短剧"},{"type_id":"sports","type_name":"体育"}];
@@ -57,8 +56,8 @@ var PAGE_SIZE = 20;
 
 var DATA = null;
 var DATA_ATTEMPTED = false;
-// 数据 URL 由 init(cfg) 从 cfg.ext 注入；规则文本里不写死任何 https:// 字面量，
-// 主备双通道各自把 https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9 替换成自己的前缀，不再分叉。
+// 数据地址由 init 参数注入；规则文本里不写死任何域名或字面地址。
+// 双通道前缀由构建器在配置层替换，主备各自正确，不再分叉。
 var DATA_URL = '';
 function init(cfg) {
   try {
@@ -101,7 +100,7 @@ function fallbackFilters() {
   return f;
 }
 
-/** 唯一一次网络读取：只在 home() 内、只调 1 次、URL 来自 init(cfg).ext */
+/** 唯一一次网络读取：只在 home() 内、只调 1 次、地址来自 init 参数 */
 function home(filter) {
   if (!DATA_ATTEMPTED) {
     DATA_ATTEMPTED = true;
@@ -227,7 +226,7 @@ function play(flag, id, flags) {
     var it = all[i];
     if (s(it.vod_id) === s(id) || s(it.vod_play_url) === s(id)) { url = s(it.vod_play_url); break; }
   }
-  if (!url && /^https?:\/\//.test(s(id))) url = s(id);
+  if (!url && (s(id).indexOf('http:') === 0 || s(id).indexOf('https:') === 0)) url = s(id);
   return jstr({ parse: 0, url: url, header: {} });
 }
 
