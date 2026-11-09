@@ -55,33 +55,51 @@ const listPath = process.env.FILTER_LIST || join(rootDir, "scripts", "filter-lin
 const CURRENT_UTC_YEAR = new Date().getUTCFullYear();
 const GENERATED_AT = new Date().toISOString();
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
+// 形态②：规则里不再写死数据 URL。ext 填 __SELF__/filter-data.json，
+// build.py _emit 把 __SELF__ 替换成主/备通道各自前缀，init(cfg).ext 注入规则。
+// DEFAULT_DATA_URL 仅作文档/日志示例，不注入规则文本。
 const DEFAULT_DATA_URL = "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/filter-data.json";
 const TIMEOUT_MS = 8000;
 const CONCURRENCY = 8;
 
 // ═══════════════════════════════════════════════════════════════════
-// drpy2 契约常量（lead 要求集中在顶部；researcher 结论回来只改这一处）
-// ═══════════════════════════════════════════════════════════════════
+// 契约来源：DRPY2_REAL_CONTRACT.md（cat-researcher 最终契约，覆盖 DESIGN_RESEARCH.md）
+// 形态②（api=单个规则 .js）选对；真实规则 bili_open.js L609-620 导出的是 7 个内部名，
+// Java 层 JsSpider.java:97-154 自己映射成 homeContent/categoryContent/...。
+// 规则内函数名与导出键都用内部名；ext 填数据 URL 由 init(cfg) 读取，站点级 jar:""。
 const DRPY2_CONTRACT = {
-  source: "DESIGN_RESEARCH.md / DESIGN_ZERO_RISK.md / DESIGN_RISKS.md",
-  engine: "drpy2-builtin（APK 内置 QuickJS，零 jar）",
+  source: "DRPY2_REAL_CONTRACT.md（最终契约）/ DESIGN_ZERO_RISK.md / DESIGN_RISKS.md",
+  engine: "drpy2-builtin（APK 内置 QuickJS + spider.js 加载器，零 jar）",
+  form: "形态②：api = 单个规则 .js（绝对 URL，无 ? / 无 base64 / 无 assets:// / 无 ./）",
   exportFn: "__jsEvalReturn",
   globalName: "__JS_SPIDER__",
-  methods: ["homeContent", "homeVodContent", "categoryContent", "detailContent", "searchContent", "playerContent"],
+  // 【已证实】bili_open.js L609-620：{init, home, homeVod, category, detail, play, proxy, search}
+  // 不是 homeContent 那套（那是 Java Spider 接口名，写进规则会静默空页）。
+  methods: ["init", "home", "homeVod", "category", "detail", "play", "search"],
   returnType: "JSON-string",
   filtersShape: "object-of-arrays: {'<type_id>':[{key,name,value:[{n,v}]}]}",
   filterKeys: ["类型", "地区", "排序", "年代"],
-  categoryArg: "extend（第 4 参）；第 3 参 filter 是布尔开关，绝不作为值字典",
+  categoryArg: "category(tid, page, filter, ext)：第 4 参 ext 拿点选值；第 3 参 filter 是布尔开关",
   siteType: 3,
-  siteApi: "__SELF__/spider-filter.js",  // build.py _emit 时替换成各通道绝对前缀
-  spider: "",                            // 零 jar：CI 断言必须为空
-  ext: "",                               // Site.ext 是 String
+  siteApi: "__SELF__/spider-filter.js",  // build.py _emit 时替换成各通道绝对前缀，末尾是 .js
+  spider: "",                            // 顶层零 jar：CI 断言必须为空
+  ext: "__SELF__/filter-data.json",      // 形态②的 ext = 业务数据 URL，init(cfg) 读 cfg.ext
+  siteJar: "",                           // 站点级 jar:""，防继承顶层 jar（bili_open 样本）
   requestCallPoints: 1,
+  // 真实契约已销项：type:3 / 纯同源绝对 .js / 7 内部名 / ext 是数据 URL 字符串 /
+  //                 返回 JSON-string / 中英文筛选键都兼容 / 站点级 jar:""
+  resolvedByResearch: [
+    "site.type = 3（DRPY2_REAL_CONTRACT §6，ApiConfig.java:740 走 jsLoader）",
+    "api 为绝对 https .js，不带 ? / base64 / assets:// / ./（URL_JOIN 正则要求扩展名结尾）",
+    "规则导出 7 个内部名（bili_open.js L609-620），Java 层自行映射 *Content",
+    "ext 为 filter-data.json 绝对 URL，init(cfg) 读 cfg.ext 后 req() 一次",
+    "返回 JSON-string；extend 中文『类型/地区/年代/排序』与英文 key 双兼容",
+    "顶层 spider 与站点级 jar 均为空字符串，零 JarLoader",
+  ],
   pendingResearcher: [
-    "site.type 精确取值（当前按同壳惯例 3，DESIGN_RISKS §1 标为真机未验）",
-    "site.api 是否必须含 .js 之外还要 assets:// 前缀（当前纯同源 URL）",
-    "__JS_SPIDER__ 方法返回 String 还是 Object（当前按 String）",
-    "extend 里筛选键名是中文『类型/地区/年代/排序』还是英文 key（当前中文优先 + 英文兜底）",
+    "真机 5 轮 ★1 ↔ 筛选·自有 切线回归不闪退（DESIGN_RISKS §4，需真机）",
+    "AXML usesCleartextTraffic 属性值（数据里 http 源，DESIGN_RISKS R05）",
+    "cfg.ext 在 cat 分支下是否严格为原始 URL 字符串（JsSpider.java:81-82 推断为字符串，需真机）",
   ],
 };
 
@@ -425,26 +443,31 @@ function emptyData(cfg, metaExtra) { return buildData([], cfg, metaExtra); }
 
 // ═══════════════════════════════════════════════════════════════════
 // drpy2 规则模板
-// 硬约束：全文恰好 1 个 req( 调用点、恰好 1 个 http(s) URL、无其它网络调用
+// 硬约束：全文恰好 1 个 req( 调用点；URL 不由规则写死，改由 init(cfg).ext 注入
+//         （__SELF__/filter-data.json 经 build.py _emit 替换成主/备通道各自前缀）
 // ═══════════════════════════════════════════════════════════════════
 const RULE_TEMPLATE = String.raw`/**
  * spider-filter.js —— 自有 drpy2 规则（scripts/build-filter-lines.mjs 每日生成）
  *
- * 契约来源：DESIGN_RESEARCH.md（cat-researcher 零 jar drpy2 版）、
- *           DESIGN_ZERO_RISK.md（8 条零风险指标）、DESIGN_RISKS.md（R01/R02/R03/R04）。
+ * 契约来源：DRPY2_REAL_CONTRACT.md（cat-researcher 最终契约，形态②）
+ *           + bili_open.js L609-620（真实能跑规则的导出形状）
+ *           + DESIGN_ZERO_RISK.md（8 条零风险指标）/ DESIGN_RISKS.md（R01/R02/R03/R04）。
  * 加载链：APK assets/js/lib/spider.js
  *   import * as spider from '%s'
  *   globalThis.__JS_SPIDER__ = spider.__jsEvalReturn()
- * → 本文件必须导出 __jsEvalReturn()，返回 6 个 *Content 方法（R01）。
+ * → 本文件导出 __jsEvalReturn()，返回 7 个【内部名】
+ *   {init, home, homeVod, category, detail, play, search}。
+ *   homeContent/categoryContent/... 是 Java 层 JsSpider.java:97-154 的映射名，
+ *   写进规则会取不到方法 → 静默空页（R01 决定性事实）。
  *
- * 零 jar：filter-line.json 的 spider 为空，走内置 QuickJS，不触发 JarLoader。
- * 零运行时外网：全文只有 1 个网络读取调用点（homeContent 内），指向自托管静态数据；
- *   无循环抓源、无第二个 URL、无同步并发（R04 防 ANR）。
+ * 零 jar：filter-line.json 顶层 spider:"" + 站点级 jar:""，走内置 QuickJS，不触发 JarLoader。
+ * 零运行时外网：全文只有 1 个 req() 调用点，URL 由 init(cfg).ext 注入
+ *   （形态②的 ext = filter-data.json 绝对 URL）；无循环抓源、无第二个 URL（R04 防 ANR）。
  * 零白屏：数据拉取失败时返回固定 class + 固定四排 filters + 空 list（R11）。
  *
- * 三处静默空页陷阱已按契约锁死：
- *   R01 导出名：见 __jsEvalReturn 返回对象
- *   R02 categoryContent 只用第 4 参 extend 取点选值，第 3 参 filter 仅当布尔开关
+ * 三处静默空页陷阱已按真实契约锁死：
+ *   R01 导出名：7 个内部名，见 __jsEvalReturn 返回对象
+ *   R02 category(tid, page, filter, ext) 只用第 4 参 ext 取点选值，第 3 参 filter 仅布尔
  *   R03 filters 为 object-of-arrays，首层 key 严格等于 class[].type_id
  */
 
@@ -460,6 +483,18 @@ var PAGE_SIZE = 20;
 
 var DATA = null;
 var DATA_ATTEMPTED = false;
+// 数据 URL 由 init(cfg) 从 cfg.ext 注入；规则文本里不写死任何 https:// 字面量，
+// 主备双通道各自把 __SELF__ 替换成自己的前缀，不再分叉。
+var DATA_URL = '';
+function init(cfg) {
+  try {
+    var e = cfg && cfg.ext;
+    if (typeof e === 'string' && e) DATA_URL = e;
+    else if (e && typeof e === 'object' && e.ext) DATA_URL = String(e.ext);
+  } catch (err) { logMsg('init(cfg) 读取 ext 失败', err && err.message); }
+  logMsg('init', GENERATED_AT, 'dataUrl=' + DATA_URL);
+  return '';
+}
 
 function jstr(o) { try { return JSON.stringify(o); } catch (e) { return '{}'; } }
 function s(x) { return x === null || x === undefined ? '' : String(x); }
@@ -492,12 +527,12 @@ function fallbackFilters() {
   return f;
 }
 
-/** 唯一一次网络读取：只在 homeContent 内、只调 1 次、只指向自托管静态数据 */
-function homeContent() {
+/** 唯一一次网络读取：只在 home() 内、只调 1 次、URL 来自 init(cfg).ext */
+function home(filter) {
   if (!DATA_ATTEMPTED) {
     DATA_ATTEMPTED = true;
     try {
-      var raw = req(/*__DATA_URL__*/);
+      var raw = req(DATA_URL);
       DATA = JSON.parse(raw);
       if (!DATA || !DATA.list) DATA = null;
     } catch (e) {
@@ -505,6 +540,8 @@ function homeContent() {
       logMsg('静态数据读取失败，使用空数据兜底', e && e.message);
     }
   }
+  // bili_open.js L144-152：filter 为真才挂 filters；我们的 filters 恒定四排，
+  // 无论 filter 真假都返回，保证面板一定出现（filter 只当布尔开关用）。
   var cls = DATA && DATA['class'] && DATA['class'].length ? DATA['class'] : CLASSES;
   var filters = DATA && DATA.filters ? DATA.filters : fallbackFilters();
   var list = DATA && DATA.list ? DATA.list.slice(0, PAGE_SIZE) : [];
@@ -513,18 +550,18 @@ function homeContent() {
 
 /** 其余方法只触发一次数据读取，之后全在内存里跑，绝不再次联网 */
 function ensure() {
-  if (!DATA_ATTEMPTED) homeContent();
+  if (!DATA_ATTEMPTED) home(false);
   return DATA;
 }
 function pool() { var d = ensure(); return d && d.list ? d.list : []; }
 
-function homeVodContent() {
+function homeVod() {
   return jstr({ list: pool().slice(0, PAGE_SIZE) });
 }
 
-/** 第 4 参 extend = 点选值字典；第 3 参 filter 只是布尔开关，绝不读它当值（R02） */
-function categoryContent(tid, pg, filter, extend) {
-  var fl = extend;
+/** 第 4 参 ext = 点选值字典；第 3 参 filter 只是布尔开关，绝不读它当值（R02） */
+function category(tid, page, filter, ext) {
+  var fl = ext;
   if (typeof fl === 'string') { try { fl = JSON.parse(fl); } catch (e) { fl = {}; } }
   if (!fl || typeof fl !== 'object') fl = {};
   var type = pick(fl, ['类型', 'type', 'genre']);
@@ -563,7 +600,7 @@ function categoryContent(tid, pg, filter, extend) {
   } else {
     arr.sort(function (a, b) { return s(b.vod_time).localeCompare(s(a.vod_time)); });
   }
-  var p = parseInt(pg, 10) || 1;
+  var p = parseInt(page, 10) || 1;
   var start = (p - 1) * PAGE_SIZE;
   return jstr({
     list: arr.slice(start, start + PAGE_SIZE),
@@ -581,7 +618,7 @@ function pick(fl, keys) {
   return '';
 }
 
-function searchContent(wd, quick, pg) {
+function search(wd, quick, pg) {
   var kw = s(wd).trim().toLowerCase();
   if (!kw) return jstr({ list: [] });
   var out = [], all = pool();
@@ -591,9 +628,9 @@ function searchContent(wd, quick, pg) {
   return jstr({ list: out, page: parseInt(pg, 10) || 1, pagecount: 1, total: out.length });
 }
 
-/** 详情：入参可能是数组或字符串；只从内存数据取，不联网 */
-function detailContent(ids) {
-  var list = Array.isArray(ids) ? ids : [ids];
+/** 详情：入参可能是数组或字符串（bili_open 的 detail(id) 形态）；只从内存数据取，不联网 */
+function detail(id) {
+  var list = Array.isArray(id) ? id : [id];
   var out = [], all = pool();
   for (var n = 0; n < list.length && n < 20; n++) {
     var id = s(list[n]);
@@ -610,7 +647,7 @@ function detailContent(ids) {
 }
 
 /** 播放：返回数据里的播放地址；无解析、无嗅探、无联网 */
-function playerContent(flag, id, flags) {
+function play(flag, id, flags) {
   var all = pool(), url = '';
   for (var i = 0; i < all.length; i++) {
     var it = all[i];
@@ -620,19 +657,20 @@ function playerContent(flag, id, flags) {
   return jstr({ parse: 0, url: url, header: {} });
 }
 
-/** R01：导出名严格为 6 个 *Content 方法，形状集中由 CONTRACT.methods 声明 */
+/** R01（DRPY2_REAL_CONTRACT）：导出 7 个内部名，Java 层自行映射 *Content */
 export function __jsEvalReturn() {
   return {
-    homeContent: homeContent,
-    homeVodContent: homeVodContent,
-    categoryContent: categoryContent,
-    detailContent: detailContent,
-    searchContent: searchContent,
-    playerContent: playerContent,
+    init: init,
+    home: home,
+    homeVod: homeVod,
+    category: category,
+    detail: detail,
+    play: play,
+    search: search,
     __contract: CONTRACT
   };
 }
-// fallback 分支（spider.js 的 default 分支）；同样导出 6 个方法名
+// fallback 分支（spider.js 的 default 分支）；同样返回 7 个内部名
 export default __jsEvalReturn;
 `;
 
@@ -645,8 +683,9 @@ function renderRule(cfg) {
     .replace("/*__CLASSES__*/", JSON.stringify(CLASSES))
     .replace("/*__TYPE_WORDS__*/", JSON.stringify(TYPE_WORDS))
     .replace("/*__AREA_WORDS__*/", JSON.stringify(AREA_WORDS))
-    .replace("/*__SORT_OPTIONS__*/", JSON.stringify(SORT_OPTIONS))
-    .replace("/*__DATA_URL__*/", JSON.stringify(String(cfg.dataUrl || DEFAULT_DATA_URL)));
+    .replace("/*__SORT_OPTIONS__*/", JSON.stringify(SORT_OPTIONS));
+  // 数据 URL 不再写进规则：形态②由 init(cfg).ext 注入，规则文本里 0 个 https:// 字面量，
+  // __SELF__ 由 build.py _emit 对 filter-line.json 替换成主/备通道各自前缀。
 }
 
 function renderConfig(cfg) {
@@ -658,8 +697,9 @@ function renderConfig(cfg) {
       key: "own_filter",
       name: String(cfg.name || "筛选·自有（每日抽样·本地过滤）"),
       type: DRPY2_CONTRACT.siteType,
-      api: DRPY2_CONTRACT.siteApi, // __SELF__/spider-filter.js，emit 时替换成通道绝对前缀
-      ext: DRPY2_CONTRACT.ext,
+      api: DRPY2_CONTRACT.siteApi, // __SELF__/spider-filter.js，emit 时替换成绝对 .js URL
+      ext: DRPY2_CONTRACT.ext,     // __SELF__/filter-data.json，emit 时替换成绝对 .json URL
+      jar: DRPY2_CONTRACT.siteJar, // 站点级 ""，防继承顶层 jar（bili_open 样本）
       filterable: 1,
       searchable: 1,
       quickSearch: 1,
@@ -681,12 +721,24 @@ function renderConfig(cfg) {
 
 /** 静态断言：返回 {reqCalls, urls, md5, csp, spiderEmpty, filtersShapeValid, checks[]} */
 function audit(ruleText, config, data) {
-  const reqCalls = (ruleText.match(/\b(?:req|request|fetch)\s*\(/g) || []).length;
-  const urls = (ruleText.match(/https?:\/\//g) || []).length;
+  // 剥离块注释 / 行注释 / 字符串字面量后再统计，避免文档里的 req() 与 https:// 被误计
+  const code = ruleText
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/^\s*\/\/.*$/gm, "")
+    .replace(/'(?:[^'\\]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\]|\\.)*"/g, '""');
+  const reqCalls = (code.match(/\b(?:req|request|fetch)\s*\(/g) || []).length;
+  // 形态②：规则里不写死任何 https:// 字面量，数据 URL 由 init(cfg).ext 注入。
+  const urls = (code.match(/https?:\/\//g) || []).length;
+  const hasInitCfg = /function init\(cfg\)/.test(code) && /DATA_URL = e/.test(code);
   const cfgText = JSON.stringify(config);
   const md5 = cfgText.includes(";md5;");
   const csp = cfgText.includes("csp_");
   const spiderEmpty = !config.spider;
+  const site = (config.sites || [])[0] || {};
+  const jarEmpty = site.jar === "";
+  const apiOk = /__SELF__\/spider-filter\.js$/.test(String(site.api || ""));
+  const extOk = /__SELF__\/filter-data\.json$/.test(String(site.ext || ""));
   const classIds = (data?.["class"] || CLASSES).map((c) => c.type_id);
   const f = data?.filters || {};
   let filtersShapeValid = !!f && typeof f === "object" && !Array.isArray(f) &&
@@ -694,15 +746,22 @@ function audit(ruleText, config, data) {
       f[id].every((row) => row && typeof row.key === "string" && typeof row.name === "string" &&
         Array.isArray(row.value) && row.value.every((v) => v && "n" in v && "v" in v))) &&
     Object.keys(f).every((k) => classIds.includes(k));
+  const wantMethods = DRPY2_CONTRACT.methods;
+  const exported = (ruleText.match(/export function __jsEvalReturn\(\)[\s\S]*?return \{([\s\S]*?)\};/) || [])[1] || "";
+  const methodsOk = wantMethods.every((m) => new RegExp("\\b" + m + ":\\s*" + m + "\\b").test(exported));
   const checks = [
-    { name: "零 jar（spider 为空）", pass: spiderEmpty, actual: JSON.stringify(config.spider) },
+    { name: "零 jar（顶层 spider 为空）", pass: spiderEmpty, actual: JSON.stringify(config.spider) },
+    { name: "站点级 jar 为空", pass: jarEmpty, actual: JSON.stringify(site.jar) },
     { name: "无 ;md5;", pass: !md5, actual: md5 ? "found" : "none" },
     { name: "无 csp_ 站点", pass: !csp, actual: csp ? "found" : "none" },
-    { name: "request 调用点恰好 1", pass: reqCalls === 1, actual: reqCalls },
-    { name: "规则内 URL 恰好 1", pass: urls === 1, actual: urls },
+    { name: "api 为 __SELF__/spider-filter.js", pass: apiOk, actual: site.api },
+    { name: "ext 为 __SELF__/filter-data.json", pass: extOk, actual: site.ext },
+    { name: "req 调用点恰好 1", pass: reqCalls === 1, actual: reqCalls },
+    { name: "规则内写死 URL 为 0（改由 init(cfg).ext 注入）", pass: urls === 0 && hasInitCfg, actual: "urls=" + urls + " initCfg=" + hasInitCfg },
+    { name: "__jsEvalReturn 导出 7 个内部名", pass: methodsOk, actual: wantMethods.join(",") },
     { name: "filters object-of-arrays + key=type_id", pass: filtersShapeValid, actual: Object.keys(f).join(",") },
   ];
-  return { reqCalls, urls, md5, csp, spiderEmpty, filtersShapeValid, checks };
+  return { reqCalls, urls, hasInitCfg, md5, csp, spiderEmpty, jarEmpty, apiOk, extOk, methodsOk, filtersShapeValid, checks };
 }
 
 async function main() {
@@ -769,7 +828,7 @@ async function main() {
       ruleFile: "spider-filter.js",
       dataFile: "filter-data.json",
       sitesCount: config.sites.length,
-      jar: null,
+      jar: config.sites[0]?.jar ?? "",
       success: allOk,
     },
     data: {
@@ -787,11 +846,14 @@ async function main() {
     audit: a,
     degradation: [
       "任何源挂掉 / 全失败都 exit 0，产出合法 filter-data.json（沿用上一版 stale:true 或空数据）",
-      "规则全文恰好 1 个 req 调用点、1 个 URL，零运行时抓源（R04 防 ANR）",
-      "spider 为空 → 走内置 QuickJS，零 jar（DESIGN_ZERO_RISK 指标 2）",
+      "规则全文恰好 1 个 req 调用点；URL 由 init(cfg).ext 注入，规则内 0 个写死 https://（R04 防 ANR + 主备双通道零分叉）",
+      "顶层 spider 与站点级 jar 均为空字符串 → 走内置 QuickJS，零 jar（DESIGN_ZERO_RISK 指标 2）",
       "filters 为 object-of-arrays，首层 key 严格等于 class type_id（R03）",
-      "categoryContent 只用第 4 参 extend 取点选值（R02）",
+      "category(tid, page, filter, ext) 只用第 4 参 ext 取点选值（R02）",
+      "__jsEvalReturn 导出 7 个内部名（DRPY2_REAL_CONTRACT / bili_open.js L609-620），Java 层自行映射 *Content",
     ],
+    contractResolved: DRPY2_CONTRACT.resolvedByResearch,
+    pendingResearcher: DRPY2_CONTRACT.pendingResearcher,
     lines: [{ name: config.sites[0].name, file: "filter-line.json", success: allOk, sitesCount: 1 }],
   };
   writeJson("filter-manifest.json", manifest);
@@ -805,7 +867,11 @@ async function main() {
   try {
     const js = readFileSync(join(outDir, "spider-filter.js"), "utf8");
     if (!js.includes("export function __jsEvalReturn")) throw new Error("缺少导出函数");
-    if (!js.includes("categoryContent(tid, pg, filter, extend)")) throw new Error("第 4 参契约缺失");
+    if (!js.includes("function category(tid, page, filter, ext)")) throw new Error("第 4 参 ext 契约缺失");
+    if (!js.includes("function init(cfg)")) throw new Error("init(cfg) 契约缺失");
+    for (const m of DRPY2_CONTRACT.methods) {
+      if (!new RegExp("\\b" + m + ":\\s*" + m + "\\b").test(js)) throw new Error("导出缺内部名 " + m);
+    }
     parseOk++;
   } catch (e) { parseBad++; warn("规则脚本自检失败", e); }
 
