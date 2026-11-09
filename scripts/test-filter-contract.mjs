@@ -29,7 +29,8 @@
  *   node scripts/test-filter-contract.mjs --fixture-index         # 内联 fixture 自检（用收敛后 2 条基线）
  *   node scripts/test-filter-contract.mjs                         # 拉线上 index（集成后使用）
  *   node scripts/test-filter-contract.mjs --rule <spider-filter.js> \
- *        --data <filter-data.json> --line <filter-line.json> --index <index.json>
+ *        --data <filter-data.json> --line <filter-line.json> --index <index.json> \
+ *        --fallback <fs4k3.json> --rule-line <filter-line.json>
  *   node scripts/test-filter-contract.mjs --offline               # T6 不联网 -> SKIP
  *   node scripts/test-filter-contract.mjs --json                  # 机器可读
  * 环境变量等价：FILTER_RULE / FILTER_DATA / FILTER_LINE / FILTER_INDEX
@@ -53,21 +54,26 @@ const OFFLINE = has("offline");
 const AS_JSON = has("json");
 
 const ONLINE_INDEX = "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/index.json";
-// lead 收敛前的线上 index 尚未上线 2 条版：给 --fixture-index 或 FILTER_FIXTURE_INDEX
-// 让 FIXTURE 自检跑「新基线」而非拉到旧的 7 条线上版（避免集成前必然误报）。
+// lead 收敛前的线上 index 尚未上线 3 条版：给 --fixture-index 或 FILTER_FIXTURE_INDEX
+// 让 FIXTURE 自检跑「新基线」而非拉到线上旧版（避免集成前必然误报）。
 // 集成后去掉此开关，默认拉线上即可。
 const FIXTURE_INDEX = has("fixture-index") || !!env("FILTER_FIXTURE_INDEX");
+// 第 1 条兜底子仓 / 第 2 条规则站子仓的可选本地路径（T9/T10 用；不给则走内联 fixture）
+const FALLBACK_PATH = arg("fallback") || env("FILTER_FALLBACK");
+const RULE_LINE_PATH = arg("rule-line") || env("FILTER_RULE_LINE");
 
 // ---------------------------------------------------------------------------
-// T6 基线（2026-11-09 收敛后）：主入口恰好 2 条、人话命名。
-//   第 1 条「打开就能看」-> filter-line.json（规则站，用户不切线路就有四排筛选）
-//   第 2 条「看不了点这里」-> fs4k3.json（备用直连）
-// 其余 5 条（fs4k2/fs4kc/c1/c2/4k）后台仍生成、仍自愈，但**不进 index.json**。
-// 名字归一化仍兼容「NNNN条资源」这类每日动态数字（本轮两条名字无数字）。
+// T6 基线（2026-11-09 兼容性兜底版）：主入口恰好 3 条、人话命名。
+//   1「打开就能看」            -> fs4k3.json   （14 个 type:1 直连，全壳通用；spider 置空）
+//   2「想按类型年代挑片点这里」 -> filter-line.json（drpy2 规则站，筛选不默认）
+//   3「看不了点这里」          -> fs4k2.json   （备用）
+// 其余 4 条（fs4kc/c1/c2/4k）后台仍生成、仍自愈，但**不进 index.json**。
+// 名字归一化仍兼容「NNNN条资源」这类每日动态数字（本轮三条名字无数字）。
 // ---------------------------------------------------------------------------
-const BASELINE_2 = [
-  { name: "打开就能看", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/filter-line.json" },
-  { name: "看不了点这里", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/fs4k3.json" },
+const BASELINE_3 = [
+  { name: "打开就能看", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/fs4k3.json" },
+  { name: "想按类型年代挑片点这里", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/filter-line.json" },
+  { name: "看不了点这里", url: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/fs4k2.json" },
 ];
 const normalizeName = (s) => String(s).replace(/\d+条资源/g, "<N>条资源");
 // 后台自愈产物：不进 index，但必须仍可拉到（宽松检查，不硬卡 200 内容）
@@ -220,7 +226,8 @@ var rule = { title: 'decl', filter: {} };
 export default rule;
 `;
 
-const FIXTURE_LINE = {
+// 第 2 条：drpy2 规则站子仓（形态②）
+const FIXTURE_RULE_LINE = {
   spider: "",
   notice: "按类型/地区/年代筛选由本仓库自有规则本地实现；片量为每日抽样，非全量",
   wallpaper: "",
@@ -230,6 +237,16 @@ const FIXTURE_LINE = {
     ext: "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/filter-data.json",
     jar: "", filterable: 1, searchable: 1, quickSearch: 1, changeable: 0,
   }],
+  lives: [], parses: [], flags: [],
+};
+// 第 1 条：全壳通用兜底子仓（14 个 type:1 直连、零 jar）
+const FIXTURE_FALLBACK = {
+  spider: "",
+  sites: Array.from({ length: 14 }, (_, i) => ({
+    key: "src" + i, name: "直连源" + (i + 1), type: 1,
+    api: "https://example.invalid/api.php/provide/vod/",
+    searchable: 1, quickSearch: 1, changeable: 1,
+  })),
   lives: [], parses: [], flags: [],
 };
 
@@ -362,23 +379,28 @@ function readText(p, label) {
   if (!fs.existsSync(p)) throw new Error(`${label} 路径不存在: ${p}`);
   return fs.readFileSync(p, "utf8").replace(/^\uFEFF/, ""); // 剥 BOM
 }
-let ruleSrc, lineSrc, dataFixture, DATA_FALLBACK = false;
+let ruleSrc, lineSrc, fallbackSrc, ruleLineSrc, dataFixture, DATA_FALLBACK = false;
 try {
   ruleSrc = readText(RULE_PATH, "rule") ?? FIXTURE_RULE;
-  lineSrc = readText(LINE_PATH, "line") ?? JSON.stringify(FIXTURE_LINE, null, 2);
+  // --line 仍指「规则站子仓」（与 T1-T5/T7-T8 的历史用法兼容）
+  lineSrc = readText(LINE_PATH, "line") ?? JSON.stringify(FIXTURE_RULE_LINE, null, 2);
+  // 3 条版新增：第 1 条兜底子仓 / 第 2 条规则站子仓，可各自指定真实产物
+  fallbackSrc = readText(FALLBACK_PATH, "fallback") ?? JSON.stringify(FIXTURE_FALLBACK, null, 2);
+  ruleLineSrc = readText(RULE_LINE_PATH, "rule-line") ?? lineSrc;
   const prodData = DATA_PATH ? JSON.parse(readText(DATA_PATH, "data")) : null;
   // PRODUCT 模式若源站全挂产出 stale 空数据：T3 测的是「第 4 参驱动本地过滤」这个逻辑，
   // 与当天片源无关 -> 回落内联 fixture 并如实标注，绝不静默当通过。
   DATA_FALLBACK = !!(prodData && Array.isArray(prodData.list) && prodData.list.length === 0);
   dataFixture = prodData && !DATA_FALLBACK ? prodData : FIXTURE_DATA;
 } catch (e) { console.error("LOAD ERROR", e.message); process.exit(2); }
-const MODE = (RULE_PATH || LINE_PATH || DATA_PATH) ? "PRODUCT" : "FIXTURE";
+const MODE = (RULE_PATH || LINE_PATH || DATA_PATH || FALLBACK_PATH || RULE_LINE_PATH) ? "PRODUCT" : "FIXTURE";
 
 if (!AS_JSON) {
   console.log("=".repeat(78));
   console.log("筛选线路「真实加载链」契约单测  mode=" + MODE + "  node=" + process.version);
   console.log("rule=" + (RULE_PATH || "<inline fixture>") + "  data=" + (DATA_PATH || "<inline fixture>"));
-  console.log("line=" + (LINE_PATH || "<inline fixture>") + "  index=" + (INDEX_PATH || "<live fetch>"));
+  console.log("line=" + (LINE_PATH || "<inline fixture>") + "  fallback=" + (FALLBACK_PATH || "<inline fixture>") + "  rule-line=" + (RULE_LINE_PATH || "<inline fixture>"));
+  console.log("index=" + (INDEX_PATH || "<live fetch>"));
   if (DATA_FALLBACK) console.log("DATA_FALLBACK: 产物数据为空(stale)，T3 逻辑改用内联 fixture，真实数据待源站恢复后复跑");
   console.log("=".repeat(78));
 }
@@ -566,12 +588,12 @@ async function main() {
     assert(badFirst === "流浪地球", `搜「流浪地球」第 1 条是「${badFirst}」，应为正片「流浪地球」`);
   });
 
-  // ---------------- T6 回归：2 条人话线路（收敛后基线） ----------------
+  // ---------------- T6 回归：3 条人话线路（兼容性兜底基线） ----------------
   let idxText = null, idxSrc = "<none>";
   if (INDEX_PATH) { idxText = readText(INDEX_PATH, "index"); idxSrc = INDEX_PATH; }
   else if (FIXTURE_INDEX) {
-    idxText = JSON.stringify({ urls: BASELINE_2 }, null, 2);
-    idxSrc = "<fixture 2-line baseline>";
+    idxText = JSON.stringify({ urls: BASELINE_3 }, null, 2);
+    idxSrc = "<fixture 3-line baseline>";
   }
   else if (!OFFLINE) {
     try {
@@ -584,21 +606,22 @@ async function main() {
     } catch (e) { idxText = null; idxSrc = "fetch failed: " + e.message; }
   }
   if (!idxText) {
-    skip("T6", "主入口恰好 2 条人话线路", OFFLINE ? "--offline 且未给 --index" : idxSrc);
+    skip("T6", "主入口恰好 3 条人话线路", OFFLINE ? "--offline 且未给 --index" : idxSrc);
   } else {
-    await check("T6", "主入口恰好 2 条：打开就能看 -> filter-line.json / 看不了点这里 -> fs4k3.json", () => {
+    await check("T6", "主入口恰好 3 条：打开就能看->fs4k3 / 想按类型年代挑片点这里->filter-line / 看不了点这里->fs4k2", () => {
       const j = JSON.parse(idxText);
       assert(Array.isArray(j.urls), "urls 不是数组");
-      assert(j.urls.length === 2, `urls 数量=${j.urls.length}，要求恰好 2（收敛后零门槛）`);
-      for (let i = 0; i < 2; i++) {
-        const got = j.urls[i], want = BASELINE_2[i];
+      assert(j.urls.length === 3, `urls 数量=${j.urls.length}，要求恰好 3（兼容性兜底版）`);
+      for (let i = 0; i < 3; i++) {
+        const got = j.urls[i], want = BASELINE_3[i];
         assert(normalizeName(got.name) === normalizeName(want.name),
           `第 ${i + 1} 条 name 不符: got=${JSON.stringify(got.name)} want=${JSON.stringify(want.name)}`);
         assert(got.url === want.url, `第 ${i + 1} 条 url 不符: got=${got.url} want=${want.url}`);
       }
-      assert(/filter-line\.json$/.test(j.urls[0].url), "第 1 条不是规则站 filter-line.json");
-      assert(/fs4k3\.json$/.test(j.urls[1].url), "第 2 条不是备用 fs4k3.json");
-      return `urls=2 first="${j.urls[0].name}"->filter-line.json second="${j.urls[1].name}"->fs4k3.json src=${idxSrc}`;
+      assert(/fs4k3\.json$/.test(j.urls[0].url), "第 1 条不是全壳通用兜底 fs4k3.json");
+      assert(/filter-line\.json$/.test(j.urls[1].url), "第 2 条不是规则站 filter-line.json");
+      assert(/fs4k2\.json$/.test(j.urls[2].url), "第 3 条不是备用 fs4k2.json");
+      return `urls=3 [1]${j.urls[0].name}->fs4k3 [2]${j.urls[1].name}->filter-line [3]${j.urls[2].name}->fs4k2 src=${idxSrc}`;
     });
   }
 
@@ -625,15 +648,32 @@ async function main() {
     });
   }
 
-  // ---------------- T9 零门槛前提：默认第 1 条就是规则站 ----------------
-  await check("T9", "默认线路 filter-line.json 就是规则站（type3/.js api/spider 空），用户不切线路即有筛选", () => {
-    const cfg = JSON.parse(lineSrc);
-    assert(Array.isArray(cfg.sites) && cfg.sites.length >= 1, "默认子仓 sites 为空");
+  // ---------------- T9 零门槛前提：第 1 条是全壳通用兜底（全 type:1 / 零 jar） ----------------
+  await check("T9", "第 1 条 fs4k3.json 是全壳通用兜底：sites 全 type:1 / spider=\"\" / 无 csp_ / 无 ;md5;", () => {
+    const cfg = JSON.parse(fallbackSrc);
+    assert(Array.isArray(cfg.sites) && cfg.sites.length > 0, "兜底子仓 sites 为空");
+    assert(cfg.spider === "", `兜底子仓顶层 spider 必须为 ""（零 jar），实际=${JSON.stringify(cfg.spider)}`);
+    assert(!fallbackSrc.includes(";md5;"), "兜底子仓全文出现 ;md5; 绑定");
+    assert(!fallbackSrc.includes("csp_"), "兜底子仓出现 csp_ jar 站点");
+    let min = Infinity, max = -Infinity;
+    for (const [i, s] of cfg.sites.entries()) {
+      assert(s.type === 1, `sites[${i}].type=${s.type}，兜底必须全为 type:1（全壳通用）`);
+      assert(typeof s.api === "string" && /^https?:\/\//.test(s.api), `sites[${i}].api 非绝对 URL`);
+      assert(!/\.js$/.test(s.api), `sites[${i}].api 是 .js 规则站，不该出现在兜底里`);
+      min = Math.min(min, s.type); max = Math.max(max, s.type);
+    }
+    return `sites=${cfg.sites.length} types=${min}..${max} spider="" noMd5=true noCsp=true`;
+  });
+
+  // ---------------- T10 规则站仍可选（第 2 条，筛选功能没被删） ----------------
+  await check("T10", "第 2 条 filter-line.json 仍是规则站：type3 / .js api / spider=\"\"", () => {
+    const cfg = JSON.parse(ruleLineSrc);
+    assert(Array.isArray(cfg.sites) && cfg.sites.length >= 1, "规则站 sites 为空");
     const s = cfg.sites[0];
-    assert(s.type === 3, `默认站点 type=${s.type}，要求 3`);
-    assert(typeof s.api === "string" && /\.js$/.test(s.api), `默认站点 api 不是 .js 规则: ${s.api}`);
-    assert(cfg.spider === "" || cfg.spider === undefined, `顶层 spider 非空: ${JSON.stringify(cfg.spider)}`);
-    return `default.type=3 api=.../${s.api.split("/").pop()} spider=""`;
+    assert(s.type === 3, `规则站 sites[0].type=${s.type}，要求 3`);
+    assert(typeof s.api === "string" && /\.js$/.test(s.api), `规则站 api 不是 .js: ${s.api}`);
+    assert(cfg.spider === "" || cfg.spider === undefined, `规则站顶层 spider 非空: ${JSON.stringify(cfg.spider)}`);
+    return `ruleLine.type=3 api=.../${s.api.split("/").pop()} spider="" (第 2 条，不默认)`;
   });
 
   // ---------------- 汇总 ----------------
