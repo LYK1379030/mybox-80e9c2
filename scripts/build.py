@@ -1063,21 +1063,21 @@ def main():
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
     # 兜底：无论上面 fs4k 注入成功与否，index 里 3 条线路指向的文件必须都在 templates，
     # 否则 _inspect_output 判「index 指向未生成文件」→ FATAL 停更（CI 实战教训）。
-    # 用上游老线 templates["fs4k.json"]（一定存在）派生纯直连零 jar 副本。
+    # 最稳来源 = 本文件内置的 DIRECT_SITES（纯 type:1 直连，零 jar，全壳通用），
+    # 不依赖 filmstore4k/dist 当天是否产出。
     for _miss in ("fs4k3.json", "fs4k2.json"):
         if _miss in templates:
             continue
-        try:
-            _base = json.loads(templates["fs4k.json"])
-            _d = dict(_base)
-            _d["spider"] = ""
-            _d["notice"] = "打不开就换一条，这条是直连片源。"
-            _d["sites"] = [s for s in _base.get("sites", [])
-                           if str(s.get("api", "")).startswith("http")]
-            templates[_miss] = json.dumps(_d, ensure_ascii=False, indent=2)
-            print("   [兜底] %s 由 fs4k.json 派生（%d 站，零 jar）" % (_miss, len(_d["sites"])))
-        except Exception as _e2:
-            print("   [兜底] %s 派生失败: %s" % (_miss, _e2))
+        _d = {
+            "spider": "",
+            "wallpaper": "",
+            "sites": [dict(s) for s in DIRECT_SITES],
+            "lives": [], "parses": [], "flags": [], "ads": [],
+            "notice": "打不开就换一条，这条是直连片源。",
+            "_meta": {"note": "内置直连兜底，零 jar，任何 TVBox 系壳可用", "sites": len(DIRECT_SITES)},
+        }
+        templates[_miss] = json.dumps(_d, ensure_ascii=False, indent=2)
+        print("   [兜底] %s 由 DIRECT_SITES 内置派生（%d 站，零 jar）" % (_miss, len(DIRECT_SITES)))
     # 4k.json / c1.json / c2.json 等老线仍由前面流程写进 templates，照常自愈与 purge。
 
     # ---- 筛选线路：可选第 2 条（挑壳；四排筛选/精准搜索）----
