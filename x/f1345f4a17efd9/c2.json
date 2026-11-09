@@ -3,8 +3,17 @@
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
+      "key": "feifan",
+      "name": "非凡·最快·397ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "bfzy",
-      "name": "暴风·大库·541ms",
+      "name": "暴风·大库·547ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -13,22 +22,12 @@
     },
     {
       "key": "lzi",
-      "name": "量子·备用·916ms",
+      "name": "量子·备用·826ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
-    },
-    {
-      "key": "feifan",
-      "name": "非凡·最快·3702ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1,
-      "timeout": 30
     },
     {
       "key": "dytt",
@@ -642,6 +641,13 @@
       "ips": [
         "223.5.5.5",
         "223.6.6.6"
+      ]
+    },
+    {
+      "name": "腾讯",
+      "url": "https://doh.pub/dns-query",
+      "ips": [
+        "119.29.29.29"
       ]
     },
     {

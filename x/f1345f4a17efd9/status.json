@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T00:20:08Z",
+  "built_at": "2026-11-09T00:34:46Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 268,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 541,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 916,
+      "ms": 241,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 3702,
+      "ms": 397,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 547,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 826,
       "total": null,
       "why": "ok"
     },
@@ -286,16 +286,16 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "爱酷",
@@ -340,8 +340,8 @@
     },
     {
       "name": "腾讯",
-      "ok": false,
-      "why": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+      "ok": true,
+      "bytes": 468
     }
   ],
   "external": [
@@ -576,7 +576,7 @@
     "dead_vod": 2,
     "live_files": 3,
     "alive_parses": 0,
-    "alive_doh": 3
+    "alive_doh": 4
   },
   "output_check": [
     {

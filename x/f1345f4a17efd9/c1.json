@@ -4,15 +4,24 @@
   "sites": [
     {
       "key": "索尼",
-      "name": "索尼 ·268ms",
+      "name": "索尼 ·241ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
       "changeable": 1
     },
     {
+      "key": "feifan",
+      "name": "非凡·最快·397ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "bfzy",
-      "name": "暴风·大库·541ms",
+      "name": "暴风·大库·547ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -21,22 +30,12 @@
     },
     {
       "key": "lzi",
-      "name": "量子·备用·916ms",
+      "name": "量子·备用·826ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
-    },
-    {
-      "key": "feifan",
-      "name": "非凡·最快·3702ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1,
-      "timeout": 30
     },
     {
       "key": "dytt",
@@ -389,6 +388,13 @@
       "ips": [
         "223.5.5.5",
         "223.6.6.6"
+      ]
+    },
+    {
+      "name": "腾讯",
+      "url": "https://doh.pub/dns-query",
+      "ips": [
+        "119.29.29.29"
       ]
     },
     {

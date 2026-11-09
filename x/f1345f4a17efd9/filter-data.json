@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-11-09T00:20:03.763Z",
+    "generated": "2026-11-09T00:34:42.234Z",
     "samplePages": 2,
     "countIsSample": true,
     "currentUtcYear": 2026,
@@ -15,12 +15,12 @@
     ],
     "stale": false,
     "sources": 15,
-    "okSources": 30,
+    "okSources": 28,
     "rawSampled": 232,
     "perSource": {
       "c2_5": 40,
       "sony": 40,
-      "c276": 40,
+      "c276": 0,
       "u_65": 40,
       "bfzy": 40,
       "yinghua": 40,
@@ -35,7 +35,7 @@
       "360zy": 40
     },
     "note": "片量为每日抽样（每源 pg=1..samplePages），非全量片库；按类型/地区/年代筛选由本仓库自有规则本地实现，不代表用户可见全库条数。",
-    "bytes": 255896
+    "bytes": 257005
   },
   "class": [
     {
@@ -272,16 +272,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -292,8 +296,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -570,16 +582,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -590,8 +606,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -868,16 +892,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -888,8 +916,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -1166,16 +1202,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -1186,8 +1226,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -1464,16 +1512,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -1484,8 +1536,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -1762,16 +1822,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -1782,8 +1846,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -2060,16 +2132,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -2080,8 +2156,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -2358,16 +2442,20 @@
             "v": "巴西"
           },
           {
-            "n": "大陆",
-            "v": "大陆"
+            "n": "英国,加拿大",
+            "v": "英国,加拿大"
           },
           {
-            "n": "香港",
-            "v": "香港"
+            "n": "中国香港,中国大陆",
+            "v": "中国香港,中国大陆"
           },
           {
             "n": "内地",
             "v": "内地"
+          },
+          {
+            "n": "香港",
+            "v": "香港"
           },
           {
             "n": "台湾",
@@ -2378,8 +2466,16 @@
             "v": "比利时 / 法国 / 荷兰"
           },
           {
+            "n": "大陆",
+            "v": "大陆"
+          },
+          {
             "n": "法国 / 日本",
             "v": "法国 / 日本"
+          },
+          {
+            "n": "美国,英国",
+            "v": "美国,英国"
           },
           {
             "n": "新加坡",
@@ -4164,476 +4260,27 @@
       "vod_director": "酒向大辅"
     },
     {
-      "vod_id": "c276:99656",
-      "vod_name": "来自远方动画版",
-      "vod_pic": "https://fffgood.com/upload/vod/20261005-1/63b65cfd78e7d1dab91383d3ac937db8.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "剧情,动画,奇幻",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-09 00:07:54",
-      "type_name": "日韩动漫",
-      "type_id": "anime",
-      "decade": "2020年代",
-      "types": [
-        "动画",
-        "奇幻",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vip.ffzy-plays.com/share/e5cd7df3d8cd7faf219132113b73b327",
-      "vod_content": "<p>&nbsp;过着极其平凡日子的女高中生·立木典子，某天早晨仿佛被不可思议的梦境引导一般，迷失到了一个陌生的异世界。\r\n在这个语言不通、常识也不管用的世界里，救下无处可去、只能四处彷徨的典子的，是独自一人旅行的流浪战士·伊札克。\r\n与此同时，世界各地都在流传着“能够唤醒带来毁灭的‘天上鬼’的人出现了”、“必须比任何国家都先得到手”的传言。\r\n所谓的觉醒，以及天上鬼到底是什么——\r\n仿佛知晓答案一般，伊札克看着典子喃喃自语道。\r\n“我必须杀了这个女孩。”\r\n尽管语言和文化都存在隔阂，两人之间依然一点点萌生了细微的羁绊。\r\n这样的两人，最终将被卷入宏大的命运旋涡之中——。</p>",
-      "vod_actor": "黑泽朋世,熊谷健太郎,梅原裕一郎,竹内荣治,齐藤贵美子,宫泽正,中野泰佑,伊藤美来",
-      "vod_director": "阿部记之"
-    },
-    {
-      "vod_id": "c276:99655",
-      "vod_name": "异人旅馆第二季",
-      "vod_pic": "https://fffgood.com/upload/vod/20261004-1/ec0c9d777dde027a220589a3a89a4496.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "动画",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-09 00:06:33",
-      "type_name": "日韩动漫",
-      "type_id": "anime",
-      "decade": "2020年代",
-      "types": [
-        "动画"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vip.ffzy-plays.com/share/c84389bbba219be3e13b80f9376a0db7",
-      "vod_content": "<p>&nbsp;想要称得上最高级饭店的条件除了必备的\r\n「最精致的美食」、「至高的疗愈」、「迷人的娱乐」......\r\n还得具备——\r\n「配备最新武器」\r\n「滴水不漏的身份伪装」\r\n「完美无缺的尸体处理」！ ？\r\n即使身处生死关头，依然绝不说NO的两位柜台接待员──\r\n生朗与沙罗，将如何实现杀手们的愿望？\r\n戏剧张力十足的杀手饭店故事，即将揭幕！</p>",
-      "vod_actor": "小林裕介,白浜灯奈乃,羊宫妃那",
-      "vod_director": "网野哲朗"
-    },
-    {
-      "vod_id": "c276:100032",
-      "vod_name": "Final Table",
-      "vod_pic": "https://fffgood.com/upload/vod/20261024-1/e1aa893a0df5b55b3f97e010bfbeea0b.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "韩国",
-      "vod_class": "剧情",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 23:22:43",
-      "type_name": "韩国剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vod.ffzy-bofang.com/share/aafd8346a677af9db717afeadf6b62ec",
-      "vod_content": "<p>&nbsp;是为了选出最好的韩国厨师而进行的生存“The Table: K Chef 2026”大赛，描绘了来自世界各地的韩国厨师们的奇妙食物和故事盛宴的电视剧。</p>",
-      "vod_actor": "安孝燮,洪华莲,张栗,郑幼贞",
-      "vod_director": "金道勋"
-    },
-    {
-      "vod_id": "c276:99841",
-      "vod_name": "听，谁在唱歌2",
-      "vod_pic": "https://fffgood.com/upload/vod/20261014-1/d25e7140b82c53fccafba5ee2d3398ab.jpg",
-      "vod_remarks": "更新至第20261108期",
-      "vod_year": "2026",
-      "vod_area": "大陆",
-      "vod_class": "真人秀",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 23:17:54",
-      "type_name": "大陆综艺",
-      "type_id": "variety",
-      "decade": "2020年代",
-      "types": [
-        "综艺"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vod.ffzy-bofang.com/share/79f69230354b71206fb723c571cce58b",
-      "vod_content": "<p>&nbsp;烟火入旋律，歌声愈人心。疾驰在每一次追寻灵感的途中，慢下来才发现最淳朴的心声最动人！这一次不赶路，只感受路。</p>",
-      "vod_actor": "吴克群,陆虎,鹭卓 ,陈卓璇,刘凤瑶 ,张子墨",
-      "vod_director": ""
-    },
-    {
-      "vod_id": "c276:99898",
-      "vod_name": "好男孩2026",
-      "vod_pic": "https://fffgood.com/upload/vod/20261019-1/dc57c4cc43586539dff01da5702f72a6.jpg",
-      "vod_remarks": "更新至第05集",
-      "vod_year": "2026",
-      "vod_area": "泰国",
-      "vod_class": "剧情,奇幻",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 23:13:27",
-      "type_name": "泰国剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "奇幻",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/235d4034b03318cc97d376cb07c7fb7c",
-      "vod_content": "<p>&nbsp;在过着孤独的生活并三十岁时因意外去世后，一个男人获得了重返过去的第二次机会。他醒来时发现自己回到了学生时代，决定过上截然不同的生活。</p>",
-      "vod_actor": "平散·索唐库尔,梅塔斯·欧帕西安卡琼,Saeng Sillapin Sillapachai,Juno Tiranat Kittisattho,Lighty Namassakarn Trangkhasombat,塔湾·维弘可塔纳,提迪蓬·德查阿派坤",
-      "vod_director": "西瓦·萨瓦玛尼固"
-    },
-    {
-      "vod_id": "c276:99650",
-      "vod_name": "魔法姐妹露露与莉莉第二季",
-      "vod_pic": "https://fffgood.com/upload/vod/20261004-1/359cf1576ad5b0b3dd955d1d49f0b550.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "动画,奇幻",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 22:19:52",
-      "type_name": "日韩动漫",
-      "type_id": "anime",
-      "decade": "2020年代",
-      "types": [
-        "动画",
-        "奇幻"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vip.ffzy-plays.com/share/0b89e80fe509c87b71f997752b002934",
-      "vod_content": "魔法姐妹露露与莉莉第二季",
-      "vod_actor": "橘芽衣,小鹿奈绪,七海弘希,茅野爱衣,和泉风花,廣原ふう,八乙女光,天崎滉平,橘龙丸,杉田智和,太田贵子,水岛裕,笠间淳,大原惠美,远藤绫,广濑裕也,白井悠介,夏吉优子",
-      "vod_director": "道解慎太郎"
-    },
-    {
-      "vod_id": "c276:99651",
-      "vod_name": "大叔喜欢可爱小玩意动画版",
-      "vod_pic": "https://fffgood.com/upload/vod/20261004-1/20faccdb775de2cd6d78cf4a1407c7ce.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "喜剧,动画",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 22:19:12",
-      "type_name": "日韩动漫",
-      "type_id": "anime",
-      "decade": "2020年代",
-      "types": [
-        "喜剧",
-        "动画"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vip.ffzy-plays.com/share/c15d12444bdba497b96841a269056108",
-      "vod_content": "<p>&nbsp;小路三贵长相帅气、工作能力出众，私下里却对可爱的事物毫无抵抗力。\r\n在职场上，他深受下属们的绝对信赖；可一回到家，就会满心欢喜地把玩本命角色 “巴哥太郎”，享受专属的幸福时光。\r\n小路始终不敢向任何人坦白自己热爱可爱小东西这个秘密，每天都在心惊胆战中度过。\r\n故事围绕他对巴哥太郎满到溢出的喜爱，以及因一件契机而逐渐产生变化的日常展开，敬请欣赏。</p>",
-      "vod_actor": "兴津和幸,江口拓也,梶裕贵,村濑步,前田佳织里,花井美春,丹羽哲士,园崎未惠,富田美忧,和泉风花,船户百合绘,田野麻美,佐藤日向",
-      "vod_director": "牧野友映"
-    },
-    {
-      "vod_id": "c276:99724",
-      "vod_name": "你却爱着一个他(原声)",
-      "vod_pic": "https://fffgood.com/upload/vod/20261008-1/ae6e302ccb04beb38e7076a04171934e.jpg",
-      "vod_remarks": "更新至第10集",
-      "vod_year": "2026",
-      "vod_area": "泰国",
-      "vod_class": "剧情,同性",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 21:28:39",
-      "type_name": "泰国剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/eeb3b040d8d25cd782183ae757fdbfd0",
-      "vod_content": "<p>&nbsp;改编自水千丞小说《你却爱着一个他》。\r\n围绕“188男团”宇宙展开，讲述了几个性格各异、外表出众但陷入情感纠葛的男主之间，充满控制欲、金钱与极致拉扯的虐恋与爱情故事。</p>",
-      "vod_actor": "亚提·唐威邦帕尼特,南塔蓬·翁沙库永",
-      "vod_director": ""
-    },
-    {
-      "vod_id": "c276:99644",
-      "vod_name": "青之芦苇第二季",
-      "vod_pic": "https://fffgood.com/upload/vod/20261004-1/5f9b42334848a16b6aac382547455f94.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "动画,运动",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 20:18:06",
-      "type_name": "日韩动漫",
-      "type_id": "anime",
-      "decade": "2020年代",
-      "types": [
-        "动画"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vip.ffzy-plays.com/share/94b2c2bc2644aa53f124b7904473c3f7",
-      "vod_content": "青之芦苇第二季",
-      "vod_actor": "大铃功起 ,橘龙丸,山下诚一郎,八代拓,堀江瞬,加藤涉,榎木淳弥,熊谷健太郎,武内骏辅,梅原裕一郎,小野贤章,内山昂辉,古川慎,兴津和幸,河濑茉希,手冢弘道,上田丽奈,小松未可子,小林亲弘,安元洋贵,真堂圭,园崎未惠,中岛良树",
-      "vod_director": "横山和基"
-    },
-    {
-      "vod_id": "c276:100276",
-      "vod_name": "氧毒素：耀眼的星",
-      "vod_pic": "https://fffgood.com/upload/vod/20261108-1/b41160414ecb5fb99f78518f6dbc0edf.jpg",
-      "vod_remarks": "更新至第01集",
-      "vod_year": "2026",
-      "vod_area": "泰国",
-      "vod_class": "爱情.剧情",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 20:07:37",
-      "type_name": "泰国剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "爱情",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/9cc98208091fee9789244aee08a28ca7",
-      "vod_content": "氧毒素：耀眼的星",
-      "vod_actor": "",
-      "vod_director": ""
-    },
-    {
-      "vod_id": "c276:99659",
-      "vod_name": "天狗的厨房第三季",
-      "vod_pic": "https://fffgood.com/upload/vod/20261005-1/a7422bc83fa4214f8ac3842a81e07e29.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "剧情",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 19:54:52",
-      "type_name": "日本剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/83bf29a1e7fb5f7afa57187371bdd6e7",
-      "vod_content": "<p>&nbsp;本季依旧以天狗后裔们的生活为主线，通过壮丽的风景与香气四溢的料理，用优美的影像细腻描绘他们的日常。担任故事核心的主要演员将继续出演之外，第三季还将有新角色登场。在原作者监修下，将展开原创剧情。第二季中，オン返回纽约，有意宣布自行创业，而基则依旧生活在天狗之里。过着各自生活的三人，将从再次回到故乡相聚开始，故事由此展开。这一次又会有怎样的相遇与料理登场呢？</p>",
-      "vod_actor": "驹木根葵汰,盐野瑛久,越山敬达,古屋吕敏,柊木阳太,奥井修二,永尾柚乃,角田晃广,渡边真起子,原田泰造",
-      "vod_director": "長島翔,畑中みゆき,宮﨑萌加,小山亮太"
-    },
-    {
-      "vod_id": "c276:99992",
+      "vod_id": "u_65:74860",
       "vod_name": "越来越糟",
-      "vod_pic": "https://fffgood.com/upload/vod/20261022-1/fead1b72323da87fed0e446a5ed11644.jpg",
-      "vod_remarks": "更新至第05集",
+      "vod_pic": "https://img.ukuapi88.com/upload/vod/20261028-1/061146a198fe2b869a3210534e8f0f06.webp",
+      "vod_remarks": "更新至05集",
       "vod_year": "2026",
-      "vod_area": "英国",
+      "vod_area": "英国,加拿大",
       "vod_class": "喜剧",
       "vod_score": "0.0",
-      "vod_time": "2026-11-08 19:47:47",
+      "vod_time": "2026-11-09 07:29:10",
       "type_name": "欧美剧",
       "type_id": "tv",
       "decade": "2020年代",
       "types": [
         "喜剧"
       ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/7d49472a0a92a841bb35f0001552032a",
-      "vod_content": "<p>&nbsp;Ethan, Abi and Sam are best friends from uni, soulmates for life, and dysfunctional roommates. It’s been a year since the trio finally managed to move to London, but they have collectively accomplished nothing and now their landlord is selling up.</p>",
+      "_source": "u_65",
+      "vod_play_from": "ukyun$$$ukm3u8",
+      "vod_play_url": "https://ukzy.ukubf8.com/share/ynge6nepJv",
+      "vod_content": "<p>伊桑、阿比和萨姆是大学时期的好友，也是相伴一生的知己，但他们的室友关系却很紧张。这三人终于决定搬到伦敦生活已经有一年了，然而他们却毫无建树，而且现在他们的房东准备出售这套房子了。</p>",
       "vod_actor": "利奥·莱奇,安德鲁·斯科特,莉娜·邓纳姆,加里·比德尔,布莱克·哈里森,艾米莉·费尔恩,阿梅莉亚·迪莫尔登伯格,薇琪·佩珀代因,英迪尔·马伦,奥利维亚·格兰特,萨菲亚·奥克利-格林,Nicole Sadie Sawyerr,阿里安·尼克,菲尔·齐默尔曼,西蒙·海恩斯,卢卡·卡勒-查普曼,Dane Williams",
       "vod_director": ""
-    },
-    {
-      "vod_id": "c276:100036",
-      "vod_name": "金银岛2026",
-      "vod_pic": "https://fffgood.com/upload/vod/20261025-1/de67cecfbddd5c5e50851eeb63fb8c11.jpg",
-      "vod_remarks": "更新至第05集",
-      "vod_year": "2026",
-      "vod_area": "美国",
-      "vod_class": "剧情,冒险",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 19:43:30",
-      "type_name": "欧美剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "冒险",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/18440ce50ee313cce057f7ce19523870",
-      "vod_content": "<p>&nbsp;该剧改编自罗伯特·路易斯·史蒂文森的经典冒险小说，聚焦少年吉姆·霍金斯的成长蜕变，讲述他如何从一个涉世未深的男孩，一步步变成敢闯敢拼的年轻海盗。当吉姆意外获得一张传说中的藏宝图后，母亲贝斯当机立断的决断虽然守住了关键线索，却也将母子二人双双推入了命悬一线的凶险境地。</p>",
-      "vod_actor": "海莉·阿特维尔,大卫·奥伊罗,Borja Saavedra,John Burke,Martin Frislev Ammitsbøl,Alina Dyadichenko,杰克·休斯顿,托默·卡蓬,汤姆·斯威特,Biondolillo Pascal",
-      "vod_director": ""
-    },
-    {
-      "vod_id": "c276:100005",
-      "vod_name": "尚公主",
-      "vod_pic": "https://fffgood.com/upload/vod/20261023-1/41626bf3eb2af0b3d99b708af5a971b4.jpg",
-      "vod_remarks": "更新至第33集",
-      "vod_year": "2026",
-      "vod_area": "大陆",
-      "vod_class": "剧情,爱情,古装",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 18:00:40",
-      "type_name": "国产剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "爱情",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/85b25f84cf96c0752bd047b4fe0eee64",
-      "vod_content": "<p>&nbsp;不甘命运的天家嫡女暮晚摇与智谋无双的寒门才俊言尚在岭南相逢、于盛安入局，携手步步破局，共筑清平天下的故事。一群少年各怀心事、各有所求，在乱世惊涛中搅动风云，奔赴理想。\r\n该剧改编自伊人睽睽的同名小说。</p>",
-      "vod_actor": "孟子义,李昀锐,吴汉坤,全伊伦,李孝谦,沈佳钰,余皑磊,胡杏儿,唐晓天,徐海乔,晏紫东,白冰可,吴彼,张月,王子睿,李嘉鑫,刘钧,公磊,黄圣池,沙宝亮,侯长荣,彭杨,丁嘉文,杨子骅,崔志刚,张舒沦,何子怡,纪凌尘,裴佳欣,丁子恩",
-      "vod_director": "秦榛"
-    },
-    {
-      "vod_id": "c276:100235",
-      "vod_name": "折月亮",
-      "vod_pic": "https://fffgood.com/upload/vod/20261105-1/db6423bd4b51d9904c85877fa1abc09c.jpg",
-      "vod_remarks": "更新至第10集",
-      "vod_year": "2026",
-      "vod_area": "大陆",
-      "vod_class": "剧情,爱情",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 17:57:08",
-      "type_name": "国产剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "爱情",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://svip.feifei-play.com/share/1b7f4b2c845aac58d112f6e7ca78e8f7",
-      "vod_content": "<p>&nbsp;傅识则（林一饰）与云厘（卢昱晓饰）在南芜重逢，作为社恐少女的云厘面对自己的高中&quot;白月光”，在一干人等的助攻下，突破社恐追求傅识则，凭“小太阳”般的光芒打动他，两人甜蜜相恋。后又因认知分歧阴差阳错二人分手，云厘出国，傅识则选择重振旗鼓带队登顶科研领域，待云厘回国后花式追妻，二人终解芥蒂、再续前缘。\r\n该剧改编自竹已的小说《折月亮》，属“南芜三部曲”终章。</p>",
-      "vod_actor": "林一,卢昱晓,卢洋洋,李歌洋,黄圣池,黄婷婷,谢彬彬,赵鹏皓,裴佳欣,吴芊盈",
-      "vod_director": "张博昱"
-    },
-    {
-      "vod_id": "c276:100257",
-      "vod_name": "玫瑰战争粤语",
-      "vod_pic": "https://fffgood.com/upload/vod/20261106-1/3e5ed15bb5fafdb97e2ea7e15509e539.jpg",
-      "vod_remarks": "更新至第07集",
-      "vod_year": "2026",
-      "vod_area": "香港",
-      "vod_class": "剧情",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 17:55:46",
-      "type_name": "香港剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vod.ffzy-bofang.com/share/33805671920f0d02e6d18f630985aace",
-      "vod_content": "<p>&nbsp;一宗骇人的碎尸案，警察刘少杰发现自己太太夏无双是最大嫌疑犯，质疑她杀害富豪李耀天。随着刘少杰深入调查，偶像新星关子盈、金牌经理人苏嘉年、演员安安、名模富太梁菲雅，四位女明星同样有杀人嫌疑。夏无双望着李耀天的遗照，脸上只有冷冽的笑容，只道出一切是他咎由自取。\r\n原来李耀天在幕后主使其同父异母弟弟李耀诚藉经营酒吧为名，威逼利诱女明星，为富豪贵宾提供性招待服务，满足自己丑陋变态的私欲。\r\n夏无双发现身边好闺蜜被李耀天控制，就连她的外甥女关子盈，也难逃李耀天魔掌，选择自杀解脱一生。她选择与警察刘少杰合作，联手瓦解李耀诚经营的黑暗酒吧王国。一众女星重获自由，夏无双却发现杀害李耀天的人，竟然就是⋯一宗骇人的碎尸案，警察刘少杰发现自己太太夏无双是最大嫌疑犯，质疑她杀害富豪李耀天。随着刘少杰深入调查，偶像新星关子盈、金牌经理人苏嘉年、演员安安、名模富太梁菲雅，四位女明星同样有杀人嫌疑。夏无双望着李耀天的遗照，脸上只有冷冽的笑容，只道出一切是他咎由自取。\r\n原来李耀天在 幕后主使其同父异母弟弟李耀诚藉经营酒吧为名，威逼利诱女明星，为富豪贵宾提供性招待服务，满足自己丑陋变态的私欲。\r\n夏无双发现身边好闺蜜被李耀天控制，就连她的外甥女关子盈，也难逃李耀天魔掌，选择自杀解脱一生。她选择与警察刘少杰合作，联手瓦解李耀诚经营的黑暗酒吧王国。一众女星重获自由，夏无双却发现杀害李耀天的人，竟然就是……</p>",
-      "vod_actor": "杨茜尧,陈豪,林夏薇,马国明,陈展鹏,姚子羚,傅嘉莉,陈自瑶,邝洁楹,蔡洁,洪永城,陈桢怡,关嘉敏,廖慧仪",
-      "vod_director": "钟澍佳"
-    },
-    {
-      "vod_id": "c276:99774",
-      "vod_name": "夜樱家的大作战第二季Part 2",
-      "vod_pic": "https://fffgood.com/upload/vod/20261011-1/24497baa82c8f38153a4f42f080b4404.jpg",
-      "vod_remarks": "更新至第05集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "剧情,动画,奇幻",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 17:47:38",
-      "type_name": "日韩动漫",
-      "type_id": "anime",
-      "decade": "2020年代",
-      "types": [
-        "动画",
-        "奇幻",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vip.ffzy-plays.com/share/59789a1cdca168a6dac05bc5ef16819d",
-      "vod_content": "<p>&nbsp;大家一起歼灭了皮下真率领的犯罪组织「蒲公英」，「夜樱前线」顺利成功，接着还一并举办了太阳与六美的婚宴，夜樱家迎来了安稳的日常生活……\r\n然而却冒出了新任务？\r\n某天，太阳在梦中与夜樱家初代当家夜樱蕾进行对话。她表示为了达成「杀了我」的这个愿望，有两个不可或缺的事物。听从蕾说的话，为了接触掌握关键的皮下，太阳要挑战银级特务考试，但是有传言指「今年不会有任何人合格」，最凶狠的考官们正在等着他！\r\n然后露出无畏笑容，六美她们的父亲夜樱百终于动了起来，身上带有重重谜团的他，究竟有何目的？\r\n各式各样的事件降临在夜樱家！\r\n家人之间的关系遭受考验！\r\n电视动画『夜樱家的大作战』的新章，作战开始！</p>",
-      "vod_actor": "川岛零士,本渡枫,小西克幸,鬼头明里,兴津和幸,悠木碧,松冈祯丞,内山夕实,山寺宏一,大塚芳忠,伊藤美来,花守由美里,上坂堇,进藤尚美",
-      "vod_director": "凑未来,中津川孝广"
-    },
-    {
-      "vod_id": "c276:100279",
-      "vod_name": "西部战线",
-      "vod_pic": "https://fffgood.com/upload/vod/20261108-1/7d059667ea565e2c31b93157efd72d55.jpg",
-      "vod_remarks": "HD中字",
-      "vod_year": "2015",
-      "vod_area": "韩国",
-      "vod_class": "剧情,战争",
-      "vod_score": "6.7",
-      "vod_time": "2026-11-08 14:53:00",
-      "type_name": "战争片",
-      "type_id": "tv",
-      "decade": "2010年代",
-      "types": [
-        "战争",
-        "剧情"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://vip.ffzy-play10.com/share/242cf910a10a071d305411486959674e",
-      "vod_content": "<p>&nbsp;故事发生在1953年，彼时，韩国和朝鲜之间的争斗正值最盛之时，国内情势十分紧张。南福（薛景求 饰）本是老实本分的农民，靠着土地吃饭，虽然日子过得紧紧巴巴，但也不失宁静和祥和。战争的到来彻底改变了他的命运，应召入伍后，对如何打仗一无所知的南福就这样糊里糊涂的成为了一名大街上随处可见的韩国下等兵。\r\n某日，上司将一份十分重要的机密文件交给南福，命他送往指定地点，这封文件是如此的重要，以至于关系到战争的成败。然而，南福却将文件给搞丢了，而这份文件又恰恰被朝鲜人民军的士兵荣光（吕珍九 饰）给拾到了，在两人之间，一场你藏我找的猫鼠游戏就此拉开序幕。</p>",
-      "vod_actor": "薛景求,吕珍九,李璟荣,郑仁基,迪恩·唐森",
-      "vod_director": "千成日"
-    },
-    {
-      "vod_id": "c276:100034",
-      "vod_name": "永属于你",
-      "vod_pic": "https://fffgood.com/upload/vod/20261025-1/ba6b5f0c20ae929019585fe07a6becf8.jpg",
-      "vod_remarks": "更新至第05集",
-      "vod_year": "2026",
-      "vod_area": "美国",
-      "vod_class": "喜剧",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 14:40:11",
-      "type_name": "欧美剧",
-      "type_id": "tv",
-      "decade": "2020年代",
-      "types": [
-        "喜剧"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://super.ffzy-online6.com/share/164b9d82149e90db2876f473a6d4ee9a",
-      "vod_content": "<p>&nbsp;Eternally Yours (working title) is an eternal love story about two vampires who have been married for five hundred years, and their struggles to accept the human who is dating their daughter.</p>",
-      "vod_actor": "阿莱格拉·爱德华兹,嘉伦·李维森,爱德·维坎斯",
-      "vod_director": ""
-    },
-    {
-      "vod_id": "c276:100278",
-      "vod_name": "罗梅莉亚战记",
-      "vod_pic": "https://fffgood.com/upload/vod/20261108-1/31dc63f832f6bfea99c4a94ebee5a4bd.jpg",
-      "vod_remarks": "更新至第06集",
-      "vod_year": "2026",
-      "vod_area": "日本",
-      "vod_class": "动画",
-      "vod_score": "0.0",
-      "vod_time": "2026-11-08 14:35:18",
-      "type_name": "日韩动漫",
-      "type_id": "anime",
-      "decade": "2020年代",
-      "types": [
-        "动画"
-      ],
-      "_source": "c276",
-      "vod_play_from": "feifan$$$ffm3u8",
-      "vod_play_url": "https://svip.feifei-play.com/share/3172362312fcf09d96f02125f66b74f5",
-      "vod_content": "<p>&nbsp;#罗梅莉亚战记# 动画化官宣</p>",
-      "vod_actor": "根本优奈,小笠原仁,大野智敬,广濑裕也,千本木彩花,伊濑茉莉也,亚咲花,千叶翔也,梶原岳人,堀江瞬,绵贯龙之介,手冢宏通,山口智广,广濑龙一,细田健太,海渡翼,安田陆矢,松川裕辉,山下大毅,堀金苍平,樱井尚辉,石井瑞树,木村飒,原俊太郎,峰田大梦",
-      "vod_director": "白井宏旨"
     },
     {
       "vod_id": "u_65:74049",
@@ -4680,6 +4327,29 @@
       "vod_content": "<p>本剧改编自作者同名漫画。故事讲述了主人公田村乌兹梅，曾是一名童星。但在28岁时因某起事件为契机退出演艺圈，此后整整12年将自己封闭在家中，与外界隔绝。后来，她被迫到一家便民杂物事务所打工。在一次次帮助委托人的过程中，她开始设身处地理解他们的烦恼，并逐渐直面自己曾经留下的心灵创伤。在治愈他人的同时，她也重新找回了生活的希望，开启了自己人生的重启之路。</p>",
       "vod_actor": "井本绚子,白洲迅,大原梓,柴野晃太朗,前田美波里,相岛一之,菅原大吉,市毛良枝",
       "vod_director": "古泽健,渋谷未来,加治屋彰人,水取拓也"
+    },
+    {
+      "vod_id": "u_65:74091",
+      "vod_name": "天狗的厨房 第三季",
+      "vod_pic": "https://img.ukuapi88.com/upload/vod/20261012-1/96e49490705ce68cf682f2828f6c21ed.webp",
+      "vod_remarks": "更新至06集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "剧情",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-09 07:19:10",
+      "type_name": "日剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "剧情"
+      ],
+      "_source": "u_65",
+      "vod_play_from": "ukyun$$$ukm3u8",
+      "vod_play_url": "https://ukzy.ukubf8.com/share/IfavIKvn5y",
+      "vod_content": "<p>本季依旧以天狗后裔们的生活为主线，通过壮丽的风景与香气四溢的料理，用优美的影像细腻描绘他们的日常。担任故事核心的主要演员将继续出演之外，第三季还将有新角色登场。在原作者监修下，将展开原创剧情。第二季中，オン返回纽约，有意宣布自行创业，而基则依旧生活在天狗之里。过着各自生活的三人，将从再次回到故乡相聚开始，故事由此展开。这一次又会有怎样的相遇与料理登场呢？</p>",
+      "vod_actor": "驹木根葵汰,盐野瑛久,越山敬达,古屋吕敏,柊木阳太,奥井修二,永尾柚乃,角田晃广,渡边真起子,原田泰造",
+      "vod_director": "長島翔,畑中みゆき,宮﨑萌加,小山亮太"
     },
     {
       "vod_id": "u_65:66371",
@@ -4822,6 +4492,29 @@
       "vod_content": "<p>钻石王牌actII 第二季将于今年10月开播第二季度的内容。</p>",
       "vod_actor": "逢坂良太,岛崎信长,樱井孝宏,浅沼晋太郎,花江夏树,下野纮,田尻浩章,下妻由幸,村田太志,石田彰,松冈祯丞,苍井翔太,内田雄马,武内骏辅,山下大辉,村濑步,畠中祐,细谷佳正,冈本信彦,浪川大辅,羽多野涉,东地宏树,赤城进,竹内荣治,内山夕实,梶裕贵,宫崎贵宜,大桥贤一郎,山谷祥生,保志总一朗,代永翼,熊谷健太郎,仲野裕,小野贤章,神谷浩史,铃木达央,金本凉辅,西凛太郎,木村良平,加藤亮夫,宫田俊哉,仲村宗悟,田丸笃志,滨健人",
       "vod_director": "大庭秀昭"
+    },
+    {
+      "vod_id": "u_65:75291",
+      "vod_name": "玫瑰战争 粤语",
+      "vod_pic": "https://img.ukuapi88.com/upload/vod/20261107-1/5d08fc176af682b685d8956484c9e124.jpg",
+      "vod_remarks": "更新至08集",
+      "vod_year": "2026",
+      "vod_area": "中国香港,中国大陆",
+      "vod_class": "剧情",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-09 01:56:47",
+      "type_name": "国产剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "剧情"
+      ],
+      "_source": "u_65",
+      "vod_play_from": "ukyun$$$ukm3u8",
+      "vod_play_url": "https://ukzy.ukubf3.com/share/FAHvaY9Fhb",
+      "vod_content": "<p>一宗骇人的碎尸案，警察刘少杰发现自己太太夏无双是最大嫌疑犯，质疑她杀害富豪李耀天。随着刘少杰深入调查，偶像新星关子盈、金牌经理人苏嘉年、演员安安、名模富太梁菲雅，四位女明星同样有杀人嫌疑。夏无双望着李耀天的遗照，脸上只有冷冽的笑容，只道出一切是他咎由自取。\r\n原来李耀天在幕后主使其同父异母弟弟李耀诚藉经营酒吧为名，威逼利诱女明星，为富豪贵宾提供性招待服务，满足自己丑陋变态的私欲。\r\n夏无双发现身边好闺蜜被李耀天控制，就连她的外甥女关子盈，也难逃李耀天魔掌，选择自杀解脱一生。她选择与警察刘少杰合作，联手瓦解李耀诚经营的黑暗酒吧王国。一众女星重获自由，夏无双却发现杀害李耀天的人，竟然就是⋯一宗骇人的碎尸案，警察刘少杰发现自己太太夏无双是最大嫌疑犯，质疑她杀害富豪李耀天。随着刘少杰深入调查，偶像新星关子盈、金牌经理人苏嘉年、演员安安、名模富太梁菲雅，四位女明星同样有杀人嫌疑。夏无双望着李耀天的遗照，脸上只有冷冽的笑容，只道出一切是他咎由自取。\r\n原来李耀天在 幕后主使其同父异母弟弟李耀诚藉经营酒吧为名，威逼利诱女明星，为富豪贵宾提供性招待服务，满足自己丑陋变态的私欲。\r\n夏无双发现身边好闺蜜被李耀天控制，就连她的外甥女关子盈，也难逃李耀天魔掌，选择自杀解脱一生。她选择与警察刘少杰合作，联手瓦解李耀诚经营的黑暗酒吧王国。一众女星重获自由，夏无双却发现杀害李耀天的人，竟然就是……</p>",
+      "vod_actor": "杨茜尧,陈豪,林夏薇,马国明,陈展鹏,姚子羚,傅嘉莉,陈自瑶,邝洁楹,蔡洁,洪永城,陈桢怡,关嘉敏,廖慧仪",
+      "vod_director": "钟澍佳"
     },
     {
       "vod_id": "u_65:75423",
@@ -5342,6 +5035,27 @@
       "vod_content": "史上最餓劣的食境節目【飢餓遊戲】點選以下連結訂閱，精采影音不漏接！　　史上最靠夭的節目　　今天的戰友．明天的敵人　　永遠無法預知下一關將跟與誰合作　　唯有帶著【玩下去、吃下去】的精神．繼續獲得食物充飢　　讓【飢餓指數】歸零．才是最後贏家　　王仁甫 孫協志 許孟哲 主持　　中視周日晚間八點【飢餓遊戲】",
       "vod_actor": "孙协志,王仁甫,许孟哲",
       "vod_director": ""
+    },
+    {
+      "vod_id": "bfzy:169314",
+      "vod_name": "Final Table",
+      "vod_pic": "https://p.bfvp26.com/upload/vod/20261024-1/206dc03b25246f82d622e6136c0c76fb.webp",
+      "vod_remarks": "更新至第6集",
+      "vod_year": "2026",
+      "vod_area": "韩国",
+      "vod_class": "",
+      "vod_score": "5.0",
+      "vod_time": "2026-11-08 23:15:26",
+      "type_name": "韩国剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [],
+      "_source": "bfzy",
+      "vod_play_from": "bfzym3u8",
+      "vod_play_url": "https://v.fengbao14.com/video/Final-Table/609fcd7ab0ad/index.m3u8",
+      "vod_content": "是为了选出最好的韩国厨师而进行的生存“The Table: K Chef 2026”大赛，描绘了来自世界各地的韩国厨师们的奇妙食物和故事盛宴的电视剧。",
+      "vod_actor": "安孝燮,洪华莲,张栗,郑幼贞",
+      "vod_director": "金道勋"
     },
     {
       "vod_id": "bfzy:162476",
@@ -6515,6 +6229,53 @@
       "vod_director": "暂无"
     },
     {
+      "vod_id": "modu:90698",
+      "vod_name": "青之芦苇第二季",
+      "vod_pic": "https://www.mdzypic.com/upload/vod/20261004-1/ece3151f92ccece64d03534d492d7dcb.webp",
+      "vod_remarks": "更新至06集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "动画,运动",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 20:14:58",
+      "type_name": "日韩动漫",
+      "type_id": "anime",
+      "decade": "2020年代",
+      "types": [
+        "动画"
+      ],
+      "_source": "modu",
+      "vod_play_from": "modum3u8",
+      "vod_play_url": "https://play.modujx17.com/20261004/JBnPYSkS/index.m3u8",
+      "vod_content": "<p>暂无剧情简介</p>",
+      "vod_actor": "安元洋贵,兴津和幸,榎木淳弥,梅原裕一郎,中岛良树,小林亲弘,小野贤章,内山昂辉,小松未可子,古川慎,手冢弘道,真堂圭,武内骏辅,八代拓,堀江瞬,上田丽奈,山下诚一郎,园崎未惠,熊谷健太郎,橘龙丸,加藤涉,河濑茉希",
+      "vod_director": "横山和基"
+    },
+    {
+      "vod_id": "modu:91211",
+      "vod_name": "金银岛2026",
+      "vod_pic": "https://www.mdzypic.com/upload/vod/20261013-1/6871e882b3fad57dadc7667b1e8f56ad.webp",
+      "vod_remarks": "更新至05集",
+      "vod_year": "2026–",
+      "vod_area": "美国,英国",
+      "vod_class": "剧情,冒险",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 19:50:52",
+      "type_name": "欧美剧",
+      "type_id": "tv",
+      "decade": "年代不详",
+      "types": [
+        "冒险",
+        "剧情"
+      ],
+      "_source": "modu",
+      "vod_play_from": "modum3u8",
+      "vod_play_url": "https://play.modujx17.com/20261013/EAc73TAu/index.m3u8",
+      "vod_content": "<p>该剧改编自罗伯特·路易斯·史蒂文森的经典冒险小说，聚焦少年吉姆·霍金斯的成长蜕变，讲述他如何从一个涉世未深的男孩，一步步变成敢闯敢拼的年轻海盗。当吉姆意外获得一张传说中的藏宝图后，母亲贝斯当机立断的决...</p>",
+      "vod_actor": "大卫·奥伊罗,海莉·阿特维尔,杰克·休斯顿,汤姆·斯威特,Martin·Frislev·Ammitsbøl,托默·卡蓬,John·Burke,Borja·Saavedra,Alina·Dyadichenko,Biondolillo·Pascal",
+      "vod_director": "暂无"
+    },
+    {
       "vod_id": "modu:92507",
       "vod_name": "校园接送恋曲",
       "vod_pic": "https://www.mdzypic.com/upload/vod/20261108-1/780e9627f181ce9f512d2c6c4691f43b.webp",
@@ -6537,6 +6298,30 @@
       "vod_content": "<p>Lois成功考入知名的贝尔罗斯大学，本来准备和挚爱男友Max开启校园新生活。 Lane是校园爆火 App「Campus Drivers」的创始人，长相迷人，但害怕稳定的亲密关系。 一场失恋风波，心碎的...</p>",
       "vod_actor": "保罗·卢卡·诺,卡桑德拉·卡诺,Esteban·Vial,Félix·Nebel,Enzo·Lorente,Eloïse·Rey,Louna·Balavoine",
       "vod_director": "Tom·Goris,范尼·勒巴斯克"
+    },
+    {
+      "vod_id": "modu:91680",
+      "vod_name": "尚公主",
+      "vod_pic": "https://www.mdzypic.com/upload/vod/20261023-1/b9cba87f28f33eaf122e50f33cea8dee.webp",
+      "vod_remarks": "更新至33集",
+      "vod_year": "2026",
+      "vod_area": "中国大陆",
+      "vod_class": "剧情,爱情,古装",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 19:40:28",
+      "type_name": "国产剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "爱情",
+        "剧情"
+      ],
+      "_source": "modu",
+      "vod_play_from": "modum3u8",
+      "vod_play_url": "https://play.modujx17.com/20261023/4wldGQS9/index.m3u8",
+      "vod_content": "<p>不甘命运的天家嫡女暮晚摇与智谋无双的寒门才俊言尚在岭南相逢、于盛安入局，携手步步破局，共筑清平天下的故事。一群少年各怀心事、各有所求，在乱世惊涛中搅动风云，奔赴理想。 该剧改编自伊人睽睽的同名小说。</p>",
+      "vod_actor": "余皑磊,杨子骅,纪凌尘,胡杏儿,晏紫东,孟子义,侯长荣,李昀锐,沙宝亮,唐晓天,王子睿,徐海乔,刘钧,崔志刚,张月,裴佳欣,吴彼,彭杨,公磊,张舒沦,丁嘉文,吴汉坤,黄圣池,李孝谦,李嘉鑫,白冰可,丁子恩,何子怡,沈佳钰",
+      "vod_director": "秦榛"
     },
     {
       "vod_id": "modu:92506",
@@ -6885,6 +6670,27 @@
       "vod_director": ""
     },
     {
+      "vod_id": "tyys:71370",
+      "vod_name": "夜樱家的大作战 第二季 Part 2",
+      "vod_pic": "https://tyyswimg2.com/upload/vod/20261108-1/ba9211c5f06a0f84798faf3b2e28a4e0.jpg",
+      "vod_remarks": "更新第05集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 22:18:52",
+      "type_name": "日韩动漫",
+      "type_id": "anime",
+      "decade": "2020年代",
+      "types": [],
+      "_source": "tyys",
+      "vod_play_from": "tym3u8",
+      "vod_play_url": "https://tyyszywvod2.com/videos/202610/11/6acb8b7c111492f4c5c39f45/72c00c/index.m3u8",
+      "vod_content": "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大家一起歼灭了皮下真率领的犯罪组织「蒲公英」，「夜樱前线」顺利成功，接着还一并举办了太阳与六美的婚宴，夜樱家迎来了安稳的日常生活…… 然而却冒出了新任务？ 某天，太阳在梦中与夜樱家初代当家夜樱蕾进行对话。她表示为了达成「杀了我」的这个愿望，有两个不可或缺的事物。听从蕾说的话，为了接触掌握关键的皮下，太阳要挑战银级特务考试，但是有传言指「今年不会有任何人合格」，最凶狠的考官们正在等着他！ 然后露出无畏笑容，六美她们的父亲夜樱百终于动了起来，身上带有重重谜团的他，究竟有何目的？ 各式各样的事件降临在夜樱家！ 家人之间的关系遭受考验！ 电视动画『夜樱家的大作战』的新章，作战开始！</p>",
+      "vod_actor": "川岛零士,本渡枫,小西克幸,鬼头明里,兴津和幸,悠木碧,松冈祯丞,内山夕实,山寺宏一,大塚芳忠,伊藤美来,花守由美里,上坂堇,进藤尚美",
+      "vod_director": "凑未来,中津川孝广"
+    },
+    {
       "vod_id": "jian:64119",
       "vod_name": "我是烂尾世界造物主",
       "vod_pic": "https://pic9.iqiyipic.com/image/20260916/86/b9/a_101495722_m_601_579_772.png",
@@ -6893,7 +6699,7 @@
       "vod_area": "",
       "vod_class": "武侠,穿越,奇幻,动漫",
       "vod_score": "0.0",
-      "vod_time": "2026-11-09 08:20:05",
+      "vod_time": "2026-11-09 08:30:05",
       "type_name": "动漫",
       "type_id": "anime",
       "decade": "2020年代",
@@ -6917,7 +6723,7 @@
       "vod_area": "中国",
       "vod_class": "脱口秀,文化,综艺",
       "vod_score": "0.0",
-      "vod_time": "2026-11-09 08:20:05",
+      "vod_time": "2026-11-09 08:30:05",
       "type_name": "综艺",
       "type_id": "variety",
       "decade": "2020年代",
@@ -6940,7 +6746,7 @@
       "vod_area": "",
       "vod_class": "动漫",
       "vod_score": "0.0",
-      "vod_time": "2026-11-09 08:20:05",
+      "vod_time": "2026-11-09 08:30:05",
       "type_name": "动漫",
       "type_id": "anime",
       "decade": "2020年代",
@@ -6961,7 +6767,7 @@
       "vod_area": "内地",
       "vod_class": "综艺",
       "vod_score": "0.0",
-      "vod_time": "2026-11-09 08:20:04",
+      "vod_time": "2026-11-09 08:30:04",
       "type_name": "综艺",
       "type_id": "variety",
       "decade": "2020年代",
@@ -6984,7 +6790,7 @@
       "vod_area": "中国大陆",
       "vod_class": "搞笑,日常,励志,原创,国创（B站）",
       "vod_score": "6.4",
-      "vod_time": "2026-11-09 08:20:04",
+      "vod_time": "2026-11-09 08:30:04",
       "type_name": "动漫",
       "type_id": "anime",
       "decade": "2020年代",
@@ -7005,7 +6811,7 @@
       "vod_area": "日本",
       "vod_class": "真人,冒险,科幻,动漫",
       "vod_score": "0.0",
-      "vod_time": "2026-11-09 08:20:01",
+      "vod_time": "2026-11-09 08:30:01",
       "type_name": "动漫",
       "type_id": "anime",
       "decade": "2020年代",
@@ -7653,6 +7459,290 @@
       "vod_director": "冉荣燊"
     },
     {
+      "vod_id": "ffzy:99656",
+      "vod_name": "来自远方动画版",
+      "vod_pic": "https://fffgood.com/upload/vod/20261005-1/63b65cfd78e7d1dab91383d3ac937db8.jpg",
+      "vod_remarks": "更新至第06集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "剧情,动画,奇幻",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-09 00:07:54",
+      "type_name": "日韩动漫",
+      "type_id": "anime",
+      "decade": "2020年代",
+      "types": [
+        "动画",
+        "奇幻",
+        "剧情"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://vip.ffzy-plays.com/share/e5cd7df3d8cd7faf219132113b73b327",
+      "vod_content": "<p>&nbsp;过着极其平凡日子的女高中生·立木典子，某天早晨仿佛被不可思议的梦境引导一般，迷失到了一个陌生的异世界。\r\n在这个语言不通、常识也不管用的世界里，救下无处可去、只能四处彷徨的典子的，是独自一人旅行的流浪战士·伊札克。\r\n与此同时，世界各地都在流传着“能够唤醒带来毁灭的‘天上鬼’的人出现了”、“必须比任何国家都先得到手”的传言。\r\n所谓的觉醒，以及天上鬼到底是什么——\r\n仿佛知晓答案一般，伊札克看着典子喃喃自语道。\r\n“我必须杀了这个女孩。”\r\n尽管语言和文化都存在隔阂，两人之间依然一点点萌生了细微的羁绊。\r\n这样的两人，最终将被卷入宏大的命运旋涡之中——。</p>",
+      "vod_actor": "黑泽朋世,熊谷健太郎,梅原裕一郎,竹内荣治,齐藤贵美子,宫泽正,中野泰佑,伊藤美来",
+      "vod_director": "阿部记之"
+    },
+    {
+      "vod_id": "ffzy:99655",
+      "vod_name": "异人旅馆第二季",
+      "vod_pic": "https://fffgood.com/upload/vod/20261004-1/ec0c9d777dde027a220589a3a89a4496.jpg",
+      "vod_remarks": "更新至第06集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "动画",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-09 00:06:33",
+      "type_name": "日韩动漫",
+      "type_id": "anime",
+      "decade": "2020年代",
+      "types": [
+        "动画"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://vip.ffzy-plays.com/share/c84389bbba219be3e13b80f9376a0db7",
+      "vod_content": "<p>&nbsp;想要称得上最高级饭店的条件除了必备的\r\n「最精致的美食」、「至高的疗愈」、「迷人的娱乐」......\r\n还得具备——\r\n「配备最新武器」\r\n「滴水不漏的身份伪装」\r\n「完美无缺的尸体处理」！ ？\r\n即使身处生死关头，依然绝不说NO的两位柜台接待员──\r\n生朗与沙罗，将如何实现杀手们的愿望？\r\n戏剧张力十足的杀手饭店故事，即将揭幕！</p>",
+      "vod_actor": "小林裕介,白浜灯奈乃,羊宫妃那",
+      "vod_director": "网野哲朗"
+    },
+    {
+      "vod_id": "ffzy:99841",
+      "vod_name": "听，谁在唱歌2",
+      "vod_pic": "https://fffgood.com/upload/vod/20261014-1/d25e7140b82c53fccafba5ee2d3398ab.jpg",
+      "vod_remarks": "更新至第20261108期",
+      "vod_year": "2026",
+      "vod_area": "大陆",
+      "vod_class": "真人秀",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 23:17:54",
+      "type_name": "大陆综艺",
+      "type_id": "variety",
+      "decade": "2020年代",
+      "types": [
+        "综艺"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://vod.ffzy-bofang.com/share/79f69230354b71206fb723c571cce58b",
+      "vod_content": "<p>&nbsp;烟火入旋律，歌声愈人心。疾驰在每一次追寻灵感的途中，慢下来才发现最淳朴的心声最动人！这一次不赶路，只感受路。</p>",
+      "vod_actor": "吴克群,陆虎,鹭卓 ,陈卓璇,刘凤瑶 ,张子墨",
+      "vod_director": ""
+    },
+    {
+      "vod_id": "ffzy:99898",
+      "vod_name": "好男孩2026",
+      "vod_pic": "https://fffgood.com/upload/vod/20261019-1/dc57c4cc43586539dff01da5702f72a6.jpg",
+      "vod_remarks": "更新至第05集",
+      "vod_year": "2026",
+      "vod_area": "泰国",
+      "vod_class": "剧情,奇幻",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 23:13:27",
+      "type_name": "泰国剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "奇幻",
+        "剧情"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://super.ffzy-online6.com/share/235d4034b03318cc97d376cb07c7fb7c",
+      "vod_content": "<p>&nbsp;在过着孤独的生活并三十岁时因意外去世后，一个男人获得了重返过去的第二次机会。他醒来时发现自己回到了学生时代，决定过上截然不同的生活。</p>",
+      "vod_actor": "平散·索唐库尔,梅塔斯·欧帕西安卡琼,Saeng Sillapin Sillapachai,Juno Tiranat Kittisattho,Lighty Namassakarn Trangkhasombat,塔湾·维弘可塔纳,提迪蓬·德查阿派坤",
+      "vod_director": "西瓦·萨瓦玛尼固"
+    },
+    {
+      "vod_id": "ffzy:99650",
+      "vod_name": "魔法姐妹露露与莉莉第二季",
+      "vod_pic": "https://fffgood.com/upload/vod/20261004-1/359cf1576ad5b0b3dd955d1d49f0b550.jpg",
+      "vod_remarks": "更新至第06集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "动画,奇幻",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 22:19:52",
+      "type_name": "日韩动漫",
+      "type_id": "anime",
+      "decade": "2020年代",
+      "types": [
+        "动画",
+        "奇幻"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://vip.ffzy-plays.com/share/0b89e80fe509c87b71f997752b002934",
+      "vod_content": "魔法姐妹露露与莉莉第二季",
+      "vod_actor": "橘芽衣,小鹿奈绪,七海弘希,茅野爱衣,和泉风花,廣原ふう,八乙女光,天崎滉平,橘龙丸,杉田智和,太田贵子,水岛裕,笠间淳,大原惠美,远藤绫,广濑裕也,白井悠介,夏吉优子",
+      "vod_director": "道解慎太郎"
+    },
+    {
+      "vod_id": "ffzy:99651",
+      "vod_name": "大叔喜欢可爱小玩意动画版",
+      "vod_pic": "https://fffgood.com/upload/vod/20261004-1/20faccdb775de2cd6d78cf4a1407c7ce.jpg",
+      "vod_remarks": "更新至第06集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "喜剧,动画",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 22:19:12",
+      "type_name": "日韩动漫",
+      "type_id": "anime",
+      "decade": "2020年代",
+      "types": [
+        "喜剧",
+        "动画"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://vip.ffzy-plays.com/share/c15d12444bdba497b96841a269056108",
+      "vod_content": "<p>&nbsp;小路三贵长相帅气、工作能力出众，私下里却对可爱的事物毫无抵抗力。\r\n在职场上，他深受下属们的绝对信赖；可一回到家，就会满心欢喜地把玩本命角色 “巴哥太郎”，享受专属的幸福时光。\r\n小路始终不敢向任何人坦白自己热爱可爱小东西这个秘密，每天都在心惊胆战中度过。\r\n故事围绕他对巴哥太郎满到溢出的喜爱，以及因一件契机而逐渐产生变化的日常展开，敬请欣赏。</p>",
+      "vod_actor": "兴津和幸,江口拓也,梶裕贵,村濑步,前田佳织里,花井美春,丹羽哲士,园崎未惠,富田美忧,和泉风花,船户百合绘,田野麻美,佐藤日向",
+      "vod_director": "牧野友映"
+    },
+    {
+      "vod_id": "ffzy:99724",
+      "vod_name": "你却爱着一个他(原声)",
+      "vod_pic": "https://fffgood.com/upload/vod/20261008-1/ae6e302ccb04beb38e7076a04171934e.jpg",
+      "vod_remarks": "更新至第10集",
+      "vod_year": "2026",
+      "vod_area": "泰国",
+      "vod_class": "剧情,同性",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 21:28:39",
+      "type_name": "泰国剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "剧情"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://super.ffzy-online6.com/share/eeb3b040d8d25cd782183ae757fdbfd0",
+      "vod_content": "<p>&nbsp;改编自水千丞小说《你却爱着一个他》。\r\n围绕“188男团”宇宙展开，讲述了几个性格各异、外表出众但陷入情感纠葛的男主之间，充满控制欲、金钱与极致拉扯的虐恋与爱情故事。</p>",
+      "vod_actor": "亚提·唐威邦帕尼特,南塔蓬·翁沙库永",
+      "vod_director": ""
+    },
+    {
+      "vod_id": "ffzy:100276",
+      "vod_name": "氧毒素：耀眼的星",
+      "vod_pic": "https://fffgood.com/upload/vod/20261108-1/b41160414ecb5fb99f78518f6dbc0edf.jpg",
+      "vod_remarks": "更新至第01集",
+      "vod_year": "2026",
+      "vod_area": "泰国",
+      "vod_class": "爱情.剧情",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 20:07:37",
+      "type_name": "泰国剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "爱情",
+        "剧情"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://super.ffzy-online6.com/share/9cc98208091fee9789244aee08a28ca7",
+      "vod_content": "氧毒素：耀眼的星",
+      "vod_actor": "",
+      "vod_director": ""
+    },
+    {
+      "vod_id": "ffzy:100235",
+      "vod_name": "折月亮",
+      "vod_pic": "https://fffgood.com/upload/vod/20261105-1/db6423bd4b51d9904c85877fa1abc09c.jpg",
+      "vod_remarks": "更新至第10集",
+      "vod_year": "2026",
+      "vod_area": "大陆",
+      "vod_class": "剧情,爱情",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 17:57:08",
+      "type_name": "国产剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "爱情",
+        "剧情"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://svip.feifei-play.com/share/1b7f4b2c845aac58d112f6e7ca78e8f7",
+      "vod_content": "<p>&nbsp;傅识则（林一饰）与云厘（卢昱晓饰）在南芜重逢，作为社恐少女的云厘面对自己的高中&quot;白月光”，在一干人等的助攻下，突破社恐追求傅识则，凭“小太阳”般的光芒打动他，两人甜蜜相恋。后又因认知分歧阴差阳错二人分手，云厘出国，傅识则选择重振旗鼓带队登顶科研领域，待云厘回国后花式追妻，二人终解芥蒂、再续前缘。\r\n该剧改编自竹已的小说《折月亮》，属“南芜三部曲”终章。</p>",
+      "vod_actor": "林一,卢昱晓,卢洋洋,李歌洋,黄圣池,黄婷婷,谢彬彬,赵鹏皓,裴佳欣,吴芊盈",
+      "vod_director": "张博昱"
+    },
+    {
+      "vod_id": "ffzy:100279",
+      "vod_name": "西部战线",
+      "vod_pic": "https://fffgood.com/upload/vod/20261108-1/7d059667ea565e2c31b93157efd72d55.jpg",
+      "vod_remarks": "HD中字",
+      "vod_year": "2015",
+      "vod_area": "韩国",
+      "vod_class": "剧情,战争",
+      "vod_score": "6.7",
+      "vod_time": "2026-11-08 14:53:00",
+      "type_name": "战争片",
+      "type_id": "tv",
+      "decade": "2010年代",
+      "types": [
+        "战争",
+        "剧情"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://vip.ffzy-play10.com/share/242cf910a10a071d305411486959674e",
+      "vod_content": "<p>&nbsp;故事发生在1953年，彼时，韩国和朝鲜之间的争斗正值最盛之时，国内情势十分紧张。南福（薛景求 饰）本是老实本分的农民，靠着土地吃饭，虽然日子过得紧紧巴巴，但也不失宁静和祥和。战争的到来彻底改变了他的命运，应召入伍后，对如何打仗一无所知的南福就这样糊里糊涂的成为了一名大街上随处可见的韩国下等兵。\r\n某日，上司将一份十分重要的机密文件交给南福，命他送往指定地点，这封文件是如此的重要，以至于关系到战争的成败。然而，南福却将文件给搞丢了，而这份文件又恰恰被朝鲜人民军的士兵荣光（吕珍九 饰）给拾到了，在两人之间，一场你藏我找的猫鼠游戏就此拉开序幕。</p>",
+      "vod_actor": "薛景求,吕珍九,李璟荣,郑仁基,迪恩·唐森",
+      "vod_director": "千成日"
+    },
+    {
+      "vod_id": "ffzy:100034",
+      "vod_name": "永属于你",
+      "vod_pic": "https://fffgood.com/upload/vod/20261025-1/ba6b5f0c20ae929019585fe07a6becf8.jpg",
+      "vod_remarks": "更新至第05集",
+      "vod_year": "2026",
+      "vod_area": "美国",
+      "vod_class": "喜剧",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 14:40:11",
+      "type_name": "欧美剧",
+      "type_id": "tv",
+      "decade": "2020年代",
+      "types": [
+        "喜剧"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://super.ffzy-online6.com/share/164b9d82149e90db2876f473a6d4ee9a",
+      "vod_content": "<p>&nbsp;Eternally Yours (working title) is an eternal love story about two vampires who have been married for five hundred years, and their struggles to accept the human who is dating their daughter.</p>",
+      "vod_actor": "阿莱格拉·爱德华兹,嘉伦·李维森,爱德·维坎斯",
+      "vod_director": ""
+    },
+    {
+      "vod_id": "ffzy:100278",
+      "vod_name": "罗梅莉亚战记",
+      "vod_pic": "https://fffgood.com/upload/vod/20261108-1/31dc63f832f6bfea99c4a94ebee5a4bd.jpg",
+      "vod_remarks": "更新至第06集",
+      "vod_year": "2026",
+      "vod_area": "日本",
+      "vod_class": "动画",
+      "vod_score": "0.0",
+      "vod_time": "2026-11-08 14:35:18",
+      "type_name": "日韩动漫",
+      "type_id": "anime",
+      "decade": "2020年代",
+      "types": [
+        "动画"
+      ],
+      "_source": "ffzy",
+      "vod_play_from": "feifan$$$ffm3u8",
+      "vod_play_url": "https://svip.feifei-play.com/share/3172362312fcf09d96f02125f66b74f5",
+      "vod_content": "<p>&nbsp;#罗梅莉亚战记# 动画化官宣</p>",
+      "vod_actor": "根本优奈,小笠原仁,大野智敬,广濑裕也,千本木彩花,伊濑茉莉也,亚咲花,千叶翔也,梶原岳人,堀江瞬,绵贯龙之介,手冢宏通,山口智广,广濑龙一,细田健太,海渡翼,安田陆矢,松川裕辉,山下大毅,堀金苍平,樱井尚辉,石井瑞树,木村飒,原俊太郎,峰田大梦",
+      "vod_director": "白井宏旨"
+    },
+    {
       "vod_id": "lzi:165698",
       "vod_name": "失控撞劫[电影解说]",
       "vod_pic": "https://p.lztutu.com/upload/vod/20261109-1/1cfdaca30be24a67b4f463020e86a62b.jpg",
@@ -7803,31 +7893,31 @@
         54,
         63,
         67,
-        78,
+        100,
+        105,
+        106,
+        107,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
         117,
+        118,
+        119,
+        121,
         122,
         123,
-        124,
-        126,
-        127,
-        128,
-        129,
-        130,
-        131,
-        133,
-        134,
-        135,
-        137,
-        138,
-        139,
-        187,
-        188,
-        191,
-        192,
-        194,
-        196,
-        219,
-        223
+        174,
+        175,
+        178,
+        179,
+        182,
+        184,
+        207,
+        211,
+        216
       ],
       "悬疑": [
         1,
@@ -7836,22 +7926,22 @@
         31,
         33,
         46,
-        105,
-        157,
-        160,
-        208,
-        218,
+        88,
+        141,
+        144,
+        196,
+        206,
         228
       ],
       "冒险": [
         2,
         13,
         62,
-        87,
-        155,
+        139,
+        162,
+        186,
         198,
-        210,
-        215
+        203
       ],
       "剧情": [
         2,
@@ -7868,75 +7958,75 @@
         67,
         71,
         72,
-        75,
+        76,
         77,
-        79,
+        78,
+        80,
         82,
-        84,
         85,
         87,
         88,
-        89,
-        90,
         91,
         92,
+        93,
+        94,
         95,
         96,
+        97,
         98,
-        100,
-        104,
-        105,
-        108,
-        109,
-        110,
-        111,
-        112,
-        113,
-        114,
-        115,
-        116,
-        155,
-        157,
-        158,
+        99,
+        139,
+        141,
+        142,
+        144,
+        145,
+        146,
+        147,
+        150,
+        151,
         160,
-        161,
         162,
         163,
-        166,
-        167,
-        176,
+        164,
+        165,
+        168,
+        169,
+        172,
+        173,
         177,
-        178,
-        181,
-        182,
-        185,
-        186,
-        190,
+        188,
+        195,
+        196,
         200,
-        207
+        202,
+        206,
+        210,
+        214,
+        217,
+        220
       ],
       "犯罪": [
         4,
         7,
         17,
         23,
-        106,
-        156,
-        178,
-        212,
-        213,
+        89,
+        140,
+        165,
+        200,
+        201,
         226
       ],
       "动作": [
         5,
-        103,
-        106,
-        140,
-        144,
-        155,
-        211,
-        213,
-        214,
+        86,
+        89,
+        124,
+        128,
+        139,
+        199,
+        201,
+        202,
         227
       ],
       "动画": [
@@ -7949,24 +8039,23 @@
         21,
         22,
         62,
-        75,
-        76,
+        79,
         80,
         81,
+        82,
         83,
-        91,
-        94,
-        97,
-        98,
-        99,
-        100,
-        101,
-        102,
-        183,
-        189,
-        210,
+        84,
+        161,
+        170,
+        176,
+        198,
+        203,
+        208,
+        214,
         215,
-        220
+        218,
+        219,
+        225
       ],
       "爱情": [
         8,
@@ -7975,39 +8064,39 @@
         19,
         32,
         47,
-        84,
-        88,
-        89,
-        112,
-        159,
-        162,
-        166,
-        167,
-        177,
-        181,
-        199,
-        200,
-        202,
-        209
+        95,
+        143,
+        146,
+        150,
+        151,
+        163,
+        164,
+        168,
+        187,
+        188,
+        190,
+        197,
+        221,
+        222
       ],
       "历史": [
         9,
         27,
-        201,
-        211
+        189,
+        199
       ],
       "传记": [
         9,
-        221
+        209
       ],
       "惊悚": [
         11,
         20,
         70,
-        103,
-        106,
-        209,
-        218,
+        86,
+        89,
+        197,
+        206,
         226,
         227,
         228
@@ -8016,55 +8105,54 @@
         11,
         20,
         70,
-        154,
-        185
+        138,
+        172
       ],
       "奇幻": [
         13,
         14,
         62,
-        75,
-        79,
         80,
+        82,
         91,
-        98,
-        100,
-        108,
-        111,
-        113,
-        186,
+        94,
+        96,
+        173,
+        181,
         193,
-        205,
-        210,
-        215,
-        216,
-        220
+        198,
+        203,
+        204,
+        208,
+        214,
+        217,
+        218
       ],
       "喜剧": [
         15,
         26,
         62,
-        81,
-        86,
-        93,
-        104,
-        109,
-        111,
-        113,
-        114,
-        186,
-        189,
-        210,
-        213,
-        215,
-        217,
-        220
+        75,
+        87,
+        92,
+        94,
+        96,
+        97,
+        173,
+        176,
+        198,
+        201,
+        203,
+        205,
+        208,
+        219,
+        224
       ],
       "科幻": [
         20,
-        158,
-        181,
-        198,
+        142,
+        168,
+        186,
         227
       ],
       "短剧": [
@@ -8075,40 +8163,40 @@
         44,
         45,
         46,
-        108,
-        109,
-        110,
-        111,
-        112,
-        113,
-        114,
-        115,
-        116,
-        168,
-        169,
-        170,
-        171,
-        172,
-        173,
-        174
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158
       ],
       "战争": [
         52,
-        92,
-        136,
-        201,
-        211
+        120,
+        189,
+        199,
+        223
       ],
       "纪录片": [
         63,
-        107,
-        221
+        90,
+        209
       ],
       "灾难": [
-        158
+        142
       ],
       "武侠": [
-        193
+        181
       ]
     },
     "byArea": {
@@ -8121,14 +8209,14 @@
         49,
         54,
         55,
-        77,
-        92,
-        106,
-        117,
-        129,
-        142,
-        153,
-        167
+        89,
+        100,
+        108,
+        113,
+        126,
+        137,
+        151,
+        223
       ],
       "中国大陆": [
         1,
@@ -8162,35 +8250,35 @@
         70,
         71,
         72,
-        104,
-        105,
-        128,
-        135,
+        87,
+        88,
+        112,
+        119,
+        124,
+        125,
+        130,
+        134,
         140,
         141,
+        143,
+        144,
+        145,
         146,
+        147,
+        148,
         150,
+        152,
+        153,
+        154,
+        155,
         156,
         157,
+        158,
         159,
-        160,
-        161,
-        162,
-        163,
         164,
         166,
-        168,
-        169,
-        170,
-        171,
-        172,
-        173,
-        174,
-        175,
-        179,
-        180,
-        191,
-        192
+        167,
+        178
       ],
       "美国": [
         2,
@@ -8199,17 +8287,16 @@
         20,
         26,
         69,
-        87,
-        93,
-        103,
-        154,
-        155,
-        183,
-        209,
-        210,
-        214,
-        215,
-        217
+        86,
+        138,
+        139,
+        170,
+        197,
+        198,
+        202,
+        203,
+        205,
+        224
       ],
       "日本": [
         6,
@@ -8230,36 +8317,36 @@
         58,
         59,
         74,
-        75,
         76,
+        77,
+        78,
+        79,
         80,
         81,
+        82,
         83,
-        85,
-        91,
-        94,
-        95,
-        96,
-        97,
-        98,
-        99,
-        100,
+        84,
         101,
-        102,
-        118,
-        125,
-        143,
-        147,
+        109,
+        127,
+        131,
+        133,
+        135,
+        136,
+        142,
         149,
-        151,
-        152,
-        158,
-        165,
-        184,
+        161,
+        171,
+        173,
+        176,
+        177,
+        180,
         186,
-        189,
-        190,
-        198,
+        214,
+        215,
+        218,
+        219,
+        225,
         229,
         230,
         231
@@ -8272,9 +8359,9 @@
       ],
       "中国香港": [
         23,
-        123,
-        130,
-        133
+        106,
+        114,
+        117
       ],
       "中国台湾": [
         30
@@ -8284,22 +8371,22 @@
         64,
         66,
         68,
-        79,
-        82,
-        84,
-        119,
-        120,
-        121,
-        145,
-        176,
-        185
+        102,
+        103,
+        104,
+        129,
+        160,
+        172,
+        217,
+        220,
+        221
       ],
       "比利时,法国,荷兰": [
         52
       ],
       "马来西亚 / 中国大陆": [
         60,
-        132
+        116
       ],
       "印度尼西亚": [
         65
@@ -8307,75 +8394,81 @@
       "巴西": [
         73
       ],
-      "大陆": [
-        78,
-        88,
-        89,
-        138,
-        139,
-        144
+      "英国,加拿大": [
+        75
       ],
-      "英国": [
-        86,
-        178,
-        220,
-        221,
-        222
-      ],
-      "香港": [
-        90,
-        122,
-        127,
-        131,
-        134,
-        188
+      "中国香港,中国大陆": [
+        85
       ],
       "意大利": [
-        107
+        90
       ],
       "内地": [
-        108,
-        109,
-        110,
-        111,
-        112,
-        113,
-        114,
-        115,
-        116,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        184,
+        189,
         196,
+        199,
+        200,
         201,
-        208,
-        211,
-        212,
-        213,
-        219,
-        225
+        207,
+        213
+      ],
+      "香港": [
+        105,
+        111,
+        115,
+        118,
+        175
       ],
       "台湾": [
-        124,
-        126,
-        137,
-        187
+        107,
+        110,
+        121,
+        174
       ],
       "比利时 / 法国 / 荷兰": [
-        136
+        120
+      ],
+      "大陆": [
+        122,
+        123,
+        128,
+        216,
+        222
       ],
       "法国 / 日本": [
-        148
+        132
+      ],
+      "美国,英国": [
+        162
       ],
       "法国": [
-        177,
-        218
+        163,
+        206
+      ],
+      "英国": [
+        165,
+        208,
+        209,
+        210
       ],
       "新加坡": [
-        181,
-        182
+        168,
+        169
       ],
       "中国": [
-        194,
-        207,
-        224
+        182,
+        195,
+        212
       ],
       "西班牙": [
         226
@@ -8452,23 +8545,24 @@
         49,
         53,
         72,
-        92,
-        124,
-        126,
-        129,
-        131,
-        137,
-        138,
-        139,
-        192,
-        216
+        107,
+        110,
+        113,
+        115,
+        121,
+        122,
+        123,
+        179,
+        204,
+        223
       ],
       "2000年代": [
         67,
-        134
+        118
       ],
       "年代不详": [
-        177
+        162,
+        163
       ]
     },
     "byClass": {
@@ -8484,31 +8578,31 @@
         54,
         63,
         67,
-        78,
+        100,
+        105,
+        106,
+        107,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
         117,
+        118,
+        119,
+        121,
         122,
         123,
-        124,
-        126,
-        127,
-        128,
-        129,
-        130,
-        131,
-        133,
-        134,
-        135,
-        137,
-        138,
-        139,
-        187,
-        188,
-        191,
-        192,
-        194,
-        196,
-        219,
-        223
+        174,
+        175,
+        178,
+        179,
+        182,
+        184,
+        207,
+        211,
+        216
       ],
       "all": [
         0,
@@ -8605,34 +8699,34 @@
         71,
         72,
         73,
+        75,
+        76,
         77,
-        79,
-        82,
-        84,
+        78,
         85,
-        86,
         87,
         88,
-        89,
-        90,
-        92,
-        93,
-        95,
-        96,
+        102,
+        103,
         104,
-        105,
-        119,
-        120,
-        121,
-        132,
+        108,
+        116,
+        126,
+        129,
+        133,
+        137,
+        139,
+        140,
+        141,
         142,
+        143,
+        144,
         145,
+        146,
+        147,
         149,
-        153,
-        155,
-        156,
-        157,
-        158
+        150,
+        151
       ],
       "anime": [
         6,
@@ -8654,47 +8748,47 @@
         62,
         69,
         74,
-        75,
-        76,
+        79,
         80,
         81,
+        82,
         83,
-        91,
-        94,
-        97,
-        98,
-        99,
-        100,
+        84,
         101,
-        102,
-        118,
+        109,
+        124,
         125,
-        140,
-        141,
-        143,
-        144,
-        146,
-        147,
+        127,
+        128,
+        130,
+        131,
+        132,
+        134,
+        135,
+        136,
         148,
-        150,
-        151,
-        152,
-        164,
-        179,
+        161,
+        166,
+        170,
+        171,
+        176,
+        180,
+        181,
         183,
-        184,
-        189,
+        185,
+        186,
+        191,
+        192,
         193,
-        195,
-        197,
         198,
         203,
         204,
-        205,
-        210,
+        208,
+        214,
         215,
-        216,
-        220
+        218,
+        219,
+        225
       ],
       "movie": [
         11,
@@ -8703,13 +8797,13 @@
         38,
         39,
         70,
-        103,
-        106,
-        136,
-        154,
-        180,
-        209,
-        211,
+        86,
+        89,
+        120,
+        138,
+        167,
+        197,
+        199,
         226,
         227,
         228
@@ -8722,26 +8816,26 @@
         44,
         45,
         46,
-        108,
-        109,
-        110,
-        111,
-        112,
-        113,
-        114,
-        115,
-        116,
-        168,
-        169,
-        170,
-        171,
-        172,
-        173,
-        174
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158
       ],
       "doc": [
-        107,
-        221
+        90,
+        209
       ]
     }
   },
@@ -8753,13 +8847,13 @@
       "剧情": 60,
       "犯罪": 10,
       "动作": 10,
-      "动画": 27,
+      "动画": 26,
       "爱情": 20,
       "历史": 4,
       "传记": 2,
       "惊悚": 10,
       "恐怖": 5,
-      "奇幻": 19,
+      "奇幻": 18,
       "喜剧": 18,
       "科幻": 5,
       "短剧": 23,
@@ -8771,7 +8865,7 @@
     "area": {
       "韩国": 16,
       "中国大陆": 60,
-      "美国": 17,
+      "美国": 16,
       "日本": 51,
       "澳大利亚": 1,
       "加拿大": 1,
@@ -8782,28 +8876,31 @@
       "马来西亚 / 中国大陆": 2,
       "印度尼西亚": 1,
       "巴西": 1,
-      "大陆": 6,
-      "英国": 5,
-      "香港": 6,
+      "英国,加拿大": 1,
+      "中国香港,中国大陆": 1,
       "意大利": 1,
       "内地": 17,
+      "香港": 5,
       "台湾": 4,
       "比利时 / 法国 / 荷兰": 1,
+      "大陆": 5,
       "法国 / 日本": 1,
+      "美国,英国": 1,
       "法国": 2,
+      "英国": 4,
       "新加坡": 2,
       "中国": 3,
       "西班牙": 1,
       "英国 / 美国": 1
     },
     "decade": {
-      "2020年代": 215,
+      "2020年代": 214,
       "2010年代": 14,
       "2000年代": 2,
       "90年代": 0,
       "80年代": 0,
       "更早": 0,
-      "年代不详": 1
+      "年代不详": 2
     }
   }
 }
