@@ -1347,9 +1347,13 @@ def _inspect_output(templates, report):
             if not u.startswith("http"):
                 rec["problems"].append("lives[%d].url 非绝对地址: %s" % (i, u))
         # 全文扫描残留相对 / 死域名
+        # filter-line.json 的 _meta.dataFile/_meta.ruleFile 是「说明性文件名元数据」，
+        # 不是客户端解析的资源路径（真实 URL 在 sites[].api），跳过 _meta 子树避免误报。
         def walk(x, p="$"):
             if isinstance(x, dict):
                 for k, v in x.items():
+                    if fn == "filter-line.json" and p == "$" and k == "_meta":
+                        continue
                     walk(v, p + "." + k)
             elif isinstance(x, list):
                 for i, v in enumerate(x):
