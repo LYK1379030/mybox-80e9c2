@@ -74,11 +74,8 @@ const DRPY2_CONTRACT = {
   exportFn: "__jsEvalReturn",
   globalName: "__JS_SPIDER__",
   // 【已证实】bili_open.js L609-620：{init, home, homeVod, category, detail, play, proxy, search}
-  // 【真机修正 2026-11-09】用户手机（moyu.tvcang.xi / com.github.tvbox.osc）实测：只给内部名时
-  // 首页海报出、class/filters 全丢（顶部只有「主页」）→ 必须双套导出。
+  // 不是 homeContent 那套（那是 Java Spider 接口名，写进规则会静默空页）。
   methods: ["init", "home", "homeVod", "category", "detail", "play", "search"],
-  contentMethods: ["homeContent", "homeVodContent", "categoryContent",
-                   "detailContent", "searchContent", "playerContent"],
   returnType: "JSON-string",
   filtersShape: "object-of-arrays: {'<type_id>':[{key,name,value:[{n,v}]}]}",
   filterKeys: ["类型", "地区", "排序", "年代"],
@@ -837,23 +834,9 @@ function play(flag, id, flags) {
   return jstr({ parse: 0, url: url, header: {} });
 }
 
-/** 真机反馈（2026-11-09 用户截图）：只导出 catvod 内部名时，moyu.tvcang.xi
- *  (com.github.tvbox.osc) 只渲染出首页海报，class/filters 全丢 → 顶部只有「主页」。
- *  故两套方法名同时导出：catvod 内部名 + TVBox/OSC 接口名（同一实现双挂），
- *  壳认哪套都能命中；筛选/搜索逻辑一字不改。 */
-function homeContent(filter) { return home(filter); }
-function homeVodContent() { return homeVod(); }
-function categoryContent(tid, pg, filter, extend) { return category(tid, pg, filter, extend); }
-function detailContent(ids) {
-  var one = Array.isArray(ids) ? ids[0] : ids;
-  return detail(one);
-}
-function searchContent(wd, quick, pg) { return search(wd, quick, pg); }
-function playerContent(flag, id, flags) { return play(flag, id, flags); }
-
+/** R01（DRPY2_REAL_CONTRACT）：导出 7 个内部名，Java 层自行映射 *Content */
 export function __jsEvalReturn() {
   return {
-    // catvod 内部名
     init: init,
     home: home,
     homeVod: homeVod,
@@ -861,17 +844,10 @@ export function __jsEvalReturn() {
     detail: detail,
     play: play,
     search: search,
-    // TVBox/OSC 接口名（双挂，兼容不同壳）
-    homeContent: homeContent,
-    homeVodContent: homeVodContent,
-    categoryContent: categoryContent,
-    detailContent: detailContent,
-    searchContent: searchContent,
-    playerContent: playerContent,
     __contract: CONTRACT
   };
 }
-// fallback 分支（spider.js 的 default 分支）；同样返回双套方法名
+// fallback 分支（spider.js 的 default 分支）；同样返回 7 个内部名
 export default __jsEvalReturn;
 `;
 
@@ -951,9 +927,6 @@ function audit(ruleText, config, data) {
   const wantMethods = DRPY2_CONTRACT.methods;
   const exported = (ruleText.match(/export function __jsEvalReturn\(\)[\s\S]*?return \{([\s\S]*?)\};/) || [])[1] || "";
   const methodsOk = wantMethods.every((m) => new RegExp("\\b" + m + ":\\s*" + m + "\\b").test(exported));
-  // 真机要求：TVBox/OSC 的 *Content 接口名也必须同时导出（只给内部名时 class/filters 会丢）。
-  const wantContent = DRPY2_CONTRACT.contentMethods || [];
-  const contentOk = wantContent.every((m) => new RegExp("\\b" + m + ":\\s*" + m + "\\b").test(exported));
   // 搜索索引结构：byName / terms 都是「字符串 -> 下标数组」，且下标不越界。
   // 空数据（源全挂的合法降级）允许 byName 为空，但字段本身必须存在。
   const si = data?.searchIndex;
@@ -980,12 +953,11 @@ function audit(ruleText, config, data) {
     { name: "req 调用点恰好 1", pass: reqCalls === 1, actual: reqCalls },
     { name: "规则内写死 URL 为 0（改由 init(cfg).ext 注入）", pass: urls === 0 && hasInitCfg, actual: "urls=" + urls + " initCfg=" + hasInitCfg },
     { name: "__jsEvalReturn 导出 7 个内部名", pass: methodsOk, actual: wantMethods.join(",") },
-    { name: "__jsEvalReturn 同时导出 6 个 *Content 接口名（真机必需）", pass: contentOk, actual: wantContent.join(",") },
     { name: "filters object-of-arrays + key=type_id", pass: filtersShapeValid, actual: Object.keys(f).join(",") },
     { name: "searchIndex 结构合法（byName/terms 下标不越界）", pass: idxOk, actual: "names=" + Object.keys(si?.byName || {}).length + " terms=" + Object.keys(si?.terms || {}).length },
     { name: "search() 含精确相等 + 排序 + 归一化去重 + 索引召回", pass: searchOk, actual: "exact/sort/dedup/index" },
   ];
-  return { reqCalls, urls, hasInitCfg, md5, csp, spiderEmpty, jarEmpty, apiOk, extOk, methodsOk, contentOk, filtersShapeValid, idxOk, searchOk, checks };
+  return { reqCalls, urls, hasInitCfg, md5, csp, spiderEmpty, jarEmpty, apiOk, extOk, methodsOk, filtersShapeValid, idxOk, searchOk, checks };
 }
 
 async function main() {
