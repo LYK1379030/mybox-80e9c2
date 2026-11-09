@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T04:46:37Z",
+  "built_at": "2026-11-09T05:00:00Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 27,
+      "ms": 72,
       "total": null,
       "why": "ok"
     },
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 98,
+      "ms": 522,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 281,
+      "ms": 612,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 593,
+      "ms": 743,
       "total": null,
       "why": "ok"
     },
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 16
+      "files": 15
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 16
+      "files": 15
     }
   ],
   "issues": [
@@ -616,12 +616,6 @@
       "problems": []
     },
     {
-      "file": "fs4kc.json",
-      "sites": 4,
-      "lives": 0,
-      "problems": []
-    },
-    {
       "file": "filter-line.json",
       "sites": 1,
       "lives": 0,
@@ -653,7 +647,7 @@
     }
   ],
   "verify": {
-    "files_checked": 11,
+    "files_checked": 10,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
