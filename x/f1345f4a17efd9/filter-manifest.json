@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T07:58:20.806Z",
+  "generated": "2026-11-09T08:03:39.475Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 492009,
+    "bytes": 492212,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 249,
     "seedCount": 16,
-    "searchIndexTerms": 3910,
+    "searchIndexTerms": 3902,
     "searchIndexNames": 800,
-    "searchIndexBytes": 96011,
+    "searchIndexBytes": 95524,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -80,17 +80,17 @@
     ],
     "buckets": {
       "type": {
-        "科幻": 40,
+        "科幻": 41,
         "冒险": 43,
-        "灾难": 8,
+        "灾难": 9,
         "纪录片": 9,
         "悬疑": 49,
         "综艺": 60,
         "动作": 49,
         "惊悚": 16,
-        "战争": 9,
+        "战争": 10,
         "剧情": 60,
-        "爱情": 57,
+        "爱情": 58,
         "犯罪": 34,
         "喜剧": 39,
         "短剧": 59,
@@ -121,9 +121,10 @@
         "美国,中国大陆,英国": 1,
         "中国": 1,
         "中国香港": 2,
-        "泰国": 24,
+        "泰国": 25,
         "意大利": 1,
         "澳大利亚": 1,
+        "比利时,法国,荷兰": 1,
         "马来西亚 / 中国大陆": 1,
         "印度尼西亚": 4,
         "巴西": 1,
@@ -135,13 +136,13 @@
         "印度": 1
       },
       "decade": {
-        "2020年代": 663,
-        "2010年代": 85,
+        "2020年代": 661,
+        "2010年代": 86,
         "2000年代": 23,
         "90年代": 13,
         "80年代": 4,
         "更早": 3,
-        "年代不详": 9
+        "年代不详": 10
       }
     }
   },
@@ -213,7 +214,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3910"
+        "actual": "names=800 terms=3902"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",

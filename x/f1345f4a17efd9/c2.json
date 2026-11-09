@@ -4,7 +4,7 @@
   "sites": [
     {
       "key": "bfzy",
-      "name": "暴风·大库·159ms",
+      "name": "暴风·大库·344ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -13,7 +13,7 @@
     },
     {
       "key": "feifan",
-      "name": "非凡·最快·484ms",
+      "name": "非凡·最快·368ms",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -22,7 +22,7 @@
     },
     {
       "key": "lzi",
-      "name": "量子·备用·728ms",
+      "name": "量子·备用·777ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -641,6 +641,13 @@
       "ips": [
         "223.5.5.5",
         "223.6.6.6"
+      ]
+    },
+    {
+      "name": "腾讯",
+      "url": "https://doh.pub/dns-query",
+      "ips": [
+        "119.29.29.29"
       ]
     },
     {
