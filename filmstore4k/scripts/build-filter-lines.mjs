@@ -531,13 +531,30 @@ function categoryContent(tid, pg, filter, extend) {
   var area = pick(fl, ['地区', 'area', 'region']);
   var decade = pick(fl, ['年代', 'year', 'decade']);
   var sort = pick(fl, ['排序', 'sort', 'by']);
+  // 面板里的聚合选项（华语/欧美…）在源站数据里是具体国家（中国大陆/内地/美国…），
+  // 精确子串匹配会 0 条。把聚合词展开成别名集合，命中任一即算该档。
+  var AREA_ALIAS = {
+    '华语': ['华语', '中国大陆', '中国香港', '中国台湾', '大陆', '内地', '港澳', '香港', '台湾', '中国'],
+    '欧美': ['欧美', '美国', '英国', '法国', '德国', '意大利', '西班牙', '加拿大', '俄罗斯', '澳大利亚', '比利时', '荷兰', '巴西'],
+    '韩国': ['韩国', '韩'],
+    '日本': ['日本', '日'],
+    '泰国': ['泰国', '泰'],
+    '印度': ['印度']
+  };
+  function areaHit(cell, want) {
+    if (!want) return true;
+    var c = s(cell);
+    var words = AREA_ALIAS[want] || [want];
+    for (var w = 0; w < words.length; w++) if (c.indexOf(words[w]) >= 0) return true;
+    return false;
+  }
   var arr = [];
   var all = pool();
   for (var i = 0; i < all.length; i++) {
     var it = all[i];
     if (tid && tid !== 'all' && s(it.type_id) !== s(tid)) continue;
     if (type && s(it.vod_class).indexOf(type) < 0 && s(it.type_name).indexOf(type) < 0 && !(it.types || []).join(',').includes(type)) continue;
-    if (area && s(it.vod_area).indexOf(area) < 0) continue;
+    if (!areaHit(it.vod_area, area)) continue;
     if (decade && s(it.decade) !== decade) continue;
     arr.push(it);
   }
