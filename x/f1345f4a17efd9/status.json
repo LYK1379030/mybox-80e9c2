@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T05:00:00Z",
+  "built_at": "2026-11-09T05:02:17Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 72,
+      "ms": 38,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 522,
+      "ms": 474,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 612,
+      "ms": 533,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 743,
+      "ms": 716,
       "total": null,
       "why": "ok"
     },
@@ -298,12 +298,6 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
@@ -314,6 +308,12 @@
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "综合",
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 15
+      "files": 17
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 15
+      "files": 17
     }
   ],
   "issues": [
@@ -562,8 +562,8 @@
   "stale": false,
   "stale_reason": "",
   "user_notice": "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。",
-  "default_entry": "fs4k3.json",
-  "visible_entries": 3,
+  "default_entry": "filter-line.json",
+  "visible_entries": 2,
   "filter_ok": true,
   "summary": {
     "sub_configs": [
@@ -604,14 +604,26 @@
       "problems": []
     },
     {
-      "file": "fs4k3.json",
-      "sites": 4,
+      "file": "fs4k.json",
+      "sites": 15,
       "lives": 0,
       "problems": []
     },
     {
       "file": "fs4k2.json",
-      "sites": 4,
+      "sites": 15,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "fs4k3.json",
+      "sites": 14,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "fs4kc.json",
+      "sites": 3,
       "lives": 0,
       "problems": []
     },
@@ -647,7 +659,7 @@
     }
   ],
   "verify": {
-    "files_checked": 10,
+    "files_checked": 12,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T04:59:42.237Z",
+  "generated": "2026-11-09T05:02:03.283Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 495103,
+    "bytes": 495447,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 251,
     "seedCount": 16,
-    "searchIndexTerms": 4039,
+    "searchIndexTerms": 4018,
     "searchIndexNames": 800,
-    "searchIndexBytes": 98511,
+    "searchIndexBytes": 98370,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -90,9 +90,9 @@
         "惊悚": 20,
         "战争": 10,
         "剧情": 60,
-        "爱情": 58,
+        "爱情": 57,
         "犯罪": 32,
-        "喜剧": 49,
+        "喜剧": 46,
         "短剧": 60,
         "武侠": 7,
         "奇幻": 60,
@@ -108,7 +108,7 @@
         "大陆": 60,
         "日本": 60,
         "美国": 39,
-        "香港": 15,
+        "香港": 14,
         "台湾": 19,
         "中国台湾": 2,
         "英国": 8,
@@ -128,15 +128,16 @@
         "马来西亚 / 中国大陆": 1,
         "印度尼西亚": 4,
         "巴西": 1,
+        "中国香港,中国大陆": 1,
         "美国 / 英国": 1,
         "法国 / 日本": 1,
         "国产": 1,
         "印度": 1,
-        "内地": 13
+        "内地": 6
       },
       "decade": {
-        "2020年代": 662,
-        "2010年代": 82,
+        "2020年代": 661,
+        "2010年代": 83,
         "2000年代": 24,
         "90年代": 14,
         "80年代": 5,
@@ -213,7 +214,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=4039"
+        "actual": "names=800 terms=4018"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",

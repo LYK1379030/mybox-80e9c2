@@ -1,51 +1,54 @@
 {
-  "spider": "",
-  "wallpaper": "",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/spider.jar;md5;c07ab2794d358d27d4a4e842712d3c16",
+  "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
-      "key": "feifan",
-      "name": "非凡·最快",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "type": 1,
+      "key": "快映4K",
+      "name": "🔥快映 | 4K",
+      "type": 3,
+      "api": "csp_PanWebShare",
+      "ext": "{\"site\":[\"http://xsayang.fun\"]}",
       "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
+      "quickSearch": 1,
+      "filterable": 1,
+      "timeout": 60
     },
     {
-      "key": "dytt",
-      "name": "电影天堂",
-      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
-      "type": 1,
+      "key": "八零4K",
+      "name": "🔥八零 | 4K",
+      "type": 3,
+      "api": "csp_PanWebShare",
+      "ext": "{\"site\":[\"https://www.80yy3.com\",\"https://woog.430520.xyz\"]}",
       "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
+      "quickSearch": 1,
+      "filterable": 1,
+      "timeout": 60
     },
     {
-      "key": "bfzy",
-      "name": "暴风·大库",
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "type": 1,
+      "key": "闪电4K",
+      "name": "🔥闪电 | 4K",
+      "type": 3,
+      "api": "csp_PanWebShare",
+      "ext": "{\"site\":[\"http://xhban.xyz\"]}",
       "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "lzi",
-      "name": "量子·备用",
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
+      "quickSearch": 1,
+      "filterable": 1,
+      "timeout": 60
     }
   ],
   "lives": [],
   "parses": [],
-  "flags": [],
+  "flags": [
+    "m3u8",
+    "mp4"
+  ],
   "ads": [],
-  "notice": "打不开就换一条，这条是直连片源。",
   "_meta": {
-    "note": "内置直连兜底，零 jar，任何 TVBox 系壳可用",
-    "sites": 4
+    "generated": "2026-11-08T10:54:26.972Z",
+    "probed": 21,
+    "alive": 14,
+    "hardDead": 6,
+    "totalResources": 1485974,
+    "note": "③C 专线：独立大 jar（194类含 PanWebShare 系），切线会重载 jar，低配设备闪退就回③/③B"
   }
 }
