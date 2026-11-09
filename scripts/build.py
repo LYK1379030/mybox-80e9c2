@@ -1119,12 +1119,11 @@ def main():
         report.setdefault("filter_notes", []).extend(_filter_notes)
 
     # 恰好 2 条人话线路（无数字/星号/括号/技术词）
-    # 恰好 2 条人话线路
-    # 【真机实测 2026-11-09】用户软件里直连源(fs4k3)能出片，自有规则站(filter-line)
-    # 加载不出任何内容 → 把能用的排第一，规则站降为第二条可选。
+    # 只保留一条：真机上唯一确认能出片的直连源。
+    # 【2026-11-09 真机教训】自有规则站(filter-line)在该软件里加载不出内容，
+    # 留它在列表里就是"摆设"。宁少不假：不能用的线路一律不展示给用户。
     entries = [
         {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
-        {"name": "更多线路（筛选/挑片）", "url": SELF + "/filter-line.json"},
     ]
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
