@@ -1061,6 +1061,23 @@ def main():
                 print("   ③ fs4k.json/fs4k2.json 已生成（%d 站，零 jar；fs4k3 作默认）" % len(_fs4k["sites"]))
         except Exception as _e:
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
+    # 兜底：无论上面 fs4k 注入成功与否，index 里 3 条线路指向的文件必须都在 templates，
+    # 否则 _inspect_output 判「index 指向未生成文件」→ FATAL 停更（CI 实战教训）。
+    # 用上游老线 templates["fs4k.json"]（一定存在）派生纯直连零 jar 副本。
+    for _miss in ("fs4k3.json", "fs4k2.json"):
+        if _miss in templates:
+            continue
+        try:
+            _base = json.loads(templates["fs4k.json"])
+            _d = dict(_base)
+            _d["spider"] = ""
+            _d["notice"] = "打不开就换一条，这条是直连片源。"
+            _d["sites"] = [s for s in _base.get("sites", [])
+                           if str(s.get("api", "")).startswith("http")]
+            templates[_miss] = json.dumps(_d, ensure_ascii=False, indent=2)
+            print("   [兜底] %s 由 fs4k.json 派生（%d 站，零 jar）" % (_miss, len(_d["sites"])))
+        except Exception as _e2:
+            print("   [兜底] %s 派生失败: %s" % (_miss, _e2))
     # 4k.json / c1.json / c2.json 等老线仍由前面流程写进 templates，照常自愈与 purge。
 
     # ---- 筛选线路：可选第 2 条（挑壳；四排筛选/精准搜索）----
