@@ -1421,6 +1421,7 @@ def _inspect_output(templates, report):
         checks.append(rec)
         for pr in rec["problems"]:
             report["issues"].append("%s: %s" % (fn, pr))
+            print("   [自检明细] %s: %s" % (fn, pr))
     report["output_check"] = checks
     report["verify"] = {
         "files_checked": len(checks),
