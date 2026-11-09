@@ -1119,15 +1119,18 @@ def main():
         report.setdefault("filter_notes", []).extend(_filter_notes)
 
     # 恰好 2 条人话线路（无数字/星号/括号/技术词）
+    # 恰好 2 条人话线路
+    # 【真机实测 2026-11-09】用户软件里直连源(fs4k3)能出片，自有规则站(filter-line)
+    # 加载不出任何内容 → 把能用的排第一，规则站降为第二条可选。
     entries = [
-        {"name": "打开就能看", "url": SELF + "/filter-line.json"},
-        {"name": "看不了点这里", "url": SELF + "/fs4k3.json"},
+        {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
+        {"name": "更多线路（筛选/挑片）", "url": SELF + "/filter-line.json"},
     ]
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
     report["user_notice"] = ("暂时用昨天的片单，正在自动恢复。" if _stale else _user_notice)
-    report["default_entry"] = "filter-line.json"
+    report["default_entry"] = "fs4k3.json"
     report["visible_entries"] = 2
     report["filter_ok"] = _filter_ok
     if "filter-line.json" in templates:
