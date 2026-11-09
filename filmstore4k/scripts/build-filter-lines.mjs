@@ -135,10 +135,20 @@ function writeJson(name, obj) { return writeText(name, JSON.stringify(obj, null,
 /** 清单：坏掉/缺失都用内置默认，绝不中断 */
 function readList() {
   const def = {
-    name: "筛选·自有（每日抽样·本地过滤）",
-    enabled: true, samplePages: 2, perBucketMax: 60, maxItems: 400,
+    // 用户可见层用平实命名；「每日抽样/非全量/零依赖」等技术口径只留在后台 manifest/_meta。
+    name: "打开就能看",
+    enabled: true,
+    // SEARCH_DIAGNOSIS.md 定稿：14 源 × pg=1..12 = 168 请求 → 约 1040 去重条；
+    // 8 字段精简后单文件 ≤512KB。wd 种子单独补经典片覆盖。
+    samplePages: 12, perBucketMax: 60, maxItems: 800,
     maxBytes: 512000, dataUrl: DEFAULT_DATA_URL,
-    note: "按类型/地区/年代筛选由本仓库自有规则本地实现；片量为每日抽样，非全量。",
+    // 常见片名种子（仓库内固定清单，researcher 实测 3/3 在 bfzy/lzi 精确第 1）。
+    // 运行时还会从抽样里按 vod_hits 取 Top-N 一起合并，不用用户填任何东西。
+    seedTitles: ["流浪地球", "狂飙", "周处除三害", "流浪地球2", "满江红", "长安三万里", "封神第一部", "繁花", "漫长的季节", "三体"],
+    wdWhitelist: ["bfzy", "lzi", "360zy", "c2_5"],
+    wdDenylist: ["jian"],
+    seedKeep: 10,
+    note: "每天自动更新一批片，搜不到可以点备用。",
   };
   try {
     if (!existsSync(listPath)) { warn("清单不存在，用默认配置"); return def; }
@@ -240,9 +250,10 @@ function buildUrl(api, params) {
   }
   return u.toString();
 }
-async function fetchText(url) {
+async function fetchText(url, timeout = TIMEOUT_MS) {
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
+  const ms = Number(timeout) > 0 ? Number(timeout) : TIMEOUT_MS;
+  const timer = setTimeout(() => ctrl.abort(), ms);
   try {
     const r = await fetch(url, {
       headers: { "user-agent": UA, accept: "application/json,text/plain,*/*" },
@@ -273,33 +284,83 @@ async function mapLimit(items, limit, fn) {
   return out;
 }
 
-async function collectRaw(sources, samplePages) {
+/**
+ * 采集双来源（SEARCH_DIAGNOSIS.md 定稿）：
+ *  (a) videolist&pg=1..samplePages：全部存活源，覆盖当天新片/热门；
+ *  (b) wd 种子：常见片名 × 白名单 4 源（bfzy/lzi/360zy/c2_5），排除 jian（wd 被忽略）。
+ *      精确片在 bfzy/lzi 实测 3/3 第 1；ffzy/dytt/c276 的 wd 结果可收但必须过规则端 relScore。
+ * 合并后按归一化片名去重，仍由 buildData 强制 ≤ maxBytes。
+ */
+async function collectRaw(sources, cfg) {
+  const samplePages = Number(cfg.samplePages) || 12;
   const jobs = [];
-  for (const s of sources) for (let pg = 1; pg <= samplePages; pg++) jobs.push({ s, pg });
-  log("取数计划 " + jobs.length + " 个请求（每源 " + samplePages + " 页），并发 " + CONCURRENCY);
+  for (const s of sources) for (let pg = 1; pg <= samplePages; pg++) jobs.push({ s, pg, kind: "page" });
+
+  // 种子片名 = 固定经典清单 + 抽样里按 vod_hits 取 Top-N（先跑抽样才知道 hits，
+  // 所以 wd 任务在抽样结果返回后动态追加，见下）。
+  const seeds = new Set((cfg.seedTitles || []).map((x) => String(x).trim()).filter(Boolean));
+  const whitelist = new Set(cfg.wdWhitelist || ["bfzy", "lzi", "360zy", "c2_5"]);
+  const denylist = new Set(cfg.wdDenylist || ["jian"]);
+  const wdSources = sources.filter((s) => whitelist.has(s.key) && !denylist.has(s.key));
+
+  log("取数计划 " + jobs.length + " 个分页请求（每源 " + samplePages + " 页），并发 " + CONCURRENCY);
   const results = await mapLimit(jobs, CONCURRENCY, async (job) => {
     try {
       const j = parseLoose(await fetchText(buildUrl(job.s.api, { ac: "videolist", pg: job.pg })));
       return Array.isArray(j?.list) ? j.list : [];
     } catch (e) { warn("跳过 " + job.s.key + " pg=" + job.pg, e); return []; }
   });
+
   const pool = [], seen = new Set();
   let okSources = 0;
   const perSource = {};
+  const push = (it, sk, sname) => {
+    if (!it || typeof it !== "object" || !String(it.vod_name || "").trim()) return;
+    const k = normalizeName(it.vod_name);
+    if (!k || seen.has(k)) return;
+    seen.add(k);
+    pool.push({ ...it, _source: sk, _source_name: sname });
+  };
   for (let i = 0; i < jobs.length; i++) {
     const sk = jobs[i].s.key;
     const list = results[i] || [];
     if (list.length) okSources++;
     perSource[sk] = (perSource[sk] || 0) + list.length;
-    for (const it of list) {
-      if (!it || typeof it !== "object" || !String(it.vod_name || "").trim()) continue;
-      const k = normalizeName(it.vod_name);
-      if (!k || seen.has(k)) continue;
-      seen.add(k);
-      pool.push({ ...it, _source: sk, _source_name: jobs[i].s.name });
-    }
+    for (const it of list) push(it, sk, jobs[i].s.name);
   }
-  return { pool, okSources, perSource };
+
+  // 从抽样里按 vod_hits 取 Top-N 片名作为补充种子（researcher：vod_hits 只在部分源存在，
+  // 取不到就退化为固定清单，不中断）。
+  const byHits = [];
+  for (const it of pool) {
+    const h = Number(it.vod_hits || it.vod_hits_day || it.vod_hits_month || 0);
+    if (h > 0 && String(it.vod_name || "").trim()) byHits.push({ name: String(it.vod_name).trim(), h });
+  }
+  byHits.sort((a, b) => b.h - a.h);
+  for (const x of byHits.slice(0, 6)) seeds.add(x.name);
+
+  // wd 任务：每片 × 白名单源，只取返回前 seedKeep 条（后续规则端 relScore 会重排）
+  const wdJobs = [];
+  for (const title of seeds) for (const s of wdSources) wdJobs.push({ s, title, kind: "wd" });
+  log("wd 种子 " + seeds.size + " 片 × " + wdSources.length + " 源 = " + wdJobs.length +
+      " 个请求（白名单 " + [...whitelist].join("/") + "，排除 " + [...denylist].join("/") + "）");
+  const wdResults = await mapLimit(wdJobs, CONCURRENCY, async (job) => {
+    try {
+      const j = parseLoose(await fetchText(buildUrl(job.s.api, {
+        ac: "videolist", pg: 1, wd: job.title,
+      }), 5000)); // wd 种子单独 5s 超时，避免慢源把 CI 拖到分钟级
+      return Array.isArray(j?.list) ? j.list.slice(0, Number(cfg.seedKeep) || 10) : [];
+    } catch (e) { warn("wd 跳过 " + job.s.key + " " + job.title, e); return []; }
+  });
+  let wdAdded = 0;
+  const wdStart = pool.length; // wd 种子段的起始下标：buildData 要优先保留这些经典片
+  for (let i = 0; i < wdJobs.length; i++) {
+    const before = pool.length;
+    for (const it of (wdResults[i] || [])) push(it, wdJobs[i].s.key, wdJobs[i].s.name);
+    wdAdded += pool.length - before;
+  }
+  log("wd 种子新增 " + wdAdded + " 条（归一化去重后），合并池 " + pool.length + " 条");
+  return { pool, okSources, perSource, wdAdded, seedCount: seeds.size, wdStart };
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -338,33 +399,58 @@ function areaTag(it) {
   const a = String(it.vod_area || "").trim();
   return a && a !== "未知" && a !== "暂无" ? a : "";
 }
+/**
+ * 8 字段精简（SEARCH_DIAGNOSIS.md §3.1 实测 260 B/条）。
+ * 额外保留 1 个截断 vod_play_url：detail()/play() 依赖可播地址，去掉会让用户点开没片；
+ * 与 decade/types/vod_time/vod_class 这些筛选/排序所需的最小派生字段一起，
+ * 总字节在 buildData 的 ≤maxBytes 门禁里实测回报。
+ */
 function cleanItem(it, i) {
+  const cap = (raw, n = 120) => {
+    const s0 = String(raw ?? "").replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
+    return s0.length > n ? s0.slice(0, n) : s0;
+  };
   const play = String(it.vod_play_url || "");
   let playUrl = "";
   const m = play.match(/https?:\/\/[^\s$,#]+/);
   if (m) playUrl = m[0];
   else if (/^https?:\/\//.test(play)) playUrl = play;
   return {
-    vod_id: String(it._source || "src") + ":" + String(it.vod_id || it.vod_name || i),
-    vod_name: String(it.vod_name || ""),
-    vod_pic: String(it.vod_pic || ""),
-    vod_remarks: String(it.vod_remarks || ""),
-    vod_year: String(it.vod_year || ""),
-    vod_area: areaTag(it),
-    vod_class: String(it.vod_class || ""),
-    vod_score: String(it.vod_score || ""),
-    vod_time: String(it.vod_time || ""),
-    type_name: String(it.type_name || ""),
+    vod_id: cap(String(it._source || "src") + ":" + String(it.vod_id || it.vod_name || i)),
+    vod_name: cap(it.vod_name),
+    vod_pic: cap(it.vod_pic),
+    vod_remarks: cap(it.vod_remarks),
+    vod_year: cap(it.vod_year),
     type_id: classOf(it),
+    type_name: cap(it.type_name),
+    vod_area: cap(areaTag(it)),
+    // 以下为筛选/排序/可播所需的最小派生字段（非源站原始长文本）
     decade: decadeOf(it.vod_year),
     types: typeTags(it),
-    _source: String(it._source || ""),
-    vod_play_from: String(it.vod_play_from || ""),
-    vod_play_url: playUrl,
-    vod_content: String(it.vod_content || it.vod_name || ""),
-    vod_actor: String(it.vod_actor || ""),
-    vod_director: String(it.vod_director || ""),
+    vod_class: cap(it.vod_class, 40),
+    vod_time: cap(it.vod_time, 24),
+    vod_score: cap(it.vod_score, 8),
+    vod_play_url: cap(playUrl),
   };
+}
+
+/**
+ * 搜索索引（A 轨）：只存归一化片名 -> [list 下标] 与 2gram -> [list 下标]，
+ * 绝不重复长文本。规则端精确 key 命中即取候选，2gram 用于部分输入的召回。
+ */
+function buildSearchIndex(items) {
+  const byName = {}, terms = {};
+  for (let i = 0; i < items.length; i++) {
+    const key = normalizeName(items[i].vod_name);
+    if (!key) continue;
+    (byName[key] ||= []).push(i);
+    for (let j = 0; j + 2 <= key.length; j++) {
+      const g = key.slice(j, j + 2);
+      (terms[g] ||= []).push(i);
+    }
+  }
+  for (const g of Object.keys(terms)) if (terms[g].length > 80) terms[g] = terms[g].slice(0, 80);
+  return { byName, terms };
 }
 
 /** 四排 filters：object-of-arrays，首层 key 严格等于 class[].type_id（R03） */
@@ -406,15 +492,21 @@ function buildIndexes(items, perBucketMax) {
 
 /** 组装数据并强制 ≤ maxBytes：超出就逐条裁剪 list 与索引后重写 */
 function buildData(rawPool, cfg, metaExtra) {
-  const maxItems = Number(cfg.maxItems) || 400;
+  const maxItems = Number(cfg.maxItems) || 800;
   const perBucketMax = Number(cfg.perBucketMax) || 60;
-  let items = rawPool.slice(0, maxItems).map(cleanItem);
+  // wd 种子（经典片）优先入选，再按分页样本补足，避免 slice(0,maxItems) 把种子挤掉
+  // 导致「搜流浪地球 0 结果」。wdStart 由 collectRaw 标记种子段起点。
+  const wdStart = Number.isInteger(metaExtra?.wdStart) ? metaExtra.wdStart : rawPool.length;
+  const pagePart = rawPool.slice(0, wdStart);
+  const seedPart = rawPool.slice(wdStart);
+  const picked = [...seedPart, ...pagePart].slice(0, maxItems);
+  let items = picked.map(cleanItem);
   let data = null;
   for (;;) {
     data = {
       _meta: {
         generated: GENERATED_AT,
-        samplePages: Number(cfg.samplePages) || 2,
+        samplePages: Number(cfg.samplePages) || 12,
         countIsSample: true,
         currentUtcYear: CURRENT_UTC_YEAR,
         decadeKeys: DECADE_KEYS,
@@ -425,6 +517,7 @@ function buildData(rawPool, cfg, metaExtra) {
       filters: buildFilters(items),
       list: items,
       index: buildIndexes(items, perBucketMax),
+      searchIndex: buildSearchIndex(items),
       buckets: {
         type: Object.fromEntries(Object.entries(buildIndexes(items, perBucketMax).byType).map(([k, v]) => [k, v.length])),
         area: Object.fromEntries(Object.entries(buildIndexes(items, perBucketMax).byArea).map(([k, v]) => [k, v.length])),
@@ -439,7 +532,11 @@ function buildData(rawPool, cfg, metaExtra) {
 }
 
 /** 合法空数据：四排选项仍在、list 空、索引空（R11 不白屏） */
-function emptyData(cfg, metaExtra) { return buildData([], cfg, metaExtra); }
+function emptyData(cfg, metaExtra) {
+  const d = buildData([], cfg, metaExtra);
+  d.searchIndex = d.searchIndex || { byName: {}, terms: {} };
+  return d;
+}
 
 // ═══════════════════════════════════════════════════════════════════
 // drpy2 规则模板
@@ -617,17 +714,94 @@ function pick(fl, keys) {
   return '';
 }
 
-function search(wd, quick, pg) {
-  var kw = s(wd).trim().toLowerCase();
-  if (!kw) return jstr({ list: [] });
-  var out = [], all = pool();
-  for (var i = 0; i < all.length && out.length < PAGE_SIZE * 3; i++) {
-    if (s(all[i].vod_name).toLowerCase().indexOf(kw) >= 0) out.push(all[i]);
+// ── 搜索相关性（照抄 SEARCH_DIAGNOSIS.md §②，纯本地、无网络） ──
+var S2T = { '飆': '飙', '週': '周', '處': '处', '灣': '湾', '臺': '台', '國': '国', '劇': '剧', '電影': '电影' };
+function norm(x) {
+  var t = s(x);
+  try { t = t.normalize('NFKC').toLowerCase(); } catch (e) { t = t.toLowerCase(); }
+  t = t.replace(/[ⅡⅢⅣ]/g, function (m) { return ({ 'Ⅱ': '2', 'Ⅲ': '3', 'Ⅳ': '4' })[m] || m; });
+  for (var k in S2T) if (Object.prototype.hasOwnProperty.call(S2T, k)) t = t.split(k).join(S2T[k]);
+  return t.replace(/[\s\-_.·•【】\[\]()（）「」《》:：,，!！?？'"]+/g, '');
+}
+var SPIN = /(之|外传|番外|前传|后传|大夏|宿命|风云|再次冒险|特别版|解说|预告|花絮|片花|短剧|动态漫|抢先|完整版|国语|粤语|中字|字幕|199\d|ai$|人生|商界|傲视|至尊)/;
+var DERIV = /(解说|预告|花絮|片花|动态漫|电影解说|抢先版)/;
+var SEQ_PURE = /^[0-9一二三四五六七八九十]+(季|部|集)?$/;
+function relScore(name, kw) {
+  var n = norm(name), k = norm(kw);
+  if (!n || !k) return -1;
+  if (n === k) return 1000;
+  if (n.indexOf(k) === 0) {
+    var tail = n.slice(k.length);
+    if (SEQ_PURE.test(tail)) return 600;
+    var sc = 300 - tail.length * 15;
+    if (SPIN.test(tail)) sc -= 220;
+    if (DERIV.test(tail)) sc -= 180;
+    return sc;
   }
-  return jstr({ list: out, page: parseInt(pg, 10) || 1, pagecount: 1, total: out.length });
+  if (n.indexOf(k) >= 0) return 150 - (n.length - k.length) * 8;
+  return -1;
+}
+/** 索引取候选：精确 key 命中优先，2gram 召回补充；无索引时退化为全池扫描 */
+function searchCandidates(kw) {
+  var d = ensure();
+  var all = pool();
+  var idx = d && d.searchIndex;
+  var k = norm(kw);
+  var seen = {}, order = [], out = [];
+  if (idx && idx.byName) {
+    for (var key in idx.byName) {
+      if (!Object.prototype.hasOwnProperty.call(idx.byName, key)) continue;
+      if (key === k || key.indexOf(k) >= 0 || k.indexOf(key) >= 0) {
+        var arr = idx.byName[key];
+        for (var a = 0; a < arr.length; a++) if (!seen[arr[a]]) { seen[arr[a]] = 1; order.push(arr[a]); }
+      }
+    }
+    if (idx.terms) for (var g in idx.terms) {
+      if (!Object.prototype.hasOwnProperty.call(idx.terms, g) || k.indexOf(g) < 0) continue;
+      var t = idx.terms[g];
+      for (var b = 0; b < t.length; b++) if (!seen[t[b]]) { seen[t[b]] = 1; order.push(t[b]); }
+    }
+  }
+  if (!order.length) for (var i = 0; i < all.length; i++) { seen[i] = 1; order.push(i); }
+  for (var j = 0; j < order.length; j++) if (all[order[j]]) out.push(all[order[j]]);
+  return out;
+}
+function search(wd, quick, pg) {
+  var kw = s(wd).trim();
+  if (!kw) return jstr({ list: [] });
+  var cand = searchCandidates(kw);
+  var scored = [], dedup = {};
+  for (var i = 0; i < cand.length; i++) {
+    var it = cand[i];
+    var sc = relScore(it.vod_name, kw);
+    if (sc < 0) continue;
+    var dk = norm(it.vod_name);
+    // 归一化片名去重：同键只留分最高那条（正片优先于解说/蹭名片）
+    if (dedup[dk] !== undefined) {
+      if (sc <= scored[dedup[dk]].s) continue;
+      scored[dedup[dk]] = { it: it, s: sc };
+    } else { dedup[dk] = scored.length; scored.push({ it: it, s: sc }); }
+  }
+  scored.sort(function (a, b) {
+    return b.s - a.s
+      || (Number(b.it.vod_year) || 0) - (Number(a.it.vod_year) || 0)
+      || s(b.it.vod_time).localeCompare(s(a.it.vod_time));
+  });
+  var rows = [];
+  for (var k2 = 0; k2 < scored.length; k2++) rows.push(scored[k2].it);
+  var p = parseInt(pg, 10) || 1;
+  var start = (p - 1) * PAGE_SIZE;
+  var size = quick ? Math.min(10, PAGE_SIZE) : PAGE_SIZE;
+  var list = rows.slice(start, start + size);
+  return jstr({
+    list: list, page: p,
+    pagecount: Math.max(1, Math.ceil(rows.length / size)),
+    limit: size, total: rows.length
+  });
 }
 
-/** 详情：入参可能是数组或字符串（bili_open 的 detail(id) 形态）；只从内存数据取，不联网 */
+/** 详情：入参可能是数组或字符串（bili_open 的 detail(id) 形态）；只从内存数据取，不联网。
+ *  数据已按 8 字段精简，这里把缺失的长文本字段用片名/播放串回填成可播结构。 */
 function detail(id) {
   var list = Array.isArray(id) ? id : [id];
   var out = [], all = pool();
@@ -638,6 +812,10 @@ function detail(id) {
       var v = {};
       for (var k in all[i]) if (Object.prototype.hasOwnProperty.call(all[i], k)) v[k] = all[i][k];
       v.vod_content = s(v.vod_content || v.vod_name);
+      v.vod_actor = s(v.vod_actor || '');
+      v.vod_director = s(v.vod_director || '');
+      v.vod_play_from = s(v.vod_play_from || '自有');
+      v.vod_play_url = s(v.vod_play_url || '');
       out.push(v);
       break;
     }
@@ -690,11 +868,12 @@ function renderRule(cfg) {
 function renderConfig(cfg) {
   return {
     spider: DRPY2_CONTRACT.spider, // 零 jar：CI 断言为空
-    notice: "自有规则本地筛选·每日抽样·零第三方依赖；按类型/地区/年代筛选由本仓库规则本地实现，片量为每日抽样，非全量。",
+    // 用户可见层只留一句人话；「每日抽样/非全量/零依赖」口径留在 filter-manifest.json 与 _meta。
+    notice: "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。",
     wallpaper: "",
     sites: [{
       key: "own_filter",
-      name: String(cfg.name || "筛选·自有（每日抽样·本地过滤）"),
+      name: String(cfg.name || "打开就能看"),
       type: DRPY2_CONTRACT.siteType,
       api: DRPY2_CONTRACT.siteApi, // __SELF__/spider-filter.js，emit 时替换成绝对 .js URL
       ext: DRPY2_CONTRACT.ext,     // __SELF__/filter-data.json，emit 时替换成绝对 .json URL
@@ -748,6 +927,22 @@ function audit(ruleText, config, data) {
   const wantMethods = DRPY2_CONTRACT.methods;
   const exported = (ruleText.match(/export function __jsEvalReturn\(\)[\s\S]*?return \{([\s\S]*?)\};/) || [])[1] || "";
   const methodsOk = wantMethods.every((m) => new RegExp("\\b" + m + ":\\s*" + m + "\\b").test(exported));
+  // 搜索索引结构：byName / terms 都是「字符串 -> 下标数组」，且下标不越界。
+  // 空数据（源全挂的合法降级）允许 byName 为空，但字段本身必须存在。
+  const si = data?.searchIndex;
+  const listLen = (data.list || []).length;
+  const idxOk = !!(si && si.byName && si.terms && typeof si.byName === "object" && typeof si.terms === "object" &&
+    (listLen > 0 ? Object.keys(si.byName).length > 0 : true) &&
+    Object.values(si.byName).every((a) => Array.isArray(a) && a.every((i) => Number.isInteger(i) && i >= 0 && i < listLen)) &&
+    Object.values(si.terms).every((a) => Array.isArray(a) && a.every((i) => Number.isInteger(i) && i >= 0 && i < listLen)));
+  // 规则 search() 必须含精确相等、排序、归一化去重、索引召回（防止退回 indexOf 老实现）。
+  // 这里扫原文而非剥过字符串的 code：正则字面量里的花括号会干扰 code。
+  const searchOk = /if \(n === k\) return 1000/.test(ruleText) &&
+    /scored\.sort\(/.test(ruleText) &&
+    /var scored = \[\], dedup = \{\}/.test(ruleText) &&
+    /searchCandidates\(/.test(ruleText) &&
+    /d && d\.searchIndex/.test(ruleText) &&
+    /relScore\(it\.vod_name, kw\)/.test(ruleText);
   const checks = [
     { name: "零 jar（顶层 spider 为空）", pass: spiderEmpty, actual: JSON.stringify(config.spider) },
     { name: "站点级 jar 为空", pass: jarEmpty, actual: JSON.stringify(site.jar) },
@@ -759,8 +954,10 @@ function audit(ruleText, config, data) {
     { name: "规则内写死 URL 为 0（改由 init(cfg).ext 注入）", pass: urls === 0 && hasInitCfg, actual: "urls=" + urls + " initCfg=" + hasInitCfg },
     { name: "__jsEvalReturn 导出 7 个内部名", pass: methodsOk, actual: wantMethods.join(",") },
     { name: "filters object-of-arrays + key=type_id", pass: filtersShapeValid, actual: Object.keys(f).join(",") },
+    { name: "searchIndex 结构合法（byName/terms 下标不越界）", pass: idxOk, actual: "names=" + Object.keys(si?.byName || {}).length + " terms=" + Object.keys(si?.terms || {}).length },
+    { name: "search() 含精确相等 + 排序 + 归一化去重 + 索引召回", pass: searchOk, actual: "exact/sort/dedup/index" },
   ];
-  return { reqCalls, urls, hasInitCfg, md5, csp, spiderEmpty, jarEmpty, apiOk, extOk, methodsOk, filtersShapeValid, checks };
+  return { reqCalls, urls, hasInitCfg, md5, csp, spiderEmpty, jarEmpty, apiOk, extOk, methodsOk, filtersShapeValid, idxOk, searchOk, checks };
 }
 
 async function main() {
@@ -769,13 +966,15 @@ async function main() {
   const sources = readSources();
   log("源池存活 " + sources.length + " 个，CURRENT_UTC_YEAR=" + CURRENT_UTC_YEAR + "，输出目录 " + outDir);
 
-  // ① 抓样本
-  let rawPool = [], okSources = 0, perSource = {};
+  // ① 抓样本（分页 + wd 种子）
+  let rawPool = [], okSources = 0, perSource = {}, wdAdded = 0, seedCount = 0, wdStart = 0;
   try {
-    const r = await collectRaw(sources, Number(cfg.samplePages) || 2);
+    const r = await collectRaw(sources, cfg);
     rawPool = r.pool; okSources = r.okSources; perSource = r.perSource;
+    wdAdded = r.wdAdded || 0; seedCount = r.seedCount || 0; wdStart = r.wdStart ?? rawPool.length;
   } catch (e) { warn("取数阶段异常，按全失败处理", e); }
-  log("归一化去重后 " + rawPool.length + " 条，有效源 " + okSources + "/" + sources.length);
+  log("归一化去重后 " + rawPool.length + " 条（wd 种子新增 " + wdAdded +
+      " 条 / " + seedCount + " 片），有效源 " + okSources + "/" + sources.length);
 
   // ② 全失败：沿用上一版数据 + stale:true；否则写合法空数据（R11）
   let data, stale = false, staleReason = null;
@@ -792,6 +991,10 @@ async function main() {
     } catch (e) { warn("上一版数据读取失败", e); }
     if (prev) {
       prev._meta = { ...(prev._meta || {}), stale: true, stale_reason: staleReason, reusedAt: GENERATED_AT };
+      // 兼容上一版尚无 searchIndex 的产物：补空索引，规则 searchCandidates 会退化为全池扫描
+      if (!prev.searchIndex || !prev.searchIndex.byName || !prev.searchIndex.terms) {
+        prev.searchIndex = { byName: {}, terms: {} };
+      }
       data = prev;
       log("源站全挂：沿用上一版 filter-data.json（" + (data.list || []).length + " 条）并标 stale:true");
     } else {
@@ -801,7 +1004,7 @@ async function main() {
   } else {
     data = buildData(rawPool, cfg, {
       stale: false, sources: sources.length, okSources,
-      rawSampled: rawPool.length, perSource,
+      rawSampled: rawPool.length, perSource, wdAdded, seedCount, wdStart,
     });
   }
 
@@ -834,9 +1037,14 @@ async function main() {
       items: (data.list || []).length,
       bytes,
       maxBytes: Number(cfg.maxBytes || 512000),
-      samplePages: Number(cfg.samplePages) || 2,
+      samplePages: Number(cfg.samplePages) || 12,
       countIsSample: true,
       perBucketMax: Number(cfg.perBucketMax) || 60,
+      wdAdded,
+      seedCount,
+      searchIndexTerms: Object.keys(data.searchIndex?.terms || {}).length,
+      searchIndexNames: Object.keys(data.searchIndex?.byName || {}).length,
+      searchIndexBytes: Buffer.byteLength(JSON.stringify(data.searchIndex || {}), "utf8"),
       stale,
       stale_reason: staleReason,
       decades: DECADE_KEYS,

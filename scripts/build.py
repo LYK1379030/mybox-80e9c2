@@ -1024,8 +1024,9 @@ def main():
     _ = fourk_real
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
-    entries = [{"name": "%s" % (names.get(u, u)),
-                "url": SELF + "/" + u + ".json"} for u, n in built]
+    # 后台仍按原逻辑生成全部子仓文件（自愈 / purge / 高级用户手填不受影响），
+    # 但用户可见的 index.json 按 FINAL_GOAL.md 收敛成恰好 2 条人话线路。
+    entries = []
     # ---- ③ 聚合·实时筛选线路（filmstore4k 产物，构建期自动实测源存活）----
     # 产物由 filmstore4k/build-fs4k.js 生成（node filmstore4k/build-fs4k.js），
     # 若产物缺失则跳过（不影响主流程），绝不因可选线路挂掉整个构建。
@@ -1050,30 +1051,22 @@ def main():
                     _fs4k3["sites"] = _fs4k3_direct
                     templates["fs4k3.json"] = json.dumps(_fs4k3, ensure_ascii=False, indent=2)
                     print("   ③B fs4k3.json 纯直连保底线已接入（%d 站）" % len(_fs4k3_direct))
-                entries.insert(0, {"name": "★1 主用·聚合全站（%d 站·%s）" % (
-                    len(_fs4k["sites"]),
-                    (_fs4k.get("_meta", {}).get("totalResources", 0) and "%d条资源" % _fs4k["_meta"]["totalResources"] or "已实测")),
-                    "url": SELF + "/fs4k2.json"})
-                if templates.get("fs4k3.json"):
-                    entries.insert(1, {"name": " 2 备用·纯直连保底（最稳）",
-                                       "url": SELF + "/fs4k3.json"})
+                # fs4kc.json 仍注册进 templates（后台自愈 / purge），不进用户可见 index
                 if os.path.isfile(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json")):
                     templates["fs4kc.json"] = open(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json"), encoding="utf-8").read()
-                    entries.insert(2, {"name": " 3 进阶·4K网盘专线（低配设备勿试）",
-                                       "url": SELF + "/fs4kc.json"})
-                print("   ③ fs4k.json/fs4k2.json 已接入（%d 站，index 指向 fs4k2）" % len(_fs4k["sites"]))
+                # 备用线 fs4k3.json 仍注册进 templates（不进 entries），
+                # 下面收敛段会用「看不了点这里」指向它。
+                print("   ③ fs4k.json/fs4k2.json 已生成（%d 站，不写入用户可见 index）" % len(_fs4k["sites"]))
         except Exception as _e:
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
-    entries.append({"name": " 5 老线·4K直连专区（%d 条·免授权）" % len(hd_sites),
-                    "url": SELF + "/4k.json"})
+    # 4k.json / c1.json / c2.json 等老线仍由前面流程写进 templates，照常自愈与 purge。
 
-    # ---- 筛选·自有（每日抽样·本地过滤）零风险线路 ----
-    # 基准：DESIGN_ZERO_RISK.md 指标 1/2/5/6/8 + DESIGN_RISKS.md R07（绝不拖死主 6 条）
+    # ---- 筛选线路：默认第一条（FINAL_GOAL.md 指标 1/3）----
     # CI 由 build-filter-lines.mjs 在 filmstore4k/dist/ 预生成 4 个同源静态文件：
-    #   filter-line.json（子仓配置）/ filter-data.json（静态片单）/
+    #   filter-line.json（子仓配置）/ filter-data.json（静态片单 + searchIndex）/
     #   spider-filter.js（drpy2 规则，仅 1 次 req）/ filter-manifest.json（说明清单）
-    # 四者「同生共死」：任一缺失 / 断言失败 → 只 print 跳过追加，绝不 FATAL。
-    # index.json 只在 urls 尾部追加 1 条，上面 6 条主线路名字与顺序一个字节不动。
+    # 四者「同生共死」：任一缺失 / 断言失败 → 只 print 跳过，绝不 FATAL。
+    # 用户可见 index 收敛成恰好 2 条；其余子仓仍注册 templates、仍自愈、仍 purge。
     _filter_dir = os.path.join(ROOT, "filmstore4k", "dist")
     _filter_files = {
         "filter-line.json": "filter-line.json",
@@ -1082,12 +1075,16 @@ def main():
         "filter-manifest.json": "filter-manifest.json",
     }
     _filter_notes = []
+    _stale = False
+    _stale_reason = ""
+    _user_notice = "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。"
+    _filter_ok = False
     try:
         _missing = [fn for fn in _filter_files
                     if not (os.path.isfile(os.path.join(_filter_dir, fn))
                             and os.path.getsize(os.path.join(_filter_dir, fn)) > 0)]
         if _missing:
-            _filter_notes.append("筛选产物缺失，跳过追加: %s" % ",".join(_missing))
+            _filter_notes.append("筛选产物缺失，跳过默认线路: %s" % ",".join(_missing))
         else:
             with open(os.path.join(_filter_dir, "filter-line.json"), encoding="utf-8") as _fc:
                 _cfg_text = _fc.read()
@@ -1100,20 +1097,46 @@ def main():
                 raise ValueError("filter-line.json 含 ;md5; 段")
             if "csp_" in _cfg_text:
                 raise ValueError("filter-line.json 含 csp_ 站点")
-            # 四份原样注册（含 .js 规则与静态数据），随双通道一起输出 + purge
             for _fn in _filter_files:
                 with open(os.path.join(_filter_dir, _fn), encoding="utf-8") as _f:
                     templates[_fn] = _f.read()
-            entries.append({"name": "筛选·自有（每日抽样·本地过滤）",
-                            "url": SELF + "/filter-line.json"})
-            print("   筛选·自有线路已追加（4 产物同源、零 jar，原 6 条主线路未改动）")
+            _filter_ok = True
+            print("   筛选线路已注册（4 产物同源、零 jar），作为默认第一条")
+        # stale 字段：从 filter-manifest.json 读，写进 status.json 给维护者看
+        try:
+            with open(os.path.join(_filter_dir, "filter-manifest.json"), encoding="utf-8") as _fmf:
+                _fm = json.load(_fmf)
+            _stale = bool((_fm.get("data") or {}).get("stale"))
+            _stale_reason = str((_fm.get("data") or {}).get("stale_reason") or "")
+        except Exception as _se:
+            _filter_notes.append("filter-manifest stale 读取失败: %s" % _se)
     except Exception as _e:
-        # R07：只 print 跳过，绝不 FATAL 拖死主 6 条
+        # R07：只 print 跳过，绝不 FATAL 拖死备用线
         print("   ⚠ 筛选线路注入跳过（不影响主配置）: %s" % _e)
     for _msg in _filter_notes:
         print("   [筛选标记] %s" % _msg)
     if _filter_notes:
         report.setdefault("filter_notes", []).extend(_filter_notes)
+
+    # 恰好 2 条人话线路（无数字/星号/括号/技术词）
+    entries = [
+        {"name": "打开就能看", "url": SELF + "/filter-line.json"},
+        {"name": "看不了点这里", "url": SELF + "/fs4k3.json"},
+    ]
+    # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
+    report["stale"] = _stale
+    report["stale_reason"] = _stale_reason
+    report["user_notice"] = ("暂时用昨天的片单，正在自动恢复。" if _stale else _user_notice)
+    report["default_entry"] = "filter-line.json"
+    report["visible_entries"] = 2
+    report["filter_ok"] = _filter_ok
+    if "filter-line.json" in templates:
+        try:
+            _fl = json.loads(templates["filter-line.json"])
+            _fl["notice"] = report["user_notice"]
+            templates["filter-line.json"] = json.dumps(_fl, ensure_ascii=False, indent=2)
+        except Exception as _ne:
+            _filter_notes.append("filter-line notice 注入失败: %s" % _ne)
 
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
