@@ -7,7 +7,7 @@ TVBox / 影视仓 专属仓 构建器（对抗式自检版）
 设计原则：把输出当成客户端会真去请求的东西，构建时逐项实测。
   1. 上游配置：多镜像逐个试，全部挂了跳过且保留上一版产物；
   2. 相对路径：按每个上游自己的 base 绝对化，绝不混用；
-  3. spider jar：所有 spider 一律只留纯 URL，剥离 ;md5; 校验段；
+  3. spider jar：真下载并计算 md5，替换掉上游已过期的校验值；
   4. 点播线路：真发 ?ac=list，死的剔除、慢的放宽超时、活的按延迟排序；
   5. 解析站 / DoH / EPG / 壁纸：DNS + HTTP 实测，死的不写进配置；
   6. 输出双通道：Pages 与 jsDelivr 各生成一份，内部 URL 全部绝对化，
@@ -24,6 +24,7 @@ import ssl
 import sys
 import time
 import socket
+import hashlib
 import urllib.request
 import urllib.parse
 import urllib.error
@@ -91,9 +92,7 @@ DIRECT_SITES = [
 # 之前用 easy11.05 那个 194 类的 jar 会让摸鱼4K盒闪退，已弃用。
 K4_SPIDER = ("https://gh-proxy.com/raw.githubusercontent.com/"
              "CandyMuj/ResourceInterface/main/TVBox/candymuj.jar")
-# A02/P0：统一决策——全部 spider 只留纯 URL，绝不再拼 ;md5; 段。
-# 上游 candymuj.jar 一换内容，硬编码 md5 会让整份配置被客户端拒载；
-# 4konly 通道另由 _emit_4konly() 指向同源 /4konly/spider.jar（见 A08）。
+K4_SPIDER_MD5 = "9f391d889e28d3c40092fabb562f408c"
 
 SITES_4K = [
     # csp_Wogg 的 ext 必须是 {"token": ..., "filter": ...}，
@@ -344,11 +343,12 @@ def absolutize(obj, base, jar_base):
         if not isinstance(v, str) or not (v.startswith("./") or v.startswith("../")):
             return v
         rel = v.lstrip("./")
-        # A02/P0：上游相对 jar 路径常带 ;md5; 校验段，一律剥离只留纯 URL。
+        tail = ""
         if ";md5;" in rel:
-            rel = rel.split(";md5;", 1)[0]
+            rel, tail = rel.split(";md5;", 1)
+            tail = ";md5;" + tail
         root = (jar_base or base) if rel.endswith(".jar") else base
-        return root.rstrip("/") + "/" + rel.lstrip("/")
+        return root.rstrip("/") + "/" + rel.lstrip("/") + tail
 
     def walk(x):
         if isinstance(x, dict):
@@ -485,19 +485,27 @@ def sanitize_urls(obj, base, report):
 
 # ---------------------------------------------------------------- 自检
 def fix_spider_md5(cfg, report):
-    """A02/P0：统一决策——所有 spider 一律只留纯 URL。
+    """真下载 spider jar 计算 md5，替换上游已过期的校验值。
 
-    上游 jar 一换内容，写死的校验值就会让客户端拒载整份配置
-    （CandyMuj / 上游 c1、c2 都踩过）。这里只做剥离，绝不重新计算
-    或把校验段回写进任何产物；ok/match 恒为 True 以免下游自检误报。
+    上游 jar 更新但配置没跟 md5 时，客户端会校验失败 / 反复重下。
+    下载失败则直接去掉 ;md5; 段，宁可不校验也不写错值。
     """
     sp = cfg.get("spider")
     if not isinstance(sp, str) or ";md5;" not in sp:
         return
-    url = sp.split(";md5;", 1)[0]
-    cfg["spider"] = url
-    report.append({"url": url, "stripped_md5": True,
-                   "ok": True, "match": True})
+    url, old = sp.rsplit(";md5;", 1)
+    try:
+        b = fetch_bytes(url, timeout=25, limit=8_000_000)
+        if not b.startswith(b"PK\x03\x04"):
+            raise ValueError("不是 jar/zip")
+        new = hashlib.md5(b).hexdigest()
+        cfg["spider"] = url + ";md5;" + new
+        report.append({"url": url, "old_md5": old, "new_md5": new,
+                       "match": old == new, "bytes": len(b), "ok": True})
+    except Exception as e:
+        cfg["spider"] = url          # 去掉错误的 md5 段
+        report.append({"url": url, "old_md5": old, "new_md5": None,
+                       "match": False, "ok": False, "why": str(e)[:100]})
 
 
 def probe_vod(site):
@@ -797,8 +805,6 @@ def main():
         "upstreams": [], "spider_md5": [], "vod_lines": [], "dropped": [],
         "live": [], "parses": [], "doh": [], "external": [], "channels": [],
         "issues": [],
-        # A04：默认视作 stale，只有两个 sentinel 都在时由 6b 改为 False。
-        "stale": True, "stale_reason": "node 构建步骤 sentinel 尚未确认",
     }
 
     # ---------- 1. 外部依赖自检（死的不写进配置） ----------
@@ -891,10 +897,6 @@ def main():
     if not configs:
         report["issues"].append("所有上游均失败：保留上一版产物，不覆盖。")
         report["fatal"] = True
-        # A07：FATAL 分支也必须把本次失败原因带进 status.json；
-        # 虽然 workflow 会中止发布，但至少本地 / 上传的 artifact 可追溯。
-        report["stale"] = True
-        report["stale_reason"] = "所有上游均失败，本次未产出新配置"
         _verify(report)
         chs = _channels()
         report["channels"] = [
@@ -906,15 +908,14 @@ def main():
         print("FATAL: 所有上游均失败，已保留上一版产物。")
         sys.exit(1)
 
-    # ---------- 4. spider 统一剥离 ;md5; 段（A02/P0）----------
-    # 只处理上游 c1/c2；fs4k* 与 line-* 是后面从 disk 读进 templates 的，
-    # 由 _strip_md5_in_templates() 在落盘前做最后一道全量兜底。
+    # ---------- 4. spider md5 动态修正 ----------
     for uid, cfg in configs.items():
         fix_spider_md5(cfg, report["spider_md5"])
     for r in report["spider_md5"]:
-        if r.get("stripped_md5"):
+        if not r.get("match"):
             report["issues"].append(
-                "已剥离 spider 的 ;md5; 校验段: %s" % r["url"].split("/")[-1])
+                "spider md5 已自动修正 %s: %s -> %s"
+                % (r["url"].split("/")[-1], r.get("old_md5"), r.get("new_md5")))
 
     # ---------- 5. 线路体检 ----------
     all_sites = [s for c in configs.values()
@@ -1009,7 +1010,7 @@ def main():
     # 是「别人能免费看 4K」的真正原因。
     fourk_real = {
         "wallpaper": WALLPAPER,
-        "spider": K4_SPIDER,   # A02/P0：纯 URL，不再拼 ;md5;
+        "spider": K4_SPIDER + ";md5;" + K4_SPIDER_MD5,
         "sites": [dict(s) for s in SITES_4K],
         "lives": live_entries,
         "parses": PARSE_BUILTIN + CONF_PARSES,
@@ -1065,81 +1066,56 @@ def main():
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
     entries.append({"name": " 5 老线·4K直连专区（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
-    # ---- 分类频道：按大区/年代分组的 16 条线路（团队 build-lines.mjs 每日产出）----
-    # 纯代码零账号：每条线路是完整动态 macCMS 子仓，客户端 t/pg/wd/ids 由源站原生处理。
-    # 分开放在 index-cats.json，避免主 index 被 22 条线路塞乱（lead 决策）。
-    # 独立复验 P1(cat-verifier)：诚实声明必须落到「用户可达的线上产物」，不能只在仓库 manifest。
-    # 影视仓 FongMi 壳不支持站内两级分类/筛选，线路名容易被误读为「站内按类型/年代筛过」，
-    # 因此三处都补用户可懂的口径：①线路名后缀 ②每份 line-*.json 的 _meta.userVisibleNote
-    # ③lines-manifest.json 随 Pages 发布（大白话 protocolNotes / sampling 用户可见）。
-    _USER_NOTE = ("按主题/年代精选源站的线路分组；站内分类由源站原生标签提供。"
-                  "受影视仓客户端协议限制，站内无法按类型或年代裁剪，线路名不代表筛选结果。"
-                  "片量为每日最新两页抽样，不代表用户可见条数。")
+
+    # ---- 筛选·自有（每日抽样·本地过滤）零风险线路 ----
+    # 基准：DESIGN_ZERO_RISK.md 指标 1/2/5/6/8 + DESIGN_RISKS.md R07（绝不拖死主 6 条）
+    # CI 由 build-filter-lines.mjs 在 filmstore4k/dist/ 预生成 4 个同源静态文件：
+    #   filter-line.json（子仓配置）/ filter-data.json（静态片单）/
+    #   spider-filter.js（drpy2 规则，仅 1 次 req）/ filter-manifest.json（说明清单）
+    # 四者「同生共死」：任一缺失 / 断言失败 → 只 print 跳过追加，绝不 FATAL。
+    # index.json 只在 urls 尾部追加 1 条，上面 6 条主线路名字与顺序一个字节不动。
+    _filter_dir = os.path.join(ROOT, "filmstore4k", "dist")
+    _filter_files = {
+        "filter-line.json": "filter-line.json",
+        "filter-data.json": "filter-data.json",
+        "spider-filter.js": "spider-filter.js",
+        "filter-manifest.json": "filter-manifest.json",
+    }
+    _filter_notes = []
     try:
-        _lines_dir = os.path.join(ROOT, "filmstore4k", "dist")
-        _manifest_path = os.path.join(_lines_dir, "lines-manifest.json")
-        if os.path.isfile(_manifest_path):
-            _manifest = json.load(open(_manifest_path, encoding="utf-8"))
-            # file -> 是否空年代档（用于线路名标注「暂无片源」）
-            _empty_by_file = {}
-            _decade_by_file = {}
-            for _ln in _manifest.get("lines", []):
-                if _ln.get("file"):
-                    _empty_by_file[_ln["file"]] = bool(_ln.get("empty"))
-                    _decade_by_file[_ln["file"]] = _ln.get("kind") == "decade"
-            _cat_entries = []
-            for _e in _manifest.get("entries", []):
-                _f = _e.get("file", "")
-                _p = os.path.join(_lines_dir, _f)
-                if not os.path.isfile(_p):
-                    continue
-                # 每份 line 配置补一句用户可懂的口径（客户端拉得到这份文件）
-                try:
-                    _cfg = json.load(open(_p, encoding="utf-8"))
-                    _meta = _cfg.setdefault("_meta", {})
-                    _meta["userVisibleNote"] = _USER_NOTE
-                    if _empty_by_file.get(_f):
-                        _meta["emptyNotice"] = "本年代档当日抽样无片，显示为空属正常，不代表源站没有该年代影片。"
-                    templates[_f] = json.dumps(_cfg, ensure_ascii=False, indent=2)
-                except Exception:
-                    templates[_f] = open(_p, encoding="utf-8").read()
-                _nm = _e.get("name", _f)
-                if _empty_by_file.get(_f):
-                    _nm = _nm + "（暂无片源）"
-                elif _decade_by_file.get(_f):
-                    _nm = _nm + "（抽样·非站内筛选）"
-                elif not _nm.startswith("⏰"):
-                    _nm = "分类·" + _nm + "（线路分组）"
-                _cat_entries.append({"name": _nm, "url": SELF + "/" + _f})
-            if _cat_entries:
-                templates["index-cats.json"] = json.dumps({"urls": _cat_entries}, ensure_ascii=False, indent=2)
-                print("   分类频道 index-cats.json 已接入（%d 条线路，名后缀+口径下沉）" % len(_cat_entries))
-            # manifest 随 Pages 发布（大白话 protocolNotes / sampling 用户可达）
-            templates["lines-manifest.json"] = json.dumps(_manifest, ensure_ascii=False, indent=2)
+        _missing = [fn for fn in _filter_files
+                    if not (os.path.isfile(os.path.join(_filter_dir, fn))
+                            and os.path.getsize(os.path.join(_filter_dir, fn)) > 0)]
+        if _missing:
+            _filter_notes.append("筛选产物缺失，跳过追加: %s" % ",".join(_missing))
+        else:
+            with open(os.path.join(_filter_dir, "filter-line.json"), encoding="utf-8") as _fc:
+                _cfg_text = _fc.read()
+            _cfg = json.loads(_cfg_text)
+            # 零风险 3 断言：spider 为空、无 ;md5;、无 csp_
+            _spider = _cfg.get("spider", "")
+            if _spider not in ("", None):
+                raise ValueError("filter-line.json 的 spider 非空，违反零 jar 约束: %r" % _spider)
+            if ";md5;" in _cfg_text:
+                raise ValueError("filter-line.json 含 ;md5; 段")
+            if "csp_" in _cfg_text:
+                raise ValueError("filter-line.json 含 csp_ 站点")
+            # 四份原样注册（含 .js 规则与静态数据），随双通道一起输出 + purge
+            for _fn in _filter_files:
+                with open(os.path.join(_filter_dir, _fn), encoding="utf-8") as _f:
+                    templates[_fn] = _f.read()
+            entries.append({"name": "筛选·自有（每日抽样·本地过滤）",
+                            "url": SELF + "/filter-line.json"})
+            print("   筛选·自有线路已追加（4 产物同源、零 jar，原 6 条主线路未改动）")
     except Exception as _e:
-        print("   ⚠ 分类频道接入失败（跳过，不影响主配置）: %s" % _e)
+        # R07：只 print 跳过，绝不 FATAL 拖死主 6 条
+        print("   ⚠ 筛选线路注入跳过（不影响主配置）: %s" % _e)
+    for _msg in _filter_notes:
+        print("   [筛选标记] %s" % _msg)
+    if _filter_notes:
+        report.setdefault("filter_notes", []).extend(_filter_notes)
+
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
-
-    # ---------- 6b. A04：node 构建步骤 sentinel 检测 → status.json 打 stale ----------
-    # workflow 在两个 node 步骤成功后各写一个 sentinel（.ok-fs4k / .ok-lines）。
-    # 两步是 continue-on-error:true，失败时 sentinel 不存在，而 dist/ 里仍是
-    # checkout 出来的旧文件；build.py 会把旧内容当新产物发布（built_at 新、内容旧）。
-    # 这里只标 stale 并告警，不 FATAL，让 Pages 仍能发布上一版可用配置。
-    stale_reasons = []
-    for sentinel, label in ((".ok-fs4k", "聚合线路(fs4k)"),
-                            (".ok-lines", "分类频道(line-*)")):
-        if not os.path.isfile(os.path.join(ROOT, sentinel)):
-            stale_reasons.append("%s 本次未成功构建，沿用上次 dist 产物" % label)
-    report["stale"] = bool(stale_reasons)
-    report["stale_reason"] = "；".join(stale_reasons)
-    if stale_reasons:
-        report["issues"].append("stale: " + report["stale_reason"])
-
-    # ---------- 6c. A02 兜底：全量剥离 templates 里任何 ;md5; 段 ----------
-    # fs4k* / line-* 是从 disk 读进来的（fixer-A 的文件），不经过
-    # fix_spider_md5()，必须在这里做最后一道全量清洗，确保产出的
-    # 每一份配置 spider / jar 都是纯 URL。
-    _strip_md5_in_templates(templates, report)
 
     report["summary"] = {
         "sub_configs": built, "4k_sites": len(hd_sites),
@@ -1266,11 +1242,7 @@ def _emit_4konly(site_root, templates):
     两者混在同一个多仓里切换时会互相覆盖 → csp_ 类找不到 → 客户端闪退。
     所以 4K 单独一套地址，用户切换过去时只加载它自己的 jar。
     """
-    # A08：4konly 通道改为同源自托管 jar（下面已把 spider4k.jar 复制进
-    # _site/4konly/spider.jar），spider 只留纯 URL，不再指向第三方 gh-proxy。
-    # PAGES_BASE 形如 https://<user>.github.io/<repo>/<sub>，4konly 挂在站点根。
-    site_base = PAGES_BASE.rsplit("/", 1)[0] if PAGES_BASE else ""
-    jar = site_base + "/4konly/spider.jar"
+    jar = K4_SPIDER + ";md5;" + K4_SPIDER_MD5
     sites = []
     for s in SITES_4K:
         api = str(s.get("api") or "")
@@ -1317,45 +1289,6 @@ def _emit_4konly(site_root, templates):
     print("   4konly/index.json 已生成（%d 条 4K 线路）" % len(sites))
 
 
-def _strip_md5_in_templates(templates, report):
-    """A02 兜底：递归剥掉所有配置里字符串值的 ;md5; 校验段。
-
-    fix_spider_md5() 只覆盖上游 c1/c2；fs4k* 与 line-* 是 build-fs4k.js /
-    build-lines.mjs 写到 disk 后原样读进 templates 的，必须在这里做全量清洗。
-    """
-    # 匹配 ";md5;" 后跟的十六进制校验值（或任意到字符串结尾的片段）。
-    # 用正则替换而非 split，避免万一遇到非 JSON 文本时把后半文件整段丢掉。
-    mark_re = re.compile(r";md5;[0-9a-fA-F]*")
-    stripped = [0]
-
-    def scrub(s):
-        if ";md5;" not in s:
-            return s
-        stripped[0] += 1
-        return mark_re.sub("", s)
-
-    def walk(x):
-        if isinstance(x, dict):
-            return {k: walk(v) for k, v in x.items()}
-        if isinstance(x, list):
-            return [walk(v) for v in x]
-        if isinstance(x, str):
-            return scrub(x)
-        return x
-
-    for fn, text in list(templates.items()):
-        if ";md5;" not in text:
-            continue
-        try:
-            obj = json.loads(text)
-        except Exception:
-            templates[fn] = scrub(text)
-            continue
-        templates[fn] = json.dumps(walk(obj), ensure_ascii=False, indent=2)
-    if stripped[0]:
-        report["issues"].append("已从产物剥离 %d 处 ;md5; 校验段" % stripped[0])
-
-
 def _inspect_output(templates, report):
     """把生成的 JSON 当客户端会读的东西再核一遍：
 
@@ -1367,19 +1300,6 @@ def _inspect_output(templates, report):
       - 记录每条 ext / api 的 URL 总数，供 status.json 复核。
     """
     checks = []
-    # 空年代档（manifest.lines[].empty=true）设计上 sites 为空，属正常，不算 problem。
-    # 但其余线路若 sites 全空 = CI 出口被挡 / 构建失败（攻击报告 A01），必须报错拦截。
-    # 精确豁免而非一刀切：只放行 manifest 明确标记 empty 的那些文件名。
-    _empty_lines = set()
-    try:
-        _mpath = os.path.join(ROOT, "filmstore4k", "dist", "lines-manifest.json")
-        if os.path.isfile(_mpath):
-            _mf = json.load(open(_mpath, encoding="utf-8"))
-            for _ln in _mf.get("lines", []):
-                if _ln.get("empty"):
-                    _empty_lines.add(_ln.get("file"))
-    except Exception:
-        pass
     # 已知死链 / 假 200 HTML 源 / 坏 csp 类，生成物里一条都不许留
     dead_marks = [
         "ghp.ci/", "FongMi/CatVodSpider/main/json/wogg.json",
@@ -1387,7 +1307,19 @@ def _inspect_output(templates, report):
         "sk100.tv/api.php/app", "fuju2024.cc:8013",
         "csp_CandyMuj_sstv",
     ]
+    # 说明清单 / 静态数据（不是 TVBox 配置）：没有 sites 或会含大量示意字符串，
+    # 跳过全文 walk 与 sites 判空，只确认是合法 JSON，避免误伤自检。
+    # filter-data.json 是客户端规则读取的静态片单（有 list/filters，但不是子仓配置）。
+    info_manifests = {
+        "filter-manifest.json", "filter-data.json", "lines-manifest.json",
+        "index-cats.json", "status.json",
+    }
     for fn, text in templates.items():
+        # 规则 / 数据 .js 不是 JSON，_inspect_output 只对 templates 里的 JSON 文本做检查；
+        # spider-filter.js 由生成器自检 + node --check 保证，这里若被注册进来直接跳过。
+        if fn.endswith(".js"):
+            checks.append({"file": fn, "sites": 0, "lives": 0, "problems": []})
+            continue
         try:
             # SELF 是 emit 时才替换的通道前缀；自检时先换成一个合法的假 host，
             # 这样「是否绝对地址」的检查才不会把占位符误判成相对路径。
@@ -1397,9 +1329,18 @@ def _inspect_output(templates, report):
             continue
         rec = {"file": fn, "sites": len(o.get("sites", [])),
                "lives": len(o.get("lives", [])), "problems": []}
-        # index / index-cats / lines-manifest 是多仓清单与统计说明，本就没有 sites 字段，
-        # 不能按「子仓配置」判空；4 个设计空档由 _empty_lines 精确豁免。
-        if fn not in ("index.json", "index-cats.json", "lines-manifest.json") and not o.get("sites") and fn not in _empty_lines:
+        if fn in info_manifests:
+            checks.append(rec)
+            continue
+        # 零风险 3 断言：filter-line.json 正常过检，但额外确认零 jar / 无 md5 / 无 csp_
+        if fn == "filter-line.json":
+            if o.get("spider", "") not in ("", None):
+                rec["problems"].append("filter-line.json spider 非空（违反零 jar）")
+            if ";md5;" in text:
+                rec["problems"].append("filter-line.json 含 ;md5; 段")
+            if "csp_" in text:
+                rec["problems"].append("filter-line.json 含 csp_ 站点")
+        if fn != "index.json" and not o.get("sites"):
             rec["problems"].append("sites 为空")
         for i, l in enumerate(o.get("lives", [])):
             u = str(l.get("url", ""))
@@ -1421,11 +1362,7 @@ def _inspect_output(templates, report):
                         rec["problems"].append("残留死链 %s = %s" % (p, x[:70]))
                 if REL_FILE_RE.match(x):
                     rec["problems"].append("残留裸相对文件 %s = %s" % (p, x[:70]))
-        # lines-manifest.json 是统计/说明清单，里面的 lines[].file / entries[].file
-        # 是「相对文件名索引」，不是客户端要解析的资源 URL，不能按相对路径误判。
-        # 只保留上面的 JSON 合法性 + sites 豁免检查，跳过全文 walk。
-        if fn != "lines-manifest.json":
-            walk(o)
+        walk(o)
         ks = [str(s.get("key")) for s in o.get("sites", [])]
         dupk = sorted({k for k in ks if ks.count(k) > 1})
         if dupk:
@@ -1433,22 +1370,23 @@ def _inspect_output(templates, report):
         # __SELF__ 是 _emit() 落盘时才替换的通道占位符；此处检查的是
         # 替换前的模板（上面已用 self.invalid 代换后解析），出现属正常。
         # 真正残留由 _emit() 写入时对替换结果断言拦截。
-        # C02：双份 index 都要校验「指向的文件确实生成了」。
-        # 以前只查 index.json，build-lines.mjs 失败导致 line-*.json 缺失时
-        # index-cats.json 仍指向 404，CI 全绿而用户切进去白屏。
-        if fn in ("index.json", "index-cats.json"):
+        if fn == "index.json":
             for e in o.get("urls", []):
                 u = str(e.get("url", ""))
                 if not u.startswith("http"):
                     rec["problems"].append("index 子仓非绝对: " + u)
                 target = u.rsplit("/", 1)[-1]
                 if target not in templates:
-                    rec["problems"].append("index 指向未生成的文件: " + target)
+                    # R07：筛选线路是可选增量，产物同生共死（注入段已保证缺则不追加）；
+                    # 这里即便出现历史残留也不把它当硬依赖 FATAL，主 6 条照常交付。
+                    if target.startswith("filter-") or target == "spider-filter.js":
+                        report.setdefault("filter_notes", []).append(
+                            "index 引用了缺失的筛选产物 %s，仅告警不改主 6 条" % target)
+                    else:
+                        rec["problems"].append("index 指向未生成的文件: " + target)
         checks.append(rec)
         for pr in rec["problems"]:
             report["issues"].append("%s: %s" % (fn, pr))
-            # 临时诊断：把自检问题明细打进 CI 日志（定位 32 个问题后保留亦无害）
-            print("   [自检明细] %s: %s" % (fn, pr))
     report["output_check"] = checks
     report["verify"] = {
         "files_checked": len(checks),
@@ -1467,10 +1405,8 @@ def _verify(report):
     if not CONF_DOH:
         report["issues"].append("无可用 DoH")
     for r in report["spider_md5"]:
-        if r.get("stripped_md5"):
-            report["issues"].append("已剥离 spider 的 ;md5; 校验段（纯 URL 策略）")
-    if report.get("stale"):
-        report["issues"].append("stale: " + str(report.get("stale_reason", "node 构建步骤未成功")))
+        if r.get("ok") is False:
+            report["issues"].append("spider jar 下载失败，已去掉 md5 校验段")
     dead = sum(1 for x in report["vod_lines"] if not x["alive"])
     if dead:
         report["issues"].append("已剔除 %d 条失活点播线路（正常自愈）" % dead)

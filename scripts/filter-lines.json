@@ -1,0 +1,27 @@
+{
+  "_comment": "自有筛选线路清单（最终零风险定稿）。零 jar / 零运行时外网 / 零第三方依赖：CI 每日预生成静态片单，drpy2 规则只读取 1 个同源静态文件并本地过滤。",
+  "_basis": ["DESIGN_ZERO_RISK.md（8 条可验证指标）", "DESIGN_RISKS.md（R01 导出形状 / R02 第 4 参 extend / R03 filters object-of-arrays）", "DESIGN_RESEARCH.md（drpy2 源码级契约，cat-researcher 重写中）"],
+  "_producer": "scripts/build-filter-lines.mjs",
+  "_outputs": [
+    "dist/filter-data.json（CI 每日预生成静态片单，≤500KB）",
+    "dist/spider-filter.js（drpy2 规则，唯一 1 次 req）",
+    "dist/filter-line.json（完整 TVBox 子仓配置，spider 空）",
+    "dist/filter-manifest.json（说明 + 校验信息）"
+  ],
+  "_contract_constants_in_generator": "DRPY2_CONTRACT / RULE_CONTRACT 集中在 build-filter-lines.mjs 顶部，researcher 结论回来后只改那一处",
+  "lines": [
+    {
+      "name": "筛选·自有（每日抽样·本地过滤）",
+      "enabled": true,
+      "engine": "drpy2-builtin",
+      "jar": null,
+      "samplePages": 2,
+      "perBucketMax": 60,
+      "maxItems": 400,
+      "maxBytes": 512000,
+      "dataUrlTemplate": "__SELF__/filter-data.json",
+      "dataUrlResolvedExample": "https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/filter-data.json",
+      "note": "按类型/地区/年代筛选由本仓库自有规则本地实现；片量为每日抽样（每源 pg=1..2），非全量。规则/数据/配置全在用户自己仓库，Pages 与 jsDelivr 同源分发，不引入任何新 jar、无第三方运行时依赖。"
+    }
+  ]
+}
