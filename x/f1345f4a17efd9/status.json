@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T03:33:01Z",
+  "built_at": "2026-11-09T04:39:35Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 73,
+      "ms": 87,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 538,
+      "ms": 163,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 724,
+      "ms": 218,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 975,
+      "ms": 842,
       "total": null,
       "why": "ok"
     },
@@ -286,20 +286,26 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -310,16 +316,10 @@
       "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 26430
+      "bytes": 60000
     },
     {
       "name": "EPG",
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 17
+      "files": 15
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 17
+      "files": 15
     }
   ],
   "issues": [
@@ -562,8 +562,8 @@
   "stale": false,
   "stale_reason": "",
   "user_notice": "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。",
-  "default_entry": "filter-line.json",
-  "visible_entries": 2,
+  "default_entry": "fs4k3.json",
+  "visible_entries": 3,
   "filter_ok": true,
   "summary": {
     "sub_configs": [
@@ -604,26 +604,14 @@
       "problems": []
     },
     {
-      "file": "fs4k.json",
-      "sites": 15,
+      "file": "fs4k3.json",
+      "sites": 4,
       "lives": 0,
       "problems": []
     },
     {
       "file": "fs4k2.json",
-      "sites": 15,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "fs4k3.json",
-      "sites": 14,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "fs4kc.json",
-      "sites": 3,
+      "sites": 4,
       "lives": 0,
       "problems": []
     },
@@ -659,7 +647,7 @@
     }
   ],
   "verify": {
-    "files_checked": 12,
+    "files_checked": 10,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
