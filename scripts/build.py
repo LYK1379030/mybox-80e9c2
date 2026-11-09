@@ -1065,7 +1065,7 @@ def main():
     # 否则 _inspect_output 判「index 指向未生成文件」→ FATAL 停更（CI 实战教训）。
     # 最稳来源 = 本文件内置的 DIRECT_SITES（纯 type:1 直连，零 jar，全壳通用），
     # 不依赖 filmstore4k/dist 当天是否产出。
-    for _miss in ("fs4k3.json", "fs4k2.json"):
+    for _miss in ("fs4k3.json", "fs4k2.json", "fs4kc.json"):
         if _miss in templates:
             continue
         _d = {
