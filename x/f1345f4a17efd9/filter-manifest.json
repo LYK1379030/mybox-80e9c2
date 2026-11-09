@@ -1,19 +1,21 @@
 {
-  "generated": "2026-11-09T00:34:42.234Z",
+  "generated": "2026-11-09T01:34:29.531Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
-    "source": "DESIGN_RESEARCH.md / DESIGN_ZERO_RISK.md / DESIGN_RISKS.md",
-    "engine": "drpy2-builtin（APK 内置 QuickJS，零 jar）",
+    "source": "DRPY2_REAL_CONTRACT.md（最终契约）/ DESIGN_ZERO_RISK.md / DESIGN_RISKS.md",
+    "engine": "drpy2-builtin（APK 内置 QuickJS + spider.js 加载器，零 jar）",
+    "form": "形态②：api = 单个规则 .js（绝对 URL，无 ? / 无 base64 / 无 assets:// / 无 ./）",
     "exportFn": "__jsEvalReturn",
     "globalName": "__JS_SPIDER__",
     "methods": [
-      "homeContent",
-      "homeVodContent",
-      "categoryContent",
-      "detailContent",
-      "searchContent",
-      "playerContent"
+      "init",
+      "home",
+      "homeVod",
+      "category",
+      "detail",
+      "play",
+      "search"
     ],
     "returnType": "JSON-string",
     "filtersShape": "object-of-arrays: {'<type_id>':[{key,name,value:[{n,v}]}]}",
@@ -23,17 +25,25 @@
       "排序",
       "年代"
     ],
-    "categoryArg": "extend（第 4 参）；第 3 参 filter 是布尔开关，绝不作为值字典",
+    "categoryArg": "category(tid, page, filter, ext)：第 4 参 ext 拿点选值；第 3 参 filter 是布尔开关",
     "siteType": 3,
     "siteApi": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/spider-filter.js",
     "spider": "",
-    "ext": "",
+    "ext": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/filter-data.json",
+    "siteJar": "",
     "requestCallPoints": 1,
+    "resolvedByResearch": [
+      "site.type = 3（DRPY2_REAL_CONTRACT §6，ApiConfig.java:740 走 jsLoader）",
+      "api 为绝对 https .js，不带 ? / base64 / assets:// / ./（URL_JOIN 正则要求扩展名结尾）",
+      "规则导出 7 个内部名（bili_open.js L609-620），Java 层自行映射 *Content",
+      "ext 为 filter-data.json 绝对 URL，init(cfg) 读 cfg.ext 后 req() 一次",
+      "返回 JSON-string；extend 中文『类型/地区/年代/排序』与英文 key 双兼容",
+      "顶层 spider 与站点级 jar 均为空字符串，零 JarLoader"
+    ],
     "pendingResearcher": [
-      "site.type 精确取值（当前按同壳惯例 3，DESIGN_RISKS §1 标为真机未验）",
-      "site.api 是否必须含 .js 之外还要 assets:// 前缀（当前纯同源 URL）",
-      "__JS_SPIDER__ 方法返回 String 还是 Object（当前按 String）",
-      "extend 里筛选键名是中文『类型/地区/年代/排序』还是英文 key（当前中文优先 + 英文兜底）"
+      "真机 5 轮 ★1 ↔ 筛选·自有 切线回归不闪退（DESIGN_RISKS §4，需真机）",
+      "AXML usesCleartextTraffic 属性值（数据里 http 源，DESIGN_RISKS R05）",
+      "cfg.ext 在 cat 分支下是否严格为原始 URL 字符串（JsSpider.java:81-82 推断为字符串，需真机）"
     ]
   },
   "line": {
@@ -42,12 +52,12 @@
     "ruleFile": "spider-filter.js",
     "dataFile": "filter-data.json",
     "sitesCount": 1,
-    "jar": null,
+    "jar": "",
     "success": true
   },
   "data": {
-    "items": 232,
-    "bytes": 257020,
+    "items": 230,
+    "bytes": 256417,
     "maxBytes": 512000,
     "samplePages": 2,
     "countIsSample": true,
@@ -65,50 +75,49 @@
     ],
     "buckets": {
       "type": {
-        "综艺": 36,
-        "悬疑": 12,
-        "冒险": 8,
         "剧情": 60,
+        "动画": 30,
+        "奇幻": 21,
+        "爱情": 23,
+        "冒险": 9,
+        "综艺": 37,
+        "悬疑": 11,
         "犯罪": 10,
         "动作": 10,
-        "动画": 26,
-        "爱情": 20,
-        "历史": 4,
-        "传记": 2,
+        "历史": 5,
+        "传记": 3,
         "惊悚": 10,
         "恐怖": 5,
-        "奇幻": 18,
         "喜剧": 18,
         "科幻": 5,
-        "短剧": 23,
-        "战争": 5,
+        "短剧": 27,
+        "战争": 3,
         "纪录片": 3,
         "灾难": 1,
         "武侠": 1
       },
       "area": {
         "韩国": 16,
+        "日本": 54,
+        "泰国": 14,
         "中国大陆": 60,
-        "美国": 16,
-        "日本": 51,
+        "美国": 15,
         "澳大利亚": 1,
         "加拿大": 1,
         "中国香港": 4,
-        "中国台湾": 1,
-        "泰国": 13,
         "比利时,法国,荷兰": 1,
         "马来西亚 / 中国大陆": 2,
         "印度尼西亚": 1,
         "巴西": 1,
+        "台湾": 5,
+        "大陆": 4,
         "英国,加拿大": 1,
         "中国香港,中国大陆": 1,
         "意大利": 1,
-        "内地": 17,
-        "香港": 5,
-        "台湾": 4,
-        "比利时 / 法国 / 荷兰": 1,
-        "大陆": 5,
+        "内地": 18,
+        "香港": 6,
         "法国 / 日本": 1,
+        "中国台湾": 1,
         "美国,英国": 1,
         "法国": 2,
         "英国": 4,
@@ -118,7 +127,7 @@
         "英国 / 美国": 1
       },
       "decade": {
-        "2020年代": 214,
+        "2020年代": 212,
         "2010年代": 14,
         "2000年代": 2,
         "90年代": 0,
@@ -130,14 +139,24 @@
   },
   "audit": {
     "reqCalls": 1,
-    "urls": 1,
+    "urls": 0,
+    "hasInitCfg": true,
     "md5": false,
     "csp": false,
     "spiderEmpty": true,
+    "jarEmpty": true,
+    "apiOk": true,
+    "extOk": true,
+    "methodsOk": true,
     "filtersShapeValid": true,
     "checks": [
       {
-        "name": "零 jar（spider 为空）",
+        "name": "零 jar（顶层 spider 为空）",
+        "pass": true,
+        "actual": "\"\""
+      },
+      {
+        "name": "站点级 jar 为空",
         "pass": true,
         "actual": "\"\""
       },
@@ -152,14 +171,29 @@
         "actual": "none"
       },
       {
-        "name": "request 调用点恰好 1",
+        "name": "api 为 https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/spider-filter.js",
+        "pass": true,
+        "actual": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/spider-filter.js"
+      },
+      {
+        "name": "ext 为 https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/filter-data.json",
+        "pass": true,
+        "actual": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/filter-data.json"
+      },
+      {
+        "name": "req 调用点恰好 1",
         "pass": true,
         "actual": 1
       },
       {
-        "name": "规则内 URL 恰好 1",
+        "name": "规则内写死 URL 为 0（改由 init(cfg).ext 注入）",
         "pass": true,
-        "actual": 1
+        "actual": "urls=0 initCfg=true"
+      },
+      {
+        "name": "__jsEvalReturn 导出 7 个内部名",
+        "pass": true,
+        "actual": "init,home,homeVod,category,detail,play,search"
       },
       {
         "name": "filters object-of-arrays + key=type_id",
@@ -170,10 +204,24 @@
   },
   "degradation": [
     "任何源挂掉 / 全失败都 exit 0，产出合法 filter-data.json（沿用上一版 stale:true 或空数据）",
-    "规则全文恰好 1 个 req 调用点、1 个 URL，零运行时抓源（R04 防 ANR）",
-    "spider 为空 → 走内置 QuickJS，零 jar（DESIGN_ZERO_RISK 指标 2）",
+    "规则全文恰好 1 个 req 调用点；URL 由 init(cfg).ext 注入，规则内 0 个写死 https://（R04 防 ANR + 主备双通道零分叉）",
+    "顶层 spider 与站点级 jar 均为空字符串 → 走内置 QuickJS，零 jar（DESIGN_ZERO_RISK 指标 2）",
     "filters 为 object-of-arrays，首层 key 严格等于 class type_id（R03）",
-    "categoryContent 只用第 4 参 extend 取点选值（R02）"
+    "category(tid, page, filter, ext) 只用第 4 参 ext 取点选值（R02）",
+    "__jsEvalReturn 导出 7 个内部名（DRPY2_REAL_CONTRACT / bili_open.js L609-620），Java 层自行映射 *Content"
+  ],
+  "contractResolved": [
+    "site.type = 3（DRPY2_REAL_CONTRACT §6，ApiConfig.java:740 走 jsLoader）",
+    "api 为绝对 https .js，不带 ? / base64 / assets:// / ./（URL_JOIN 正则要求扩展名结尾）",
+    "规则导出 7 个内部名（bili_open.js L609-620），Java 层自行映射 *Content",
+    "ext 为 filter-data.json 绝对 URL，init(cfg) 读 cfg.ext 后 req() 一次",
+    "返回 JSON-string；extend 中文『类型/地区/年代/排序』与英文 key 双兼容",
+    "顶层 spider 与站点级 jar 均为空字符串，零 JarLoader"
+  ],
+  "pendingResearcher": [
+    "真机 5 轮 ★1 ↔ 筛选·自有 切线回归不闪退（DESIGN_RISKS §4，需真机）",
+    "AXML usesCleartextTraffic 属性值（数据里 http 源，DESIGN_RISKS R05）",
+    "cfg.ext 在 cat 分支下是否严格为原始 URL 字符串（JsSpider.java:81-82 推断为字符串，需真机）"
   ],
   "lines": [
     {

@@ -1,34 +1,39 @@
 /**
  * spider-filter.js —— 自有 drpy2 规则（scripts/build-filter-lines.mjs 每日生成）
  *
- * 契约来源：DESIGN_RESEARCH.md（cat-researcher 零 jar drpy2 版）、
- *           DESIGN_ZERO_RISK.md（8 条零风险指标）、DESIGN_RISKS.md（R01/R02/R03/R04）。
+ * 契约来源：DRPY2_REAL_CONTRACT.md（cat-researcher 最终契约，形态②）
+ *           + bili_open.js L609-620（真实能跑规则的导出形状）
+ *           + DESIGN_ZERO_RISK.md（8 条零风险指标）/ DESIGN_RISKS.md（R01/R02/R03/R04）。
  * 加载链：APK assets/js/lib/spider.js
  *   import * as spider from '%s'
  *   globalThis.__JS_SPIDER__ = spider.__jsEvalReturn()
- * → 本文件必须导出 __jsEvalReturn()，返回 6 个 *Content 方法（R01）。
+ * → 本文件导出 __jsEvalReturn()，返回 7 个【内部名】
+ *   {init, home, homeVod, category, detail, play, search}。
+ *   homeContent/categoryContent/... 是 Java 层 JsSpider.java:97-154 的映射名，
+ *   写进规则会取不到方法 → 静默空页（R01 决定性事实）。
  *
- * 零 jar：filter-line.json 的 spider 为空，走内置 QuickJS，不触发 JarLoader。
- * 零运行时外网：全文只有 1 个网络读取调用点（homeContent 内），指向自托管静态数据；
- *   无循环抓源、无第二个 URL、无同步并发（R04 防 ANR）。
+ * 零 jar：filter-line.json 顶层 spider:"" + 站点级 jar:""，走内置 QuickJS，不触发 JarLoader。
+ * 零运行时外网：全文只有 1 个 req() 调用点，URL 由 init(cfg).ext 注入
+ *   （形态②的 ext = filter-data.json 绝对 URL）；无循环抓源、无第二个 URL（R04 防 ANR）。
  * 零白屏：数据拉取失败时返回固定 class + 固定四排 filters + 空 list（R11）。
  *
- * 三处静默空页陷阱已按契约锁死：
- *   R01 导出名：见 __jsEvalReturn 返回对象
- *   R02 categoryContent 只用第 4 参 extend 取点选值，第 3 参 filter 仅当布尔开关
+ * 三处静默空页陷阱已按真实契约锁死：
+ *   R01 导出名：7 个内部名，见 __jsEvalReturn 返回对象
+ *   R02 category(tid, page, filter, ext) 只用第 4 参 ext 取点选值，第 3 参 filter 仅布尔
  *   R03 filters 为 object-of-arrays，首层 key 严格等于 class[].type_id
  */
 
 var CONTRACT = {
-  "source": "DESIGN_RESEARCH.md / DESIGN_ZERO_RISK.md / DESIGN_RISKS.md",
+  "source": "DRPY2_REAL_CONTRACT.md（最终契约）/ DESIGN_ZERO_RISK.md / DESIGN_RISKS.md",
   "exportFn": "__jsEvalReturn",
   "methods": [
-    "homeContent",
-    "homeVodContent",
-    "categoryContent",
-    "detailContent",
-    "searchContent",
-    "playerContent"
+    "init",
+    "home",
+    "homeVod",
+    "category",
+    "detail",
+    "play",
+    "search"
   ],
   "returnType": "JSON-string",
   "filtersShape": "object-of-arrays: {'<type_id>':[{key,name,value:[{n,v}]}]}",
@@ -38,10 +43,10 @@ var CONTRACT = {
     "排序",
     "年代"
   ],
-  "categoryArg": "extend（第 4 参）；第 3 参 filter 是布尔开关，绝不作为值字典",
+  "categoryArg": "category(tid, page, filter, ext)：第 4 参 ext 拿点选值；第 3 参 filter 是布尔开关",
   "dataFile": "filter-data.json"
 };
-var GENERATED_AT = "2026-11-09T00:34:42.234Z";
+var GENERATED_AT = "2026-11-09T01:34:29.531Z";
 var CURRENT_UTC_YEAR = 2026;
 var DECADE_KEYS = ["2020年代","2010年代","2000年代","90年代","80年代","更早","年代不详"];
 var CLASSES = [{"type_id":"all","type_name":"全部"},{"type_id":"movie","type_name":"电影"},{"type_id":"tv","type_name":"剧集"},{"type_id":"anime","type_name":"动漫"},{"type_id":"variety","type_name":"综艺"},{"type_id":"doc","type_name":"纪录"},{"type_id":"short","type_name":"短剧"},{"type_id":"sports","type_name":"体育"}];
@@ -52,6 +57,18 @@ var PAGE_SIZE = 20;
 
 var DATA = null;
 var DATA_ATTEMPTED = false;
+// 数据 URL 由 init(cfg) 从 cfg.ext 注入；规则文本里不写死任何 https:// 字面量，
+// 主备双通道各自把 https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9 替换成自己的前缀，不再分叉。
+var DATA_URL = '';
+function init(cfg) {
+  try {
+    var e = cfg && cfg.ext;
+    if (typeof e === 'string' && e) DATA_URL = e;
+    else if (e && typeof e === 'object' && e.ext) DATA_URL = String(e.ext);
+  } catch (err) { logMsg('init(cfg) 读取 ext 失败', err && err.message); }
+  logMsg('init', GENERATED_AT, 'dataUrl=' + DATA_URL);
+  return '';
+}
 
 function jstr(o) { try { return JSON.stringify(o); } catch (e) { return '{}'; } }
 function s(x) { return x === null || x === undefined ? '' : String(x); }
@@ -84,12 +101,12 @@ function fallbackFilters() {
   return f;
 }
 
-/** 唯一一次网络读取：只在 homeContent 内、只调 1 次、只指向自托管静态数据 */
-function homeContent() {
+/** 唯一一次网络读取：只在 home() 内、只调 1 次、URL 来自 init(cfg).ext */
+function home(filter) {
   if (!DATA_ATTEMPTED) {
     DATA_ATTEMPTED = true;
     try {
-      var raw = req("https://lyk1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/filter-data.json");
+      var raw = req(DATA_URL);
       DATA = JSON.parse(raw);
       if (!DATA || !DATA.list) DATA = null;
     } catch (e) {
@@ -97,6 +114,8 @@ function homeContent() {
       logMsg('静态数据读取失败，使用空数据兜底', e && e.message);
     }
   }
+  // bili_open.js L144-152：filter 为真才挂 filters；我们的 filters 恒定四排，
+  // 无论 filter 真假都返回，保证面板一定出现（filter 只当布尔开关用）。
   var cls = DATA && DATA['class'] && DATA['class'].length ? DATA['class'] : CLASSES;
   var filters = DATA && DATA.filters ? DATA.filters : fallbackFilters();
   var list = DATA && DATA.list ? DATA.list.slice(0, PAGE_SIZE) : [];
@@ -105,18 +124,18 @@ function homeContent() {
 
 /** 其余方法只触发一次数据读取，之后全在内存里跑，绝不再次联网 */
 function ensure() {
-  if (!DATA_ATTEMPTED) homeContent();
+  if (!DATA_ATTEMPTED) home(false);
   return DATA;
 }
 function pool() { var d = ensure(); return d && d.list ? d.list : []; }
 
-function homeVodContent() {
+function homeVod() {
   return jstr({ list: pool().slice(0, PAGE_SIZE) });
 }
 
-/** 第 4 参 extend = 点选值字典；第 3 参 filter 只是布尔开关，绝不读它当值（R02） */
-function categoryContent(tid, pg, filter, extend) {
-  var fl = extend;
+/** 第 4 参 ext = 点选值字典；第 3 参 filter 只是布尔开关，绝不读它当值（R02） */
+function category(tid, page, filter, ext) {
+  var fl = ext;
   if (typeof fl === 'string') { try { fl = JSON.parse(fl); } catch (e) { fl = {}; } }
   if (!fl || typeof fl !== 'object') fl = {};
   var type = pick(fl, ['类型', 'type', 'genre']);
@@ -155,7 +174,7 @@ function categoryContent(tid, pg, filter, extend) {
   } else {
     arr.sort(function (a, b) { return s(b.vod_time).localeCompare(s(a.vod_time)); });
   }
-  var p = parseInt(pg, 10) || 1;
+  var p = parseInt(page, 10) || 1;
   var start = (p - 1) * PAGE_SIZE;
   return jstr({
     list: arr.slice(start, start + PAGE_SIZE),
@@ -173,7 +192,7 @@ function pick(fl, keys) {
   return '';
 }
 
-function searchContent(wd, quick, pg) {
+function search(wd, quick, pg) {
   var kw = s(wd).trim().toLowerCase();
   if (!kw) return jstr({ list: [] });
   var out = [], all = pool();
@@ -183,9 +202,9 @@ function searchContent(wd, quick, pg) {
   return jstr({ list: out, page: parseInt(pg, 10) || 1, pagecount: 1, total: out.length });
 }
 
-/** 详情：入参可能是数组或字符串；只从内存数据取，不联网 */
-function detailContent(ids) {
-  var list = Array.isArray(ids) ? ids : [ids];
+/** 详情：入参可能是数组或字符串（bili_open 的 detail(id) 形态）；只从内存数据取，不联网 */
+function detail(id) {
+  var list = Array.isArray(id) ? id : [id];
   var out = [], all = pool();
   for (var n = 0; n < list.length && n < 20; n++) {
     var id = s(list[n]);
@@ -202,7 +221,7 @@ function detailContent(ids) {
 }
 
 /** 播放：返回数据里的播放地址；无解析、无嗅探、无联网 */
-function playerContent(flag, id, flags) {
+function play(flag, id, flags) {
   var all = pool(), url = '';
   for (var i = 0; i < all.length; i++) {
     var it = all[i];
@@ -212,17 +231,18 @@ function playerContent(flag, id, flags) {
   return jstr({ parse: 0, url: url, header: {} });
 }
 
-/** R01：导出名严格为 6 个 *Content 方法，形状集中由 CONTRACT.methods 声明 */
+/** R01（DRPY2_REAL_CONTRACT）：导出 7 个内部名，Java 层自行映射 *Content */
 export function __jsEvalReturn() {
   return {
-    homeContent: homeContent,
-    homeVodContent: homeVodContent,
-    categoryContent: categoryContent,
-    detailContent: detailContent,
-    searchContent: searchContent,
-    playerContent: playerContent,
+    init: init,
+    home: home,
+    homeVod: homeVod,
+    category: category,
+    detail: detail,
+    play: play,
+    search: search,
     __contract: CONTRACT
   };
 }
-// fallback 分支（spider.js 的 default 分支）；同样导出 6 个方法名
+// fallback 分支（spider.js 的 default 分支）；同样返回 7 个内部名
 export default __jsEvalReturn;

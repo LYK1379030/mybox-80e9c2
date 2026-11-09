@@ -8,7 +8,8 @@
       "name": "筛选·自有（每日抽样·本地过滤）",
       "type": 3,
       "api": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/spider-filter.js",
-      "ext": "",
+      "ext": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/filter-data.json",
+      "jar": "",
       "filterable": 1,
       "searchable": 1,
       "quickSearch": 1,
@@ -19,9 +20,9 @@
   "parses": [],
   "flags": [],
   "_meta": {
-    "generated": "2026-11-09T00:34:42.234Z",
+    "generated": "2026-11-09T01:34:29.531Z",
     "producer": "scripts/build-filter-lines.mjs",
-    "engine": "drpy2-builtin（APK 内置 QuickJS，零 jar）",
+    "engine": "drpy2-builtin（APK 内置 QuickJS + spider.js 加载器，零 jar）",
     "zeroJar": true,
     "dataFile": "filter-data.json",
     "ruleFile": "spider-filter.js"
