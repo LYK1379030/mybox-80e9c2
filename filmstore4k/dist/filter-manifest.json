@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T08:06:44.915Z",
+  "generated": "2026-11-09T08:17:11.315Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 491917,
+    "bytes": 491866,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 249,
     "seedCount": 16,
-    "searchIndexTerms": 3910,
+    "searchIndexTerms": 3906,
     "searchIndexNames": 800,
-    "searchIndexBytes": 95706,
+    "searchIndexBytes": 95620,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -90,9 +90,9 @@
         "惊悚": 17,
         "战争": 10,
         "剧情": 60,
-        "爱情": 58,
-        "犯罪": 35,
-        "喜剧": 39,
+        "爱情": 59,
+        "犯罪": 36,
+        "喜剧": 40,
         "短剧": 59,
         "武侠": 6,
         "奇幻": 60,
@@ -213,7 +213,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3910"
+        "actual": "names=800 terms=3906"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",

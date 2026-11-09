@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T08:07:03Z",
+  "built_at": "2026-11-09T08:17:31Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 67,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 536,
+      "ms": 57,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 548,
+      "ms": 604,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 738,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 855,
+      "ms": 846,
       "total": null,
       "why": "ok"
     },
@@ -298,20 +298,8 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -320,6 +308,18 @@
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 18
+      "files": 17
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 18
+      "files": 17
     }
   ],
   "issues": [
@@ -652,12 +652,6 @@
       "problems": []
     },
     {
-      "file": "flt.json",
-      "sites": 107,
-      "lives": 1,
-      "problems": []
-    },
-    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -665,7 +659,7 @@
     }
   ],
   "verify": {
-    "files_checked": 13,
+    "files_checked": 12,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,

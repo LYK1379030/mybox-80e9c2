@@ -1,11 +1,7 @@
 {
   "urls": [
     {
-      "name": "打开就能看（能筛选）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/flt.json"
-    },
-    {
-      "name": "看不了点这里",
+      "name": "打开就能看",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4k3.json"
     }
   ]
