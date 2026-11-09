@@ -1119,12 +1119,29 @@ def main():
         report.setdefault("filter_notes", []).extend(_filter_notes)
 
     # 恰好 2 条人话线路（无数字/星号/括号/技术词）
+    # jar 路线（第三方确认：本壳只吃 csp_* jar，不吃自写 .js）
+    # flt.json 由 build-filter-lines 侧预生成：107 个 csp_ 站 / 52 个带筛选面板。
+    _flt_text = ""
+    try:
+        _fp = os.path.join(ROOT, "filmstore4k", "dist", "flt.json")
+        if os.path.isfile(_fp):
+            _flt_text = open(_fp, encoding="utf-8").read()
+            _fo = json.loads(_flt_text)
+            print("   [jar线] flt.json 已接入（%d 站，jar=%s）" % (
+                len(_fo.get("sites") or []), "自托管" if "4konly/" in str(_fo.get("spider")) else str(_fo.get("spider"))[:40]))
+        else:
+            print("   ⚠ flt.json 缺失，jar 线不接入（只留直连兜底）")
+    except Exception as _fe:
+        print("   ⚠ flt.json 读取失败（跳过）: %s" % _fe)
     # 只保留一条：真机上唯一确认能出片的直连源。
     # 【2026-11-09 真机教训】自有规则站(filter-line)在该软件里加载不出内容，
     # 留它在列表里就是"摆设"。宁少不假：不能用的线路一律不展示给用户。
-    entries = [
-        {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
-    ]
+    entries = []
+    if _flt_text:
+        entries.append({"name": "打开就能看（能筛选）", "url": SELF + "/flt.json"})
+    entries.append({"name": "看不了点这里", "url": SELF + "/fs4k3.json"})
+    if _flt_text:
+        templates["flt.json"] = _flt_text
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
