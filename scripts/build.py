@@ -1036,51 +1036,32 @@ def main():
             with open(_fs4k_path, encoding="utf-8") as _f:
                 _fs4k = json.load(_f)
             if _fs4k.get("sites"):
-                # 兼容性兜底（APP_FAILURE.md）：默认/备用线必须是全壳通用 type:1，
-                # 顶层 spider 带的 candymuj.jar;md5; 会让 360 锁版 / 精简壳
-                # 因 jar 下载或校验失败整仓拒载。只改 build.py 派生产物，
-                # 不动 filmstore4k/build-fs4k.js 源构建器。
-                # 第 3 条备用也必须纯直连：混合线里那 1 个 csp_Wogg(type:3) 在
-                # spider 置空后会找不到 jar 类 → 点它空页。备用与默认用同一份纯直连站集，
-                # 只保留版本化文件名做缓存键，不引入任何死站。
+                # 注册进 templates：随双通道一起输出 + 通过自检校验
+                _fs4k_text = json.dumps(_fs4k, ensure_ascii=False, indent=2)
+                templates["fs4k.json"] = _fs4k_text
+                # fs4k2 = 版本化副本（全新缓存键）：jsDelivr 对改坏过的路径可能钉死旧缓存，
+                # index 指向 fs4k2.json 绕开一切历史污染（实战教训）
+                templates["fs4k2.json"] = _fs4k_text
+                # fs4k3 = 纯直连保底线（零 jar 依赖），任何客户端保证可用
+                import re as _re
                 _fs4k3_direct = [s for s in _fs4k["sites"] if str(s.get("api", "")).startswith("http")]
                 if _fs4k3_direct:
-                    _fs4k3 = dict(_fs4k2)
-                    _fs4k3["spider"] = ""
-                    _fs4k3["notice"] = "打不开就换一条，这条是直连片源。"
+                    _fs4k3 = dict(_fs4k)
+                    # spider 继承 config（candymuj）——无 jar 方案实测切线会触发影视仓 BadTokenException
                     _fs4k3["sites"] = _fs4k3_direct
-                    _fs4k3_text = json.dumps(_fs4k3, ensure_ascii=False, indent=2)
-                    templates["fs4k.json"] = _fs4k3_text
-                    templates["fs4k2.json"] = _fs4k3_text
-                    templates["fs4k3.json"] = _fs4k3_text
-                    print("   ③B fs4k3/fs4k2 纯直连保底线已接入（%d 站，零 jar，无 csp 死站）" % len(_fs4k3_direct))
+                    templates["fs4k3.json"] = json.dumps(_fs4k3, ensure_ascii=False, indent=2)
+                    print("   ③B fs4k3.json 纯直连保底线已接入（%d 站）" % len(_fs4k3_direct))
                 # fs4kc.json 仍注册进 templates（后台自愈 / purge），不进用户可见 index
                 if os.path.isfile(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json")):
                     templates["fs4kc.json"] = open(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json"), encoding="utf-8").read()
-                # 下面收敛段会把 fs4k3（第 1 条默认）与 fs4k2（第 3 条备用）写进 entries。
-                print("   ③ fs4k.json/fs4k2.json 已生成（%d 站，零 jar；fs4k3 作默认）" % len(_fs4k["sites"]))
+                # 备用线 fs4k3.json 仍注册进 templates（不进 entries），
+                # 下面收敛段会用「看不了点这里」指向它。
+                print("   ③ fs4k.json/fs4k2.json 已生成（%d 站，不写入用户可见 index）" % len(_fs4k["sites"]))
         except Exception as _e:
             print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
-    # 兜底：无论上面 fs4k 注入成功与否，index 里 3 条线路指向的文件必须都在 templates，
-    # 否则 _inspect_output 判「index 指向未生成文件」→ FATAL 停更（CI 实战教训）。
-    # 最稳来源 = 本文件内置的 DIRECT_SITES（纯 type:1 直连，零 jar，全壳通用），
-    # 不依赖 filmstore4k/dist 当天是否产出。
-    for _miss in ("fs4k3.json", "fs4k2.json"):
-        if _miss in templates:
-            continue
-        _d = {
-            "spider": "",
-            "wallpaper": "",
-            "sites": [dict(s) for s in DIRECT_SITES],
-            "lives": [], "parses": [], "flags": [], "ads": [],
-            "notice": "打不开就换一条，这条是直连片源。",
-            "_meta": {"note": "内置直连兜底，零 jar，任何 TVBox 系壳可用", "sites": len(DIRECT_SITES)},
-        }
-        templates[_miss] = json.dumps(_d, ensure_ascii=False, indent=2)
-        print("   [兜底] %s 由 DIRECT_SITES 内置派生（%d 站，零 jar）" % (_miss, len(DIRECT_SITES)))
     # 4k.json / c1.json / c2.json 等老线仍由前面流程写进 templates，照常自愈与 purge。
 
-    # ---- 筛选线路：可选第 2 条（挑壳；四排筛选/精准搜索）----
+    # ---- 筛选线路：默认第一条（FINAL_GOAL.md 指标 1/3）----
     # CI 由 build-filter-lines.mjs 在 filmstore4k/dist/ 预生成 4 个同源静态文件：
     #   filter-line.json（子仓配置）/ filter-data.json（静态片单 + searchIndex）/
     #   spider-filter.js（drpy2 规则，仅 1 次 req）/ filter-manifest.json（说明清单）
@@ -1120,7 +1101,7 @@ def main():
                 with open(os.path.join(_filter_dir, _fn), encoding="utf-8") as _f:
                     templates[_fn] = _f.read()
             _filter_ok = True
-            print("   筛选线路已注册（4 产物同源、零 jar），作为可选第 2 条")
+            print("   筛选线路已注册（4 产物同源、零 jar），作为默认第一条")
         # stale 字段：从 filter-manifest.json 读，写进 status.json 给维护者看
         try:
             with open(os.path.join(_filter_dir, "filter-manifest.json"), encoding="utf-8") as _fmf:
@@ -1137,22 +1118,17 @@ def main():
     if _filter_notes:
         report.setdefault("filter_notes", []).extend(_filter_notes)
 
-    # 兼容性兜底（APP_FAILURE.md）：恰好 3 条人话线路。
-    # 第 1 条 = fs4k3（14 个 type:1 直连、零 jar），任何 TVBox 壳都能解析；
-    # 第 2 条 = filter-line（drpy2 规则站，四排筛选/精准搜索，挑壳，可选）；
-    # 第 3 条 = fs4k2（同样零 jar 的直连备用）。
-    # 三个 target 都已在 templates 注册，_inspect_output 的「index 指向未生成文件」全过。
+    # 恰好 2 条人话线路（无数字/星号/括号/技术词）
     entries = [
-        {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
-        {"name": "想按类型年代挑片点这里", "url": SELF + "/filter-line.json"},
-        {"name": "看不了点这里", "url": SELF + "/fs4k2.json"},
+        {"name": "打开就能看", "url": SELF + "/filter-line.json"},
+        {"name": "看不了点这里", "url": SELF + "/fs4k3.json"},
     ]
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
     report["user_notice"] = ("暂时用昨天的片单，正在自动恢复。" if _stale else _user_notice)
-    report["default_entry"] = "fs4k3.json"
-    report["visible_entries"] = 3
+    report["default_entry"] = "filter-line.json"
+    report["visible_entries"] = 2
     report["filter_ok"] = _filter_ok
     if "filter-line.json" in templates:
         try:
@@ -1438,7 +1414,6 @@ def _inspect_output(templates, report):
         checks.append(rec)
         for pr in rec["problems"]:
             report["issues"].append("%s: %s" % (fn, pr))
-            print("   [自检明细] %s: %s" % (fn, pr))
     report["output_check"] = checks
     report["verify"] = {
         "files_checked": len(checks),
