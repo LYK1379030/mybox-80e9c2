@@ -45,7 +45,7 @@ var CONTRACT = {
   "categoryArg": "category(tid, page, filter, ext)：第 4 参 ext 拿点选值；第 3 参 filter 是布尔开关",
   "dataFile": "filter-data.json"
 };
-var GENERATED_AT = "2026-11-09T02:53:21.162Z";
+var GENERATED_AT = "2026-11-09T03:32:41.683Z";
 var CURRENT_UTC_YEAR = 2026;
 var DECADE_KEYS = ["2020年代","2010年代","2000年代","90年代","80年代","更早","年代不详"];
 var CLASSES = [{"type_id":"all","type_name":"全部"},{"type_id":"movie","type_name":"电影"},{"type_id":"tv","type_name":"剧集"},{"type_id":"anime","type_name":"动漫"},{"type_id":"variety","type_name":"综艺"},{"type_id":"doc","type_name":"纪录"},{"type_id":"short","type_name":"短剧"},{"type_id":"sports","type_name":"体育"}];
@@ -191,17 +191,94 @@ function pick(fl, keys) {
   return '';
 }
 
-function search(wd, quick, pg) {
-  var kw = s(wd).trim().toLowerCase();
-  if (!kw) return jstr({ list: [] });
-  var out = [], all = pool();
-  for (var i = 0; i < all.length && out.length < PAGE_SIZE * 3; i++) {
-    if (s(all[i].vod_name).toLowerCase().indexOf(kw) >= 0) out.push(all[i]);
+// ── 搜索相关性（照抄 SEARCH_DIAGNOSIS.md §②，纯本地、无网络） ──
+var S2T = { '飆': '飙', '週': '周', '處': '处', '灣': '湾', '臺': '台', '國': '国', '劇': '剧', '電影': '电影' };
+function norm(x) {
+  var t = s(x);
+  try { t = t.normalize('NFKC').toLowerCase(); } catch (e) { t = t.toLowerCase(); }
+  t = t.replace(/[ⅡⅢⅣ]/g, function (m) { return ({ 'Ⅱ': '2', 'Ⅲ': '3', 'Ⅳ': '4' })[m] || m; });
+  for (var k in S2T) if (Object.prototype.hasOwnProperty.call(S2T, k)) t = t.split(k).join(S2T[k]);
+  return t.replace(/[\s\-_.·•【】\[\]()（）「」《》:：,，!！?？'"]+/g, '');
+}
+var SPIN = /(之|外传|番外|前传|后传|大夏|宿命|风云|再次冒险|特别版|解说|预告|花絮|片花|短剧|动态漫|抢先|完整版|国语|粤语|中字|字幕|199\d|ai$|人生|商界|傲视|至尊)/;
+var DERIV = /(解说|预告|花絮|片花|动态漫|电影解说|抢先版)/;
+var SEQ_PURE = /^[0-9一二三四五六七八九十]+(季|部|集)?$/;
+function relScore(name, kw) {
+  var n = norm(name), k = norm(kw);
+  if (!n || !k) return -1;
+  if (n === k) return 1000;
+  if (n.indexOf(k) === 0) {
+    var tail = n.slice(k.length);
+    if (SEQ_PURE.test(tail)) return 600;
+    var sc = 300 - tail.length * 15;
+    if (SPIN.test(tail)) sc -= 220;
+    if (DERIV.test(tail)) sc -= 180;
+    return sc;
   }
-  return jstr({ list: out, page: parseInt(pg, 10) || 1, pagecount: 1, total: out.length });
+  if (n.indexOf(k) >= 0) return 150 - (n.length - k.length) * 8;
+  return -1;
+}
+/** 索引取候选：精确 key 命中优先，2gram 召回补充；无索引时退化为全池扫描 */
+function searchCandidates(kw) {
+  var d = ensure();
+  var all = pool();
+  var idx = d && d.searchIndex;
+  var k = norm(kw);
+  var seen = {}, order = [], out = [];
+  if (idx && idx.byName) {
+    for (var key in idx.byName) {
+      if (!Object.prototype.hasOwnProperty.call(idx.byName, key)) continue;
+      if (key === k || key.indexOf(k) >= 0 || k.indexOf(key) >= 0) {
+        var arr = idx.byName[key];
+        for (var a = 0; a < arr.length; a++) if (!seen[arr[a]]) { seen[arr[a]] = 1; order.push(arr[a]); }
+      }
+    }
+    if (idx.terms) for (var g in idx.terms) {
+      if (!Object.prototype.hasOwnProperty.call(idx.terms, g) || k.indexOf(g) < 0) continue;
+      var t = idx.terms[g];
+      for (var b = 0; b < t.length; b++) if (!seen[t[b]]) { seen[t[b]] = 1; order.push(t[b]); }
+    }
+  }
+  if (!order.length) for (var i = 0; i < all.length; i++) { seen[i] = 1; order.push(i); }
+  for (var j = 0; j < order.length; j++) if (all[order[j]]) out.push(all[order[j]]);
+  return out;
+}
+function search(wd, quick, pg) {
+  var kw = s(wd).trim();
+  if (!kw) return jstr({ list: [] });
+  var cand = searchCandidates(kw);
+  var scored = [], dedup = {};
+  for (var i = 0; i < cand.length; i++) {
+    var it = cand[i];
+    var sc = relScore(it.vod_name, kw);
+    if (sc < 0) continue;
+    var dk = norm(it.vod_name);
+    // 归一化片名去重：同键只留分最高那条（正片优先于解说/蹭名片）
+    if (dedup[dk] !== undefined) {
+      if (sc <= scored[dedup[dk]].s) continue;
+      scored[dedup[dk]] = { it: it, s: sc };
+    } else { dedup[dk] = scored.length; scored.push({ it: it, s: sc }); }
+  }
+  scored.sort(function (a, b) {
+    return b.s - a.s
+      || (Number(b.it.vod_year) || 0) - (Number(a.it.vod_year) || 0)
+      || s(b.it.vod_time).localeCompare(s(a.it.vod_time));
+  });
+  var rows = [];
+  for (var k2 = 0; k2 < scored.length; k2++) rows.push(scored[k2].it);
+  var p = parseInt(pg, 10) || 1;
+  var start = (p - 1) * PAGE_SIZE;
+  var size = quick ? Math.min(10, PAGE_SIZE) : PAGE_SIZE;
+  var list = rows.slice(start, start + size);
+  return jstr({
+    list: list, page: p,
+    pagecount: Math.max(1, Math.ceil(rows.length / size)),
+    limit: size, total: rows.length
+  });
 }
 
-/** 详情：入参可能是数组或字符串（bili_open 的 detail(id) 形态）；只从内存数据取，不联网 */
+/** 详情：入参可能是数组或字符串（bili_open 的 detail(id) 形态）；只从内存数据取，不联网。
+ *  数据已按 8 字段精简，这里把缺失的长文本字段用片名/播放串回填成可播结构。 */
 function detail(id) {
   var list = Array.isArray(id) ? id : [id];
   var out = [], all = pool();
@@ -212,6 +289,10 @@ function detail(id) {
       var v = {};
       for (var k in all[i]) if (Object.prototype.hasOwnProperty.call(all[i], k)) v[k] = all[i][k];
       v.vod_content = s(v.vod_content || v.vod_name);
+      v.vod_actor = s(v.vod_actor || '');
+      v.vod_director = s(v.vod_director || '');
+      v.vod_play_from = s(v.vod_play_from || '自有');
+      v.vod_play_url = s(v.vod_play_url || '');
       out.push(v);
       break;
     }

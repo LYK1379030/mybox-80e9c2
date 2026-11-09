@@ -1,32 +1,12 @@
 {
   "urls": [
     {
-      "name": "★1 主用·聚合全站（15 站·1485974条资源）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4k2.json"
-    },
-    {
-      "name": " 2 备用·纯直连保底（最稳）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4k3.json"
-    },
-    {
-      "name": " 3 进阶·4K网盘专线（低配设备勿试）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4kc.json"
-    },
-    {
-      "name": "老线·直连合集（21条）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c1.json"
-    },
-    {
-      "name": "老线·直连合集（46条）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/c2.json"
-    },
-    {
-      "name": " 5 老线·4K直连专区（8 条·免授权）",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/4k.json"
-    },
-    {
-      "name": "筛选·自有（每日抽样·本地过滤）",
+      "name": "打开就能看",
       "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/filter-line.json"
+    },
+    {
+      "name": "看不了点这里",
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/fs4k3.json"
     }
   ]
 }

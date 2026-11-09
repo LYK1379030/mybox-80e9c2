@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T02:53:25Z",
+  "built_at": "2026-11-09T03:33:01Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 285,
+      "ms": 73,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 521,
+      "ms": 538,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 705,
+      "ms": 724,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 844,
+      "ms": 975,
       "total": null,
       "why": "ok"
     },
@@ -286,16 +286,22 @@
   ],
   "parses": [
     {
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "771949",
@@ -314,12 +320,6 @@
       "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
-      "ok": false,
-      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 26430
     },
     {
       "name": "EPG",
@@ -559,6 +559,12 @@
   ],
   "epg_ok": true,
   "vod_total": 6,
+  "stale": false,
+  "stale_reason": "",
+  "user_notice": "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。",
+  "default_entry": "filter-line.json",
+  "visible_entries": 2,
+  "filter_ok": true,
   "summary": {
     "sub_configs": [
       [

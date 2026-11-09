@@ -1,11 +1,11 @@
 {
   "spider": "",
-  "notice": "自有规则本地筛选·每日抽样·零第三方依赖；按类型/地区/年代筛选由本仓库规则本地实现，片量为每日抽样，非全量。",
+  "notice": "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。",
   "wallpaper": "",
   "sites": [
     {
       "key": "own_filter",
-      "name": "筛选·自有（每日抽样·本地过滤）",
+      "name": "打开就能看",
       "type": 3,
       "api": "__SELF__/spider-filter.js",
       "ext": "__SELF__/filter-data.json",
@@ -20,7 +20,7 @@
   "parses": [],
   "flags": [],
   "_meta": {
-    "generated": "2026-11-09T02:53:21.162Z",
+    "generated": "2026-11-09T03:32:41.683Z",
     "producer": "scripts/build-filter-lines.mjs",
     "engine": "drpy2-builtin（APK 内置 QuickJS + spider.js 加载器，零 jar）",
     "zeroJar": true,
