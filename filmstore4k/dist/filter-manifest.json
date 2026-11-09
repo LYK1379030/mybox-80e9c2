@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T08:03:39.475Z",
+  "generated": "2026-11-09T08:06:44.915Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 492212,
+    "bytes": 491917,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 249,
     "seedCount": 16,
-    "searchIndexTerms": 3902,
+    "searchIndexTerms": 3910,
     "searchIndexNames": 800,
-    "searchIndexBytes": 95524,
+    "searchIndexBytes": 95706,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -87,11 +87,11 @@
         "悬疑": 49,
         "综艺": 60,
         "动作": 49,
-        "惊悚": 16,
+        "惊悚": 17,
         "战争": 10,
         "剧情": 60,
         "爱情": 58,
-        "犯罪": 34,
+        "犯罪": 35,
         "喜剧": 39,
         "短剧": 59,
         "武侠": 6,
@@ -107,7 +107,7 @@
         "中国大陆": 60,
         "大陆": 60,
         "日本": 60,
-        "美国": 35,
+        "美国": 34,
         "香港": 13,
         "台湾": 20,
         "中国台湾": 2,
@@ -121,7 +121,7 @@
         "美国,中国大陆,英国": 1,
         "中国": 1,
         "中国香港": 2,
-        "泰国": 25,
+        "泰国": 24,
         "意大利": 1,
         "澳大利亚": 1,
         "比利时,法国,荷兰": 1,
@@ -132,7 +132,6 @@
         "美国 / 英国": 1,
         "法国 / 日本": 1,
         "国产": 1,
-        "泰国 / 中国大陆": 1,
         "印度": 1
       },
       "decade": {
@@ -214,7 +213,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3902"
+        "actual": "names=800 terms=3910"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",
