@@ -3,16 +3,8 @@
   "spider": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/jar/custom_spider.jar;md5;41c87635d7592069884a5dafa12acabe",
   "sites": [
     {
-      "key": "索尼",
-      "name": "索尼 ·49ms",
-      "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
       "key": "bfzy",
-      "name": "暴风·大库·512ms",
+      "name": "暴风·大库·913ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -20,22 +12,14 @@
       "quickSearch": 1
     },
     {
-      "key": "feifan",
-      "name": "非凡·最快·619ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "lzi",
-      "name": "量子·备用·721ms",
+      "name": "量子·备用·1961ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
-      "quickSearch": 1
+      "quickSearch": 1,
+      "timeout": 30
     },
     {
       "key": "dytt",

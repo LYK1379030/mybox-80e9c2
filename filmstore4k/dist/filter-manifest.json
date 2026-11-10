@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T02:59:01.741Z",
+  "generated": "2026-11-10T03:36:21.068Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 490155,
+    "bytes": 489912,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 258,
     "seedCount": 16,
-    "searchIndexTerms": 3635,
+    "searchIndexTerms": 3661,
     "searchIndexNames": 800,
-    "searchIndexBytes": 91756,
+    "searchIndexBytes": 91559,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -90,7 +90,7 @@
         "惊悚": 22,
         "战争": 11,
         "剧情": 60,
-        "爱情": 56,
+        "爱情": 55,
         "犯罪": 36,
         "喜剧": 55,
         "短剧": 56,
@@ -112,7 +112,7 @@
         "台湾": 26,
         "中国台湾": 1,
         "英国": 11,
-        "韩国": 38,
+        "韩国": 39,
         "韩国 捷克": 1,
         "加拿大": 4,
         "其它": 7,
@@ -142,8 +142,8 @@
         "印度": 1
       },
       "decade": {
-        "2020年代": 646,
-        "2010年代": 94,
+        "2020年代": 645,
+        "2010年代": 95,
         "2000年代": 28,
         "90年代": 13,
         "80年代": 8,
@@ -220,7 +220,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3635"
+        "actual": "names=800 terms=3661"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",
