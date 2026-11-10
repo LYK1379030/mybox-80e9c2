@@ -20,18 +20,18 @@
       "quickSearch": 1
     },
     {
-      "key": "lzi",
-      "name": "【直连】量子·备用",
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "key": "feifan",
+      "name": "【直连】非凡·最快",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
     },
     {
-      "key": "feifan",
-      "name": "【直连】非凡·最快",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "key": "lzi",
+      "name": "【直连】量子·备用",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,

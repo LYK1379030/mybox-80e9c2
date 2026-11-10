@@ -1,0 +1,165 @@
+{
+  "spider": "",
+  "wallpaper": "",
+  "sites": [
+    {
+      "key": "s1_360zycom",
+      "name": "360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s2_bfzyapicom",
+      "name": "暴风资源",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s3_cjlziapicom",
+      "name": "量子资源",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s4_apiapibdzycom",
+      "name": "百度采集",
+      "type": 1,
+      "api": "https://api.apibdzy.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s5_tyyszycom",
+      "name": "天涯资源",
+      "type": 1,
+      "api": "http://tyyszy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s6_m3u8apiyhzycom",
+      "name": "樱花资源",
+      "type": 1,
+      "api": "https://m3u8.apiyhzy.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s7_suoniapicom",
+      "name": "索尼资源",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    }
+  ],
+  "lives": [],
+  "parses": [],
+  "flags": [
+    "youku",
+    "qq",
+    "iqiyi",
+    "qiyi",
+    "letv",
+    "sohu",
+    "tudou",
+    "pptv",
+    "mgtv",
+    "wasu",
+    "bilibili"
+  ],
+  "ads": [],
+  "notice": "完整线路：精选源 + 备用源。备用源偶有超时，主源失效时可切。",
+  "_meta": {
+    "tier": "B-完整",
+    "sites": 7,
+    "verified": "2026-11-10T07:02:01.934Z",
+    "detail": [
+      {
+        "name": "360资源",
+        "avgMs": 668,
+        "play": "3/3",
+        "tier": "A"
+      },
+      {
+        "name": "暴风资源",
+        "avgMs": 440,
+        "play": "3/3",
+        "tier": "A"
+      },
+      {
+        "name": "量子资源",
+        "avgMs": 1375,
+        "play": "3/3",
+        "tier": "A"
+      },
+      {
+        "name": "百度采集",
+        "avgMs": 5134,
+        "play": "3/3",
+        "tier": "A"
+      },
+      {
+        "name": "天涯资源",
+        "avgMs": 1184,
+        "play": "3/3",
+        "tier": "B"
+      },
+      {
+        "name": "樱花资源",
+        "avgMs": 4199,
+        "play": "3/3",
+        "tier": "B"
+      },
+      {
+        "name": "索尼资源",
+        "avgMs": 15500,
+        "play": "3/3",
+        "tier": "B"
+      }
+    ],
+    "dropped": [
+      {
+        "name": "建安资源",
+        "why": "播放地址全是腾讯/爱奇艺网页，需嗅探，客户端直接播不了"
+      },
+      {
+        "name": "非凡[直连]",
+        "why": "play_url 全是 /share/ 分享页，非直链"
+      },
+      {
+        "name": "非凡影视",
+        "why": "与非凡[直连]内容指纹完全相同（重复源）"
+      },
+      {
+        "name": "电影天堂",
+        "why": "play_url 全是 /share/ 分享页，非直链"
+      },
+      {
+        "name": "金鹰资源",
+        "why": "1/3 稳定，21-34s 超时"
+      },
+      {
+        "name": "速播资源",
+        "why": "1/3 稳定，9.6s 平均超时"
+      },
+      {
+        "name": "极速[直连]",
+        "why": "1/2 稳定且播放地址不可解析"
+      }
+    ]
+  }
+}
