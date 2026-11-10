@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-09T08:17:31Z",
+  "built_at": "2026-11-10T02:13:29Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 293,
+      "total": null,
+      "why": "ok"
+    },
+    {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 57,
+      "ms": 318,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 604,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 738,
+      "ms": 575,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 846,
+      "ms": 773,
       "total": null,
       "why": "ok"
     },
@@ -286,16 +286,16 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "爱酷",
@@ -304,16 +304,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "综合",
@@ -348,12 +348,12 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 47035
     },
     {
       "name": "EPG",
       "ok": true,
-      "bytes": 3123
+      "bytes": 3098
     }
   ],
   "channels": [
