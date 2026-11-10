@@ -1044,8 +1044,6 @@ def main():
     entries = [
         {"name": "打开就能看", "url": SELF + "/one.json"},
     ]
-    if _ext_text:
-        templates["ext.json"] = _ext_text
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
