@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T03:42:23Z",
+  "built_at": "2026-11-10T03:46:20Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 70,
+      "total": 20,
+      "why": "ok"
+    },
+    {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 260,
+      "ms": 110,
       "total": 20,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 586,
-      "total": 20,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 864,
+      "ms": 714,
       "total": 20,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1866,
+      "ms": 1411,
       "total": 20,
       "why": "ok"
     },
@@ -256,6 +256,30 @@
       "name": "💥豆瓣",
       "api": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "why": "4K专区拒收: agit.ai 返回 HTML 反爬页"
+    },
+    {
+      "name": "建安资源",
+      "why": "片单OK但不可播: 非流媒体; 非流媒体; 非流媒体"
+    },
+    {
+      "name": "暴风·大库",
+      "why": "片单OK但不可播: HTTP Error 404: Not Found; HTTP Error 404: Not Fou"
+    },
+    {
+      "name": "电影天堂",
+      "why": "片单OK但不可播: HTTP Error 403: Forbidden; HTTP Error 403: Forbidd"
+    },
+    {
+      "name": "影视 • 非凡[直连]",
+      "why": "片单OK但不可播: HTML页; HTML页; HTML页"
+    },
+    {
+      "name": "量子·备用",
+      "why": "片单OK但不可播: HTTP Error 404: Not Found; HTTP Error 404: Not Fou"
+    },
+    {
+      "name": "金鹰资源",
+      "why": "片单OK但不可播: 非流媒体; 非流媒体; 非流媒体"
     }
   ],
   "live": [
@@ -298,6 +322,12 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
@@ -314,12 +344,6 @@
       "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
-      "ok": false,
-      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
@@ -348,7 +372,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 48228
+      "bytes": 60000
     },
     {
       "name": "EPG",
@@ -605,7 +629,7 @@
     },
     {
       "file": "one.json",
-      "sites": 7,
+      "sites": 1,
       "lives": 0,
       "problems": []
     },
