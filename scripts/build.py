@@ -71,9 +71,9 @@ RAWG = "https://raw.githubusercontent.com/gaotianliuyun/gao/master/"
 DIRECT_SITES = [
     {"key": "feifan", "name": "非凡·最快", "api": "http://cj.ffzyapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
-    {"key": "dytt", "name": "电影天堂", "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+    {"key": "dytt", "name": "✅纯净电影天堂", "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
-    {"key": "bfzy", "name": "暴风·大库", "api": "https://bfzyapi.com/api.php/provide/vod",
+    {"key": "bfzy", "name": "✅纯净暴风", "api": "https://bfzyapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     {"key": "lzi", "name": "量子·备用", "api": "https://cj.lziapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
@@ -1185,13 +1185,13 @@ CLEAN_FILTER_TYPES = {
 CLEAN_SITES = [
     # ---- 主轴：type=3 spider，支持 extend 筛选 ----
     {
-        "key": "clean_kanqiu", "name": "🏀看球直播", "type": 3,
+        "key": "clean_kanqiu", "name": "✅纯净看球", "type": 3,
         "api": "csp_Kanqiu", "searchable": 1, "quickSearch": 1,
         "filterable": 1, "changeable": 1,
     },
     # ---- 直连主力：categories 白名单挡成人 ----
     {
-        "key": "clean_bfzy", "name": "暴风·大库", "type": 1,
+        "key": "clean_bfzy", "name": "✅纯净暴风", "type": 1,
         "api": "https://bfzyapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
         "categories": ["电影片","动作片","喜剧片","恐怖片","科幻片","爱情片","剧情片",
@@ -1202,7 +1202,7 @@ CLEAN_SITES = [
                        "体育赛事","足球","篮球","网球","斯诺克"],
     },
     {
-        "key": "clean_360", "name": "360资源", "type": 1,
+        "key": "clean_360", "name": "✅纯净360", "type": 1,
         "api": "https://caiji.360zy.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
         "categories": ["电影","连续剧","综艺","动漫","动作片","喜剧片","爱情片",
@@ -1213,7 +1213,7 @@ CLEAN_SITES = [
                        "欧美综艺","国产动漫","欧美动漫","日韩动漫","足球"],
     },
     {
-        "key": "clean_feifan", "name": "非凡资源", "type": 1,
+        "key": "clean_feifan", "name": "✅纯净非凡", "type": 1,
         "api": "http://cj.ffzyapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
         "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
@@ -1223,7 +1223,7 @@ CLEAN_SITES = [
                        "欧美动漫","港台动漫","海外动漫","短剧"],
     },
     {
-        "key": "clean_dytt", "name": "电影天堂", "type": 1,
+        "key": "clean_dytt", "name": "✅纯净电影天堂", "type": 1,
         "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
         "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
@@ -1233,7 +1233,7 @@ CLEAN_SITES = [
                        "欧美动漫","港台动漫","海外动漫","短剧","动画片"],
     },
     {
-        "key": "clean_lzi", "name": "量子资源", "type": 1,
+        "key": "clean_lzi", "name": "✅纯净量子", "type": 1,
         "api": "https://cj.lziapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
         "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
