@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T03:36:42Z",
+  "built_at": "2026-11-10T03:38:03Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,14 +38,14 @@
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 913,
+      "ms": 1014,
       "total": 20,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1961,
+      "ms": 1935,
       "total": 20,
       "why": "ok"
     },
@@ -56,13 +56,13 @@
       "why": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
       "why": "返回HTML反爬页"
     },
     {
-      "api": "https://haiwaikan.com/api.php/provide/vod",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
       "why": "返回HTML反爬页"
@@ -324,22 +324,22 @@
   ],
   "parses": [
     {
-      "name": "西瓜",
-      "url": "https://jx.xmflv.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "西瓜",
+      "url": "https://jx.xmflv.com/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "爱酷",
@@ -354,10 +354,10 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "HTTP: HTTP Error 403: Forbidden"
     }
   ],
   "doh": [
