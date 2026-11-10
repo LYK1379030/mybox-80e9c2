@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T07:12:41Z",
+  "built_at": "2026-11-10T06:08:35Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,29 +38,29 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 53,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 361,
-      "total": null,
+      "ms": 78,
+      "total": 20,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 533,
-      "total": null,
+      "ms": 332,
+      "total": 20,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 636,
+      "total": 20,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 824,
-      "total": null,
+      "ms": 1625,
+      "total": 20,
       "why": "ok"
     },
     {
@@ -73,7 +73,7 @@
       "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "非法 JSON"
+      "why": "返回HTML反爬页"
     }
   ],
   "dropped": [
@@ -90,7 +90,7 @@
     {
       "name": "海外看",
       "api": "https://haiwaikan.com/api.php/provide/vod",
-      "why": "非法 JSON"
+      "why": "返回HTML反爬页"
     },
     {
       "name": "快帆",
@@ -286,22 +286,22 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "771949",
@@ -310,16 +310,16 @@
       "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 52588
+      "bytes": 43289
     },
     {
       "name": "EPG",
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 14
+      "files": 10
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 14
+      "files": 10
     }
   ],
   "issues": [
@@ -610,30 +610,6 @@
       "problems": []
     },
     {
-      "file": "fs4k3.json",
-      "sites": 14,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "ext.json",
-      "sites": 83,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-a.json",
-      "sites": 5,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "line-b.json",
-      "sites": 7,
-      "lives": 0,
-      "problems": []
-    },
-    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -641,7 +617,7 @@
     }
   ],
   "verify": {
-    "files_checked": 9,
+    "files_checked": 5,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,

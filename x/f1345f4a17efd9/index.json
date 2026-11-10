@@ -1,12 +1,8 @@
 {
   "urls": [
     {
-      "name": "精选·4源实测可播",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-a.json"
-    },
-    {
-      "name": "完整·7源含备用",
-      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/line-b.json"
+      "name": "直连源·每日实测",
+      "url": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/one.json"
     }
   ]
 }
