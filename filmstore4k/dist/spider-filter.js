@@ -45,7 +45,7 @@ var CONTRACT = {
   "categoryArg": "category(tid, page, filter, ext)：第 4 参 ext 拿点选值；第 3 参 filter 是布尔开关",
   "dataFile": "filter-data.json"
 };
-var GENERATED_AT = "2026-11-10T04:06:11.693Z";
+var GENERATED_AT = "2026-11-10T04:11:18.777Z";
 var CURRENT_UTC_YEAR = 2026;
 var DECADE_KEYS = ["2020年代","2010年代","2000年代","90年代","80年代","更早","年代不详"];
 var CLASSES = [{"type_id":"all","type_name":"全部"},{"type_id":"movie","type_name":"电影"},{"type_id":"tv","type_name":"剧集"},{"type_id":"anime","type_name":"动漫"},{"type_id":"variety","type_name":"综艺"},{"type_id":"doc","type_name":"纪录"},{"type_id":"short","type_name":"短剧"},{"type_id":"sports","type_name":"体育"}];
