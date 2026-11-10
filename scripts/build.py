@@ -1120,13 +1120,30 @@ def main():
 
     # 【2026-11-09 最终】只保留真机确认能出片的直连线路。
     # 我加的所有 jar 线/规则线全部移除：真机上它们都是空的，留着就是摆设。
+    # 扩展线：从 jar 的 112 个 spider 类中未接入的 83 个生成
+    _ext_text = ""
+    try:
+        _ep = os.path.join(ROOT, "filmstore4k", "dist", "ext.json")
+        if os.path.isfile(_ep):
+            _ext_text = open(_ep, encoding="utf-8").read()
+            _eo = json.loads(_ext_text)
+            print("   [扩展线] ext.json 已接入（%d 站）" % len(_eo.get("sites") or []))
+        else:
+            print("   ⚠ ext.json 缺失")
+    except Exception as _ee:
+        _ext_text = ""
+        print("   ⚠ ext.json 读取失败: %s" % _ee)
+
     # 【2026-11-09 按用户要求恢复】之前能在用的老线全部回到列表
     entries = [
         {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
+        {"name": "扩展站（83 个新站）", "url": SELF + "/ext.json"},
         {"name": "老线·合集一（21 条）", "url": SELF + "/c1.json"},
         {"name": "老线·合集二（46 条）", "url": SELF + "/c2.json"},
         {"name": "4K 专区（8 条）", "url": SELF + "/4k.json"},
     ]
+    if _ext_text:
+        templates["ext.json"] = _ext_text
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
