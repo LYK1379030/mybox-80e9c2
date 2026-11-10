@@ -443,7 +443,7 @@ def sanitize_urls(obj, base, report):
                 req = urllib.request.Request(
                     absu, headers={"User-Agent": UA, "Accept": "*/*"},
                     method="HEAD")
-                with urllib.request.urlopen(req, context=CTX, timeout=8) as f:
+                with urllib.request.urlopen(req, context=CTX, timeout=12) as f:
                     if f.status < 400:
                         report.append({"field": "rel_to_abs", "from": out, "to": absu})
                         return absu
@@ -519,7 +519,7 @@ def probe_vod(site):
     sep = "&" if "?" in api else "?"
     url = api + sep + "ac=videolist&pg=1"
     last = ""
-    for _attempt in (1, 2):
+    for _attempt in (1, 2, 3):
         t0 = time.time()
         try:
             req = urllib.request.Request(url, headers={
@@ -528,7 +528,9 @@ def probe_vod(site):
                 ctype = (f.headers.get("Content-Type") or "").lower()
                 raw = f.read(2000000)
             head = raw[:200].lstrip().lower()
-            if head.startswith((b"<!doctype", b"<html")) or "text/html" in ctype:
+            # 修正：不能只看 Content-Type——实测多个 CMS 返回 text/html 但内容是合法 JSON。
+            # 只有「真的是 HTML 标志」才判反爬；其余交给 JSON 解析去验。
+            if head.startswith((b"<!doctype", b"<html", b"<head", b"<body")):
                 last = "返回HTML反爬页"
                 continue
             j = json.loads(decode_smart(raw))
