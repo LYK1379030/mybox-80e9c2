@@ -4,7 +4,7 @@
   "sites": [
     {
       "key": "bfzy",
-      "name": "暴风·大库·32ms",
+      "name": "暴风·大库·64ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -13,7 +13,7 @@
     },
     {
       "key": "索尼",
-      "name": "索尼 ·100ms",
+      "name": "索尼 ·101ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
@@ -21,7 +21,7 @@
     },
     {
       "key": "feifan",
-      "name": "非凡·最快·541ms",
+      "name": "非凡·最快·671ms",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -30,7 +30,7 @@
     },
     {
       "key": "lzi",
-      "name": "量子·备用·821ms",
+      "name": "量子·备用·813ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
