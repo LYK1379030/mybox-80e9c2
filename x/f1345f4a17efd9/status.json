@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T07:21:52Z",
+  "built_at": "2026-11-10T07:42:35Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 32,
+      "total": null,
+      "why": "ok"
+    },
+    {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 86,
+      "ms": 100,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 526,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 551,
+      "ms": 541,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 810,
+      "ms": 821,
       "total": null,
       "why": "ok"
     },
@@ -298,16 +298,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
       "name": "771949",
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "爱酷",
@@ -316,10 +316,10 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "返回站点首页 HTML，非解析结果"
     }
   ],
   "doh": [
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 12
+      "files": 11
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 12
+      "files": 11
     }
   ],
   "issues": [
@@ -616,12 +616,6 @@
       "problems": []
     },
     {
-      "file": "ext.json",
-      "sites": 83,
-      "lives": 0,
-      "problems": []
-    },
-    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -629,7 +623,7 @@
     }
   ],
   "verify": {
-    "files_checked": 7,
+    "files_checked": 6,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
