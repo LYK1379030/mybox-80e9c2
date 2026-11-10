@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T02:13:08.380Z",
+  "generated": "2026-11-10T02:42:12.944Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 489376,
+    "bytes": 489294,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 258,
     "seedCount": 16,
-    "searchIndexTerms": 3617,
+    "searchIndexTerms": 3616,
     "searchIndexNames": 800,
-    "searchIndexBytes": 91335,
+    "searchIndexBytes": 90909,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -84,14 +84,14 @@
         "冒险": 40,
         "灾难": 8,
         "纪录片": 11,
-        "悬疑": 38,
+        "悬疑": 39,
         "综艺": 60,
-        "动作": 50,
-        "惊悚": 21,
+        "动作": 51,
+        "惊悚": 23,
         "战争": 11,
         "剧情": 60,
-        "爱情": 55,
-        "犯罪": 35,
+        "爱情": 56,
+        "犯罪": 36,
         "喜剧": 56,
         "短剧": 56,
         "武侠": 6,
@@ -112,7 +112,7 @@
         "台湾": 26,
         "中国台湾": 2,
         "英国": 11,
-        "韩国": 39,
+        "韩国": 40,
         "韩国 捷克": 1,
         "加拿大": 4,
         "其它": 7,
@@ -123,7 +123,7 @@
         "马来西亚": 1,
         "奥地利,德国": 1,
         "奥地利 / 德国": 1,
-        "丹麦": 1,
+        "丹麦": 2,
         "泰剧": 1,
         "泰国": 25,
         "印度尼西亚": 7,
@@ -142,8 +142,8 @@
         "印度": 1
       },
       "decade": {
-        "2020年代": 648,
-        "2010年代": 92,
+        "2020年代": 646,
+        "2010年代": 94,
         "2000年代": 28,
         "90年代": 13,
         "80年代": 8,
@@ -220,7 +220,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3617"
+        "actual": "names=800 terms=3616"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",

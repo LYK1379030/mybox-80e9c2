@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T02:13:29Z",
+  "built_at": "2026-11-10T02:42:29Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 293,
+      "ms": 62,
       "total": null,
       "why": "ok"
     },
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 318,
+      "ms": 374,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 575,
+      "ms": 444,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 773,
+      "ms": 567,
       "total": null,
       "why": "ok"
     },
@@ -286,16 +286,16 @@
   ],
   "parses": [
     {
-      "name": "西瓜",
-      "url": "https://jx.xmflv.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "西瓜",
+      "url": "https://jx.xmflv.com/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "爱酷",
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 47035
+      "bytes": 60000
     },
     {
       "name": "EPG",
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 17
+      "files": 18
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 17
+      "files": 18
     }
   ],
   "issues": [
@@ -652,6 +652,12 @@
       "problems": []
     },
     {
+      "file": "ext.json",
+      "sites": 83,
+      "lives": 0,
+      "problems": []
+    },
+    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -659,7 +665,7 @@
     }
   ],
   "verify": {
-    "files_checked": 12,
+    "files_checked": 13,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,

@@ -3,6 +3,14 @@
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
+      "key": "索尼",
+      "name": "索尼 ",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "changeable": 1
+    },
+    {
       "key": "feifan",
       "name": "【直连】非凡·最快",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
@@ -10,14 +18,6 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
-    },
-    {
-      "key": "索尼",
-      "name": "索尼 ",
-      "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
     },
     {
       "key": "bfzy",
