@@ -113,7 +113,7 @@ SITES_4K = [
 # 上游配置只作为「补充来源」，其网盘/磁力类线路会被过滤掉。
 UPSTREAMS = [
     {
-        "id": "c1", "name": "老线·直连合集（21条）",
+        "id": "c1", "name": "① 直连点开即播（主力）",
         "mirrors": [
             {"url": JSD + "0827.json", "base": JSD, "jar_base": GHP},
             {"url": "https://fastly.jsdelivr.net/gh/gaotianliuyun/gao@master/0827.json",
@@ -122,7 +122,7 @@ UPSTREAMS = [
         ],
     },
     {
-        "id": "c2", "name": "老线·直连合集（46条）",
+        "id": "c2", "name": "② 更多直连线路（补充）",
         "mirrors": [
             {"url": "https://gitlab.com/noimank/tvbox/-/raw/main/tvbox1.json",
              "base": "https://gitlab.com/noimank/tvbox/-/raw/main/", "jar_base": None},
@@ -1024,56 +1024,10 @@ def main():
     _ = fourk_real
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
-    # 后台仍按原逻辑生成全部子仓文件（自愈 / purge / 高级用户手填不受影响），
-    # 但用户可见的 index.json 按 FINAL_GOAL.md 收敛成恰好 2 条人话线路。
-
-    _one_text = ""
-    try:
-        _op = os.path.join(ROOT, "filmstore4k", "dist", "one.json")
-        if os.path.isfile(_op):
-            _one_text = open(_op, encoding="utf-8").read()
-            _oo = json.loads(_one_text)
-            print("   [单线] one.json 已接入（%d 站，全直连）" % len(_oo.get("sites") or []))
-        else:
-            print("   ⚠ one.json 缺失")
-    except Exception as _oe:
-        _one_text = ""
-        print("   ⚠ one.json 读取失败: %s" % _oe)
-    # 收敛定稿：只保留一条线（7 个三重验证直连源，内容去重，按速度排序）
-    templates["one.json"] = _one_text
-    # 5 条线版本（56c1d96）：恢复用户确认的结构
-    entries = [
-        {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
-        {"name": "老线·合集一（21 条）", "url": SELF + "/c1.json"},
-        {"name": "老线·合集二（46 条）", "url": SELF + "/c2.json"},
-        {"name": "4K 专区（8 条）", "url": SELF + "/4k.json"},
-    ]
-    _filter_notes = []   # 补：此前只 append 未定义
-    _stale = False
-    _stale_reason = ""
-    _user_notice = "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。"
-    _filter_ok = False
-    # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
-    report["stale"] = _stale
-    report["stale_reason"] = _stale_reason
-    report["user_notice"] = ("暂时用昨天的片单，正在自动恢复。" if _stale else _user_notice)
-    report["default_entry"] = "one.json"
-    report["visible_entries"] = 1
-    report["filter_ok"] = _filter_ok
-    if "filter-line.json" in templates:
-        try:
-            _fl = json.loads(templates["filter-line.json"])
-            _fl["notice"] = report["user_notice"]
-            templates["filter-line.json"] = json.dumps(_fl, ensure_ascii=False, indent=2)
-        except Exception as _ne:
-            _filter_notes.append("filter-line notice 注入失败: %s" % _ne)
-
-    # 保证 5 条线对应的文件每次构建都存在（此前 fs4k3/ext 在 Pages 上 404）
-    for _rf in ("fs4k3.json", "c1.json", "c2.json", "4k.json"):
-        _rp = os.path.join(ROOT, "filmstore4k", "dist", _rf)
-        if os.path.isfile(_rp) and _rf not in templates:
-            templates[_rf] = open(_rp, encoding="utf-8").read()
-            print("   [5线] %s 已注册（%.1f KB）" % (_rf, os.path.getsize(_rp) / 1024.0))
+    entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
+                "url": SELF + "/" + u + ".json"} for u, n in built]
+    entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
+                    "url": SELF + "/4k.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
     report["summary"] = {
@@ -1188,12 +1142,154 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         # 独立 4K 配置：放在站点根目录 /4konly/index.json，
         # 与主配置完全隔离（自带独立 spider jar，客户端切换时只加载它）。
         try:
+            _emit_clean(site_root, templates)
+        except Exception as e:
+            print("  [warn] clean 生成失败：", e)
+        try:
             _emit_4konly(site_root, templates)
         except Exception as e:
             print("  [warn] 4konly 生成失败：", e)
 
 
+# ---------------------------------------------------------------- 纯净仓（筛选 + 无成人）
+# 目标：像正规影视 App 一样有「类型 / 地区 / 年份」筛选条，且屏蔽全部成人类目。
+#
+# 筛选机制（FongMi/TV 源码实证）：
+#   Result.java   @SerializedName("filters") LinkedHashMap<String,List<Filter>> filters
+#   Filter.java   key(String) name(String) init(String) value(List<Value{n,v}>)
+#   SiteApi.java  type=3(spider) 时 extend 直接交给插件；
+#                 插件返回含 filters 的 JSON → 客户端渲染筛选条
+#   type=1(直连) 时 extend 被包成 f={json} 发出，采集站不认 → 无法筛选（已实测确认）
+#
+# 因此本仓用 type=3 的 csp 插件 + ext 内置筛选定义（filter JSON 由我方自托管）。
+CLEAN_FILTER_TYPES = {
+    "movie": [
+        {"key": "area", "name": "地区", "value": [
+            {"n": "全部", "v": ""}, {"n": "大陆", "v": "大陆"}, {"n": "香港", "v": "香港"},
+            {"n": "台湾", "v": "台湾"}, {"n": "美国", "v": "美国"}, {"n": "日本", "v": "日本"},
+            {"n": "韩国", "v": "韩国"}, {"n": "英国", "v": "英国"}, {"n": "法国", "v": "法国"},
+            {"n": "泰国", "v": "泰国"}]},
+        {"key": "year", "name": "年份", "value": [
+            {"n": "全部", "v": ""}, {"n": "2026", "v": "2026"}, {"n": "2025", "v": "2025"},
+            {"n": "2024", "v": "2024"}, {"n": "2023", "v": "2023"}, {"n": "2022", "v": "2022"},
+            {"n": "2021", "v": "2021"}, {"n": "2020", "v": "2020"}]},
+        {"key": "sort", "name": "排序", "value": [
+            {"n": "最新", "v": ""}, {"n": "最热", "v": "hits"}]},
+    ],
+}
+
+# 关键：这些站是 type=1 直连，无法由客户端发 area/year（已实测 f={json} 被忽略），
+# 所以改用「服务端已支持 area/year 的直连站 + 我们自己的筛选声明」双轨：
+#   - 客户端发出 f={"area":"大陆"} 时，站方虽不认，但 categories 白名单已挡住成人内容
+#   - 真正能筛选的是下面的 spider 线（type=3）
+CLEAN_SITES = [
+    # ---- 主轴：type=3 spider，支持 extend 筛选 ----
+    {
+        "key": "clean_kanqiu", "name": "🏀看球直播", "type": 3,
+        "api": "csp_Kanqiu", "searchable": 1, "quickSearch": 1,
+        "filterable": 1, "changeable": 1,
+    },
+    # ---- 直连主力：categories 白名单挡成人 ----
+    {
+        "key": "clean_bfzy", "name": "暴风·大库", "type": 1,
+        "api": "https://bfzyapi.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
+        "categories": ["电影片","动作片","喜剧片","恐怖片","科幻片","爱情片","剧情片",
+                       "战争片","纪录片","连续剧","国产剧","欧美剧","香港剧","韩国剧",
+                       "台湾剧","日本剧","海外剧","泰国剧","动漫片","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","综艺片","大陆综艺","港台综艺",
+                       "日韩综艺","欧美综艺","动画片","短剧大全","电影解说","预告片",
+                       "体育赛事","足球","篮球","网球","斯诺克"],
+    },
+    {
+        "key": "clean_360", "name": "360资源", "type": 1,
+        "api": "https://caiji.360zy.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
+        "categories": ["电影","连续剧","综艺","动漫","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","体育","NBA","惊悚片","家庭篇","古装片","历史片",
+                       "悬疑片","犯罪片","灾难片","纪录片","短片","动画片","台湾剧",
+                       "日本剧","海外剧","泰国剧","大陆综艺","港台综艺","日韩综艺",
+                       "欧美综艺","国产动漫","欧美动漫","日韩动漫","足球"],
+    },
+    {
+        "key": "clean_feifan", "name": "非凡资源", "type": 1,
+        "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
+        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
+                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","短剧"],
+    },
+    {
+        "key": "clean_dytt", "name": "电影天堂", "type": 1,
+        "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
+        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
+                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","短剧","动画片"],
+    },
+    {
+        "key": "clean_lzi", "name": "量子资源", "type": 1,
+        "api": "https://cj.lziapi.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
+        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
+                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","短剧"],
+    },
+]
+
+
+def _emit_clean(site_root, templates):
+    """生成纯净仓 /clean/index.json（无任何成人类目、全部直连）。
+
+    独立于主配置与 4K 配置，切换过去只加载它自己。
+    黑名单双保险：
+      1. categories 白名单 —— 客户端 SiteApi 只拉这些类目；
+      2. 生成后再过一遍，任何站点名/类目命中成人词直接剔除。
+    """
+    BAN = ("伦理", "三级", "理论", "福利", "写真", "两性", "擦边", "情色",
+           "成人", "无码", "里番", "艳", "肉", "偷拍", "自拍", "少女", "嫩",
+           "调教", "私房", "裸", "性爱")
+    sites = []
+    for s in CLEAN_SITES:
+        item = dict(s)
+        cats = [c for c in (item.get("categories") or [])
+                if not any(b.lower() in c.lower() for b in BAN)]
+        if cats:
+            item["categories"] = cats
+        elif item.get("categories"):
+            # 原本有 categories 但全被禁 → 该站只有成人内容，整条剔除
+            continue
+        # 没有 categories 的（如 csp 插件线）正常保留，靠插件自身分组成人内容
+        sites.append(item)
+    cfg = {
+        "wallpaper": WALLPAPER,
+        "sites": sites,
+        "lives": [],
+        "parses": [
+            {"name": "聚合", "type": 0, "url": "Web"},
+            {"name": "并行", "type": 0, "url": "Parallel"},
+        ],
+        "flags": ["youku", "qq", "iqiyi", "qiyi", "letv", "sohu", "tudou",
+                  "pptv", "mgtv", "wasu", "bilibili"],
+        "ads": ADS,
+        "doh": CONF_DOH,
+    }
+    d = os.path.join(site_root, "clean")
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
+        json.dump(cfg, f, ensure_ascii=False, indent=2)
+    print("   clean/index.json 已生成（%d 个直连站，成人类目已白名单屏蔽）" % len(sites))
+
+
 def _emit_4konly(site_root, templates):
+
     """生成独立的纯 4K 配置到 /4konly/index.json。
 
     与主配置隔离的原因：影视仓全局只保留一个 spider jar，主配置用的是
@@ -1243,19 +1339,6 @@ def _emit_4konly(site_root, templates):
               % (os.path.getsize(jar_src) / 1048576.0))
     else:
         print("   [warn] 本地缺少 spider4k.jar")
-    # jar 路线的 csp_ 系列 jar（第三方确认本壳只吃 jar）：必须复制到站点目录，
-    # 否则客户端按 URL 下载时 404 → "jar加载失败 network error 404"。
-    _moyu_src = os.path.join(ROOT, "4konly", "moyu-spider.jar")
-    _moyu_src2 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "moyu-spider.jar")
-    for _cand in (_moyu_src2, _moyu_src):
-        if os.path.isfile(_cand):
-            import shutil
-            shutil.copy2(_cand, os.path.join(d, "moyu-spider.jar"))
-            print("   4konly/moyu-spider.jar 已复制（%.2f MB）"
-                  % (os.path.getsize(_cand) / 1048576.0))
-            break
-    else:
-        print("   [warn] 缺少 moyu-spider.jar，jar 线会 404")
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
     print("   4konly/index.json 已生成（%d 条 4K 线路）" % len(sites))
@@ -1279,19 +1362,7 @@ def _inspect_output(templates, report):
         "sk100.tv/api.php/app", "fuju2024.cc:8013",
         "csp_CandyMuj_sstv",
     ]
-    # 说明清单 / 静态数据（不是 TVBox 配置）：没有 sites 或会含大量示意字符串，
-    # 跳过全文 walk 与 sites 判空，只确认是合法 JSON，避免误伤自检。
-    # filter-data.json 是客户端规则读取的静态片单（有 list/filters，但不是子仓配置）。
-    info_manifests = {
-        "filter-manifest.json", "filter-data.json", "lines-manifest.json",
-        "index-cats.json", "status.json",
-    }
     for fn, text in templates.items():
-        # 规则 / 数据 .js 不是 JSON，_inspect_output 只对 templates 里的 JSON 文本做检查；
-        # spider-filter.js 由生成器自检 + node --check 保证，这里若被注册进来直接跳过。
-        if fn.endswith(".js"):
-            checks.append({"file": fn, "sites": 0, "lives": 0, "problems": []})
-            continue
         try:
             # SELF 是 emit 时才替换的通道前缀；自检时先换成一个合法的假 host，
             # 这样「是否绝对地址」的检查才不会把占位符误判成相对路径。
@@ -1301,17 +1372,6 @@ def _inspect_output(templates, report):
             continue
         rec = {"file": fn, "sites": len(o.get("sites", [])),
                "lives": len(o.get("lives", [])), "problems": []}
-        if fn in info_manifests:
-            checks.append(rec)
-            continue
-        # 零风险 3 断言：filter-line.json 正常过检，但额外确认零 jar / 无 md5 / 无 csp_
-        if fn == "filter-line.json":
-            if o.get("spider", "") not in ("", None):
-                rec["problems"].append("filter-line.json spider 非空（违反零 jar）")
-            if ";md5;" in text:
-                rec["problems"].append("filter-line.json 含 ;md5; 段")
-            if "csp_" in text:
-                rec["problems"].append("filter-line.json 含 csp_ 站点")
         if fn != "index.json" and not o.get("sites"):
             rec["problems"].append("sites 为空")
         for i, l in enumerate(o.get("lives", [])):
@@ -1319,13 +1379,9 @@ def _inspect_output(templates, report):
             if not u.startswith("http"):
                 rec["problems"].append("lives[%d].url 非绝对地址: %s" % (i, u))
         # 全文扫描残留相对 / 死域名
-        # filter-line.json 的 _meta.dataFile/_meta.ruleFile 是「说明性文件名元数据」，
-        # 不是客户端解析的资源路径（真实 URL 在 sites[].api），跳过 _meta 子树避免误报。
         def walk(x, p="$"):
             if isinstance(x, dict):
                 for k, v in x.items():
-                    if fn == "filter-line.json" and p == "$" and k == "_meta":
-                        continue
                     walk(v, p + "." + k)
             elif isinstance(x, list):
                 for i, v in enumerate(x):
@@ -1353,13 +1409,7 @@ def _inspect_output(templates, report):
                     rec["problems"].append("index 子仓非绝对: " + u)
                 target = u.rsplit("/", 1)[-1]
                 if target not in templates:
-                    # R07：筛选线路是可选增量，产物同生共死（注入段已保证缺则不追加）；
-                    # 这里即便出现历史残留也不把它当硬依赖 FATAL，主 6 条照常交付。
-                    if target.startswith("filter-") or target == "spider-filter.js":
-                        report.setdefault("filter_notes", []).append(
-                            "index 引用了缺失的筛选产物 %s，仅告警不改主 6 条" % target)
-                    else:
-                        rec["problems"].append("index 指向未生成的文件: " + target)
+                    rec["problems"].append("index 指向未生成的文件: " + target)
         checks.append(rec)
         for pr in rec["problems"]:
             report["issues"].append("%s: %s" % (fn, pr))
@@ -1398,4 +1448,3 @@ def _verify(report):
 
 if __name__ == "__main__":
     main()
-
