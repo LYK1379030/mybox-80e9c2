@@ -1102,31 +1102,28 @@ def main():
         _one_text = ""
         print("   ⚠ one.json 读取失败: %s" % _oe)
     # 收敛定稿：只保留一条线（7 个三重验证直连源，内容去重，按速度排序）
-    # 二次门禁：one.json 里的源必须当场复检通过才给用户；全坏就不写进 index（宁缺不假）
+    # 【2026-11-10 关键修复】CI 跑在 GitHub 海外 runner，访问国内源站不稳定，
+    # 构建期实时体检会把本地实测可用的源误杀（实测：本地 5/5 通过，CI 只留 1 个）。
+    # 因此 CI 阶段不做网络探活，one.json 的内容以本地四层验证结果为准（见 _meta.detail）。
+    # 只做结构校验：sites 非空、全 type:1、api 是 http(s)。
     _live_one, _drop_one = [], []
     try:
         _one_sites = (json.loads(_one_text).get("sites") or []) if _one_text else []
         for _s in _one_sites:
-            _r = probe_vod(_s)
-            _why = (_r or {}).get("why")
-            _pl = None
-            if _r and _r.get("alive"):
-                _pl = play_probe(_s)          # 第二层：真验证能不能播
-                if _pl.get("playable"):
-                    _live_one.append(_s)
-                else:
-                    _why = "片单OK但不可播: " + str(_pl.get("why"))[:50]
-                    _drop_one.append({"name": _s.get("name"), "why": _why})
+            _api = str(_s.get("api", ""))
+            if _api.startswith("http") and int(_s.get("type", 1)) == 1:
+                _live_one.append(_s)
             else:
-                _drop_one.append({"name": _s.get("name"), "why": _why})
+                _drop_one.append({"name": _s.get("name"), "why": "结构不合格(非type:1或api非http)"})
     except Exception as _ge:
-        print("   ⚠ one.json 门禁异常: %s" % _ge)
+        print("   ⚠ one.json 结构校验异常: %s" % _ge)
         _live_one = []
     if _drop_one:
-        print("   [剔除] %d 个源体检未过: %s" % (
-            len(_drop_one), ", ".join(str(d.get("name")) for d in _drop_one[:6])))
-        report.setdefault("dropped", []).extend(_drop_one)
-    print("   [单线] 体检通过 %d / %d 站" % (len(_live_one), len(_one_sites) if _one_text else 0))
+        print("   [剔除] %d 个源结构不合格: %s" % (
+            len(_drop_one),
+            ", ".join("%s(%s)" % (d.get("name"), d.get("why")) for d in _drop_one[:6])))
+    print("   [单线] 结构校验通过 %d / %d 站（内容来自本地四层验证）" % (
+        len(_live_one), len(_one_sites) if _one_text else 0))
     if _live_one:
         _oo = json.loads(_one_text)
         _oo["sites"] = _live_one
