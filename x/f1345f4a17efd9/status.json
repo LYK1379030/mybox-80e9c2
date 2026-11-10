@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T03:38:03Z",
+  "built_at": "2026-11-10T03:42:23Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,16 +36,30 @@
   ],
   "vod_lines": [
     {
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 260,
+      "total": 20,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 586,
+      "total": 20,
+      "why": "ok"
+    },
+    {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1014,
+      "ms": 864,
       "total": 20,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1935,
+      "ms": 1866,
       "total": 20,
       "why": "ok"
     },
@@ -60,26 +74,9 @@
       "alive": false,
       "ms": 0,
       "why": "返回HTML反爬页"
-    },
-    {
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "alive": false,
-      "ms": 0,
-      "why": "返回HTML反爬页"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": false,
-      "ms": 0,
-      "why": "返回HTML反爬页"
     }
   ],
   "dropped": [
-    {
-      "name": "非凡·最快",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "why": "返回HTML反爬页"
-    },
     {
       "name": "泥巴",
       "api": "csp_NiNi",
@@ -96,19 +93,9 @@
       "why": "返回HTML反爬页"
     },
     {
-      "name": "索尼 ",
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "why": "返回HTML反爬页"
-    },
-    {
       "name": "快帆",
       "api": "https://api.kuaifan.tv/api.php/provide/vod",
       "why": "<urlopen error [Errno -2] Name or service not known>"
-    },
-    {
-      "name": "非凡",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "why": "返回HTML反爬页"
     },
     {
       "name": "櫻花",
@@ -154,11 +141,6 @@
       "name": "盤搜索",
       "api": "csp_PanSearch",
       "why": "网盘/磁力类需授权，已按需求剔除"
-    },
-    {
-      "name": "非凡·最快",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "why": "返回HTML反爬页"
     },
     {
       "name": "💥豆瓣",
@@ -274,26 +256,6 @@
       "name": "💥豆瓣",
       "api": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "why": "4K专区拒收: agit.ai 返回 HTML 反爬页"
-    },
-    {
-      "name": "建安资源",
-      "why": "返回HTML反爬页"
-    },
-    {
-      "name": "360资源",
-      "why": "返回HTML反爬页"
-    },
-    {
-      "name": "电影天堂",
-      "why": "返回HTML反爬页"
-    },
-    {
-      "name": "影视 • 非凡[直连]",
-      "why": "返回HTML反爬页"
-    },
-    {
-      "name": "金鹰资源",
-      "why": "返回HTML反爬页"
     }
   ],
   "live": [
@@ -330,20 +292,8 @@
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -358,6 +308,18 @@
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
+      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
@@ -372,21 +334,21 @@
       "bytes": 65
     },
     {
-      "name": "阿里",
-      "ok": true,
-      "bytes": 76
-    },
-    {
       "name": "腾讯",
       "ok": true,
       "bytes": 468
+    },
+    {
+      "name": "阿里",
+      "ok": true,
+      "bytes": 76
     }
   ],
   "external": [
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 48228
     },
     {
       "name": "EPG",
@@ -411,7 +373,7 @@
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
     "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> 9f391d889e28d3c40092fabb562f408c",
-    "已剔除 4 条失活点播线路（正常自愈）"
+    "已剔除 2 条失活点播线路（正常自愈）"
   ],
   "url_fixes": [
     {
@@ -607,17 +569,17 @@
     "sub_configs": [
       [
         "c1",
-        19
+        21
       ],
       [
         "c2",
-        45
+        46
       ]
     ],
-    "4k_sites": 7,
+    "4k_sites": 8,
     "real4k_sites": 3,
-    "alive_vod": 2,
-    "dead_vod": 4,
+    "alive_vod": 4,
+    "dead_vod": 2,
     "live_files": 3,
     "alive_parses": 0,
     "alive_doh": 4
@@ -625,25 +587,25 @@
   "output_check": [
     {
       "file": "c1.json",
-      "sites": 19,
+      "sites": 21,
       "lives": 3,
       "problems": []
     },
     {
       "file": "c2.json",
-      "sites": 45,
+      "sites": 46,
       "lives": 3,
       "problems": []
     },
     {
       "file": "4k.json",
-      "sites": 7,
+      "sites": 8,
       "lives": 3,
       "problems": []
     },
     {
       "file": "one.json",
-      "sites": 2,
+      "sites": 7,
       "lives": 0,
       "problems": []
     },
@@ -660,7 +622,7 @@
     "total_problems": 0,
     "url_fixes_applied": 36,
     "issues": 3,
-    "dead_vod_removed": 4,
+    "dead_vod_removed": 2,
     "all_absolute": true
   },
   "entries": {

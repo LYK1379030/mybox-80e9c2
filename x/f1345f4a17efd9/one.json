@@ -3,6 +3,15 @@
   "wallpaper": "",
   "sites": [
     {
+      "key": "s1_154219117232",
+      "name": "建安资源",
+      "type": 1,
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
       "key": "s2_bfzyapicom",
       "name": "暴风·大库",
       "type": 1,
@@ -12,10 +21,46 @@
       "changeable": 1
     },
     {
+      "key": "s3_360zycom",
+      "name": "360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s4_caijidyttzya",
+      "name": "电影天堂",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s5_ffzytv",
+      "name": "影视 • 非凡[直连]",
+      "type": 1,
+      "api": "http://ffzy.tv/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
       "key": "s6_cjlziapicom",
       "name": "量子·备用",
       "type": 1,
       "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s7_jyzyapicom",
+      "name": "金鹰资源",
+      "type": 1,
+      "api": "https://jyzyapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
