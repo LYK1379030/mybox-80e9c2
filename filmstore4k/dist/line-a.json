@@ -1,0 +1,87 @@
+{
+  "spider": "",
+  "wallpaper": "",
+  "sites": [
+    {
+      "key": "s1_360zycom",
+      "name": "360资源",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s2_bfzyapicom",
+      "name": "暴风资源",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s3_cjlziapicom",
+      "name": "量子资源",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s4_apiapibdzycom",
+      "name": "百度采集",
+      "type": 1,
+      "api": "https://api.apibdzy.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    }
+  ],
+  "lives": [],
+  "parses": [],
+  "flags": [
+    "youku",
+    "qq",
+    "iqiyi",
+    "qiyi",
+    "letv",
+    "sohu",
+    "tudou",
+    "pptv",
+    "mgtv",
+    "wasu",
+    "bilibili"
+  ],
+  "ads": [],
+  "notice": "精选线路：只保留实测 3/3 稳定且播放地址为真 m3u8 的源，按速度排序。",
+  "_meta": {
+    "tier": "A-精选",
+    "sites": 4,
+    "verified": "2026-11-10T07:02:01.928Z",
+    "policy": "接口3次全通 + 播放地址实测 #EXTM3U/application/vnd.apple.mpegurl",
+    "detail": [
+      {
+        "name": "360资源",
+        "avgMs": 668,
+        "play": "3/3"
+      },
+      {
+        "name": "暴风资源",
+        "avgMs": 440,
+        "play": "3/3"
+      },
+      {
+        "name": "量子资源",
+        "avgMs": 1375,
+        "play": "3/3"
+      },
+      {
+        "name": "百度采集",
+        "avgMs": 5134,
+        "play": "3/3"
+      }
+    ]
+  }
+}
