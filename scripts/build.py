@@ -1026,121 +1026,23 @@ def main():
     names = {u["id"]: u["name"] for u in UPSTREAMS}
     # 后台仍按原逻辑生成全部子仓文件（自愈 / purge / 高级用户手填不受影响），
     # 但用户可见的 index.json 按 FINAL_GOAL.md 收敛成恰好 2 条人话线路。
-    entries = []
-    # ---- ③ 聚合·实时筛选线路（filmstore4k 产物，构建期自动实测源存活）----
-    # 产物由 filmstore4k/build-fs4k.js 生成（node filmstore4k/build-fs4k.js），
-    # 若产物缺失则跳过（不影响主流程），绝不因可选线路挂掉整个构建。
-    _fs4k_path = os.path.join(ROOT, "filmstore4k", "dist", "fs4k.json")
-    if os.path.isfile(_fs4k_path):
-        try:
-            with open(_fs4k_path, encoding="utf-8") as _f:
-                _fs4k = json.load(_f)
-            if _fs4k.get("sites"):
-                # 注册进 templates：随双通道一起输出 + 通过自检校验
-                _fs4k_text = json.dumps(_fs4k, ensure_ascii=False, indent=2)
-                templates["fs4k.json"] = _fs4k_text
-                # fs4k2 = 版本化副本（全新缓存键）：jsDelivr 对改坏过的路径可能钉死旧缓存，
-                # index 指向 fs4k2.json 绕开一切历史污染（实战教训）
-                templates["fs4k2.json"] = _fs4k_text
-                # fs4k3 = 纯直连保底线（零 jar 依赖），任何客户端保证可用
-                import re as _re
-                _fs4k3_direct = [s for s in _fs4k["sites"] if str(s.get("api", "")).startswith("http")]
-                if _fs4k3_direct:
-                    _fs4k3 = dict(_fs4k)
-                    # spider 继承 config（candymuj）——无 jar 方案实测切线会触发影视仓 BadTokenException
-                    _fs4k3["sites"] = _fs4k3_direct
-                    templates["fs4k3.json"] = json.dumps(_fs4k3, ensure_ascii=False, indent=2)
-                    print("   ③B fs4k3.json 纯直连保底线已接入（%d 站）" % len(_fs4k3_direct))
-                # fs4kc.json 仍注册进 templates（后台自愈 / purge），不进用户可见 index
-                if os.path.isfile(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json")):
-                    templates["fs4kc.json"] = open(os.path.join(ROOT, "filmstore4k", "dist", "fs4kc.json"), encoding="utf-8").read()
-                # 备用线 fs4k3.json 仍注册进 templates（不进 entries），
-                # 下面收敛段会用「看不了点这里」指向它。
-                print("   ③ fs4k.json/fs4k2.json 已生成（%d 站，不写入用户可见 index）" % len(_fs4k["sites"]))
-        except Exception as _e:
-            print("   ⚠ fs4k.json 接入失败（跳过）: %s" % _e)
-    # 4k.json / c1.json / c2.json 等老线仍由前面流程写进 templates，照常自愈与 purge。
 
-    # ---- 筛选线路：默认第一条（FINAL_GOAL.md 指标 1/3）----
-    # CI 由 build-filter-lines.mjs 在 filmstore4k/dist/ 预生成 4 个同源静态文件：
-    #   filter-line.json（子仓配置）/ filter-data.json（静态片单 + searchIndex）/
-    #   spider-filter.js（drpy2 规则，仅 1 次 req）/ filter-manifest.json（说明清单）
-    # 四者「同生共死」：任一缺失 / 断言失败 → 只 print 跳过，绝不 FATAL。
-    # 用户可见 index 收敛成恰好 2 条；其余子仓仍注册 templates、仍自愈、仍 purge。
-    _filter_dir = os.path.join(ROOT, "filmstore4k", "dist")
-    _filter_files = {
-        "filter-line.json": "filter-line.json",
-        "filter-data.json": "filter-data.json",
-        "spider-filter.js": "spider-filter.js",
-        "filter-manifest.json": "filter-manifest.json",
-    }
-    _filter_notes = []
-    _stale = False
-    _stale_reason = ""
-    _user_notice = "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。"
-    _filter_ok = False
+    _one_text = ""
     try:
-        _missing = [fn for fn in _filter_files
-                    if not (os.path.isfile(os.path.join(_filter_dir, fn))
-                            and os.path.getsize(os.path.join(_filter_dir, fn)) > 0)]
-        if _missing:
-            _filter_notes.append("筛选产物缺失，跳过默认线路: %s" % ",".join(_missing))
+        _op = os.path.join(ROOT, "filmstore4k", "dist", "one.json")
+        if os.path.isfile(_op):
+            _one_text = open(_op, encoding="utf-8").read()
+            _oo = json.loads(_one_text)
+            print("   [单线] one.json 已接入（%d 站，全直连）" % len(_oo.get("sites") or []))
         else:
-            with open(os.path.join(_filter_dir, "filter-line.json"), encoding="utf-8") as _fc:
-                _cfg_text = _fc.read()
-            _cfg = json.loads(_cfg_text)
-            # 零风险 3 断言：spider 为空、无 ;md5;、无 csp_
-            _spider = _cfg.get("spider", "")
-            if _spider not in ("", None):
-                raise ValueError("filter-line.json 的 spider 非空，违反零 jar 约束: %r" % _spider)
-            if ";md5;" in _cfg_text:
-                raise ValueError("filter-line.json 含 ;md5; 段")
-            if "csp_" in _cfg_text:
-                raise ValueError("filter-line.json 含 csp_ 站点")
-            for _fn in _filter_files:
-                with open(os.path.join(_filter_dir, _fn), encoding="utf-8") as _f:
-                    templates[_fn] = _f.read()
-            _filter_ok = True
-            print("   筛选线路已注册（4 产物同源、零 jar），作为默认第一条")
-        # stale 字段：从 filter-manifest.json 读，写进 status.json 给维护者看
-        try:
-            with open(os.path.join(_filter_dir, "filter-manifest.json"), encoding="utf-8") as _fmf:
-                _fm = json.load(_fmf)
-            _stale = bool((_fm.get("data") or {}).get("stale"))
-            _stale_reason = str((_fm.get("data") or {}).get("stale_reason") or "")
-        except Exception as _se:
-            _filter_notes.append("filter-manifest stale 读取失败: %s" % _se)
-    except Exception as _e:
-        # R07：只 print 跳过，绝不 FATAL 拖死备用线
-        print("   ⚠ 筛选线路注入跳过（不影响主配置）: %s" % _e)
-    for _msg in _filter_notes:
-        print("   [筛选标记] %s" % _msg)
-    if _filter_notes:
-        report.setdefault("filter_notes", []).extend(_filter_notes)
-
-    # 【2026-11-09 最终】只保留真机确认能出片的直连线路。
-    # 我加的所有 jar 线/规则线全部移除：真机上它们都是空的，留着就是摆设。
-    # 扩展线：从 jar 的 112 个 spider 类中未接入的 83 个生成
-    _ext_text = ""
-    try:
-        _ep = os.path.join(ROOT, "filmstore4k", "dist", "ext.json")
-        if os.path.isfile(_ep):
-            _ext_text = open(_ep, encoding="utf-8").read()
-            _eo = json.loads(_ext_text)
-            print("   [扩展线] ext.json 已接入（%d 站）" % len(_eo.get("sites") or []))
-        else:
-            print("   ⚠ ext.json 缺失")
-    except Exception as _ee:
-        _ext_text = ""
-        print("   ⚠ ext.json 读取失败: %s" % _ee)
-
-    # 【2026-11-09 按用户要求恢复】之前能在用的老线全部回到列表
+            print("   ⚠ one.json 缺失")
+    except Exception as _oe:
+        _one_text = ""
+        print("   ⚠ one.json 读取失败: %s" % _oe)
+    # 收敛定稿：只保留一条线（7 个三重验证直连源，内容去重，按速度排序）
+    templates["one.json"] = _one_text
     entries = [
-        {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
-        {"name": "扩展站（83 个新站）", "url": SELF + "/ext.json"},
-        {"name": "老线·合集一（21 条）", "url": SELF + "/c1.json"},
-        {"name": "老线·合集二（46 条）", "url": SELF + "/c2.json"},
-        {"name": "4K 专区（8 条）", "url": SELF + "/4k.json"},
+        {"name": "打开就能看", "url": SELF + "/one.json"},
     ]
     if _ext_text:
         templates["ext.json"] = _ext_text
