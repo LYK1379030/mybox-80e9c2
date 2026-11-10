@@ -3,17 +3,8 @@
   "spider": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/jar/custom_spider.jar;md5;41c87635d7592069884a5dafa12acabe",
   "sites": [
     {
-      "key": "bfzy",
-      "name": "暴风·大库·64ms",
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "索尼",
-      "name": "索尼 ·101ms",
+      "name": "索尼 ·127ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
@@ -21,7 +12,7 @@
     },
     {
       "key": "feifan",
-      "name": "非凡·最快·671ms",
+      "name": "非凡·最快·526ms",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -29,8 +20,17 @@
       "quickSearch": 1
     },
     {
+      "key": "bfzy",
+      "name": "✅纯净暴风·537ms",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "lzi",
-      "name": "量子·备用·813ms",
+      "name": "量子·备用·797ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -39,7 +39,7 @@
     },
     {
       "key": "dytt",
-      "name": "电影天堂",
+      "name": "✅纯净电影天堂",
       "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
