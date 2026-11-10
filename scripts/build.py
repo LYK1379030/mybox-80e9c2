@@ -1123,6 +1123,7 @@ def main():
             len(_drop_one),
             ", ".join("%s(%s)" % (d.get("name"), d.get("why")) for d in _drop_one[:6])))
     print("   [单线] 结构校验通过 %d / %d 站（内容来自本地四层验证）" % (
+        len(_live_one), len(_one_sites) if _one_text else 0))
 
     # ==== 双版本输出（纯净版 / 完整版）====
     _clean_text = ""
