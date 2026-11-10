@@ -1044,12 +1044,16 @@ def main():
     entries = [
         {"name": "打开就能看", "url": SELF + "/one.json"},
     ]
+    _stale = False
+    _stale_reason = ""
+    _user_notice = "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。"
+    _filter_ok = False
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
     report["user_notice"] = ("暂时用昨天的片单，正在自动恢复。" if _stale else _user_notice)
-    report["default_entry"] = "fs4k3.json"
-    report["visible_entries"] = 2
+    report["default_entry"] = "one.json"
+    report["visible_entries"] = 1
     report["filter_ok"] = _filter_ok
     if "filter-line.json" in templates:
         try:
