@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T06:08:35Z",
+  "built_at": "2026-11-10T06:39:56Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,29 +38,29 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 78,
-      "total": 20,
+      "ms": 302,
+      "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 332,
-      "total": 20,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 636,
-      "total": 20,
+      "ms": 554,
+      "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1625,
-      "total": 20,
+      "ms": 904,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 1584,
+      "total": null,
       "why": "ok"
     },
     {
@@ -73,7 +73,7 @@
       "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "返回HTML反爬页"
+      "why": "非法 JSON"
     }
   ],
   "dropped": [
@@ -90,7 +90,7 @@
     {
       "name": "海外看",
       "api": "https://haiwaikan.com/api.php/provide/vod",
-      "why": "返回HTML反爬页"
+      "why": "非法 JSON"
     },
     {
       "name": "快帆",
@@ -298,6 +298,12 @@
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
@@ -308,12 +314,6 @@
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "爱酷",
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 43289
+      "bytes": 60000
     },
     {
       "name": "EPG",
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 10
+      "files": 12
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 10
+      "files": 12
     }
   ],
   "issues": [
@@ -610,6 +610,18 @@
       "problems": []
     },
     {
+      "file": "fs4k3.json",
+      "sites": 14,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "ext.json",
+      "sites": 83,
+      "lives": 0,
+      "problems": []
+    },
+    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -617,7 +629,7 @@
     }
   ],
   "verify": {
-    "files_checked": 5,
+    "files_checked": 7,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
