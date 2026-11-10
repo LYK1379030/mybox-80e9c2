@@ -1041,13 +1041,14 @@ def main():
         print("   ⚠ one.json 读取失败: %s" % _oe)
     # 收敛定稿：只保留一条线（7 个三重验证直连源，内容去重，按速度排序）
     templates["one.json"] = _one_text
-    # 5 条线版本（56c1d96）：恢复用户确认的结构
+    # ═══ 优化后结构（2026-11-10）═══
+    # 基于 16 源全量实测：只保留 直链m3u8 可播的源；分享页/网页/超时源全部剔除
+    # line-a = 4 源精选（3/3 稳定 + 播放实测通过）
+    # line-b = 7 源完整（A + 3 个抖动但可播的备用）
+    # c1/c2/4k/ext 仍注册 templates（后台保留），但不再进用户可见列表
     entries = [
-        {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
-        {"name": "扩展站（83 个新站）", "url": SELF + "/ext.json"},
-        {"name": "老线·合集一（21 条）", "url": SELF + "/c1.json"},
-        {"name": "老线·合集二（46 条）", "url": SELF + "/c2.json"},
-        {"name": "4K 专区（8 条）", "url": SELF + "/4k.json"},
+        {"name": "精选·4源实测可播", "url": SELF + "/line-a.json"},
+        {"name": "完整·7源含备用", "url": SELF + "/line-b.json"},
     ]
     _filter_notes = []   # 补：此前只 append 未定义
     _stale = False
@@ -1075,6 +1076,15 @@ def main():
         if os.path.isfile(_rp) and _rf not in templates:
             templates[_rf] = open(_rp, encoding="utf-8").read()
             print("   [5线] %s 已注册（%.1f KB）" % (_rf, os.path.getsize(_rp) / 1024.0))
+    # 优化线路文件注册
+    for _lf in ("line-a.json", "line-b.json"):
+        _lp = os.path.join(ROOT, "filmstore4k", "dist", _lf)
+        if os.path.isfile(_lp):
+            templates[_lf] = open(_lp, encoding="utf-8").read()
+            print("   [优化线] %s 已注册（%d 站）" % (
+                _lf, len(json.loads(templates[_lf]).get("sites") or [])))
+        else:
+            print("   ⚠ %s 缺失" % _lf)
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
     report["summary"] = {
