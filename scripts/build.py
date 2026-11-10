@@ -544,6 +544,56 @@ def probe_vod(site):
             last = str(e)[:70]
     return {"api": api, "alive": False, "ms": 0, "why": last or "videolist失败"}
 
+def play_probe(site, samples=3):
+    """播放层体检（验证员 ATTACK_VERDICT 第④条）：
+    片单 200 不等于能播。抽 samples 条 vod_play_url 里的真实地址，
+    要求 HEAD/GET 200 且 (Content-Type 是 m3u8/mp4 或 body 含 #EXTM3U)，否则判不可播。"""
+    if not isinstance(site, dict):
+        return {"playable": False, "why": "非站点"}
+    api = str(site.get("api", ""))
+    sep = "&" if "?" in api else "?"
+    try:
+        req = urllib.request.Request(api + sep + "ac=videolist&pg=1", headers={
+            "User-Agent": UA, "Accept": "application/json,*/*", "Accept-Encoding": "identity"})
+        with urllib.request.urlopen(req, context=CTX, timeout=12) as f:
+            j = json.loads(decode_smart(f.read(2000000)))
+    except Exception as e:
+        return {"playable": False, "why": "取值失败:" + str(e)[:40]}
+
+    urls = []
+    for it in (j.get("list") or [])[:6]:
+        pu = str(it.get("vod_play_url") or "")
+        for seg in pu.split("#")[:8]:
+            if "$" in seg:
+                u = seg.split("$", 1)[1].strip()
+                if u.startswith("http") and ("m3u8" in u or ".mp4" in u or "/share/" in u or "play" in u):
+                    urls.append(u)
+    if not urls:
+        return {"playable": False, "why": "无直链播放地址"}
+
+    good, bad = 0, []
+    for u in urls[:samples]:
+        try:
+            rq = urllib.request.Request(u, headers={"User-Agent": UA, "Accept": "*/*"})
+            rq.method = "GET"
+            with urllib.request.urlopen(rq, context=CTX, timeout=10) as f:
+                ct = (f.headers.get("Content-Type") or "").lower()
+                body = f.read(4000)
+            if "mpegurl" in ct or "video/" in ct or b"#EXTM3U" in body:
+                good += 1
+            elif len(body) == 0:
+                bad.append("空body")
+            elif body.lstrip()[:15].lower().startswith((b"<!doctype", b"<html")):
+                bad.append("HTML页")
+            else:
+                bad.append("非流媒体")
+        except Exception as e:
+            bad.append(str(e)[:26])
+    ok = good > 0
+    return {"playable": ok, "good": good, "tested": min(len(urls), samples),
+            "why": "ok" if ok else ("; ".join(bad[:3]) or "全部不可播")}
+
+
 def health_check(sites, report):
     cand = [s for s in sites
             if isinstance(s, dict)
@@ -1058,10 +1108,17 @@ def main():
         _one_sites = (json.loads(_one_text).get("sites") or []) if _one_text else []
         for _s in _one_sites:
             _r = probe_vod(_s)
+            _why = (_r or {}).get("why")
+            _pl = None
             if _r and _r.get("alive"):
-                _live_one.append(_s)
+                _pl = play_probe(_s)          # 第二层：真验证能不能播
+                if _pl.get("playable"):
+                    _live_one.append(_s)
+                else:
+                    _why = "片单OK但不可播: " + str(_pl.get("why"))[:50]
+                    _drop_one.append({"name": _s.get("name"), "why": _why})
             else:
-                _drop_one.append({"name": _s.get("name"), "why": (_r or {}).get("why")})
+                _drop_one.append({"name": _s.get("name"), "why": _why})
     except Exception as _ge:
         print("   ⚠ one.json 门禁异常: %s" % _ge)
         _live_one = []
