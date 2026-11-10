@@ -1123,30 +1123,6 @@ def main():
             len(_drop_one),
             ", ".join("%s(%s)" % (d.get("name"), d.get("why")) for d in _drop_one[:6])))
     print("   [单线] 结构校验通过 %d / %d 站（内容来自本地四层验证）" % (
-
-    # ==== 双版本输出（纯净版 / 完整版）====
-    _clean_text = ""
-    _full_text = ""
-    for _vn, _vf in (("clean", "v-clean.json"), ("full", "v-full.json")):
-        _vp = os.path.join(ROOT, "filmstore4k", "dist", _vf)
-        try:
-            if os.path.isfile(_vp):
-                _vt = open(_vp, encoding="utf-8").read()
-                _vo = json.loads(_vt)
-                _vn_sites = [x for x in (_vo.get("sites") or [])
-                             if str(x.get("api", "")).startswith("http") and int(x.get("type", 1)) == 1]
-                if _vn_sites:
-                    _vo["sites"] = _vn_sites
-                    _vt = json.dumps(_vo, ensure_ascii=False, indent=2)
-                    if _vn == "clean":
-                        _clean_text = _vt
-                    else:
-                        _full_text = _vt
-                    print("   [%s版] %s 已接入（%d 站）" % (_vn, _vf, len(_vn_sites)))
-                else:
-                    print("   ⚠ %s 无有效源，跳过" % _vf)
-        except Exception as _ve:
-            print("   ⚠ %s 读取失败: %s" % (_vf, _ve))
         len(_live_one), len(_one_sites) if _one_text else 0))
     if _live_one:
         _oo = json.loads(_one_text)
@@ -1180,18 +1156,6 @@ def main():
         except Exception as _ne:
             _filter_notes.append("filter-line notice 注入失败: %s" % _ne)
 
-    # 纯净版（主地址 /index.json）与完整版（第二地址 /index-adult.json）
-    if _clean_text:
-        templates["v-clean.json"] = _clean_text
-    if _full_text:
-        templates["v-full.json"] = _full_text
-    _clean_entries = ([{"name": "纯净版·实测可播", "url": SELF + "/v-clean.json"}]
-                      if _clean_text else
-                      ([{"name": "直连源·每日实测", "url": SELF + "/one.json"}] if _live_one else []))
-    _full_entries = ([{"name": "完整版·实测可播", "url": SELF + "/v-full.json"}]
-                     if _full_text else _clean_entries)
-    templates["index-adult.json"] = json.dumps({"urls": _full_entries}, ensure_ascii=False, indent=2)
-    entries = _clean_entries
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
     report["summary"] = {
