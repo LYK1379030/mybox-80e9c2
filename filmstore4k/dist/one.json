@@ -3,67 +3,26 @@
   "wallpaper": "",
   "sites": [
     {
-      "key": "s1_154219117232",
-      "name": "建安资源",
+      "key": "p1_suoniapicom",
+      "name": "索尼",
       "type": 1,
-      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod/",
+      "api": "https://suoniapi.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
-      "changeable": 1
+      "changeable": 1,
+      "_list": 20,
+      "_play": 3
     },
     {
-      "key": "s2_bfzyapicom",
-      "name": "暴风·大库",
-      "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "s3_360zycom",
+      "key": "p3_src",
       "name": "360资源",
       "type": 1,
       "api": "https://360zy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "s4_caijidyttzya",
-      "name": "电影天堂",
-      "type": 1,
-      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "s5_ffzytv",
-      "name": "影视 • 非凡[直连]",
-      "type": 1,
-      "api": "http://ffzy.tv/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "s6_cjlziapicom",
-      "name": "量子·备用",
-      "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "s7_jyzyapicom",
-      "name": "金鹰资源",
-      "type": 1,
-      "api": "https://jyzyapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
+      "changeable": 1,
+      "_list": 20,
+      "_play": 3
     }
   ],
   "lives": [],
@@ -93,10 +52,21 @@
     "bilibili"
   ],
   "ads": [],
-  "notice": "全部源实测可用：片单/播放地址/封面三验通过，内容不重复，按速度排序。",
+  "notice": "本线路每个源都做过两层实测：片单可拉 + 抽3条播放地址确认为真流媒体(m3u8/mp4)。不符合的源已全部剔除。",
   "_meta": {
-    "note": "14源→9可用→8合格→内容去重",
-    "sites": 7,
-    "testedAt": "2026-11-10T02:51:57.580Z"
+    "note": "双层验证：ac=videolist 出片单 + 抽3条play_url实测Content-Type或#EXTM3U",
+    "sites": 2,
+    "verifiedAt": "2026-11-10T03:56:50.087Z",
+    "dropped": [
+      "建安资源",
+      "电影天堂",
+      "金鹰资源",
+      "暴风·大库",
+      "量子·备用",
+      "影视·非凡",
+      "海外看",
+      "快帆"
+    ],
+    "dropReason": "片单可拉但播放地址是HTML页/空body/连接失败"
   }
 }
