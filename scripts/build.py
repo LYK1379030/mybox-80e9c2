@@ -1044,7 +1044,6 @@ def main():
     # 5 条线版本（56c1d96）：恢复用户确认的结构
     entries = [
         {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
-        {"name": "扩展站（83 个新站）", "url": SELF + "/ext.json"},
         {"name": "老线·合集一（21 条）", "url": SELF + "/c1.json"},
         {"name": "老线·合集二（46 条）", "url": SELF + "/c2.json"},
         {"name": "4K 专区（8 条）", "url": SELF + "/4k.json"},
@@ -1070,7 +1069,7 @@ def main():
             _filter_notes.append("filter-line notice 注入失败: %s" % _ne)
 
     # 保证 5 条线对应的文件每次构建都存在（此前 fs4k3/ext 在 Pages 上 404）
-    for _rf in ("fs4k3.json", "ext.json", "c1.json", "c2.json", "4k.json"):
+    for _rf in ("fs4k3.json", "c1.json", "c2.json", "4k.json"):
         _rp = os.path.join(ROOT, "filmstore4k", "dist", _rf)
         if os.path.isfile(_rp) and _rf not in templates:
             templates[_rf] = open(_rp, encoding="utf-8").read()
