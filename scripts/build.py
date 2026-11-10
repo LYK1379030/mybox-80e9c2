@@ -509,28 +509,38 @@ def fix_spider_md5(cfg, report):
 
 
 def probe_vod(site):
-    if not isinstance(site, dict):        # 纵深防御：脏元素不进体检
+    """真实体检：ac=videolist&pg=1，要求 JSON + list>=10 + 非 HTML 反爬页。
+    只测 ac=list 会被假 200 骗过（返回 HTML 也算活），必须用 videolist。"""
+    if not isinstance(site, dict):
         return None
     api = str(site.get("api", ""))
     if not api.startswith("http") or "api.php/provide/vod" not in api:
         return None
-    t0 = time.time()
-    try:
-        sep = "&" if "?" in api else "?"
-        txt = fetch_bytes(api + sep + "ac=list", timeout=7, limit=2_000_000) \
-            .decode("utf-8", "replace")
+    sep = "&" if "?" in api else "?"
+    url = api + sep + "ac=videolist&pg=1"
+    last = ""
+    for _attempt in (1, 2):
+        t0 = time.time()
         try:
-            j = json.loads(txt)
-            if not isinstance(j.get("list"), list) and '"list"' not in txt[:2000]:
-                return {"api": api, "alive": False, "ms": 0, "why": "响应无 list"}
-        except json.JSONDecodeError:
-            if '"list"' not in txt[:2000]:
-                return {"api": api, "alive": False, "ms": 0, "why": "非法 JSON"}
-        return {"api": api, "alive": True, "ms": int((time.time() - t0) * 1000),
-                "total": None, "why": "ok"}
-    except Exception as e:
-        return {"api": api, "alive": False, "ms": 0, "why": str(e)[:80]}
-
+            req = urllib.request.Request(url, headers={
+                "User-Agent": UA, "Accept": "application/json,*/*", "Accept-Encoding": "identity"})
+            with urllib.request.urlopen(req, context=CTX, timeout=8) as f:
+                ctype = (f.headers.get("Content-Type") or "").lower()
+                raw = f.read(2000000)
+            head = raw[:200].lstrip().lower()
+            if head.startswith((b"<!doctype", b"<html")) or "text/html" in ctype:
+                last = "返回HTML反爬页"
+                continue
+            j = json.loads(decode_smart(raw))
+            n = len(j.get("list") or []) if isinstance(j, dict) else 0
+            if n < 10:
+                last = "videolist仅%d条" % n
+                continue
+            return {"api": api, "alive": True, "ms": int((time.time() - t0) * 1000),
+                    "total": n, "why": "ok"}
+        except Exception as e:
+            last = str(e)[:70]
+    return {"api": api, "alive": False, "ms": 0, "why": last or "videolist失败"}
 
 def health_check(sites, report):
     cand = [s for s in sites
@@ -1040,14 +1050,41 @@ def main():
         _one_text = ""
         print("   ⚠ one.json 读取失败: %s" % _oe)
     # 收敛定稿：只保留一条线（7 个三重验证直连源，内容去重，按速度排序）
-    templates["one.json"] = _one_text
-    entries = [
-        {"name": "打开就能看", "url": SELF + "/one.json"},
-    ]
+    # 二次门禁：one.json 里的源必须当场复检通过才给用户；全坏就不写进 index（宁缺不假）
+    _live_one, _drop_one = [], []
+    try:
+        _one_sites = (json.loads(_one_text).get("sites") or []) if _one_text else []
+        for _s in _one_sites:
+            _r = probe_vod(_s)
+            if _r and _r.get("alive"):
+                _live_one.append(_s)
+            else:
+                _drop_one.append({"name": _s.get("name"), "why": (_r or {}).get("why")})
+    except Exception as _ge:
+        print("   ⚠ one.json 门禁异常: %s" % _ge)
+        _live_one = []
+    if _drop_one:
+        print("   [剔除] %d 个源体检未过: %s" % (
+            len(_drop_one), ", ".join(str(d.get("name")) for d in _drop_one[:6])))
+        report.setdefault("dropped", []).extend(_drop_one)
+    print("   [单线] 体检通过 %d / %d 站" % (len(_live_one), len(_one_sites) if _one_text else 0))
+    if _live_one:
+        _oo = json.loads(_one_text)
+        _oo["sites"] = _live_one
+        _one_text = json.dumps(_oo, ensure_ascii=False, indent=2)
+        templates["one.json"] = _one_text
+    else:
+        print("   ⚠ one.json 无可用源，本轮不进 index / 不注册")
+    entries = []
+    if _live_one:
+        entries.append({"name": "直连源·每日实测", "url": SELF + "/one.json"})
+    else:
+        entries.append({"name": "直连源·备用", "url": SELF + "/fs4k3.json"})
     _stale = False
     _stale_reason = ""
     _user_notice = "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。"
     _filter_ok = False
+    _filter_notes = []   # 修复：此前只 append 未定义，走到即 NameError
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
