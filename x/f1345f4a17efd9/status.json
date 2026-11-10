@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T03:58:58Z",
+  "built_at": "2026-11-10T04:06:30Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 88,
+      "ms": 90,
       "total": 20,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 671,
+      "ms": 494,
       "total": 20,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1092,
+      "ms": 982,
       "total": 20,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1913,
+      "ms": 1789,
       "total": 20,
       "why": "ok"
     },
@@ -258,7 +258,19 @@
       "why": "4K专区拒收: agit.ai 返回 HTML 反爬页"
     },
     {
-      "name": "索尼",
+      "name": "电影天堂",
+      "why": "片单OK但不可播: HTTP Error 403: Forbidden; HTTP Error 403: Forbidd"
+    },
+    {
+      "name": "天涯资源",
+      "why": "片单OK但不可播: Remote end closed connecti; Remote end closed conn"
+    },
+    {
+      "name": "非凡影视",
+      "why": "片单OK但不可播: HTTP Error 403: Forbidden; HTTP Error 403: Forbidd"
+    },
+    {
+      "name": "非凡备用",
       "why": "片单OK但不可播: HTTP Error 403: Forbidden; HTTP Error 403: Forbidd"
     }
   ],
@@ -302,10 +314,10 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "爱酷",
@@ -314,16 +326,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [

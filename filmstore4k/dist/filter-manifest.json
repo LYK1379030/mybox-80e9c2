@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T03:58:39.723Z",
+  "generated": "2026-11-10T04:06:11.693Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 488548,
+    "bytes": 488432,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 264,
     "seedCount": 16,
-    "searchIndexTerms": 3660,
+    "searchIndexTerms": 3642,
     "searchIndexNames": 800,
-    "searchIndexBytes": 91308,
+    "searchIndexBytes": 91476,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -80,17 +80,17 @@
     ],
     "buckets": {
       "type": {
-        "科幻": 48,
+        "科幻": 47,
         "冒险": 40,
         "灾难": 8,
         "纪录片": 11,
         "悬疑": 45,
         "综艺": 60,
         "动作": 56,
-        "惊悚": 28,
+        "惊悚": 26,
         "战争": 11,
         "剧情": 60,
-        "爱情": 56,
+        "爱情": 55,
         "犯罪": 35,
         "喜剧": 51,
         "短剧": 57,
@@ -99,7 +99,7 @@
         "动画": 60,
         "历史": 12,
         "传记": 6,
-        "恐怖": 20,
+        "恐怖": 19,
         "西部": 2,
         "歌舞": 2
       },
@@ -109,9 +109,9 @@
         "日本": 60,
         "美国": 47,
         "香港": 13,
-        "台湾": 24,
+        "台湾": 25,
         "中国台湾": 1,
-        "英国": 11,
+        "英国": 10,
         "韩国": 39,
         "韩国 捷克": 1,
         "加拿大": 4,
@@ -128,7 +128,6 @@
         "印度尼西亚": 7,
         "中国香港": 2,
         "意大利": 1,
-        "澳大利亚": 1,
         "哥伦比亚": 1,
         "新西兰": 1,
         "中国香港,中国大陆": 1,
@@ -218,7 +217,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3660"
+        "actual": "names=800 terms=3642"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",
