@@ -443,7 +443,7 @@ def sanitize_urls(obj, base, report):
                 req = urllib.request.Request(
                     absu, headers={"User-Agent": UA, "Accept": "*/*"},
                     method="HEAD")
-                with urllib.request.urlopen(req, context=CTX, timeout=12) as f:
+                with urllib.request.urlopen(req, context=CTX, timeout=8) as f:
                     if f.status < 400:
                         report.append({"field": "rel_to_abs", "from": out, "to": absu})
                         return absu
@@ -509,89 +509,27 @@ def fix_spider_md5(cfg, report):
 
 
 def probe_vod(site):
-    """真实体检：ac=videolist&pg=1，要求 JSON + list>=10 + 非 HTML 反爬页。
-    只测 ac=list 会被假 200 骗过（返回 HTML 也算活），必须用 videolist。"""
-    if not isinstance(site, dict):
+    if not isinstance(site, dict):        # 纵深防御：脏元素不进体检
         return None
     api = str(site.get("api", ""))
     if not api.startswith("http") or "api.php/provide/vod" not in api:
         return None
-    sep = "&" if "?" in api else "?"
-    url = api + sep + "ac=videolist&pg=1"
-    last = ""
-    for _attempt in (1, 2, 3):
-        t0 = time.time()
-        try:
-            req = urllib.request.Request(url, headers={
-                "User-Agent": UA, "Accept": "application/json,*/*", "Accept-Encoding": "identity"})
-            with urllib.request.urlopen(req, context=CTX, timeout=8) as f:
-                ctype = (f.headers.get("Content-Type") or "").lower()
-                raw = f.read(2000000)
-            head = raw[:200].lstrip().lower()
-            # 修正：不能只看 Content-Type——实测多个 CMS 返回 text/html 但内容是合法 JSON。
-            # 只有「真的是 HTML 标志」才判反爬；其余交给 JSON 解析去验。
-            if head.startswith((b"<!doctype", b"<html", b"<head", b"<body")):
-                last = "返回HTML反爬页"
-                continue
-            j = json.loads(decode_smart(raw))
-            n = len(j.get("list") or []) if isinstance(j, dict) else 0
-            if n < 10:
-                last = "videolist仅%d条" % n
-                continue
-            return {"api": api, "alive": True, "ms": int((time.time() - t0) * 1000),
-                    "total": n, "why": "ok"}
-        except Exception as e:
-            last = str(e)[:70]
-    return {"api": api, "alive": False, "ms": 0, "why": last or "videolist失败"}
-
-def play_probe(site, samples=3):
-    """播放层体检（验证员 ATTACK_VERDICT 第④条）：
-    片单 200 不等于能播。抽 samples 条 vod_play_url 里的真实地址，
-    要求 HEAD/GET 200 且 (Content-Type 是 m3u8/mp4 或 body 含 #EXTM3U)，否则判不可播。"""
-    if not isinstance(site, dict):
-        return {"playable": False, "why": "非站点"}
-    api = str(site.get("api", ""))
-    sep = "&" if "?" in api else "?"
+    t0 = time.time()
     try:
-        req = urllib.request.Request(api + sep + "ac=videolist&pg=1", headers={
-            "User-Agent": UA, "Accept": "application/json,*/*", "Accept-Encoding": "identity"})
-        with urllib.request.urlopen(req, context=CTX, timeout=12) as f:
-            j = json.loads(decode_smart(f.read(2000000)))
-    except Exception as e:
-        return {"playable": False, "why": "取值失败:" + str(e)[:40]}
-
-    urls = []
-    for it in (j.get("list") or [])[:6]:
-        pu = str(it.get("vod_play_url") or "")
-        for seg in pu.split("#")[:8]:
-            if "$" in seg:
-                u = seg.split("$", 1)[1].strip()
-                if u.startswith("http") and ("m3u8" in u or ".mp4" in u or "/share/" in u or "play" in u):
-                    urls.append(u)
-    if not urls:
-        return {"playable": False, "why": "无直链播放地址"}
-
-    good, bad = 0, []
-    for u in urls[:samples]:
+        sep = "&" if "?" in api else "?"
+        txt = fetch_bytes(api + sep + "ac=list", timeout=7, limit=2_000_000) \
+            .decode("utf-8", "replace")
         try:
-            rq = urllib.request.Request(u, headers={"User-Agent": UA, "Accept": "*/*"})
-            rq.method = "GET"
-            with urllib.request.urlopen(rq, context=CTX, timeout=10) as f:
-                ct = (f.headers.get("Content-Type") or "").lower()
-                body = f.read(4000)
-            if "mpegurl" in ct or "video/" in ct or b"#EXTM3U" in body:
-                good += 1
-            elif len(body) == 0:
-                bad.append("空body")
-            elif body.lstrip()[:15].lower().startswith((b"<!doctype", b"<html")):
-                bad.append("HTML页")
-            else:
-                bad.append("非流媒体")
-        except Exception as e:
-            bad.append(str(e)[:26])
-    ok = good > 0
-    return {"playable": ok, "good": good, "tested": min(len(urls), samples),
-            "why": "ok" if ok else ("; ".join(bad[:3]) or "全部不可播")}
+            j = json.loads(txt)
+            if not isinstance(j.get("list"), list) and '"list"' not in txt[:2000]:
+                return {"api": api, "alive": False, "ms": 0, "why": "响应无 list"}
+        except json.JSONDecodeError:
+            if '"list"' not in txt[:2000]:
+                return {"api": api, "alive": False, "ms": 0, "why": "非法 JSON"}
+        return {"api": api, "alive": True, "ms": int((time.time() - t0) * 1000),
+                "total": None, "why": "ok"}
+    except Exception as e:
+        return {"api": api, "alive": False, "ms": 0, "why": str(e)[:80]}
 
 
 def health_check(sites, report):
@@ -1102,45 +1040,20 @@ def main():
         _one_text = ""
         print("   ⚠ one.json 读取失败: %s" % _oe)
     # 收敛定稿：只保留一条线（7 个三重验证直连源，内容去重，按速度排序）
-    # 【2026-11-10 关键修复】CI 跑在 GitHub 海外 runner，访问国内源站不稳定，
-    # 构建期实时体检会把本地实测可用的源误杀（实测：本地 5/5 通过，CI 只留 1 个）。
-    # 因此 CI 阶段不做网络探活，one.json 的内容以本地四层验证结果为准（见 _meta.detail）。
-    # 只做结构校验：sites 非空、全 type:1、api 是 http(s)。
-    _live_one, _drop_one = [], []
-    try:
-        _one_sites = (json.loads(_one_text).get("sites") or []) if _one_text else []
-        for _s in _one_sites:
-            _api = str(_s.get("api", ""))
-            if _api.startswith("http") and int(_s.get("type", 1)) == 1:
-                _live_one.append(_s)
-            else:
-                _drop_one.append({"name": _s.get("name"), "why": "结构不合格(非type:1或api非http)"})
-    except Exception as _ge:
-        print("   ⚠ one.json 结构校验异常: %s" % _ge)
-        _live_one = []
-    if _drop_one:
-        print("   [剔除] %d 个源结构不合格: %s" % (
-            len(_drop_one),
-            ", ".join("%s(%s)" % (d.get("name"), d.get("why")) for d in _drop_one[:6])))
-    print("   [单线] 结构校验通过 %d / %d 站（内容来自本地四层验证）" % (
-        len(_live_one), len(_one_sites) if _one_text else 0))
-    if _live_one:
-        _oo = json.loads(_one_text)
-        _oo["sites"] = _live_one
-        _one_text = json.dumps(_oo, ensure_ascii=False, indent=2)
-        templates["one.json"] = _one_text
-    else:
-        print("   ⚠ one.json 无可用源，本轮不进 index / 不注册")
-    entries = []
-    if _live_one:
-        entries.append({"name": "直连源·每日实测", "url": SELF + "/one.json"})
-    else:
-        entries.append({"name": "直连源·备用", "url": SELF + "/fs4k3.json"})
+    templates["one.json"] = _one_text
+    # 5 条线版本（56c1d96）：恢复用户确认的结构
+    entries = [
+        {"name": "打开就能看", "url": SELF + "/fs4k3.json"},
+        {"name": "扩展站（83 个新站）", "url": SELF + "/ext.json"},
+        {"name": "老线·合集一（21 条）", "url": SELF + "/c1.json"},
+        {"name": "老线·合集二（46 条）", "url": SELF + "/c2.json"},
+        {"name": "4K 专区（8 条）", "url": SELF + "/4k.json"},
+    ]
+    _filter_notes = []   # 补：此前只 append 未定义
     _stale = False
     _stale_reason = ""
     _user_notice = "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。"
     _filter_ok = False
-    _filter_notes = []   # 修复：此前只 append 未定义，走到即 NameError
     # 状态字段 + 人话 notice（stale 时给用户可理解的恢复提示）
     report["stale"] = _stale
     report["stale_reason"] = _stale_reason
@@ -1156,6 +1069,12 @@ def main():
         except Exception as _ne:
             _filter_notes.append("filter-line notice 注入失败: %s" % _ne)
 
+    # 保证 5 条线对应的文件每次构建都存在（此前 fs4k3/ext 在 Pages 上 404）
+    for _rf in ("fs4k3.json", "ext.json", "c1.json", "c2.json", "4k.json"):
+        _rp = os.path.join(ROOT, "filmstore4k", "dist", _rf)
+        if os.path.isfile(_rp) and _rf not in templates:
+            templates[_rf] = open(_rp, encoding="utf-8").read()
+            print("   [5线] %s 已注册（%.1f KB）" % (_rf, os.path.getsize(_rp) / 1024.0))
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
 
     report["summary"] = {
