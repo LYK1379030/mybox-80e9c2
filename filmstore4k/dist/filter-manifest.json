@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T07:03:15.892Z",
+  "generated": "2026-11-10T07:12:19.624Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 488257,
+    "bytes": 488535,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 271,
     "seedCount": 16,
-    "searchIndexTerms": 3729,
+    "searchIndexTerms": 3723,
     "searchIndexNames": 800,
-    "searchIndexBytes": 91542,
+    "searchIndexBytes": 91135,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -81,7 +81,7 @@
     "buckets": {
       "type": {
         "科幻": 44,
-        "冒险": 37,
+        "冒险": 38,
         "灾难": 8,
         "纪录片": 12,
         "悬疑": 41,
@@ -92,10 +92,10 @@
         "剧情": 60,
         "爱情": 60,
         "犯罪": 32,
-        "喜剧": 52,
+        "喜剧": 54,
         "短剧": 58,
         "武侠": 6,
-        "奇幻": 58,
+        "奇幻": 59,
         "动画": 60,
         "历史": 13,
         "传记": 12,
@@ -123,7 +123,7 @@
         "马来西亚": 1,
         "奥地利,德国": 1,
         "奥地利 / 德国": 1,
-        "泰国": 22,
+        "泰国": 23,
         "巴西": 1,
         "新加坡": 2,
         "丹麦": 2,
@@ -136,6 +136,7 @@
         "中国香港,中国大陆": 1,
         "美国,英国": 1,
         "比利时,法国,荷兰": 1,
+        "马来西亚 / 中国大陆": 1,
         "印尼": 1
       },
       "decade": {
@@ -217,7 +218,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3729"
+        "actual": "names=800 terms=3723"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",

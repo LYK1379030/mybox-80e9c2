@@ -30,16 +30,7 @@
       "changeable": 1
     },
     {
-      "key": "s4_apiapibdzycom",
-      "name": "百度采集",
-      "type": 1,
-      "api": "https://api.apibdzy.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1
-    },
-    {
-      "key": "s5_tyyszycom",
+      "key": "s4_tyyszycom",
       "name": "天涯资源",
       "type": 1,
       "api": "http://tyyszy.com/api.php/provide/vod/",
@@ -48,10 +39,19 @@
       "changeable": 1
     },
     {
-      "key": "s6_m3u8apiyhzycom",
+      "key": "s5_m3u8apiyhzycom",
       "name": "樱花资源",
       "type": 1,
       "api": "https://m3u8.apiyhzy.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1
+    },
+    {
+      "key": "s6_apiapibdzycom",
+      "name": "百度采集",
+      "type": 1,
+      "api": "https://api.apibdzy.com/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1
@@ -82,84 +82,54 @@
     "bilibili"
   ],
   "ads": [],
-  "notice": "完整线路：精选源 + 备用源。备用源偶有超时，主源失效时可切。",
+  "notice": "完整线路：精选源 + 2 个慢速备用源（偶有超时，主源失效时用）。",
   "_meta": {
-    "tier": "B-完整",
-    "sites": 7,
-    "verified": "2026-11-10T07:02:01.934Z",
+    "verified": "2026-11-10T07:11:29.628Z",
+    "policy": "接口多次实测 + 播放地址实测 #EXTM3U 或 application/vnd.apple.mpegurl",
     "detail": [
       {
         "name": "360资源",
         "avgMs": 668,
-        "play": "3/3",
-        "tier": "A"
+        "stable": "3/3",
+        "play": "3/3"
       },
       {
         "name": "暴风资源",
         "avgMs": 440,
-        "play": "3/3",
-        "tier": "A"
+        "stable": "3/3",
+        "play": "3/3"
       },
       {
         "name": "量子资源",
         "avgMs": 1375,
-        "play": "3/3",
-        "tier": "A"
-      },
-      {
-        "name": "百度采集",
-        "avgMs": 5134,
-        "play": "3/3",
-        "tier": "A"
+        "stable": "3/3",
+        "play": "3/3"
       },
       {
         "name": "天涯资源",
         "avgMs": 1184,
-        "play": "3/3",
-        "tier": "B"
+        "stable": "2/3",
+        "play": "3/3"
       },
       {
         "name": "樱花资源",
         "avgMs": 4199,
-        "play": "3/3",
-        "tier": "B"
+        "stable": "2/3",
+        "play": "3/3"
+      },
+      {
+        "name": "百度采集",
+        "avgMs": 5100,
+        "stable": "2/5",
+        "play": "2/2"
       },
       {
         "name": "索尼资源",
-        "avgMs": 15500,
-        "play": "3/3",
-        "tier": "B"
+        "avgMs": 8500,
+        "stable": "2/5",
+        "play": "2/2"
       }
     ],
-    "dropped": [
-      {
-        "name": "建安资源",
-        "why": "播放地址全是腾讯/爱奇艺网页，需嗅探，客户端直接播不了"
-      },
-      {
-        "name": "非凡[直连]",
-        "why": "play_url 全是 /share/ 分享页，非直链"
-      },
-      {
-        "name": "非凡影视",
-        "why": "与非凡[直连]内容指纹完全相同（重复源）"
-      },
-      {
-        "name": "电影天堂",
-        "why": "play_url 全是 /share/ 分享页，非直链"
-      },
-      {
-        "name": "金鹰资源",
-        "why": "1/3 稳定，21-34s 超时"
-      },
-      {
-        "name": "速播资源",
-        "why": "1/3 稳定，9.6s 平均超时"
-      },
-      {
-        "name": "极速[直连]",
-        "why": "1/2 稳定且播放地址不可解析"
-      }
-    ]
+    "tier": "B-完整"
   }
 }
