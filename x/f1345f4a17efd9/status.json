@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-10T02:52:20Z",
+  "built_at": "2026-11-10T02:59:21Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 119,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 311,
+      "ms": 49,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 547,
+      "ms": 512,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 619,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 728,
+      "ms": 721,
       "total": null,
       "why": "ok"
     },
@@ -298,10 +298,10 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "DNS: [Errno -2] Name or service not known"
     },
     {
       "name": "771949",
@@ -313,13 +313,13 @@
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
-      "why": "HTTP: <urlopen error timed out>"
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "返回站点首页 HTML，非解析结果"
     }
   ],
   "doh": [
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 18
+      "files": 10
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 18
+      "files": 10
     }
   ],
   "issues": [
@@ -562,9 +562,9 @@
   "stale": false,
   "stale_reason": "",
   "user_notice": "每天自动更新一批片，按类型、地区、年代找片或搜片名都可以，搜不到可以点备用。",
-  "default_entry": "fs4k3.json",
-  "visible_entries": 2,
-  "filter_ok": true,
+  "default_entry": "one.json",
+  "visible_entries": 1,
+  "filter_ok": false,
   "summary": {
     "sub_configs": [
       [
@@ -604,56 +604,8 @@
       "problems": []
     },
     {
-      "file": "fs4k.json",
-      "sites": 15,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "fs4k2.json",
-      "sites": 15,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "fs4k3.json",
-      "sites": 14,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "fs4kc.json",
-      "sites": 3,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "filter-line.json",
-      "sites": 1,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "filter-data.json",
-      "sites": 0,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "spider-filter.js",
-      "sites": 0,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "filter-manifest.json",
-      "sites": 0,
-      "lives": 0,
-      "problems": []
-    },
-    {
-      "file": "ext.json",
-      "sites": 83,
+      "file": "one.json",
+      "sites": 7,
       "lives": 0,
       "problems": []
     },
@@ -665,7 +617,7 @@
     }
   ],
   "verify": {
-    "files_checked": 13,
+    "files_checked": 5,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
