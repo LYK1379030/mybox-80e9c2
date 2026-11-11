@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generated": "2026-11-11T15:52:18.582Z",
+    "generated": "2026-11-11T15:57:43.929Z",
     "samplePages": 12,
     "countIsSample": true,
     "currentUtcYear": 2026,
@@ -16,7 +16,7 @@
     "stale": false,
     "sources": 15,
     "okSources": 180,
-    "rawSampled": 1668,
+    "rawSampled": 1667,
     "perSource": {
       "c2_5": 240,
       "sony": 240,
@@ -36,7 +36,7 @@
     },
     "wdAdded": 262,
     "seedCount": 16,
-    "wdStart": 1406,
+    "wdStart": 1405,
     "note": "片量为每日抽样（每源 pg=1..samplePages），非全量片库；按类型/地区/年代筛选由本仓库自有规则本地实现，不代表用户可见全库条数。",
     "bytes": 480913
   },
@@ -7347,7 +7347,7 @@
         "剧情"
       ],
       "vod_class": "剧情,喜剧,欧美剧",
-      "vod_time": "2026-11-11 23:48:04",
+      "vod_time": "2026-11-11 23:57:03",
       "vod_score": "0.0",
       "vod_play_url": "https://vv.jisuzyv.com/play/elYvk65a"
     },
@@ -7365,7 +7365,7 @@
         "悬疑"
       ],
       "vod_class": "中国·2026·悬疑,内地剧,悬疑",
-      "vod_time": "2026-11-11 23:48:03",
+      "vod_time": "2026-11-11 23:57:02",
       "vod_score": "0.0",
       "vod_play_url": "https://vv.jisuzyv.com/play/aADQRA9e"
     },
