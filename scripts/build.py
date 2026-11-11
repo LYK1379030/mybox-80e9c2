@@ -77,6 +77,10 @@ DIRECT_SITES = [
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     {"key": "lzi", "name": "量子·备用", "api": "https://cj.lziapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    # 香蕉资源站：84k 部成人向内容，搜索可用、详情直出 m3u8 点开即播。
+    # 该站不支持按分类过滤（t= 参数被忽略），分类页显示全站列表可翻页。
+    {"key": "xiangjiao", "name": "香蕉资源", "api": "http://api.xjzyapi.com/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1, "timeout": 30},
 ]
 
 # ---------------------------------------------------------------- 真 4K 线路
@@ -1183,12 +1187,10 @@ CLEAN_FILTER_TYPES = {
 #   - 客户端发出 f={"area":"大陆"} 时，站方虽不认，但 categories 白名单已挡住成人内容
 #   - 真正能筛选的是下面的 spider 线（type=3）
 CLEAN_SITES = [
-    # ---- （已移除看球 jar 站：体育内容，非影视，且需 3.86MB jar）----
-
-    # ---- 主入口：自研 YGSpider（type=3），原生 GridFilterDialog ----
+    # ---- 主轴：type=3 spider，支持 extend 筛选 ----
     {
-        "key": "clean_ygfilter", "name": "✅影片筛选", "type": 3,
-        "api": "csp_YGSpider", "searchable": 1, "quickSearch": 1,
+        "key": "clean_kanqiu", "name": "✅纯净看球", "type": 3,
+        "api": "csp_Kanqiu", "searchable": 1, "quickSearch": 1,
         "filterable": 1, "changeable": 1,
     },
     # ---- 直连主力：categories 白名单挡成人 ----
@@ -1196,31 +1198,53 @@ CLEAN_SITES = [
         "key": "clean_bfzy", "name": "✅纯净暴风", "type": 1,
         "api": "https://bfzyapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
+        "categories": ["电影片","动作片","喜剧片","恐怖片","科幻片","爱情片","剧情片",
+                       "战争片","纪录片","连续剧","国产剧","欧美剧","香港剧","韩国剧",
+                       "台湾剧","日本剧","海外剧","泰国剧","动漫片","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","综艺片","大陆综艺","港台综艺",
+                       "日韩综艺","欧美综艺","动画片","短剧大全","电影解说","预告片",
+                       "体育赛事","足球","篮球","网球","斯诺克"],
     },
     {
         "key": "clean_360", "name": "✅纯净360", "type": 1,
         "api": "https://caiji.360zy.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
-    },
-    {
-        "key": "clean_lzi", "name": "✅纯净量子", "type": 1,
-        "api": "https://cj.lziapi.com/api.php/provide/vod",
-        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
+        "categories": ["电影","连续剧","综艺","动漫","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","体育","NBA","惊悚片","家庭篇","古装片","历史片",
+                       "悬疑片","犯罪片","灾难片","纪录片","短片","动画片","台湾剧",
+                       "日本剧","海外剧","泰国剧","大陆综艺","港台综艺","日韩综艺",
+                       "欧美综艺","国产动漫","欧美动漫","日韩动漫","足球"],
     },
     {
         "key": "clean_feifan", "name": "✅纯净非凡", "type": 1,
         "api": "http://cj.ffzyapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
+        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
+                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","短剧"],
     },
     {
         "key": "clean_dytt", "name": "✅纯净电影天堂", "type": 1,
         "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
+        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
+                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","短剧","动画片"],
+    },
+    {
+        "key": "clean_lzi", "name": "✅纯净量子", "type": 1,
+        "api": "https://cj.lziapi.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
+        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
+                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
+                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
+                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
+                       "欧美动漫","港台动漫","海外动漫","短剧"],
     },
 ]
 
@@ -1248,15 +1272,14 @@ def _emit_clean(site_root, templates):
             continue
         # 没有 categories 的（如 csp 插件线）正常保留，靠插件自身分组成人内容
         sites.append(item)
-    # 【方案B】自研 YGSpider（6KB）：原生 GridFilterDialog 的 filters 由它返回，
-    # categoryContent 真实调直连源（?year= / ?t= 实测生效）。
-    _clean_jar = "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/yg/ygfilter.jar"
     cfg = {
-        "spider": _clean_jar,
-                "wallpaper": WALLPAPER,
+        "wallpaper": WALLPAPER,
         "sites": sites,
         "lives": [],
-        "parses": [],   # 已清空：无任何解析接口（原 Web/Parallel 均不可用）
+        "parses": [
+            {"name": "聚合", "type": 0, "url": "Web"},
+            {"name": "并行", "type": 0, "url": "Parallel"},
+        ],
         "flags": ["youku", "qq", "iqiyi", "qiyi", "letv", "sohu", "tudou",
                   "pptv", "mgtv", "wasu", "bilibili"],
         "ads": ADS,
@@ -1266,7 +1289,7 @@ def _emit_clean(site_root, templates):
     os.makedirs(d, exist_ok=True)
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
-    print("   clean/index.json 已生成（%d 站 + YGSpider jar，原生筛选可用）" % len(sites))
+    print("   clean/index.json 已生成（%d 个直连站，成人类目已白名单屏蔽）" % len(sites))
 
 
 def _emit_4konly(site_root, templates):
