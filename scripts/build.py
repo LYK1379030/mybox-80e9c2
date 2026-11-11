@@ -1194,33 +1194,19 @@ CLEAN_SITES = [
         "key": "clean_bfzy", "name": "✅纯净暴风", "type": 1,
         "api": "https://bfzyapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影片","动作片","喜剧片","恐怖片","科幻片","爱情片","剧情片",
-                       "战争片","纪录片","连续剧","国产剧","欧美剧","香港剧","韩国剧",
-                       "台湾剧","日本剧","海外剧","泰国剧","动漫片","国产动漫","日韩动漫",
-                       "欧美动漫","港台动漫","海外动漫","综艺片","大陆综艺","港台综艺",
-                       "日韩综艺","欧美综艺","动画片","短剧大全","电影解说","预告片",
-                       "体育赛事","足球","篮球","网球","斯诺克"],
+        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
     },
     {
         "key": "clean_360", "name": "✅纯净360", "type": 1,
         "api": "https://caiji.360zy.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影","连续剧","综艺","动漫","动作片","喜剧片","爱情片",
-                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
-                       "欧美剧","体育","NBA","惊悚片","家庭篇","古装片","历史片",
-                       "悬疑片","犯罪片","灾难片","纪录片","短片","动画片","台湾剧",
-                       "日本剧","海外剧","泰国剧","大陆综艺","港台综艺","日韩综艺",
-                       "欧美综艺","国产动漫","欧美动漫","日韩动漫","足球"],
+        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
     },
     {
         "key": "clean_lzi", "name": "✅纯净量子", "type": 1,
         "api": "https://cj.lziapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
-                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
-                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
-                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
-                       "欧美动漫","港台动漫","海外动漫","短剧"],
+        "categories": ["电影","连续剧","综艺","动漫","纪录片","短剧","动作片","喜剧片","爱情片","科幻片","恐怖片","剧情片","战争片","悬疑片","犯罪片","灾难片","动画片","国产剧","欧美剧","韩国剧","日本剧","海外剧","台湾剧","泰国剧","大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫"],
     },
 ]
 
@@ -1255,7 +1241,7 @@ def _emit_clean(site_root, templates):
         "wallpaper": WALLPAPER,
         "sites": sites,
         "lives": [],
-        "parses": [],   # 清空：原 Web/Parallel 两个端点实测均不可用
+        "parses": [],   # 已清空：无任何解析接口（原 Web/Parallel 均不可用）
         "flags": ["youku", "qq", "iqiyi", "qiyi", "letv", "sohu", "tudou",
                   "pptv", "mgtv", "wasu", "bilibili"],
         "ads": ADS,
@@ -1265,7 +1251,7 @@ def _emit_clean(site_root, templates):
     os.makedirs(d, exist_ok=True)
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
-    print("   clean/index.json 已生成（%d 站，jar已配，parses已清，成人类目已屏蔽）" % len(sites))
+    print("   clean/index.json 已生成（%d 站，categories白名单已配，parses已清）" % len(sites))
 
 
 def _emit_4konly(site_root, templates):
