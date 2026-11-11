@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-11T13:47:02Z",
+  "built_at": "2026-11-11T14:28:27Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 46,
+      "ms": 36,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 99,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 236,
+      "ms": 85,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 598,
+      "ms": 627,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 726,
       "total": null,
       "why": "ok"
     },
@@ -298,16 +298,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
       "name": "爱酷",
       "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "夜幕",
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 9
+      "files": 10
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 9
+      "files": 10
     }
   ],
   "issues": [
@@ -559,6 +559,11 @@
   ],
   "epg_ok": true,
   "vod_total": 6,
+  "gateway": {
+    "route": "B",
+    "variant_count": 30,
+    "notes": []
+  },
   "summary": {
     "sub_configs": [
       [
@@ -598,6 +603,12 @@
       "problems": []
     },
     {
+      "file": "year-variants.json",
+      "sites": 30,
+      "lives": 0,
+      "problems": []
+    },
+    {
       "file": "index.json",
       "sites": 0,
       "lives": 0,
@@ -605,7 +616,7 @@
     }
   ],
   "verify": {
-    "files_checked": 4,
+    "files_checked": 5,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
