@@ -1143,6 +1143,12 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         os.makedirs(site_root, exist_ok=True)
         with open(os.path.join(site_root, ".nojekyll"), "w", encoding="utf-8") as f:
             f.write("")
+        # 防搜索引擎收录：任何爬虫都不允许抓取本站任何路径
+        with open(os.path.join(site_root, "robots.txt"), "w", encoding="utf-8") as f:
+            f.write("User-agent: *\nDisallow: /\n")
+        # 访问站点根不泄露任何信息
+        with open(os.path.join(site_root, "index.html"), "w", encoding="utf-8") as f:
+            f.write("<!doctype html><meta name=\"robots\" content=\"noindex,nofollow\">")
         # 独立 4K 配置：放在站点根目录 /4konly/index.json，
         # 与主配置完全隔离（自带独立 spider jar，客户端切换时只加载它）。
         try:
@@ -1285,7 +1291,8 @@ def _emit_clean(site_root, templates):
         "ads": ADS,
         "doh": CONF_DOH,
     }
-    d = os.path.join(site_root, "clean")
+    # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
+    d = os.path.join(site_root, "a")
     os.makedirs(d, exist_ok=True)
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
@@ -1332,7 +1339,8 @@ def _emit_4konly(site_root, templates):
         "ads": ADS,
         "doh": CONF_DOH,
     }
-    d = os.path.join(site_root, "4konly")
+    # 隐蔽路径：b/
+    d = os.path.join(site_root, "b")
     os.makedirs(d, exist_ok=True)
     # 把 jar 复制进站点目录，让客户端从同源下载（避免第三方防盗链）
     jar_src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "spider4k.jar")
