@@ -20,7 +20,7 @@
   "parses": [],
   "flags": [],
   "_meta": {
-    "generated": "2026-11-11T12:46:12.598Z",
+    "generated": "2026-11-11T12:48:02.761Z",
     "producer": "scripts/build-filter-lines.mjs",
     "engine": "drpy2-builtin（APK 内置 QuickJS + spider.js 加载器，零 jar）",
     "zeroJar": true,
