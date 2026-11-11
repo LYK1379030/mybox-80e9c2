@@ -1052,7 +1052,9 @@ def main():
     entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
     if _variant_sites:
-        entries.append({"name": "按年代找片（%d 个）" % len(_variant_sites),
+        # verifier FAIL-1：壳强制发 t=<class[0].type_id>，与 year 组合在 5 源全空。
+        # 这条线只保留在 x/ 多仓里做实验，诚实标注，不进 clean/，也不是主推。
+        entries.append({"name": "按年代找片（%d 个）（实验）" % len(_variant_sites),
                         "url": SELF + "/year-variants.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
     report.setdefault("gateway", {})["route"] = "B"
@@ -1174,8 +1176,15 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         # 访问站点根不泄露任何信息
         with open(os.path.join(site_root, "index.html"), "w", encoding="utf-8") as f:
             f.write("<!doctype html><meta name=\"robots\" content=\"noindex,nofollow\">")
-        # 独立 4K 配置：放在站点根目录 /4konly/index.json，
-        # 与主配置完全隔离（自带独立 spider jar，客户端切换时只加载它）。
+        # /clean/index.json：4 条 urls[] 多仓（壳 pa0.smali L557 支持 urls 展开、
+        # L600 支持 sites 单仓，两者都支持时选 urls[] 与 x/ 结构一致）。
+        # 旧生成器把它写进仓库根 clean/ 且只发 Pages 的 _site/ 子目录，
+        # 但 CI 的 git add 只提交 "$sub"，_site 仅整体上传 → 必须在这里
+        # 直接写进 _site/clean/ 才会随 upload-pages-artifact 一起发布。
+        try:
+            _emit_clean_multi(site_root, templates, built, hd_sites)
+        except Exception as e:
+            print("  [warn] clean 多仓生成失败：", e)
         try:
             _emit_clean(site_root, templates)
         except Exception as e:
@@ -1339,8 +1348,67 @@ def build_year_variants(clean_sites, report):
     return out, notes
 
 
+YG_SPIDER_JAR = ("https://gh-proxy.com/raw.githubusercontent.com/"
+                 "LYK1379030/mybox-80e9c2/main/yg/ygfilter.jar")
+YG_SPIDER_MD5 = "313a7a0b2f324f135cc17297267fb8d7"
+
+
+def _emit_clean_multi(site_root, templates, built, hd_sites):
+    """/clean/index.json = 4 条 urls[] 多仓 + /clean/yg.json = YGSpider v3 单仓。
+
+    关键：clean/ 不在 $sub 通道，_emit() 的 SELF→base 替换只作用于 templates，
+    所以这里直接写【绝对 URL】，不能用 __SELF__ 占位符。
+    文件写进 _site/clean/（随 upload-pages-artifact 整体发布）+ 仓库根 clean/
+    （让 git 能把旧 1534B 单仓配置覆盖掉）。yg/ygfilter.jar 同步复制进 _site/yg/。
+    """
+    # PAGES_BASE 形如 https://host/repo/x/<sub>；去掉 /x/<sub> 得到站点根
+    site_base = PAGES_BASE.rstrip("/").rsplit("/", 2)[0] if PAGES_BASE else ""
+    sub_base = PAGES_BASE.rstrip("/") if PAGES_BASE else CDN_BASE.rstrip("/")
+    urls = [
+        {"name": "① 直连点开即播（主力）", "url": sub_base + "/c1.json"},
+        {"name": "② 更多直连线路（补充）", "url": sub_base + "/c2.json"},
+        {"name": "④ 直连专区·点开即播（9 条·免授权）", "url": sub_base + "/4k.json"},
+        {"name": "✅影片筛选（原生四排）", "url": site_base + "/clean/yg.json"},
+    ]
+    index_text = json.dumps({"urls": urls}, ensure_ascii=False, indent=2)
+    yg_cfg = {
+        "spider": YG_SPIDER_JAR + ";md5;" + YG_SPIDER_MD5,
+        "wallpaper": WALLPAPER,
+        "sites": [{
+            "key": "yg_filter", "name": "✅影片筛选", "type": 3,
+            "api": "csp_YGSpider", "searchable": 1, "quickSearch": 1,
+            "filterable": 1, "changeable": 1,
+        }],
+        "lives": [],
+        "parses": [{"name": "聚合", "type": 0, "url": "Web"},
+                   {"name": "并行", "type": 0, "url": "Parallel"}],
+        "flags": ["youku", "qq", "iqiyi", "qiyi", "letv", "sohu", "tudou",
+                  "pptv", "mgtv", "wasu", "bilibili"],
+        "ads": ADS,
+        "doh": CONF_DOH,
+    }
+    yg_text = json.dumps(yg_cfg, ensure_ascii=False, indent=2)
+    for d in (os.path.join(site_root, "clean"), os.path.join(OUT, "clean")):
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
+            f.write(index_text)
+        with open(os.path.join(d, "yg.json"), "w", encoding="utf-8") as f:
+            f.write(yg_text)
+    # 把 YGSpider v3 jar 复制进 _site/yg/，让 Pages 上的 /yg/ygfilter.jar 也 200
+    # （spider 字段走 gh-proxy 绝对地址，但同源留一份便于校验与降级）。
+    jar_src = next((p for p in (os.path.join(ROOT, "yg", "ygfilter.jar"),
+                                os.path.join(OUT, "yg", "ygfilter.jar"))
+                    if os.path.isfile(p)), None)
+    if jar_src:
+        jar_dst = os.path.join(site_root, "yg")
+        os.makedirs(jar_dst, exist_ok=True)
+        import shutil
+        shutil.copy2(jar_src, os.path.join(jar_dst, "ygfilter.jar"))
+    print("   clean/index.json + clean/yg.json 已生成（4 条 urls[] 多仓，YGSpider v3）")
+
+
 def _emit_clean(site_root, templates):
-    """生成纯净仓 /clean/index.json（无任何成人类目、全部直连）。
+    """生成纯净仓 /a/index.json（无任何成人类目、全部直连）。
 
     独立于主配置与 4K 配置，切换过去只加载它自己。
     黑名单双保险：

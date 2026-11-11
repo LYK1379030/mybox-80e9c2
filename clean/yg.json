@@ -1,0 +1,44 @@
+{
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/yg/ygfilter.jar;md5;313a7a0b2f324f135cc17297267fb8d7",
+  "wallpaper": "https://picsum.photos/1280/720",
+  "sites": [
+    {
+      "key": "yg_filter",
+      "name": "✅影片筛选",
+      "type": 3,
+      "api": "csp_YGSpider",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "changeable": 1
+    }
+  ],
+  "lives": [],
+  "parses": [
+    {
+      "name": "聚合",
+      "type": 0,
+      "url": "Web"
+    },
+    {
+      "name": "并行",
+      "type": 0,
+      "url": "Parallel"
+    }
+  ],
+  "flags": [
+    "youku",
+    "qq",
+    "iqiyi",
+    "qiyi",
+    "letv",
+    "sohu",
+    "tudou",
+    "pptv",
+    "mgtv",
+    "wasu",
+    "bilibili"
+  ],
+  "ads": [],
+  "doh": []
+}

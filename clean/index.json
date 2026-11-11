@@ -1,79 +1,20 @@
 {
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/moyu-spider.jar",
-  "wallpaper": "https://picsum.photos/1280/720",
-  "sites": [
+  "urls": [
     {
-      "key": "s_kanqiu",
-      "name": "看球·有筛选",
-      "type": 3,
-      "api": "csp_Kanqiu",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1,
-      "changeable": 1
+      "name": "① 直连点开即播（主力）",
+      "url": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/c1.json"
     },
     {
-      "key": "s_bfzy",
-      "name": "暴风资源",
-      "type": 1,
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "filterable": 1
+      "name": "② 更多直连线路（补充）",
+      "url": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/c2.json"
     },
     {
-      "key": "s_360",
-      "name": "360资源",
-      "type": 1,
-      "api": "https://caiji.360zy.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "filterable": 1
+      "name": "④ 直连专区·点开即播（9 条·免授权）",
+      "url": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/4k.json"
     },
     {
-      "key": "s_lzi",
-      "name": "量子资源",
-      "type": 1,
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "filterable": 1
-    }
-  ],
-  "lives": [],
-  "parses": [],
-  "flags": [
-    "youku",
-    "qq",
-    "iqiyi",
-    "qiyi",
-    "letv",
-    "sohu",
-    "tudou",
-    "pptv",
-    "mgtv",
-    "wasu",
-    "bilibili"
-  ],
-  "ads": [],
-  "doh": [
-    {
-      "name": "阿里",
-      "url": "https://dns.alidns.com/dns-query",
-      "ips": [
-        "223.5.5.5",
-        "223.6.6.6"
-      ]
-    },
-    {
-      "name": "腾讯",
-      "url": "https://doh.pub/dns-query",
-      "ips": [
-        "119.29.29.29"
-      ]
+      "name": "✅影片筛选（原生四排）",
+      "url": "https://LYK1379030.github.io/mybox-80e9c2/clean/yg.json"
     }
   ]
 }

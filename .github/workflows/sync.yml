@@ -135,6 +135,7 @@ jobs:
           git config user.email "tvbox-bot@users.noreply.github.com"
           date -u +%Y-%m-%dT%H:%MZ > .last-sync
           git add .nojekyll .last-sync "${{ steps.cfg.outputs.sub }}" \
+            clean yg \
             scripts/filter-lines.json \
             filmstore4k/dist/filter-line.json filmstore4k/dist/filter-data.json \
             filmstore4k/dist/spider-filter.js filmstore4k/dist/filter-manifest.json
