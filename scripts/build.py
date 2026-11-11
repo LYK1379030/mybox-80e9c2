@@ -1028,11 +1028,36 @@ def main():
     _ = fourk_real
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
+    # 路线 B（零 jar / 零 patch / 纯配置）：预生成「年代变体」静态子仓。
+    # 壳只从 ac=list 响应顶层读 filters（ng0.smali L2157-2388），Pages 纯静态
+    # 无法改写响应，故 GridFilterDialog 四排面板不会出现；这里退化为
+    # 「线路里多出 N 个按年份切好的站点」的伪筛选，局限见 GATEWAY_REPORT.md。
+    # 每个变体站 api 直接拼好 year 参数（实测 360/bfzy/lzi/ffzy/dytt 均生效）。
+    _variant_sites, _variant_notes = build_year_variants(CLEAN_SITES, report)
+    if _variant_sites:
+        _variant_cfg = {
+            "wallpaper": WALLPAPER,
+            "sites": _variant_sites,
+            "lives": [],
+            "parses": [{"name": "聚合", "type": 0, "url": "Web"},
+                       {"name": "并行", "type": 0, "url": "Parallel"}],
+            "flags": ["youku", "qq", "iqiyi", "qiyi", "letv", "sohu", "tudou",
+                      "pptv", "mgtv", "wasu", "bilibili"],
+            "ads": ADS,
+            "doh": CONF_DOH,
+        }
+        templates["year-variants.json"] = json.dumps(_variant_cfg, ensure_ascii=False, indent=2)
     entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
     entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
+    if _variant_sites:
+        entries.append({"name": "按年代找片（%d 个）" % len(_variant_sites),
+                        "url": SELF + "/year-variants.json"})
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
+    report.setdefault("gateway", {})["route"] = "B"
+    report["gateway"]["variant_count"] = len(_variant_sites)
+    report["gateway"]["notes"] = _variant_notes
 
     report["summary"] = {
         "sub_configs": built, "4k_sites": len(hd_sites),
@@ -1165,13 +1190,16 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
 # 目标：像正规影视 App 一样有「类型 / 地区 / 年份」筛选条，且屏蔽全部成人类目。
 #
 # 筛选机制（FongMi/TV 源码实证）：
-#   Result.java   @SerializedName("filters") LinkedHashMap<String,List<Filter>> filters
-#   Filter.java   key(String) name(String) init(String) value(List<Value{n,v}>)
-#   SiteApi.java  type=3(spider) 时 extend 直接交给插件；
-#                 插件返回含 filters 的 JSON → 客户端渲染筛选条
-#   type=1(直连) 时 extend 被包成 f={json} 发出，采集站不认 → 无法筛选（已实测确认）
-#
-# 因此本仓用 type=3 的 csp 插件 + ext 内置筛选定义（filter JSON 由我方自托管）。
+# 零 jar / 零 patch 路线（GATEWAY_REPORT.md）：
+#   smali ng0.smali L2157-2388 证实壳从 ac=list 响应【顶层 filters】读取四排，
+#   L1884-1988 定义 {key,name,value:[{n,v}]}，L1612-1617 把 filterSelect 每个
+#   key 独立拼成 query（year=2024 / t=6 直接生效），L1651-1653 的 f={json} 冗余。
+#   本机实测 5 源 ac=list 均无顶层 filters；year=2024 在 360/bfzy 真收窄；
+#   t=6 仅 360 生效（bfzy 动作片=21，必须动态映射）；by 被忽略；area 仅 bfzy 生效。
+#   GitHub Pages 纯静态无法改写响应 → 路线 B 只能做「年代变体站点」伪筛选，
+#   四排 GridFilterDialog 不会出现；要真四排需路线 A 的公网网关（server.mjs）。
+# 版本差异说明：takagen99/Box master 的 SourceViewModel.java sortJson()/getList()
+#   与本机壳同源；本机 smali 为决定性证据，GitHub 源码用于交叉佐证。
 CLEAN_FILTER_TYPES = {
     "movie": [
         {"key": "area", "name": "地区", "value": [
@@ -1188,17 +1216,12 @@ CLEAN_FILTER_TYPES = {
     ],
 }
 
-# 关键：这些站是 type=1 直连，无法由客户端发 area/year（已实测 f={json} 被忽略），
-# 所以改用「服务端已支持 area/year 的直连站 + 我们自己的筛选声明」双轨：
-#   - 客户端发出 f={"area":"大陆"} 时，站方虽不认，但 categories 白名单已挡住成人内容
-#   - 真正能筛选的是下面的 spider 线（type=3）
+# 零 jar：全部 type:1 直连。构建期按 year 参数生成变体，并把源站不认的
+# 参数交给网关（路线 A）或干脆不暴露（路线 B 伪筛选）。
+
 CLEAN_SITES = [
-    # ---- 主轴：type=3 spider，支持 extend 筛选 ----
-    {
-        "key": "clean_kanqiu", "name": "✅纯净看球", "type": 3,
-        "api": "csp_Kanqiu", "searchable": 1, "quickSearch": 1,
-        "filterable": 1, "changeable": 1,
-    },
+    # 零 jar 铁律：不再放任何 csp_* 插件线（csp_Kanqiu 需 JarLoader，
+    # 用户已报 jar 加载失败；路线 A/B 都只保留 type:1 直连）。
     # ---- 直连主力：categories 白名单挡成人 ----
     {
         "key": "clean_bfzy", "name": "✅纯净暴风", "type": 1,
@@ -1253,6 +1276,67 @@ CLEAN_SITES = [
                        "欧美动漫","港台动漫","海外动漫","短剧"],
     },
 ]
+
+
+# 路线 B：预生成年代变体站。gate 数据来自 gateway/filters.json（CI 里若缺失用内置兜底）。
+# 铁律：只改配置，不引入 jar / 不改 smali / 不新增运行时服务。
+GATEWAY_VARIANT_YEARS = ["2024", "2023", "2022", "2021", "2020", "2019"]
+GATEWAY_VARIANT_BASES = [
+    {"key": "360", "name": "360", "api": "https://caiji.360zy.com/api.php/provide/vod/"},
+    {"key": "bfzy", "name": "暴风", "api": "https://bfzyapi.com/api.php/provide/vod/"},
+    {"key": "lzi", "name": "量子", "api": "https://cj.lziapi.com/api.php/provide/vod/"},
+    {"key": "ffzy", "name": "非凡", "api": "http://cj.ffzyapi.com/api.php/provide/vod/"},
+    {"key": "dytt", "name": "电影天堂", "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/"},
+]
+
+
+def _variant_probe(base, year):
+    """构建期真发一次 videolist，确认 year 参数在源站真的收窄了结果。
+    返回 (ok, why)。失败即剔除该变体，宁缺不假。"""
+    api = base["api"]
+    url = api + ("&" if "?" in api else "?") + urllib.parse.urlencode(
+        {"ac": "videolist", "pg": 1, "year": year})
+    try:
+        txt = decode_smart(fetch_bytes(url, timeout=8, limit=2_000_000))
+        j = json.loads(txt)
+        lst = j.get("list") or []
+        if not isinstance(lst, list) or len(lst) < 1:
+            return False, "year=%s 返回空列表" % year
+        # 至少一条 vod_year 命中才算真过滤（源站可能忽略参数返回全库）
+        hit = sum(1 for x in lst if str(x.get("vod_year", ""))[:4] == year)
+        if hit == 0:
+            return False, "year=%s 结果无年份命中，疑似参数被忽略" % year
+        return True, "ok(%d/%d)" % (hit, len(lst))
+    except Exception as e:
+        return False, "探测失败: %s" % str(e)[:70]
+
+
+def build_year_variants(clean_sites, report):
+    """每个 (源, 年代) 生成一个 type:1 变体站，api 直接带 year 参数。
+    同一批源不复制：每个变体是不同年份，差异明确。不做 t/by/area 变体：
+    t 的子分类 id 各源不同（360 动作=6、bfzy 动作=21），静态配置写死必错；
+    by/area 实测被源站忽略，生成了也是假筛选。"""
+    out, notes = [], []
+    for base in GATEWAY_VARIANT_BASES:
+        for year in GATEWAY_VARIANT_YEARS:
+            ok, why = _variant_probe(base, year)
+            if not ok:
+                notes.append("%s/%s 剔除: %s" % (base["key"], year, why))
+                continue
+            api = base["api"] + ("&" if "?" in base["api"] else "?") + \
+                  urllib.parse.urlencode({"year": year})
+            out.append({
+                "key": "v_%s_%s" % (base["key"], year),
+                "name": "%s·%s年" % (base["name"], year),
+                "type": 1,
+                "api": api,
+                "searchable": 1, "quickSearch": 1, "changeable": 1,
+                "filterable": 0,
+            })
+    for n in notes:
+        print("   [变体] " + n)
+    print("   [变体] 生成 %d 个年代站点（路线 B 伪筛选）" % len(out))
+    return out, notes
 
 
 def _emit_clean(site_root, templates):
