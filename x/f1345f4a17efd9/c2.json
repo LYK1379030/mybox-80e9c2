@@ -3,8 +3,17 @@
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
+      "key": "feifan",
+      "name": "非凡·最快·395ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "bfzy",
-      "name": "✅纯净暴风·36ms",
+      "name": "✅纯净暴风·567ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -13,17 +22,8 @@
     },
     {
       "key": "lzi",
-      "name": "量子·备用·627ms",
+      "name": "量子·备用·885ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "feifan",
-      "name": "非凡·最快·726ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
