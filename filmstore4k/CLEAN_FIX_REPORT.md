@@ -109,12 +109,16 @@ _emit_clean_multi 实跑：
 | # | URL | 期望 | 实测 |
 |---|---|---|---|
 | 1 | `https://LYK1379030.github.io/mybox-80e9c2/clean/index.json` | 200 / 4 条 urls[] 多仓 | 见下方最终结果 |
-| 2 | `https://LYK1379030.github.io/mybox-80e9c2/clean/yg.json` | 200 / spider md5=313a7a0b2f324f135cc17297267fb8d7 | 见下方最终结果 |
-| 3 | `https://LYK1379030.github.io/mybox-80e9c2/yg/ygfilter.jar` | 200 / 7,502 B | 见下方最终结果 |
+| 2 | `https://LYK1379030.github.io/mybox-80e9c2/clean/yg.json` | 200 / spider md5 与实际 jar 一致 | 200 / 1,567 B / md5=`d20e965738e2fe3211aa445c9c758b28` |
+| 3 | `https://LYK1379030.github.io/mybox-80e9c2/yg/ygfilter.jar` | 200 / 7,502 B / md5 一致 | 200 / 7,502 B / md5=`d20e965738e2fe3211aa445c9c758b28` |
 
 ### 最终结果
 
-提交后由 CI run 验证并填入；三连测全过才算完成。
+**TRIPLE 1/2/3 全过**（md5 口径见下）：`/clean/index.json` 200 / 4 条 urls[] 多仓；`/clean/yg.json` 200 / sites 恰好 1 条 `csp_YGSpider`；`/yg/ygfilter.jar` 200 / 7,502 B；`/a/index.json` 仍 200（未破坏原有纯净仓）；`x/` 第 4 条 name 已带「（实验）」。
+
+### md5 修正（lead 给的 `313a7a0b...` 与实际 jar 不符）
+
+实测仓库 `yg/ygfilter.jar`（blob `6120b6c187`）与 Pages `/yg/ygfilter.jar` 逐字相同：7,502 B，**md5 = `d20e965738e2fe3211aa445c9c758b28`**，与任务书给的 `313a7a0b2f324f135cc17297267fb8d7` 不一致。`JarLoader.smali` L559-589 会按 `;md5;` 第二段校验本地缓存，写错值会导致反复重下/静默 `SpiderNull`。按「确保所有添加的接口都能用」铁律，`yg.json` 的 spider 已改用**实测 md5**，并在 `build.py` 的 `YG_SPIDER_MD5` 同步。若 lead 手上的 `313a7a0b...` 对应的是另一版待替换的 jar，则需先把那版 jar 推到 `yg/` 再把 md5 改回；当前仓库里只有 `d20e9657...` 这一版。
 
 ---
 

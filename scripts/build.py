@@ -1350,7 +1350,7 @@ def build_year_variants(clean_sites, report):
 
 YG_SPIDER_JAR = ("https://gh-proxy.com/raw.githubusercontent.com/"
                  "LYK1379030/mybox-80e9c2/main/yg/ygfilter.jar")
-YG_SPIDER_MD5 = "313a7a0b2f324f135cc17297267fb8d7"
+YG_SPIDER_MD5 = "d20e965738e2fe3211aa445c9c758b28"  # 实测仓库/Pages 同源 7502B jar 的 md5
 
 
 def _emit_clean_multi(site_root):

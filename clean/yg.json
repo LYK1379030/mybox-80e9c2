@@ -1,5 +1,5 @@
 {
-  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/yg/ygfilter.jar;md5;313a7a0b2f324f135cc17297267fb8d7",
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/yg/ygfilter.jar;md5;d20e965738e2fe3211aa445c9c758b28",
   "wallpaper": "https://picsum.photos/1280/720",
   "sites": [
     {
@@ -39,44 +39,6 @@
     "wasu",
     "bilibili"
   ],
-  "ads": [
-    "static-mozai.4gtv.tv",
-    "s3t3d2y8.afcdn.net",
-    "iqiyi.hbuioo.com",
-    "vip.ffzyad.com",
-    "https://lf1-cdn-tos.bytegoofy.com/obj/tos-cn-i-dy/455ccf9e8ae744378118e4bd289288dd"
-  ],
-  "doh": [
-    {
-      "name": "阿里",
-      "url": "https://dns.alidns.com/dns-query",
-      "ips": [
-        "223.5.5.5",
-        "223.6.6.6"
-      ]
-    },
-    {
-      "name": "腾讯",
-      "url": "https://doh.pub/dns-query",
-      "ips": [
-        "119.29.29.29"
-      ]
-    },
-    {
-      "name": "Cloudflare",
-      "url": "https://cloudflare-dns.com/dns-query",
-      "ips": [
-        "1.1.1.1",
-        "1.0.0.1"
-      ]
-    },
-    {
-      "name": "AdGuard",
-      "url": "https://dns.adguard.com/dns-query",
-      "ips": [
-        "94.140.14.14",
-        "94.140.15.15"
-      ]
-    }
-  ]
+  "ads": [],
+  "doh": []
 }
