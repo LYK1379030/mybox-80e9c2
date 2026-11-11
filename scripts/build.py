@@ -1184,6 +1184,13 @@ CLEAN_FILTER_TYPES = {
 #   - 真正能筛选的是下面的 spider 线（type=3）
 CLEAN_SITES = [
     # ---- （已移除看球 jar 站：体育内容，非影视，且需 3.86MB jar）----
+
+    # ---- 主入口：自研 YGSpider（type=3），原生 GridFilterDialog ----
+    {
+        "key": "clean_ygfilter", "name": "✅影片筛选", "type": 3,
+        "api": "csp_YGSpider", "searchable": 1, "quickSearch": 1,
+        "filterable": 1, "changeable": 1,
+    },
     # ---- 直连主力：categories 白名单挡成人 ----
     {
         "key": "clean_bfzy", "name": "✅纯净暴风", "type": 1,
