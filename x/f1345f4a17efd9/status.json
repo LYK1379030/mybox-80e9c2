@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-11T12:15:26Z",
+  "built_at": "2026-11-11T12:46:28Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 31,
+      "ms": 39,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 99,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 424,
+      "ms": 39,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 813,
+      "ms": 586,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 718,
       "total": null,
       "why": "ok"
     },
@@ -286,20 +286,14 @@
   ],
   "parses": [
     {
-      "name": "西瓜",
-      "url": "https://jx.xmflv.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
+      "name": "西瓜",
+      "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -307,7 +301,7 @@
       "name": "771949",
       "url": "https://jx.771949.com/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "HTTP: HTTP Error 403: Forbidden"
     },
     {
       "name": "夜幕",
@@ -320,6 +314,12 @@
       "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
+      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [

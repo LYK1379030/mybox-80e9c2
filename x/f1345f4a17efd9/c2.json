@@ -4,7 +4,7 @@
   "sites": [
     {
       "key": "bfzy",
-      "name": "✅纯净暴风·31ms",
+      "name": "✅纯净暴风·39ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -12,18 +12,18 @@
       "quickSearch": 1
     },
     {
-      "key": "feifan",
-      "name": "非凡·最快·424ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "key": "lzi",
+      "name": "量子·备用·586ms",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
     },
     {
-      "key": "lzi",
-      "name": "量子·备用·813ms",
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "key": "feifan",
+      "name": "非凡·最快·718ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,

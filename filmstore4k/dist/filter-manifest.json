@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-11T12:15:09.808Z",
+  "generated": "2026-11-11T12:46:12.598Z",
   "producer": "scripts/build-filter-lines.mjs",
   "currentUtcYear": 2026,
   "contract": {
@@ -57,16 +57,16 @@
   },
   "data": {
     "items": 800,
-    "bytes": 481678,
+    "bytes": 481817,
     "maxBytes": 512000,
     "samplePages": 12,
     "countIsSample": true,
     "perBucketMax": 60,
     "wdAdded": 263,
     "seedCount": 16,
-    "searchIndexTerms": 3508,
+    "searchIndexTerms": 3517,
     "searchIndexNames": 800,
-    "searchIndexBytes": 86490,
+    "searchIndexBytes": 86595,
     "stale": false,
     "stale_reason": null,
     "decades": [
@@ -81,19 +81,19 @@
     "buckets": {
       "type": {
         "科幻": 35,
-        "冒险": 35,
+        "冒险": 36,
         "灾难": 9,
         "纪录片": 12,
-        "悬疑": 52,
+        "悬疑": 51,
         "综艺": 60,
         "动作": 56,
-        "惊悚": 16,
+        "惊悚": 15,
         "战争": 8,
         "剧情": 60,
         "爱情": 60,
         "犯罪": 35,
         "喜剧": 60,
-        "短剧": 54,
+        "短剧": 56,
         "武侠": 8,
         "奇幻": 60,
         "动画": 60,
@@ -112,14 +112,14 @@
         "台湾": 31,
         "中国台湾": 4,
         "英国": 9,
-        "韩国": 48,
+        "韩国": 47,
         "韩国 捷克": 1,
         "加拿大": 4,
         "其它": 7,
         "法国": 3,
         "美国 / 中国大陆 / 英国": 1,
         "美国,中国大陆,英国": 1,
-        "内地": 12,
+        "内地": 14,
         "中国": 1,
         "马来西亚": 1,
         "德国": 1,
@@ -136,8 +136,8 @@
         "印尼": 2
       },
       "decade": {
-        "2020年代": 625,
-        "2010年代": 100,
+        "2020年代": 624,
+        "2010年代": 101,
         "2000年代": 41,
         "90年代": 12,
         "80年代": 6,
@@ -214,7 +214,7 @@
       {
         "name": "searchIndex 结构合法（byName/terms 下标不越界）",
         "pass": true,
-        "actual": "names=800 terms=3508"
+        "actual": "names=800 terms=3517"
       },
       {
         "name": "search() 含精确相等 + 排序 + 归一化去重 + 索引召回",
