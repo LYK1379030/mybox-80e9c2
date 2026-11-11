@@ -62,13 +62,13 @@
 ### `scripts/build.py`（基于最新 main）
 
 1. 新增常量 `YG_SPIDER_JAR` / `YG_SPIDER_MD5 = "313a7a0b2f324f135cc17297267fb8d7"`（jar v3 7,502 B，含 YGSpider+Init+Proxy，包名 `com.github.catvod.spider`）。
-2. 新增 `_emit_clean_multi(site_root, templates, built, hd_sites)`：
+2. 新增 `_emit_clean_multi(site_root)`（**首版曾误传 `built/hd_sites` 两个 main() 局部变量，CI 日志 `name 'built' is not defined` 被 try/except 吞掉导致首轮 clean 仍未写出，已修**：函数内根本没用到它们，调用改为只传 `site_root`）：
    - 写 `_site/clean/index.json` = **4 条 urls[] 多仓**：`① 直连点开即播（主力）→ c1.json`、`② 更多直连线路（补充）→ c2.json`、`④ 直连专区·点开即播（9 条·免授权）→ 4k.json`、`✅影片筛选（原生四排）→ clean/yg.json`。前 3 条用 `PAGES_BASE` 绝对前缀（与 x/ 同源），第 4 条用站点根 `/clean/yg.json`。
    - 写 `_site/clean/yg.json` = 单仓：`spider = gh-proxy .../yg/ygfilter.jar;md5;313a7a0b...`，`sites` 恰好 1 条 `{"key":"yg_filter","name":"✅影片筛选","type":3,"api":"csp_YGSpider","searchable":1,"quickSearch":1,"filterable":1,"changeable":1}`。
    - 同时写仓库根 `clean/index.json` + `clean/yg.json`（覆盖旧的 1,573 B 单仓残留，双通道一致）。
    - 复制 `yg/ygfilter.jar` 到 `_site/yg/ygfilter.jar`（同时查 `ROOT/yg` 与 `OUT/yg` 两个来源），让 Pages 的 `/yg/ygfilter.jar` 也 200。
    - **不用 `__SELF__` 占位符**：`clean/` 不属于 `templates`，`_emit()` 的 `SELF→base` 替换覆盖不到它，直接写绝对 URL（本地实测 `has_SELF_in_clean=False`）。
-3. `_emit()` pages 分支 L1181 调 `_emit_clean_multi(...)`，原 `_emit_clean()`（写 `a/`）保留不动，互不影响。
+3. `_emit()` pages 分支 L1181 调 `_emit_clean_multi(site_root)`，原 `_emit_clean()`（写 `a/`）保留不动，互不影响。
 4. `x/` 多仓前 3 条线路**结构一字未动**；第 4 条 `按年代找片（30 个）` → `按年代找片（30 个）（实验）`（verifier FAIL-1 证实壳强制发 `t=<class[0].type_id>` 与 year 组合 5 源全空，诚实标注且不进 clean/）。
 5. `year-variants.json` 本身及其生成逻辑保留不动（双轨 PASS 过）。
 

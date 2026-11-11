@@ -1182,7 +1182,7 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         # 但 CI 的 git add 只提交 "$sub"，_site 仅整体上传 → 必须在这里
         # 直接写进 _site/clean/ 才会随 upload-pages-artifact 一起发布。
         try:
-            _emit_clean_multi(site_root, templates, built, hd_sites)
+            _emit_clean_multi(site_root)
         except Exception as e:
             print("  [warn] clean 多仓生成失败：", e)
         try:
@@ -1353,7 +1353,7 @@ YG_SPIDER_JAR = ("https://gh-proxy.com/raw.githubusercontent.com/"
 YG_SPIDER_MD5 = "313a7a0b2f324f135cc17297267fb8d7"
 
 
-def _emit_clean_multi(site_root, templates, built, hd_sites):
+def _emit_clean_multi(site_root):
     """/clean/index.json = 4 条 urls[] 多仓 + /clean/yg.json = YGSpider v3 单仓。
 
     关键：clean/ 不在 $sub 通道，_emit() 的 SELF→base 替换只作用于 templates，
