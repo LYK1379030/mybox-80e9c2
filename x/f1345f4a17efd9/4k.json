@@ -47,6 +47,16 @@
       "quickSearch": 1
     },
     {
+      "key": "xiangjiao",
+      "name": "【直连】香蕉资源",
+      "api": "http://api.xjzyapi.com/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1,
+      "timeout": 30
+    },
+    {
       "key": "bili_open",
       "name": "哔哩貓",
       "type": 3,

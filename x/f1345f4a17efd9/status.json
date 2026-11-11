@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-11T13:18:33Z",
+  "built_at": "2026-11-11T13:28:53Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 228,
+      "ms": 73,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 450,
+      "ms": 391,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 487,
+      "ms": 405,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 686,
+      "ms": 788,
       "total": null,
       "why": "ok"
     },
@@ -286,28 +286,16 @@
   ],
   "parses": [
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "西瓜",
       "url": "https://jx.xmflv.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "夜幕",
@@ -316,10 +304,22 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
       "name": "771949",
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -348,7 +348,7 @@
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 60000
+      "bytes": 35492
     },
     {
       "name": "EPG",
@@ -563,14 +563,14 @@
     "sub_configs": [
       [
         "c1",
-        21
+        22
       ],
       [
         "c2",
-        46
+        47
       ]
     ],
-    "4k_sites": 8,
+    "4k_sites": 9,
     "real4k_sites": 3,
     "alive_vod": 4,
     "dead_vod": 2,
@@ -581,19 +581,19 @@
   "output_check": [
     {
       "file": "c1.json",
-      "sites": 21,
+      "sites": 22,
       "lives": 3,
       "problems": []
     },
     {
       "file": "c2.json",
-      "sites": 46,
+      "sites": 47,
       "lives": 3,
       "problems": []
     },
     {
       "file": "4k.json",
-      "sites": 8,
+      "sites": 9,
       "lives": 3,
       "problems": []
     },
