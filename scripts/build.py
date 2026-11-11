@@ -1213,26 +1213,6 @@ CLEAN_SITES = [
                        "欧美综艺","国产动漫","欧美动漫","日韩动漫","足球"],
     },
     {
-        "key": "clean_feifan", "name": "✅纯净非凡", "type": 1,
-        "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
-                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
-                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
-                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
-                       "欧美动漫","港台动漫","海外动漫","短剧"],
-    },
-    {
-        "key": "clean_dytt", "name": "✅纯净电影天堂", "type": 1,
-        "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
-        "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
-        "categories": ["电影片","连续剧","综艺片","动漫片","动作片","喜剧片","爱情片",
-                       "科幻片","恐怖片","剧情片","战争片","国产剧","香港剧","韩国剧",
-                       "欧美剧","记录片","台湾剧","日本剧","海外剧","泰国剧",
-                       "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
-                       "欧美动漫","港台动漫","海外动漫","短剧","动画片"],
-    },
-    {
         "key": "clean_lzi", "name": "✅纯净量子", "type": 1,
         "api": "https://cj.lziapi.com/api.php/provide/vod",
         "searchable": 1, "quickSearch": 1, "changeable": 1, "filterable": 1,
@@ -1268,14 +1248,14 @@ def _emit_clean(site_root, templates):
             continue
         # 没有 categories 的（如 csp 插件线）正常保留，靠插件自身分组成人内容
         sites.append(item)
+    # 【2026-11-11 修复】必须带 spider，否则 csp_ 类无法执行 → 筛选面板出不来
+    _clean_jar = "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/moyu-spider.jar"
     cfg = {
+        "spider": _clean_jar,
         "wallpaper": WALLPAPER,
         "sites": sites,
         "lives": [],
-        "parses": [
-            {"name": "聚合", "type": 0, "url": "Web"},
-            {"name": "并行", "type": 0, "url": "Parallel"},
-        ],
+        "parses": [],   # 清空：原 Web/Parallel 两个端点实测均不可用
         "flags": ["youku", "qq", "iqiyi", "qiyi", "letv", "sohu", "tudou",
                   "pptv", "mgtv", "wasu", "bilibili"],
         "ads": ADS,
@@ -1285,7 +1265,7 @@ def _emit_clean(site_root, templates):
     os.makedirs(d, exist_ok=True)
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
-    print("   clean/index.json 已生成（%d 个直连站，成人类目已白名单屏蔽）" % len(sites))
+    print("   clean/index.json 已生成（%d 站，jar已配，parses已清，成人类目已屏蔽）" % len(sites))
 
 
 def _emit_4konly(site_root, templates):
