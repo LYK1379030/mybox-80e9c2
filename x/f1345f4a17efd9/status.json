@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-11T10:44:33Z",
+  "built_at": "2026-11-11T11:18:57Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 80,
+      "ms": 72,
       "total": null,
       "why": "ok"
     },
     {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 543,
+      "ms": 124,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 841,
+      "ms": 289,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 919,
+      "ms": 647,
       "total": null,
       "why": "ok"
     },
@@ -298,16 +298,10 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "爱酷",
@@ -316,10 +310,16 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
       "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
+      "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -334,21 +334,21 @@
       "bytes": 65
     },
     {
-      "name": "腾讯",
-      "ok": true,
-      "bytes": 468
-    },
-    {
       "name": "阿里",
       "ok": true,
       "bytes": 76
+    },
+    {
+      "name": "腾讯",
+      "ok": true,
+      "bytes": 468
     }
   ],
   "external": [
     {
       "name": "壁纸",
       "ok": true,
-      "bytes": 40008
+      "bytes": 60000
     },
     {
       "name": "EPG",
