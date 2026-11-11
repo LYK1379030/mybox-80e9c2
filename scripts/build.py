@@ -1248,7 +1248,11 @@ def _emit_clean(site_root, templates):
             continue
         # 没有 categories 的（如 csp 插件线）正常保留，靠插件自身分组成人内容
         sites.append(item)
+    # 【方案B】自研 YGSpider（6KB）：原生 GridFilterDialog 的 filters 由它返回，
+    # categoryContent 真实调直连源（?year= / ?t= 实测生效）。
+    _clean_jar = "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/yg/ygfilter.jar"
     cfg = {
+        "spider": _clean_jar,
                 "wallpaper": WALLPAPER,
         "sites": sites,
         "lives": [],
@@ -1262,7 +1266,7 @@ def _emit_clean(site_root, templates):
     os.makedirs(d, exist_ok=True)
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
-    print("   clean/index.json 已生成（%d 站，categories白名单已配，parses已清）" % len(sites))
+    print("   clean/index.json 已生成（%d 站 + YGSpider jar，原生筛选可用）" % len(sites))
 
 
 def _emit_4konly(site_root, templates):
