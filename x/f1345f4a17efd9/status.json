@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-11T15:58:05Z",
+  "built_at": "2026-11-12T00:34:44Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,42 +38,42 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 291,
+      "ms": 94,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 333,
+      "ms": 326,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 537,
+      "ms": 541,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 854,
+      "ms": 881,
       "total": null,
       "why": "ok"
-    },
-    {
-      "api": "https://api.kuaifan.tv/api.php/provide/vod",
-      "alive": false,
-      "ms": 0,
-      "why": "<urlopen error [Errno -2] Name or service not known>"
     },
     {
       "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
       "why": "非法 JSON"
+    },
+    {
+      "api": "https://api.kuaifan.tv/api.php/provide/vod",
+      "alive": false,
+      "ms": 0,
+      "why": "<urlopen error [Errno -2] Name or service not known>"
     }
   ],
   "dropped": [
@@ -298,18 +298,6 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
@@ -319,7 +307,19 @@
       "name": "771949",
       "url": "https://jx.771949.com/?url=",
       "ok": false,
+      "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
       "why": "HTTP: <urlopen error timed out>"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -353,7 +353,7 @@
     {
       "name": "EPG",
       "ok": true,
-      "bytes": 3162
+      "bytes": 3257
     }
   ],
   "channels": [
@@ -603,8 +603,8 @@
       "problems": []
     },
     {
-      "file": "year-variants.json",
-      "sites": 30,
+      "file": "fs4k3.json",
+      "sites": 10,
       "lives": 0,
       "problems": []
     },

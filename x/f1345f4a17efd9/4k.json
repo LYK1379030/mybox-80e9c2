@@ -49,7 +49,7 @@
     {
       "key": "xiangjiao",
       "name": "【直连】香蕉资源",
-      "api": "http://api.xjzyapi.com/provide/vod",
+      "api": "https://api.xjzyapi.com/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
