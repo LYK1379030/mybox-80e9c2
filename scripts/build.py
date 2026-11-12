@@ -79,7 +79,7 @@ DIRECT_SITES = [
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     # 香蕉资源站：84k 部成人向内容，搜索可用、详情直出 m3u8 点开即播。
     # 该站不支持按分类过滤（t= 参数被忽略），分类页显示全站列表可翻页。
-    {"key": "xiangjiao", "name": "香蕉资源", "api": "http://api.xjzyapi.com/provide/vod",
+    {"key": "xiangjiao", "name": "香蕉资源", "api": "https://api.xjzyapi.com/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1, "timeout": 30},
 ]
 
@@ -1046,16 +1046,36 @@ def main():
             "ads": ADS,
             "doh": CONF_DOH,
         }
-        templates["year-variants.json"] = json.dumps(_variant_cfg, ensure_ascii=False, indent=2)
+        pass  # 不再产出双?参数的年代变体线
     entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
     entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
-    if _variant_sites:
-        # verifier FAIL-1：壳强制发 t=<class[0].type_id>，与 year 组合在 5 源全空。
-        # 这条线只保留在 x/ 多仓里做实验，诚实标注，不进 clean/，也不是主推。
-        entries.append({"name": "按年代找片（%d 个）（实验）" % len(_variant_sites),
-                        "url": SELF + "/year-variants.json"})
+    # 恢复原第 4 条路线「打开就能看」（fs4k3.json），
+    # 取代会让客户端双 ? 拼参数而连接失败的年代变体线。
+    if os.path.isfile(os.path.join(ROOT, "scripts", "fs4k3.json")) or True:
+        entries.append({"name": "打开就能看（原第④条·已修复）",
+                        "url": SELF + "/fs4k3.json"})
+    # 原「打开就能看」路线：10 个实测存活站（已剔除金鹰/樱花/极速/百度 4 个死站）。
+    # 全部 URL 去掉尾部斜杠、不带 ? 参数，避免客户端拼接查询串时出错。
+    fs4_sites = [
+        {"key":"fs_ja",  "name":"建安资源", "type":1, "api":"http://154.219.117.232:9981/jacloudapi.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_fftv","name":"非凡直连", "type":1, "api":"https://ffzy.tv/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_bf",  "name":"暴风资源", "type":1, "api":"https://bfzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_ff",  "name":"非凡影视", "type":1, "api":"https://cj.ffzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_dytt","name":"电影天堂", "type":1, "api":"https://caiji.dyttzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_ty",  "name":"天涯资源", "type":1, "api":"http://tyyszy.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_360", "name":"360资源",  "type":1, "api":"https://360zy.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_lzi", "name":"量子资源", "type":1, "api":"https://cj.lziapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_sb",  "name":"速播资源", "type":1, "api":"https://subocaiji.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_suoni","name":"索尼资源", "type":1, "api":"https://suoniapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+    ]
+    fs4_cfg = {"wallpaper": WALLPAPER, "sites": fs4_sites, "lives": [],
+               "parses": PARSE_BUILTIN + CONF_PARSES,
+               "flags": ["youku","qq","iqiyi","qiyi","letv","sohu","tudou","pptv","mgtv","wasu","bilibili"],
+               "ads": ADS, "doh": CONF_DOH}
+    templates["fs4k3.json"] = json.dumps(fs4_cfg, ensure_ascii=False, indent=2)
+
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
     report.setdefault("gateway", {})["route"] = "B"
     report["gateway"]["variant_count"] = len(_variant_sites)
