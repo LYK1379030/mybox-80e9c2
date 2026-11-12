@@ -1466,9 +1466,19 @@ def _emit_clean(site_root, templates):
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
     d = os.path.join(site_root, "a")
     os.makedirs(d, exist_ok=True)
-    with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
+    # 真 5 源单仓内容写 sites.json
+    with open(os.path.join(d, "sites.json"), "w", encoding="utf-8") as f:
         json.dump(cfg, f, ensure_ascii=False, indent=2)
-    print("   clean/index.json 已生成（%d 个直连站，成人类目已白名单屏蔽）" % len(sites))
+    # index.json 必须是 urls[] 多仓（壳 nb0.smali:594 强制 getJSONArray("urls")，
+    # 单仓 sites 会抛 "No value for urls" → 接口无效 → 分类栏空白）。
+    site_base = PAGES_BASE.rstrip("/").rsplit("/", 2)[0] if PAGES_BASE else ""
+    idx = {
+        "urls": [{"name": "✅纯净5源（无成人）", "url": site_base + "/a/sites.json"}],
+        "sites": sites,
+    }
+    with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
+        json.dump(idx, f, ensure_ascii=False, indent=2)
+    print("   a/index.json 已生成（urls[] 多仓 + 5 源 sites.json）")
 
 
 def _emit_4konly(site_root, templates):
