@@ -1,0 +1,126 @@
+{
+  "wallpaper": "",
+  "sites": [
+    {
+      "key": "az_suoni",
+      "name": "索尼·全类",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 30
+    },
+    {
+      "key": "az_ff",
+      "name": "非凡·全类",
+      "type": 1,
+      "api": "https://cj.ffzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 30
+    },
+    {
+      "key": "az_dytt",
+      "name": "电影天堂·全类",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 30
+    },
+    {
+      "key": "az_ty",
+      "name": "天涯·全类",
+      "type": 1,
+      "api": "https://tyyszy.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 30
+    },
+    {
+      "key": "az_360",
+      "name": "360·全类",
+      "type": 1,
+      "api": "https://caiji.360zy.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 30
+    }
+  ],
+  "lives": [],
+  "parses": [
+    {
+      "name": "Json聚合",
+      "type": 3,
+      "url": "Demo"
+    },
+    {
+      "name": "Json并发",
+      "type": 2,
+      "url": "Parallel"
+    },
+    {
+      "name": "Json轮询",
+      "type": 2,
+      "url": "Sequence"
+    }
+  ],
+  "flags": [
+    "youku",
+    "qq",
+    "iqiyi",
+    "qiyi",
+    "letv",
+    "sohu",
+    "tudou",
+    "pptv",
+    "mgtv",
+    "wasu",
+    "bilibili"
+  ],
+  "ads": [
+    "static-mozai.4gtv.tv",
+    "s3t3d2y8.afcdn.net",
+    "iqiyi.hbuioo.com",
+    "vip.ffzyad.com",
+    "https://lf1-cdn-tos.bytegoofy.com/obj/tos-cn-i-dy/455ccf9e8ae744378118e4bd289288dd"
+  ],
+  "doh": [
+    {
+      "name": "阿里",
+      "url": "https://dns.alidns.com/dns-query",
+      "ips": [
+        "223.5.5.5",
+        "223.6.6.6"
+      ]
+    },
+    {
+      "name": "腾讯",
+      "url": "https://doh.pub/dns-query",
+      "ips": [
+        "119.29.29.29"
+      ]
+    },
+    {
+      "name": "Cloudflare",
+      "url": "https://cloudflare-dns.com/dns-query",
+      "ips": [
+        "1.1.1.1",
+        "1.0.0.1"
+      ]
+    },
+    {
+      "name": "AdGuard",
+      "url": "https://dns.adguard.com/dns-query",
+      "ips": [
+        "94.140.14.14",
+        "94.140.15.15"
+      ]
+    }
+  ]
+}

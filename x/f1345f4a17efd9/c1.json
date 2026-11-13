@@ -4,24 +4,15 @@
   "sites": [
     {
       "key": "索尼",
-      "name": "索尼 ·71ms",
+      "name": "索尼 ·72ms",
       "type": 1,
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
       "changeable": 1
     },
     {
-      "key": "feifan",
-      "name": "非凡·最快·397ms",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "bfzy",
-      "name": "✅纯净暴风·540ms",
+      "name": "✅纯净暴风·304ms",
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -29,8 +20,17 @@
       "quickSearch": 1
     },
     {
+      "key": "feifan",
+      "name": "非凡·最快·329ms",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
       "key": "lzi",
-      "name": "量子·备用·876ms",
+      "name": "量子·备用·612ms",
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
@@ -45,16 +45,6 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
-    },
-    {
-      "key": "xiangjiao",
-      "name": "香蕉资源",
-      "api": "https://api.xjzyapi.com/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1,
-      "timeout": 30
     },
     {
       "key": "bili_open",

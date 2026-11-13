@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-12T09:13:57Z",
+  "built_at": "2026-11-13T01:18:49Z",
   "upstreams": [
     {
       "id": "c1",
@@ -38,28 +38,28 @@
     {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 71,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 397,
+      "ms": 72,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 540,
+      "ms": 304,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 329,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 876,
+      "ms": 612,
       "total": null,
       "why": "ok"
     },
@@ -304,14 +304,14 @@
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -353,7 +353,7 @@
     {
       "name": "EPG",
       "ok": true,
-      "bytes": 3257
+      "bytes": 3213
     }
   ],
   "channels": [
@@ -361,13 +361,13 @@
       "name": "pages",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 10
+      "files": 11
     },
     {
       "name": "cdn",
       "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 10
+      "files": 11
     }
   ],
   "issues": [
@@ -568,14 +568,14 @@
     "sub_configs": [
       [
         "c1",
-        22
+        21
       ],
       [
         "c2",
-        47
+        46
       ]
     ],
-    "4k_sites": 9,
+    "4k_sites": 8,
     "real4k_sites": 3,
     "alive_vod": 4,
     "dead_vod": 2,
@@ -586,25 +586,31 @@
   "output_check": [
     {
       "file": "c1.json",
-      "sites": 22,
+      "sites": 21,
       "lives": 3,
       "problems": []
     },
     {
       "file": "c2.json",
-      "sites": 47,
+      "sites": 46,
       "lives": 3,
       "problems": []
     },
     {
       "file": "4k.json",
-      "sites": 9,
+      "sites": 8,
       "lives": 3,
       "problems": []
     },
     {
       "file": "fs4k3.json",
       "sites": 10,
+      "lives": 0,
+      "problems": []
+    },
+    {
+      "file": "adult.json",
+      "sites": 5,
       "lives": 0,
       "problems": []
     },
@@ -616,7 +622,7 @@
     }
   ],
   "verify": {
-    "files_checked": 5,
+    "files_checked": 6,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
