@@ -3,26 +3,27 @@
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
-      "key": "bfzy",
-      "name": "【直连】✅纯净暴风",
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "key": "suoni",
+      "name": "【直连】索尼资源",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
     },
     {
-      "key": "索尼",
-      "name": "索尼 ",
-      "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "changeable": 1
-    },
-    {
-      "key": "feifan",
+      "key": "ff",
       "name": "【直连】非凡·最快",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "bf",
+      "name": "【直连】暴风·大库",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
@@ -39,8 +40,53 @@
     },
     {
       "key": "dytt",
-      "name": "【直连】✅纯净电影天堂",
+      "name": "【直连】电影天堂",
       "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "zy360",
+      "name": "【直连】360资源",
+      "api": "https://360zy.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "ty",
+      "name": "【直连】天涯资源",
+      "api": "http://tyyszy.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "sb",
+      "name": "【直连】速播资源",
+      "api": "https://subocaiji.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "fftv",
+      "name": "【直连】非凡直连",
+      "api": "https://ffzy.tv/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "ja",
+      "name": "【直连】建安资源",
+      "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
