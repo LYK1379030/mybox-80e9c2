@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-13T02:51:48Z",
+  "built_at": "2026-11-13T03:17:14Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 37,
-      "total": null,
-      "why": "ok"
-    },
-    {
       "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 56,
+      "ms": 172,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 647,
+      "ms": 323,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 432,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 904,
+      "ms": 717,
       "total": null,
       "why": "ok"
     },
@@ -304,14 +304,14 @@
       "why": "DNS: [Errno -2] Name or service not known"
     },
     {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
+      "name": "夜幕",
+      "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "夜幕",
-      "url": "https://www.yemu.xyz/?url=",
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
