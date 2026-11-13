@@ -759,7 +759,7 @@ def load_cat_cache():
         return {}
 
 
-def prune_empty_categories(sites, report=None):
+def prune_empty_categories(sites, report=None, strip_adult=True):
     """按缓存剔除「点进去是空的」分类标签。
 
     依据（FongMi SiteApi 源码）：
@@ -808,6 +808,30 @@ def prune_empty_categories(sites, report=None):
             site["categories"] = keep
             dropped_total += dropped
         out.append(site)
+
+    # 主仓剥离成人分类：categories 里命中成人词的一律去掉，
+    # 让成人内容只在「🔥成人专区」那条线里出现。
+    ADULT_WORDS = ("伦理", "三级", "理论", "福利", "写真", "两性", "擦边",
+                   "情色", "成人", "无码", "里番", "艳", "偷拍", "自拍",
+                   "少女", "嫩", "调教", "私房", "裸", "性爱", "爆乳",
+                   "胸", "大奶", "蕾丝", "美女", "乳", "丝袜")
+    stripped = 0 if strip_adult else 0
+    out2 = []
+    for site in out:
+        cats = site.get("categories")
+        if strip_adult and isinstance(cats, list) and cats:
+            keep = [c for c in cats
+                    if not any(w in str(c) for w in ADULT_WORDS)]
+            if len(keep) != len(cats):
+                stripped += len(cats) - len(keep)
+                site = dict(site)
+                site["categories"] = keep
+        out2.append(site)
+    out = out2
+    if report is not None:
+        report.setdefault("category_prune", {})["adult_stripped"] = stripped
+    if stripped:
+        print("   [分类] 主仓剥离成人分类 %d 个（成人内容仅保留在专区）" % stripped)
 
     # 硬断言：只改 categories，站点数量必须不变
     assert len(out) == len(sites), "剪枝改变了站点数量"
@@ -1186,7 +1210,8 @@ def main():
     # 成人专区：5 站全分类集中入口
     adult_cfg = {"wallpaper": WALLPAPER,
                  "sites": [dict(x) for x in prune_empty_categories(
-                     [dict(y) for y in ADULT_ZONE_SITES])],
+                     [dict(y) for y in ADULT_ZONE_SITES],
+                     strip_adult=False)],
                  "lives": [], "parses": PARSE_BUILTIN + CONF_PARSES,
                  "flags": ["youku","qq","iqiyi","qiyi","letv","sohu","tudou","pptv","mgtv","wasu","bilibili"],
                  "ads": ADS, "doh": CONF_DOH}
