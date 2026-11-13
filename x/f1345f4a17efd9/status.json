@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-13T01:18:49Z",
+  "built_at": "2026-11-13T01:51:40Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,30 +36,30 @@
   ],
   "vod_lines": [
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 72,
+      "ms": 40,
       "total": null,
       "why": "ok"
     },
     {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 304,
+      "ms": 61,
       "total": null,
       "why": "ok"
     },
     {
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 329,
+      "ms": 673,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://cj.lziapi.com/api.php/provide/vod",
       "alive": true,
-      "ms": 612,
+      "ms": 702,
       "total": null,
       "why": "ok"
     },
@@ -298,20 +298,8 @@
       "why": "返回站点首页 HTML，非解析结果"
     },
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
-    },
-    {
       "name": "夜幕",
       "url": "https://www.yemu.xyz/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
     },
@@ -320,6 +308,18 @@
       "url": "https://jx.771949.com/?url=",
       "ok": false,
       "why": "HTTP: HTTP Error 403: Forbidden"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno -2] Name or service not known"
+    },
+    {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
+      "why": "HTTP: <urlopen error timed out>"
     }
   ],
   "doh": [
@@ -373,6 +373,7 @@
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
     "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> 9f391d889e28d3c40092fabb562f408c",
+    "⚠️ 子仓 c1 仅 6 条线路（上游疑似大面积失败），请人工复核",
     "已剔除 2 条失活点播线路（正常自愈）"
   ],
   "url_fixes": [
@@ -568,11 +569,11 @@
     "sub_configs": [
       [
         "c1",
-        21
+        6
       ],
       [
         "c2",
-        46
+        18
       ]
     ],
     "4k_sites": 8,
@@ -586,13 +587,13 @@
   "output_check": [
     {
       "file": "c1.json",
-      "sites": 21,
+      "sites": 6,
       "lives": 3,
       "problems": []
     },
     {
       "file": "c2.json",
-      "sites": 46,
+      "sites": 18,
       "lives": 3,
       "problems": []
     },
@@ -626,7 +627,7 @@
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
-    "issues": 3,
+    "issues": 4,
     "dead_vod_removed": 2,
     "all_absolute": true
   },
