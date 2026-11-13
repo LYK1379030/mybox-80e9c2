@@ -725,6 +725,92 @@ def normalize_ext(site):
     return site
 
 
+def prune_empty_categories(sites, report=None, workers=12, timeout=7):
+    """探测每个直连站的真实分类，把「点进去是空的」标签从 categories 里剔掉。
+
+    依据（FongMi SiteApi 源码）：
+        empty = site.getCategories().isEmpty()
+        for (Vod item : result.getList())
+            if (empty || site.getCategories().contains(item.getTypeName())) ids.add(...)
+    =>
+      * 白名单为空 → 完全不过滤（默认行为）
+      * 白名单非空 → 只保留 typeName 在名单里的影片
+    实测：白名单设为「非空分类」时，首页影片 0 损失（每部片的分类必然非空），
+    所以这个操作只删空标签，不会让列表变空。
+
+    超时的分类按 fail-open 保留，避免误删。
+    """
+    direct = [s for s in sites
+              if isinstance(s, dict) and str(s.get("api") or "").startswith("http")]
+    if not direct:
+        return sites
+
+    def probe_one(site):
+        api = str(site.get("api") or "")
+        sep = "&" if "?" in api else "?"
+
+        def one(c):
+            try:
+                raw = fetch(api + sep + "ac=detail&t=%s&pg=1" % c.get("type_id"),
+                            timeout=timeout, limit=200_000)
+                o = json.loads(raw)
+                return c.get("type_name"), bool(o.get("list") or [])
+            except Exception:
+                return c.get("type_name"), True      # fail-open：探测失败就保留
+
+        try:
+            o = json.loads(fetch(api + sep + "ac=list", timeout=timeout + 3,
+                                 limit=900_000))
+            cls = o.get("class") or []
+            if not cls:
+                return None
+            try:
+                with cf.ThreadPoolExecutor(max_workers=workers) as ex:
+                    verdict = dict(ex.map(one, cls[:60]))
+            except Exception:
+                return None          # 探测失败 → 该站保持原样（不删站、不改白名单）
+            keep = [c.get("type_name") for c in cls
+                    if verdict.get(c.get("type_name"), True) and c.get("type_name")]
+            return keep, len(cls)
+        except Exception:
+            return None
+
+    try:
+        with cf.ThreadPoolExecutor(max_workers=min(6, len(direct))) as ex:
+            results = list(ex.map(probe_one, direct))
+    except Exception as e:
+        print("   [warn] 分类探测整体失败，全部保留原样：", e)
+        return sites
+
+    # 硬断言：剪枝只能改 categories，绝不能改变站点数量
+    if len(results) != len(direct):
+        print("   [warn] 探测结果数量不匹配，放弃本次剪枝")
+        return sites
+    dropped_total = 0
+    out = []
+    for site, res in zip(direct, results):
+        if not res:
+            out.append(site)
+            continue
+        keep, total = res
+        dropped = total - len(keep)
+        dropped_total += dropped
+        if keep and dropped > 0:
+            site = dict(site)
+            # 该站原本已有白名单 → 取交集，避免把用户/前序逻辑删掉的成人分类又加回来
+            old = site.get("categories")
+            if isinstance(old, list) and old:
+                oldset = set(old)
+                keep = [c for c in keep if c in oldset]
+            if keep:
+                site["categories"] = keep
+        out.append(site)
+    if report is not None:
+        report.setdefault("category_prune", {})["dropped_empty"] = dropped_total
+    print("   [分类] 剔除空标签 %d 个（白名单=非空分类，首页影片不受影响）" % dropped_total)
+    return out
+
+
 def tune(cfg, health, lives):
     kept, dropped = [], []
     # 先把实测可用的直连采集站塞到最前面：这类点开就出 m3u8，
@@ -767,6 +853,11 @@ def tune(cfg, health, lives):
                 + "·" + str(r["ms"]) + "ms"
         kept.append(s)
     kept = [normalize_ext(x) for x in dedup_sites(kept)]
+    # 去空标签：只对直连站生效（csp 插件没有静态分类）
+    try:
+        kept = prune_empty_categories(kept)
+    except Exception as e:
+        print("   [warn] 分类探测失败（保留原样）：", e)
     # 排序：先按「能否点开即播」分组（直连 > csp > 网盘），
     # 同组内按实测延迟从低到高，延迟数字最小的排最前。
     for s in kept:
@@ -1022,6 +1113,17 @@ def main():
     # 与 c1/c2 的 jar 在客户端里互相覆盖，实测会导致影视仓闪退。
     # 保留代码以便后续在「单独一个仓」的场景启用。
     _ = fourk_real
+
+    # 站点数下限保护：上游网络波动会导致健康检查误杀，构建结果比线上少太多时
+    # 打醒目标记，避免「某天突然只剩几条线路」的静默降级被发现得太晚。
+    try:
+        _counts = dict(built)
+        for _k, _v in _counts.items():
+            if _v < 10:
+                report.setdefault("issues", []).append(
+                    "⚠️ 子仓 %s 仅 %d 条线路（上游疑似大面积失败），请人工复核" % (_k, _v))
+    except Exception:
+        pass
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
     # 路线 B（零 jar / 零 patch / 纯配置）：预生成「年代变体」静态子仓。
