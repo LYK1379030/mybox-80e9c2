@@ -69,13 +69,28 @@ RAWG = "https://raw.githubusercontent.com/gaotianliuyun/gao/master/"
 #   非凡 427ms/9.9万 · 电影天堂 699ms/8.5万 · 暴风 867ms/17.1万 · 量子 1729ms/16.3万
 # 合计约 52 万条片源，覆盖电影/剧集/动漫/综艺。
 DIRECT_SITES = [
-    {"key": "feifan", "name": "非凡·最快", "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+    # 全部为实测可用的苹果CMS直连采集站：点开即出 m3u8，无需授权。
+    # 上游配置（gao）近期缩水到只剩 4 个直连站，这里补齐自维护清单，
+    # 避免每天同步把线路越刷越少。
+    {"key": "ff", "name": "非凡·最快", "api": "http://cj.ffzyapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
-    {"key": "dytt", "name": "✅纯净电影天堂", "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+    {"key": "dytt", "name": "电影天堂", "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
-    {"key": "bfzy", "name": "✅纯净暴风", "api": "https://bfzyapi.com/api.php/provide/vod",
+    {"key": "bf", "name": "暴风·大库", "api": "https://bfzyapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     {"key": "lzi", "name": "量子·备用", "api": "https://cj.lziapi.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "suoni", "name": "索尼资源", "api": "https://suoniapi.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "zy360", "name": "360资源", "api": "https://360zy.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "ty", "name": "天涯资源", "api": "http://tyyszy.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "sb", "name": "速播资源", "api": "https://subocaiji.com/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "fftv", "name": "非凡直连", "api": "https://ffzy.tv/api.php/provide/vod",
+     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
+    {"key": "ja", "name": "建安资源", "api": "http://154.219.117.232:9981/jacloudapi.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
 ]
 
@@ -725,89 +740,80 @@ def normalize_ext(site):
     return site
 
 
-def prune_empty_categories(sites, report=None, workers=12, timeout=7):
-    """探测每个直连站的真实分类，把「点进去是空的」标签从 categories 里剔掉。
+def load_cat_cache():
+    """读取 scripts/cat_cache.json（一次性探测的结果，构建时直接复用）。
+
+    为什么用缓存而不是每次构建都探：
+      单站探测就要 1~8 秒，10 个站并发会互相拖到超时（实测量子站单跑 1.3s
+      拿得到 40 个分类，并发后 class 列表直接拿不到），导致白名单被误清空。
+      缓存由 scripts/gen_cat_cache.py 生成，CI 定期刷新。
+    """
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                        "cat_cache.json")
+    if not os.path.isfile(path):
+        return {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def prune_empty_categories(sites, report=None):
+    """按缓存剔除「点进去是空的」分类标签。
 
     依据（FongMi SiteApi 源码）：
         empty = site.getCategories().isEmpty()
         for (Vod item : result.getList())
             if (empty || site.getCategories().contains(item.getTypeName())) ids.add(...)
     =>
-      * 白名单为空 → 完全不过滤（默认行为）
-      * 白名单非空 → 只保留 typeName 在名单里的影片
-    实测：白名单设为「非空分类」时，首页影片 0 损失（每部片的分类必然非空），
-    所以这个操作只删空标签，不会让列表变空。
-
-    超时的分类按 fail-open 保留，避免误删。
+      白名单为空 → 不过滤；白名单非空 → 只保留名单内分类的影片。
+    实测白名单=非空分类时，首页影片 0 损失（每部片的分类必然非空）。
     """
-    direct = [s for s in sites
-              if isinstance(s, dict) and str(s.get("api") or "").startswith("http")]
-    if not direct:
+    cache = load_cat_cache()
+    if not cache:
+        print("   [分类] 无缓存，跳过空标签剪枝")
         return sites
 
-    def probe_one(site):
-        api = str(site.get("api") or "")
-        sep = "&" if "?" in api else "?"
-
-        def one(c):
-            try:
-                raw = fetch(api + sep + "ac=detail&t=%s&pg=1" % c.get("type_id"),
-                            timeout=timeout, limit=200_000)
-                o = json.loads(raw)
-                return c.get("type_name"), bool(o.get("list") or [])
-            except Exception:
-                return c.get("type_name"), True      # fail-open：探测失败就保留
-
-        try:
-            o = json.loads(fetch(api + sep + "ac=list", timeout=timeout + 3,
-                                 limit=900_000))
-            cls = o.get("class") or []
-            if not cls:
-                return None
-            try:
-                with cf.ThreadPoolExecutor(max_workers=workers) as ex:
-                    verdict = dict(ex.map(one, cls[:60]))
-            except Exception:
-                return None          # 探测失败 → 该站保持原样（不删站、不改白名单）
-            keep = [c.get("type_name") for c in cls
-                    if verdict.get(c.get("type_name"), True) and c.get("type_name")]
-            return keep, len(cls)
-        except Exception:
-            return None
-
-    try:
-        with cf.ThreadPoolExecutor(max_workers=min(6, len(direct))) as ex:
-            results = list(ex.map(probe_one, direct))
-    except Exception as e:
-        print("   [warn] 分类探测整体失败，全部保留原样：", e)
-        return sites
-
-    # 硬断言：剪枝只能改 categories，绝不能改变站点数量
-    if len(results) != len(direct):
-        print("   [warn] 探测结果数量不匹配，放弃本次剪枝")
-        return sites
     dropped_total = 0
     out = []
-    for site, res in zip(direct, results):
-        if not res:
+    for site in sites:
+        if not isinstance(site, dict):
             out.append(site)
             continue
-        keep, total = res
-        dropped = total - len(keep)
-        dropped_total += dropped
-        if keep and dropped > 0:
+        raw_api = str(site.get("api") or "")
+        api = raw_api.rstrip("/")
+        # 缓存键与实际 api 可能有末尾斜杠/协议差异 → 做归一化查找
+        info = (cache.get(raw_api) or cache.get(api) or cache.get(api + "/")
+                or cache.get(api.replace("https://", "http://"))
+                or cache.get(api.replace("http://", "https://")))
+        if not info:
+            out.append(site)
+            continue
+        keep = list(info.get("keep") or [])
+        if not keep:
+            out.append(site)
+            continue
+        # 与原白名单取交集（避免把成人过滤掉分类又加回来）
+        old = site.get("categories")
+        if isinstance(old, list) and old:
+            oldset = set(old)
+            keep = [c for c in keep if c in oldset]
+            if not keep:
+                out.append(site)
+                continue
+        dropped = max(0, int(info.get("total_cats") or 0) - len(keep))
+        if dropped > 0 or not site.get("categories"):
             site = dict(site)
-            # 该站原本已有白名单 → 取交集，避免把用户/前序逻辑删掉的成人分类又加回来
-            old = site.get("categories")
-            if isinstance(old, list) and old:
-                oldset = set(old)
-                keep = [c for c in keep if c in oldset]
-            if keep:
-                site["categories"] = keep
+            site["categories"] = keep
+            dropped_total += dropped
         out.append(site)
+
+    # 硬断言：只改 categories，站点数量必须不变
+    assert len(out) == len(sites), "剪枝改变了站点数量"
     if report is not None:
         report.setdefault("category_prune", {})["dropped_empty"] = dropped_total
-    print("   [分类] 剔除空标签 %d 个（白名单=非空分类，首页影片不受影响）" % dropped_total)
+    print("   [分类] 按缓存剔除空标签 %d 个（首页影片不受影响）" % dropped_total)
     return out
 
 
@@ -1170,14 +1176,17 @@ def main():
         {"key":"fs_sb",  "name":"速播资源", "type":1, "api":"https://subocaiji.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_suoni","name":"索尼资源", "type":1, "api":"https://suoniapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
     ]
-    fs4_cfg = {"wallpaper": WALLPAPER, "sites": fs4_sites, "lives": [],
+    fs4_cfg = {"wallpaper": WALLPAPER,
+               "sites": prune_empty_categories(fs4_sites), "lives": [],
                "parses": PARSE_BUILTIN + CONF_PARSES,
                "flags": ["youku","qq","iqiyi","qiyi","letv","sohu","tudou","pptv","mgtv","wasu","bilibili"],
                "ads": ADS, "doh": CONF_DOH}
     templates["fs4k3.json"] = json.dumps(fs4_cfg, ensure_ascii=False, indent=2)
 
     # 成人专区：5 站全分类集中入口
-    adult_cfg = {"wallpaper": WALLPAPER, "sites": [dict(x) for x in ADULT_ZONE_SITES],
+    adult_cfg = {"wallpaper": WALLPAPER,
+                 "sites": [dict(x) for x in prune_empty_categories(
+                     [dict(y) for y in ADULT_ZONE_SITES])],
                  "lives": [], "parses": PARSE_BUILTIN + CONF_PARSES,
                  "flags": ["youku","qq","iqiyi","qiyi","letv","sohu","tudou","pptv","mgtv","wasu","bilibili"],
                  "ads": ADS, "doh": CONF_DOH}
