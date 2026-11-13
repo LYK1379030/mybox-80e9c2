@@ -77,10 +77,6 @@ DIRECT_SITES = [
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     {"key": "lzi", "name": "量子·备用", "api": "https://cj.lziapi.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
-    # 香蕉资源站：84k 部成人向内容，搜索可用、详情直出 m3u8 点开即播。
-    # 该站不支持按分类过滤（t= 参数被忽略），分类页显示全站列表可翻页。
-    {"key": "xiangjiao", "name": "香蕉资源", "api": "https://api.xjzyapi.com/provide/vod",
-     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1, "timeout": 30},
 ]
 
 # ---------------------------------------------------------------- 真 4K 线路
@@ -1056,6 +1052,8 @@ def main():
     if os.path.isfile(os.path.join(ROOT, "scripts", "fs4k3.json")) or True:
         entries.append({"name": "打开就能看（原第④条·已修复）",
                         "url": SELF + "/fs4k3.json"})
+    entries.append({"name": "🔥成人专区（5 站·集中入口）",
+                        "url": SELF + "/adult.json"})
     # 原「打开就能看」路线：10 个实测存活站（已剔除金鹰/樱花/极速/百度 4 个死站）。
     # 全部 URL 去掉尾部斜杠、不带 ? 参数，避免客户端拼接查询串时出错。
     fs4_sites = [
@@ -1075,6 +1073,13 @@ def main():
                "flags": ["youku","qq","iqiyi","qiyi","letv","sohu","tudou","pptv","mgtv","wasu","bilibili"],
                "ads": ADS, "doh": CONF_DOH}
     templates["fs4k3.json"] = json.dumps(fs4_cfg, ensure_ascii=False, indent=2)
+
+    # 成人专区：5 站全分类集中入口
+    adult_cfg = {"wallpaper": WALLPAPER, "sites": [dict(x) for x in ADULT_ZONE_SITES],
+                 "lives": [], "parses": PARSE_BUILTIN + CONF_PARSES,
+                 "flags": ["youku","qq","iqiyi","qiyi","letv","sohu","tudou","pptv","mgtv","wasu","bilibili"],
+                 "ads": ADS, "doh": CONF_DOH}
+    templates["adult.json"] = json.dumps(adult_cfg, ensure_ascii=False, indent=2)
 
     templates["index.json"] = json.dumps({"urls": entries}, ensure_ascii=False, indent=2)
     report.setdefault("gateway", {})["route"] = "B"
@@ -1214,6 +1219,27 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         except Exception as e:
             print("  [warn] 4konly 生成失败：", e)
 
+
+# ---------------------------------------------------------------- 成人专区
+# 成人分类最浓、最集中的 5 站收进一条专线，主仓保持干净。
+# 不设 categories 白名单（实测白名单会过滤影片列表，推荐翻页会空）。
+ADULT_ZONE_SITES = [
+    {"key": "az_suoni", "name": "索尼·全类", "type": 1,
+     "api": "https://suoniapi.com/api.php/provide/vod",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
+    {"key": "az_ff", "name": "非凡·全类", "type": 1,
+     "api": "https://cj.ffzyapi.com/api.php/provide/vod",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
+    {"key": "az_dytt", "name": "电影天堂·全类", "type": 1,
+     "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
+    {"key": "az_ty", "name": "天涯·全类", "type": 1,
+     "api": "https://tyyszy.com/api.php/provide/vod",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
+    {"key": "az_360", "name": "360·全类", "type": 1,
+     "api": "https://caiji.360zy.com/api.php/provide/vod",
+     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
+]
 
 # ---------------------------------------------------------------- 纯净仓（筛选 + 无成人）
 # 目标：像正规影视 App 一样有「类型 / 地区 / 年份」筛选条，且屏蔽全部成人类目。
@@ -1466,19 +1492,9 @@ def _emit_clean(site_root, templates):
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
     d = os.path.join(site_root, "a")
     os.makedirs(d, exist_ok=True)
-    # 真 5 源单仓内容写 sites.json
-    with open(os.path.join(d, "sites.json"), "w", encoding="utf-8") as f:
-        json.dump(cfg, f, ensure_ascii=False, indent=2)
-    # index.json 必须是 urls[] 多仓（壳 nb0.smali:594 强制 getJSONArray("urls")，
-    # 单仓 sites 会抛 "No value for urls" → 接口无效 → 分类栏空白）。
-    site_base = PAGES_BASE.rstrip("/").rsplit("/", 2)[0] if PAGES_BASE else ""
-    idx = {
-        "urls": [{"name": "✅纯净5源（无成人）", "url": site_base + "/a/sites.json"}],
-        "sites": sites,
-    }
     with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
-        json.dump(idx, f, ensure_ascii=False, indent=2)
-    print("   a/index.json 已生成（urls[] 多仓 + 5 源 sites.json）")
+        json.dump(cfg, f, ensure_ascii=False, indent=2)
+    print("   clean/index.json 已生成（%d 个直连站，成人类目已白名单屏蔽）" % len(sites))
 
 
 def _emit_4konly(site_root, templates):
