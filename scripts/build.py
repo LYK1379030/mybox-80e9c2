@@ -1156,6 +1156,8 @@ def main():
         pass
 
     names = {u["id"]: u["name"] for u in UPSTREAMS}
+    # 统一编号 1-5 + 互不重复的用途词，电视上一眼分辨
+    names.update({"c1": "① 主用·点开即播", "c2": "② 备用·更多线路"})
     # 路线 B（零 jar / 零 patch / 纯配置）：预生成「年代变体」静态子仓。
     # 壳只从 ac=list 响应顶层读 filters（ng0.smali L2157-2388），Pages 纯静态
     # 无法改写响应，故 GridFilterDialog 四排面板不会出现；这里退化为
@@ -1175,16 +1177,16 @@ def main():
             "doh": CONF_DOH,
         }
         pass  # 不再产出双?参数的年代变体线
-    entries = [{"name": "%s（%d 条线路）" % (names.get(u, u), n),
+    entries = [{"name": "%s（%d源）" % (names.get(u, u), n),
                 "url": SELF + "/" + u + ".json"} for u, n in built]
-    entries.append({"name": "④ 直连专区·点开即播（%d 条·免授权）" % len(hd_sites),
+    entries.append({"name": "③ 免授权·点开即播（%d源）" % len(hd_sites),
                     "url": SELF + "/4k.json"})
     # 恢复原第 4 条路线「打开就能看」（fs4k3.json），
     # 取代会让客户端双 ? 拼参数而连接失败的年代变体线。
     if os.path.isfile(os.path.join(ROOT, "scripts", "fs4k3.json")) or True:
-        entries.append({"name": "打开就能看（原第④条·已修复）",
+        entries.append({"name": "④ 老线备份（10源）",
                         "url": SELF + "/fs4k3.json"})
-    entries.append({"name": "🔥成人专区（5 站·集中入口）",
+    entries.append({"name": "⑤ 扩展资源（5源）",
                         "url": SELF + "/adult.json"})
     # 原「打开就能看」路线：10 个实测存活站（已剔除金鹰/樱花/极速/百度 4 个死站）。
     # 全部 URL 去掉尾部斜杠、不带 ? 参数，避免客户端拼接查询串时出错。
