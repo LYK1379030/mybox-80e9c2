@@ -3,15 +3,6 @@
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
-      "key": "suoni",
-      "name": "【直连】索尼资源",
-      "api": "https://suoniapi.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
       "key": "bf",
       "name": "【直连】暴风·大库",
       "api": "https://bfzyapi.com/api.php/provide/vod",
@@ -21,9 +12,9 @@
       "quickSearch": 1
     },
     {
-      "key": "lzi",
-      "name": "【直连】量子·备用",
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "key": "suoni",
+      "name": "【直连】索尼资源",
+      "api": "https://suoniapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
@@ -33,6 +24,15 @@
       "key": "ff",
       "name": "【直连】非凡·最快",
       "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "type": 1,
+      "searchable": 1,
+      "changeable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "lzi",
+      "name": "【直连】量子·备用",
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
@@ -51,15 +51,6 @@
       "key": "zy360",
       "name": "【直连】360资源",
       "api": "https://360zy.com/api.php/provide/vod",
-      "type": 1,
-      "searchable": 1,
-      "changeable": 1,
-      "quickSearch": 1
-    },
-    {
-      "key": "ty",
-      "name": "【直连】天涯资源",
-      "api": "http://tyyszy.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
