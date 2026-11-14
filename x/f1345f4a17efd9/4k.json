@@ -1,5 +1,5 @@
 {
-  "wallpaper": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Example.jpg/1280px-Example.jpg",
+  "wallpaper": "",
   "spider": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar;md5;9f391d889e28d3c40092fabb562f408c",
   "sites": [
     {
@@ -12,9 +12,9 @@
       "quickSearch": 1
     },
     {
-      "key": "ff",
-      "name": "【直连】非凡·最快",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "key": "bf",
+      "name": "【直连】暴风·大库",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
@@ -30,9 +30,9 @@
       "quickSearch": 1
     },
     {
-      "key": "bf",
-      "name": "【直连】暴风·大库",
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "key": "ff",
+      "name": "【直连】非凡·最快",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
