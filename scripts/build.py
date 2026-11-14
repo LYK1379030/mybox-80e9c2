@@ -192,7 +192,7 @@ ADS = [
     "iqiyi.hbuioo.com", "vip.ffzyad.com",
     "https://lf1-cdn-tos.bytegoofy.com/obj/tos-cn-i-dy/455ccf9e8ae744378118e4bd289288dd",
 ]
-WALLPAPER = "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/wall.jpg"
+WALLPAPER = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Example.jpg/1280px-Example.jpg"
 EPG = "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
 
 IJK = [
