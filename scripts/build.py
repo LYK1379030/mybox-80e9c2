@@ -84,8 +84,6 @@ DIRECT_SITES = [
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     {"key": "zy360", "name": "360资源", "api": "https://360zy.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
-    {"key": "ty", "name": "天涯资源", "api": "http://tyyszy.com/api.php/provide/vod",
-     "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     {"key": "sb", "name": "速播资源", "api": "https://subocaiji.com/api.php/provide/vod",
      "type": 1, "searchable": 1, "changeable": 1, "quickSearch": 1},
     {"key": "fftv", "name": "非凡直连", "api": "https://ffzy.tv/api.php/provide/vod",
@@ -859,6 +857,11 @@ def tune(cfg, health, lives):
             continue
         # 死链可能藏在 api / ext / ext 子字段 / key 里，整条 site 一起查
         blob = json.dumps(s, ensure_ascii=False)
+        # 实测确证的死域：tyyszy.com 全候选域名连续超时，出现即剔除
+        if "tyyszy.com" in blob:
+            dropped.append({"name": s.get("name"), "api": a,
+                            "why": "实测全域名超时，已剔除"})
+            continue
         hit = next((why for pre, why in DEAD_APIS.items() if pre in blob), None)
         if not hit and ("agit.ai/fantaiying/dr_py" in blob or AGIT_MARK in blob):
             hit = "agit.ai 返回 HTML 反爬页"
@@ -1196,7 +1199,6 @@ def main():
         {"key":"fs_bf",  "name":"暴风资源", "type":1, "api":"https://bfzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_ff",  "name":"非凡影视", "type":1, "api":"https://cj.ffzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_dytt","name":"电影天堂", "type":1, "api":"https://caiji.dyttzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"fs_ty",  "name":"天涯资源", "type":1, "api":"http://tyyszy.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_360", "name":"360资源",  "type":1, "api":"https://360zy.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_lzi", "name":"量子资源", "type":1, "api":"https://cj.lziapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_sb",  "name":"速播资源", "type":1, "api":"https://subocaiji.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
@@ -1370,9 +1372,6 @@ ADULT_ZONE_SITES = [
      "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
     {"key": "az_dytt", "name": "电影天堂·全类", "type": 1,
      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
-     "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
-    {"key": "az_ty", "name": "天涯·全类", "type": 1,
-     "api": "https://tyyszy.com/api.php/provide/vod",
      "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
     {"key": "az_360", "name": "360·全类", "type": 1,
      "api": "https://caiji.360zy.com/api.php/provide/vod",
