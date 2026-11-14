@@ -12,18 +12,18 @@
       "quickSearch": 1
     },
     {
-      "key": "ff",
-      "name": "【直连】非凡·最快",
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "key": "bf",
+      "name": "【直连】暴风·大库",
+      "api": "https://bfzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1
     },
     {
-      "key": "bf",
-      "name": "【直连】暴风·大库",
-      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "key": "ff",
+      "name": "【直连】非凡·最快",
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
       "type": 1,
       "searchable": 1,
       "changeable": 1,
