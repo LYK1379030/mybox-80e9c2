@@ -178,13 +178,13 @@ PARSE_BUILTIN = [
     {"name": "Json轮询", "type": 2, "url": "Sequence"},
 ]
 
+# 只保留国内可达的 DoH。实测证据：
+#   cloudflare-dns.com 连接被重置、dns.adguard.com 超时 → 会让电视端 DNS 解析卡死，
+#   已剔除。阿里/腾讯裸 GET 返回 400/502 属正常（DoH 需 POST dns-message），
+#   客户端带正确报文时可用，故保留。
 DOH_CANDIDATES = [
     {"name": "阿里", "url": "https://dns.alidns.com/dns-query", "ips": ["223.5.5.5", "223.6.6.6"]},
     {"name": "腾讯", "url": "https://doh.pub/dns-query", "ips": ["119.29.29.29"]},
-    {"name": "Cloudflare", "url": "https://cloudflare-dns.com/dns-query",
-     "ips": ["1.1.1.1", "1.0.0.1"]},
-    {"name": "AdGuard", "url": "https://dns.adguard.com/dns-query",
-     "ips": ["94.140.14.14", "94.140.15.15"]},
 ]
 
 ADS = [
@@ -192,7 +192,7 @@ ADS = [
     "iqiyi.hbuioo.com", "vip.ffzyad.com",
     "https://lf1-cdn-tos.bytegoofy.com/obj/tos-cn-i-dy/455ccf9e8ae744378118e4bd289288dd",
 ]
-WALLPAPER = "https://picsum.photos/1280/720"
+WALLPAPER = "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/wall.jpg"
 EPG = "http://epg.51zmt.top:8000/api/diyp/?ch={name}&date={date}"
 
 IJK = [
@@ -935,7 +935,7 @@ def main():
     CONF_PARSES = [p for p in pr if p]
     with cf.ThreadPoolExecutor(max_workers=4) as ex:
         dr = list(ex.map(lambda e: probe_doh(e, report["doh"]), DOH_CANDIDATES))
-    CONF_DOH = [d for d in dr if d] or [DOH_CANDIDATES[0], DOH_CANDIDATES[1]]
+    CONF_DOH = [d for d in dr if d] or list(DOH_CANDIDATES)
     if not CONF_PARSES:
         report["issues"].append("所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence")
     wall_ok = probe_simple("壁纸", WALLPAPER, report["external"])
@@ -1602,8 +1602,31 @@ def _emit_clean(site_root, templates):
     BAN = ("伦理", "三级", "理论", "福利", "写真", "两性", "擦边", "情色",
            "成人", "无码", "里番", "艳", "肉", "偷拍", "自拍", "少女", "嫩",
            "调教", "私房", "裸", "性爱")
+    # 单一配置源：源列表/顺序/key/api 来自 filmstore-4k/design/picker-config.json，
+    # categories 白名单仍取自本地 CLEAN_SITES（按 key 匹配）。改源只动 JSON。
+    order = []
+    try:
+        # scripts/ -> tvbox-private/ -> deliverables/ -> workspace/
+        _ws = os.path.dirname(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))))
+        pc_path = os.path.join(os.path.dirname(_ws), "filmstore-4k", "design", "picker-config.json")
+        pc = json.load(open(pc_path, encoding="utf-8"))
+        order = [(s["key"], s["name"], s["api"]) for s in pc["sites"]]
+    except Exception as e:
+        print("  [warn] picker-config.json 读取失败，回落内置 CLEAN_SITES:", e)
+    by_key = {s["key"]: s for s in CLEAN_SITES}
+    src_sites = []
+    for key, name, api in order:
+        s = by_key.get(key)
+        if s is None:
+            print("  [warn] CLEAN_SITES 缺 key:", key); continue
+        item = dict(s)
+        item["api"] = api          # 以配置源的 API 为准（修 http/https 口径不一）
+        src_sites.append(item)
+    if not src_sites:
+        src_sites = list(CLEAN_SITES)
     sites = []
-    for s in CLEAN_SITES:
+    for s in src_sites:
         item = dict(s)
         cats = [c for c in (item.get("categories") or [])
                 if not any(b.lower() in c.lower() for b in BAN)]
@@ -1628,11 +1651,38 @@ def _emit_clean(site_root, templates):
         "doh": CONF_DOH,
     }
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
-    d = os.path.join(site_root, "a")
-    os.makedirs(d, exist_ok=True)
-    with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
-        json.dump(cfg, f, ensure_ascii=False, indent=2)
-    print("   clean/index.json 已生成（%d 个直连站，成人类目已白名单屏蔽）" % len(sites))
+    # 壳 nb0.smali:591-594 强制 getJSONArray("urls")，缺 urls 就弹
+    # "接口无效 No value for urls"；pa0.smali:557-600 支持 urls[] 展开。
+    # 因此 a/index.json 必须带 urls[]（指向 a/sites.json），同时保留 sites 兼容。
+    # 同时写进 _site/a/（随 upload-pages-artifact 发布）和仓库根 a/（随 git 提交，
+    # 供 jsDelivr 备用通道 + CI 校验）。静态QA P0#3：旧版只写 _site/a/，git add 又没 a/，
+    # 导致 Pages /a/sites.json 长期 404。
+    for d in (os.path.join(site_root, "a"), os.path.join(OUT, "a")):
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "sites.json"), "w", encoding="utf-8") as f:
+            json.dump(cfg, f, ensure_ascii=False, indent=2)
+    # Pages 站点根 = https://<user>.github.io/<repo>/，a/ 落在该根下；
+    # box.json 的 PAGES_BASE 带 /x/<sub> 子段（隐蔽线路用），不能拿来拼 a/ 路径，
+    # 否则生成的 urls[].url 是 404（静态QA #3 实测）。
+    SITE_ROOT = "https://LYK1379030.github.io/mybox-80e9c2"
+    index = {
+        "wallpaper": WALLPAPER,
+        "urls": [
+            {"name": "✅纯净5源（无成人）",
+             "url": SITE_ROOT + "/a/sites.json"},
+        ],
+        "sites": sites,          # 兼容 pa0 单仓分支
+        "lives": [],
+        "parses": cfg["parses"],
+        "flags": cfg["flags"],
+        "ads": ADS,
+        "doh": CONF_DOH,
+    }
+    for d in (os.path.join(site_root, "a"), os.path.join(OUT, "a")):
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
+            json.dump(index, f, ensure_ascii=False, indent=2)
+    print("   a/index.json 已生成（_site/a + 仓库根 a，urls[] 多仓 + sites 兼容，%d 个直连站）" % len(sites))
 
 
 def _emit_4konly(site_root, templates):
