@@ -1250,6 +1250,8 @@ def main():
                         "url": SELF + "/adult.json"})
     entries.append({"name": "⑥ 香蕉资源",
                         "url": SELF + "/banana.json"})
+    entries.append({"name": "⑦ 4K磁力直链（%d源·非采集站）" % len(K4MG_SITES),
+                        "url": SELF + "/4kmg.json"})
     # ⑦ 暂不上线：ext 已修正为字符串，但仍需先在真机验证 jar 可用。
     # 恢复时取消下一行注释即可。
     # entries.append({"name": "⑦ 4K·2K 专线（%d源）" % len(K4_SITES),
@@ -1324,6 +1326,12 @@ def main():
     _manual_sites = [dict(BANANA_SITE), dict(EXTRA_SITE)]
     banana_cfg = dict(COMMON_CFG, sites=_manual_sites)
     templates["banana.json"] = json.dumps(banana_cfg, ensure_ascii=False, indent=2)
+
+    # 第7条：4K磁力/网盘直链专区（独立 spider jar，与采集站隔离）
+    k4mg_cfg = dict(COMMON_CFG, sites=[dict(x) for x in K4MG_SITES])
+    k4mg_cfg["spider"] = K4MG_SPIDER
+    k4mg_cfg["flags"] = []
+    templates["4kmg.json"] = json.dumps(k4mg_cfg, ensure_ascii=False, indent=2)
 
     # 第7条：4K 插件专线（独立 spider jar，与主配置隔离）
     k4_cfg = {"wallpaper": WALLPAPER, "spider": K4_SPIDER,
@@ -1434,19 +1442,21 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
                 # 缺失时客户端用默认长超时，一个连不上的站就会把整次
                 # 并发搜索拖到 40s+，表现为"切换线路一直转圈没结果"。
                 # 同时剔除 jar 里没有实现类的 csp_ 站（点进去必崩/搜索卡死）。
-                _csp_ok = None
-                def _jar_classes():
-                    global _CSP_CLASSES
-                    if _CSP_CLASSES is None:
+                def _jar_classes(_fn=None):
+                    # 4K磁力专区用独立 jar jg4k.jar；其它仓用 custom_spider.jar。
+                    import zipfile as _zf
+                    _jar = "jg4k.jar" if (_fn == "4kmg.json") else "custom_spider.jar"
+                    _cache_key = _jar
+                    if _CSP_CLASSES is None or _CSP_CLASSES.get("_jar") != _cache_key:
                         try:
-                            import zipfile as _zf
-                            _jp = os.path.join(ROOT, "jar", "custom_spider.jar")
+                            _jp = os.path.join(ROOT, "jar", _jar)
                             _dx = _zf.ZipFile(_jp).read("classes.dex")
-                            _CSP_CLASSES = set(x.decode() for x in re.findall(
+                            _classes = set(x.decode() for x in re.findall(
                                 rb'com/github/catvod/spider/([A-Za-z0-9_\-]{2,40})', _dx))
+                            globals()["_CSP_CLASSES"] = {"_jar": _cache_key, "classes": _classes}
                         except Exception:
-                            _CSP_CLASSES = set()
-                    return _CSP_CLASSES
+                            globals()["_CSP_CLASSES"] = {"_jar": _cache_key, "classes": set()}
+                    return globals()["_CSP_CLASSES"].get("classes", set())
                 _kept = []
                 for _s in obj["sites"]:
                     if not isinstance(_s, dict):
@@ -1454,7 +1464,7 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
                     _api = str(_s.get("api") or "")
                     if _api.startswith("csp_"):
                         _cls = _api[4:]
-                        if _cls not in _jar_classes():
+                        if _cls not in _jar_classes(fn):
                             changed = True
                             continue     # jar 无此类 → 剔除，避免卡死
                     # 统一压到 8 秒：连不上的站快速跳过，避免"切换线路转圈"。
@@ -1508,7 +1518,7 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         # 同源自托管 spider jar（266KB），供 6 个子仓统一引用，避免走 gh-proxy
         jar_dir = os.path.join(site_root, "jar")
         os.makedirs(jar_dir, exist_ok=True)
-        for _jn in ("custom_spider.jar", "nb_spider.jar"):
+        for _jn in ("custom_spider.jar", "nb_spider.jar", "jg4k.jar"):
             _js = os.path.join(ROOT, "jar", _jn)
             if os.path.isfile(_js):
                 shutil.copy2(_js, os.path.join(jar_dir, _jn))
@@ -1537,6 +1547,31 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
 
 # ---------------------------------------------------------------- 成人专区
 # 成人分类最浓、最集中的 5 站收进一条专线，主仓保持干净。
+# ---------------------------------------------------------------- 4K磁力/网盘直链专区
+# 来源：songlees355-wq/okay 的 free.txt（社区维护）。这些是 csp_ 插件站，
+# 走磁力/BT/网盘解析拿原始高码率片源，非采集站压缩 m3u8。
+# 独立 jar：jg4k.jar（966162B, md5 1d7a5147033044a81f91d5f4a510f9ed），
+# 已验证含 MyDriveGuard/WoGGGuard/BiliGuard/BttwooGuard/SixVGuard 五个类。
+K4MG_SPIDER = (PAGES_ROOT + "/jar/jg4k.jar;md5;"
+               "1d7a5147033044a81f91d5f4a510f9ed")
+K4MG_SITES = [
+    {"key": "mg_6v", "name": "新6V·磁力", "type": 3,
+     "api": "csp_SixVGuard", "searchable": 1, "quickSearch": 1,
+     "changeable": 1, "ext": ""},
+    {"key": "mg_wogg", "name": "玩偶·4K弹幕", "type": 3,
+     "api": "csp_WoGGGuard", "searchable": 1, "quickSearch": 1,
+     "changeable": 1, "ext": ""},
+    {"key": "mg_bt", "name": "比特·秒播", "type": 3,
+     "api": "csp_BttwooGuard", "searchable": 1, "quickSearch": 1,
+     "changeable": 1, "ext": ""},
+    {"key": "mg_drive", "name": "我的云盘·配置", "type": 3,
+     "api": "csp_MyDriveGuard", "searchable": 1, "quickSearch": 1,
+     "changeable": 1, "ext": ""},
+    {"key": "mg_bili", "name": "哔哔·合集", "type": 3,
+     "api": "csp_BiliGuard", "searchable": 1, "quickSearch": 1,
+     "changeable": 1, "ext": ""},
+]
+
 # 不设 categories 白名单（实测白名单会过滤影片列表，推荐翻页会空）。
 ADULT_ZONE_SITES = [
     {"key": "az_suoni", "name": "索尼·全类", "type": 1,
