@@ -1,0 +1,845 @@
+{
+  "spider": "https://gh-proxy.com/raw.githubusercontent.com/LYK1379030/mybox-80e9c2/main/4konly/moyu-spider.jar",
+  "wallpaper": "",
+  "sites": [
+    {
+      "key": "x_ALLLive",
+      "name": "✨综合直播",
+      "type": 3,
+      "api": "csp_ALLLive",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_AList",
+      "name": "✨AList网盘",
+      "type": 3,
+      "api": "csp_AList",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_AiTingMusic",
+      "name": "✨爱听音乐",
+      "type": 3,
+      "api": "csp_AiTingMusic",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Ali",
+      "name": "✨阿里云盘",
+      "type": 3,
+      "api": "csp_Ali",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_App3Q",
+      "name": "✨3Q影视",
+      "type": 3,
+      "api": "csp_App3Q",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_App88",
+      "name": "✨88影视",
+      "type": 3,
+      "api": "csp_App88",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_AppGet",
+      "name": "✨App获取",
+      "type": 3,
+      "api": "csp_AppGet",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_AppQi",
+      "name": "✨奇影视",
+      "type": 3,
+      "api": "csp_AppQi",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_AppRJ",
+      "name": "✨RJ影视",
+      "type": 3,
+      "api": "csp_AppRJ",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_AppUn",
+      "name": "✨App综合",
+      "type": 3,
+      "api": "csp_AppUn",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_AppYsV2",
+      "name": "✨影视V2",
+      "type": 3,
+      "api": "csp_AppYsV2",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_BaiDuPan",
+      "name": "✨百度网盘",
+      "type": 3,
+      "api": "csp_BaiDuPan",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_BanDeng",
+      "name": "✨板凳影视",
+      "type": 3,
+      "api": "csp_BanDeng",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_BeiLeHu",
+      "name": "✨贝乐虎",
+      "type": 3,
+      "api": "csp_BeiLeHu",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Buguyy",
+      "name": "✨布谷影视",
+      "type": 3,
+      "api": "csp_Buguyy",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_C919TY",
+      "name": "✨C919影院",
+      "type": 3,
+      "api": "csp_C919TY",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_CZ",
+      "name": "✨CZ资源",
+      "type": 3,
+      "api": "csp_CZ",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_ChuXin",
+      "name": "✨初心影视",
+      "type": 3,
+      "api": "csp_ChuXin",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Cloud",
+      "name": "✨云盘",
+      "type": 3,
+      "api": "csp_Cloud",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_DJHub",
+      "name": "✨DJ音乐",
+      "type": 3,
+      "api": "csp_DJHub",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_DaDun",
+      "name": "✨大盾影视",
+      "type": 3,
+      "api": "csp_DaDun",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_DengFeng",
+      "name": "✨登峰影视",
+      "type": 3,
+      "api": "csp_DengFeng",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_DianYingYunJi",
+      "name": "✨电影云集",
+      "type": 3,
+      "api": "csp_DianYingYunJi",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Duboku",
+      "name": "✨独播库",
+      "type": 3,
+      "api": "csp_Duboku",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_FaDai",
+      "name": "✨发带影视",
+      "type": 3,
+      "api": "csp_FaDai",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_FanShu",
+      "name": "✨饭叔影视",
+      "type": 3,
+      "api": "csp_FanShu",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_FishCloud",
+      "name": "✨鱼云盘",
+      "type": 3,
+      "api": "csp_FishCloud",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_FishHxq",
+      "name": "✨鱼好心情",
+      "type": 3,
+      "api": "csp_FishHxq",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_FishPs",
+      "name": "✨鱼PS",
+      "type": 3,
+      "api": "csp_FishPs",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_GuangYa",
+      "name": "✨光雅影视",
+      "type": 3,
+      "api": "csp_GuangYa",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Guazi",
+      "name": "✨瓜子影视",
+      "type": 3,
+      "api": "csp_Guazi",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_GuaziTY",
+      "name": "✨瓜子影院",
+      "type": 3,
+      "api": "csp_GuaziTY",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Gying",
+      "name": "✨G影视",
+      "type": 3,
+      "api": "csp_Gying",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_HonHon",
+      "name": "✨红红影视",
+      "type": 3,
+      "api": "csp_HonHon",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_HuangYou",
+      "name": "✨黄油影视",
+      "type": 3,
+      "api": "csp_HuangYou",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_KZN",
+      "name": "✨KZN影视",
+      "type": 3,
+      "api": "csp_KZN",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_KaiFan",
+      "name": "✨开饭影视",
+      "type": 3,
+      "api": "csp_KaiFan",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Kan360",
+      "name": "✨看360",
+      "type": 3,
+      "api": "csp_Kan360",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_KanJu",
+      "name": "✨看剧",
+      "type": 3,
+      "api": "csp_KanJu",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_LaiChuang",
+      "name": "✨来创影视",
+      "type": 3,
+      "api": "csp_LaiChuang",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Libvio",
+      "name": "✨Libvio",
+      "type": 3,
+      "api": "csp_Libvio",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Luck",
+      "name": "✨幸运影视",
+      "type": 3,
+      "api": "csp_Luck",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_ManDian",
+      "name": "✨满点影视",
+      "type": 3,
+      "api": "csp_ManDian",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Music24bit",
+      "name": "✨24bit音乐",
+      "type": 3,
+      "api": "csp_Music24bit",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_NiuLai",
+      "name": "✨牛来影视",
+      "type": 3,
+      "api": "csp_NiuLai",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Pan115",
+      "name": "✨115网盘",
+      "type": 3,
+      "api": "csp_Pan115",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Pan123",
+      "name": "✨123网盘",
+      "type": 3,
+      "api": "csp_Pan123",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_PanWebShare123",
+      "name": "✨123分享",
+      "type": 3,
+      "api": "csp_PanWebShare123",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_PanWebShareGuangYa",
+      "name": "✨光雅分享",
+      "type": 3,
+      "api": "csp_PanWebShareGuangYa",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_PianDan",
+      "name": "✨片单精选",
+      "type": 3,
+      "api": "csp_PianDan",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_QiutongTY",
+      "name": "✨秋彤影院",
+      "type": 3,
+      "api": "csp_QiutongTY",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Qiwei",
+      "name": "✨奇威影视",
+      "type": 3,
+      "api": "csp_Qiwei",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Quark",
+      "name": "✨夸克网盘",
+      "type": 3,
+      "api": "csp_Quark",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_SaoHuo",
+      "name": "✨骚火影视",
+      "type": 3,
+      "api": "csp_SaoHuo",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_SeedHub",
+      "name": "✨SeedHub",
+      "type": 3,
+      "api": "csp_SeedHub",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_ShangTou",
+      "name": "✨上头影视",
+      "type": 3,
+      "api": "csp_ShangTou",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_ShuangXing",
+      "name": "✨双星影视",
+      "type": 3,
+      "api": "csp_ShuangXing",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Sir88",
+      "name": "✨88先生",
+      "type": 3,
+      "api": "csp_Sir88",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_SuiYuan",
+      "name": "✨随缘影视",
+      "type": 3,
+      "api": "csp_SuiYuan",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_TangPing",
+      "name": "✨糖片影视",
+      "type": 3,
+      "api": "csp_TangPing",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_TianYi",
+      "name": "✨天翼影视",
+      "type": 3,
+      "api": "csp_TianYi",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_TingBook",
+      "name": "✨听书",
+      "type": 3,
+      "api": "csp_TingBook",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_TingBookJinXia",
+      "name": "✨听书金霞",
+      "type": 3,
+      "api": "csp_TingBookJinXia",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_TingYou",
+      "name": "✨听友",
+      "type": 3,
+      "api": "csp_TingYou",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Tiu6",
+      "name": "✨Tiu6影视",
+      "type": 3,
+      "api": "csp_Tiu6",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_TuXiaoBei",
+      "name": "✨兔小贝",
+      "type": 3,
+      "api": "csp_TuXiaoBei",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_TvDy",
+      "name": "✨电视电影",
+      "type": 3,
+      "api": "csp_TvDy",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_UC",
+      "name": "✨UC网盘",
+      "type": 3,
+      "api": "csp_UC",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_VideoX",
+      "name": "✨VideoX",
+      "type": 3,
+      "api": "csp_VideoX",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_WenCai",
+      "name": "✨文采影视",
+      "type": 3,
+      "api": "csp_WenCai",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_WoNiu",
+      "name": "✨蜗牛影视",
+      "type": 3,
+      "api": "csp_WoNiu",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Wogg",
+      "name": "✨玩偶4K",
+      "type": 3,
+      "api": "csp_Wogg",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Wwys",
+      "name": "✨WW影视",
+      "type": 3,
+      "api": "csp_Wwys",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_XgAnime",
+      "name": "✨西瓜动漫",
+      "type": 3,
+      "api": "csp_XgAnime",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_XieHui",
+      "name": "✨协汇影视",
+      "type": 3,
+      "api": "csp_XieHui",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_XingHui",
+      "name": "✨星汇影视",
+      "type": 3,
+      "api": "csp_XingHui",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_XunleiPan",
+      "name": "✨迅雷网盘",
+      "type": 3,
+      "api": "csp_XunleiPan",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_YGP",
+      "name": "✨YGP影视",
+      "type": 3,
+      "api": "csp_YGP",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_YiDongYun",
+      "name": "✨移动云",
+      "type": 3,
+      "api": "csp_YiDongYun",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Yidong4K",
+      "name": "✨移动4K",
+      "type": 3,
+      "api": "csp_Yidong4K",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_ZhenXiang",
+      "name": "✨真相影视",
+      "type": 3,
+      "api": "csp_ZhenXiang",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_ZhiWo",
+      "name": "✨知我影视",
+      "type": 3,
+      "api": "csp_ZhiWo",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    },
+    {
+      "key": "x_Zwqf",
+      "name": "✨紫微影视",
+      "type": 3,
+      "api": "csp_Zwqf",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    }
+  ],
+  "lives": [],
+  "parses": [],
+  "flags": [],
+  "ads": [],
+  "notice": "扩展站点合集：从同一个 jar 里挖出的全部可用站。若某个站打不开，换别的即可。",
+  "_meta": {
+    "note": "由 jar 内 112 个 spider 类中未接入的 83 个生成",
+    "sites": 83
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "filmstore-4k",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "影视仓 / TVBox 聚合接口 - macCMS 兼容层，可部署到 Cloudflare Workers 或本机 Node",
+  "keywords": ["tvbox", "filmstore", "maccms", "cloudflare-workers", "video-api"],
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "start": "node server.js",
+    "gen": "node scripts/gen-sources.js",
+    "check": "node scripts/check-sources.js",
+    "check:prune": "node scripts/check-sources.js --prune",
+    "find4k": "node scripts/find-4k.js",
+    "collect": "node scripts/collect-apis.js",
+    "rank": "node scripts/rank-apis.js",
+    "probe": "node scripts/probe-4k.js",
+    "smoke": "node scripts/smoke.js"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,17 @@
+#EXTM3U
+#EXTINF:-1,CCTV1超清8M
+http://222.223.41.27:8888/hls/1/index.m3u8
+#EXTINF:-1,高清频道0107
+http://221.7.175.154:8445/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0
+#EXTINF:-1,高清频道1021
+http://221.7.175.154:8445/tsfile/live/1021_1.m3u8?key=txiptv&playlive=1&authid=0
+#EXTINF:-1,高清频道0139
+http://221.7.175.154:8445/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0
+#EXTINF:-1,高清频道0110
+http://222.71.55.147:9901/tsfile/live/0110_1.m3u8?key=txiptv&playlive=0&authid=0
+#EXTINF:-1,浙江卫视超清
+http://120.40.39.246:352/newlive/live/hls/8/live.m3u8
+#EXTINF:-1,河北卫视高清
+https://event.pull.hebtv.com/jishi/cp1.m3u8
+#EXTINF:-1,内蒙古高清
+http://play1-qk.nmtv.cn/live/1769652018126032.m3u8

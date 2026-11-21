@@ -1,0 +1,371 @@
+{
+  "wallpaper": "https://picsum.photos/1280/720",
+  "sites": [
+    {
+      "key": "v_360_2024",
+      "name": "360·2024年",
+      "type": 1,
+      "api": "https://caiji.360zy.com/api.php/provide/vod/?year=2024",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_360_2023",
+      "name": "360·2023年",
+      "type": 1,
+      "api": "https://caiji.360zy.com/api.php/provide/vod/?year=2023",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_360_2022",
+      "name": "360·2022年",
+      "type": 1,
+      "api": "https://caiji.360zy.com/api.php/provide/vod/?year=2022",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_360_2021",
+      "name": "360·2021年",
+      "type": 1,
+      "api": "https://caiji.360zy.com/api.php/provide/vod/?year=2021",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_360_2020",
+      "name": "360·2020年",
+      "type": 1,
+      "api": "https://caiji.360zy.com/api.php/provide/vod/?year=2020",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_360_2019",
+      "name": "360·2019年",
+      "type": 1,
+      "api": "https://caiji.360zy.com/api.php/provide/vod/?year=2019",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_bfzy_2024",
+      "name": "暴风·2024年",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/?year=2024",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_bfzy_2023",
+      "name": "暴风·2023年",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/?year=2023",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_bfzy_2022",
+      "name": "暴风·2022年",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/?year=2022",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_bfzy_2021",
+      "name": "暴风·2021年",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/?year=2021",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_bfzy_2020",
+      "name": "暴风·2020年",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/?year=2020",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_bfzy_2019",
+      "name": "暴风·2019年",
+      "type": 1,
+      "api": "https://bfzyapi.com/api.php/provide/vod/?year=2019",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_lzi_2024",
+      "name": "量子·2024年",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/?year=2024",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_lzi_2023",
+      "name": "量子·2023年",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/?year=2023",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_lzi_2022",
+      "name": "量子·2022年",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/?year=2022",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_lzi_2021",
+      "name": "量子·2021年",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/?year=2021",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_lzi_2020",
+      "name": "量子·2020年",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/?year=2020",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_lzi_2019",
+      "name": "量子·2019年",
+      "type": 1,
+      "api": "https://cj.lziapi.com/api.php/provide/vod/?year=2019",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_ffzy_2024",
+      "name": "非凡·2024年",
+      "type": 1,
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod/?year=2024",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_ffzy_2023",
+      "name": "非凡·2023年",
+      "type": 1,
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod/?year=2023",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_ffzy_2022",
+      "name": "非凡·2022年",
+      "type": 1,
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod/?year=2022",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_ffzy_2021",
+      "name": "非凡·2021年",
+      "type": 1,
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod/?year=2021",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_ffzy_2020",
+      "name": "非凡·2020年",
+      "type": 1,
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod/?year=2020",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_ffzy_2019",
+      "name": "非凡·2019年",
+      "type": 1,
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod/?year=2019",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_dytt_2024",
+      "name": "电影天堂·2024年",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/?year=2024",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_dytt_2023",
+      "name": "电影天堂·2023年",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/?year=2023",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_dytt_2022",
+      "name": "电影天堂·2022年",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/?year=2022",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_dytt_2021",
+      "name": "电影天堂·2021年",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/?year=2021",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_dytt_2020",
+      "name": "电影天堂·2020年",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/?year=2020",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    },
+    {
+      "key": "v_dytt_2019",
+      "name": "电影天堂·2019年",
+      "type": 1,
+      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/?year=2019",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "filterable": 0
+    }
+  ],
+  "lives": [],
+  "parses": [
+    {
+      "name": "聚合",
+      "type": 0,
+      "url": "Web"
+    },
+    {
+      "name": "并行",
+      "type": 0,
+      "url": "Parallel"
+    }
+  ],
+  "flags": [
+    "youku",
+    "qq",
+    "iqiyi",
+    "qiyi",
+    "letv",
+    "sohu",
+    "tudou",
+    "pptv",
+    "mgtv",
+    "wasu",
+    "bilibili"
+  ],
+  "ads": [
+    "static-mozai.4gtv.tv",
+    "s3t3d2y8.afcdn.net",
+    "iqiyi.hbuioo.com",
+    "vip.ffzyad.com",
+    "https://lf1-cdn-tos.bytegoofy.com/obj/tos-cn-i-dy/455ccf9e8ae744378118e4bd289288dd"
+  ],
+  "doh": [
+    {
+      "name": "阿里",
+      "url": "https://dns.alidns.com/dns-query",
+      "ips": [
+        "223.5.5.5",
+        "223.6.6.6"
+      ]
+    },
+    {
+      "name": "腾讯",
+      "url": "https://doh.pub/dns-query",
+      "ips": [
+        "119.29.29.29"
+      ]
+    },
+    {
+      "name": "Cloudflare",
+      "url": "https://cloudflare-dns.com/dns-query",
+      "ips": [
+        "1.1.1.1",
+        "1.0.0.1"
+      ]
+    },
+    {
+      "name": "AdGuard",
+      "url": "https://dns.adguard.com/dns-query",
+      "ips": [
+        "94.140.14.14",
+        "94.140.15.15"
+      ]
+    }
+  ]
+}
