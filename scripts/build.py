@@ -1526,7 +1526,7 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         # 同源自托管 spider jar（266KB），供 6 个子仓统一引用，避免走 gh-proxy
         jar_dir = os.path.join(site_root, "jar")
         os.makedirs(jar_dir, exist_ok=True)
-        for _jn in ("custom_spider.jar", "nb_spider.jar", "jg4k.jar"):
+        for _jn in ("custom_spider.jar", "nb_spider.jar", "jg4k.jar", "hj.txt"):
             _js = os.path.join(ROOT, "jar", _jn)
             if os.path.isfile(_js):
                 shutil.copy2(_js, os.path.join(jar_dir, _jn))
@@ -1577,7 +1577,7 @@ K4MG_SITES = [
      "changeable": 1, "ext": ""},
     {"key": "mg_bili", "name": "哔哔·合集", "type": 3,
      "api": "csp_BiliGuard", "searchable": 1, "quickSearch": 1,
-     "changeable": 1, "ext": PAGES_ROOT + "/jar/hj.txt"},
+     "changeable": 1, "ext": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/jar/hj.txt"},
 ]
 
 # 不设 categories 白名单（实测白名单会过滤影片列表，推荐翻页会空）。
@@ -2455,6 +2455,31 @@ def _emit_aliases(site_root, out_root):
     绕过 Pages 10 分钟缓存 → 用户全新加载，不读旧缓存。"""
     import shutil as _sh
     BASE = "https://LYK1379030.github.io/mybox-80e9c2"
+    # --- 纯直连配置 zhijie/：零插件零jar，彻底消除插件/jar导致的换源卡死 ---
+    # 只放实测可播的 type=1 直连站（本机实测6个 + 团队多通道确认的站）
+    ZHIJIE_SITES = [
+        {"key":"zj_360","name":"360资源","type":1,"api":"https://360zy.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_360b","name":"360备用","type":1,"api":"https://caiji.360zy.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_ff","name":"非凡","type":1,"api":"http://ffzy.tv/api.php/provide/vod/","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_ffb","name":"非凡备用","type":1,"api":"https://ffzy.tv/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_xj","name":"香蕉资源","type":1,"api":"https://api.xjzyapi.com/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_bf","name":"暴风","type":1,"api":"https://bfzyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_dytt","name":"电影天堂","type":1,"api":"https://caiji.dyttzyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_lzi","name":"量子","type":1,"api":"https://cj.lziapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_old","name":"老剧","type":1,"api":"https://lovedan.net/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_sb","name":"速播","type":1,"api":"https://subocaiji.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_dz","name":"大众资源","type":1,"api":"https://cdn.dzzyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+        {"key":"zj_hq","name":"高清精选","type":1,"api":"http://slapibf.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
+    ]
+    zhijie_cfg = {
+        "wallpaper": "", "sites": ZHIJIE_SITES, "lives": [],
+        "parses": [{"name":"聚合","type":0,"url":"Web"}],
+        "flags": [], "ads": ADS, "doh": CONF_DOH, "ijk": IJK, "rules": [],
+    }
+    for d in (os.path.join(site_root,"zhijie"), os.path.join(out_root,"zhijie")):
+        os.makedirs(d, exist_ok=True)
+        json.dump(zhijie_cfg, open(os.path.join(d,"index.json"),"w",encoding="utf-8"), ensure_ascii=False, indent=2)
+    print("  zhijie/ 已生成（纯直连零插件，12站）")
     # --- 完整版 → wanzheng/ ---
     src_x = os.path.join(site_root, "x", "f1345f4a17efd9")
     dst_w = os.path.join(site_root, "wanzheng")

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-22T01:54:33Z",
+  "built_at": "2026-11-22T02:35:39Z",
   "upstreams": [
     {
       "id": "c1",
@@ -20,39 +20,39 @@
     {
       "url": "https://gh-proxy.com/https://raw.githubusercontent.com/gaotianliuyun/gao/master/jar/custom_spider.jar",
       "old_md5": "41c87635d7592069884a5dafa12acabe",
-      "new_md5": "41c87635d7592069884a5dafa12acabe",
-      "match": true,
-      "bytes": 266777,
-      "ok": true
+      "new_md5": null,
+      "match": false,
+      "ok": false,
+      "why": "HTTP Error 403: Forbidden"
     },
     {
       "url": "https://gh-proxy.com/raw.githubusercontent.com/CandyMuj/ResourceInterface/main/TVBox/candymuj.jar",
       "old_md5": "ec8ab1bcb078290e4f5a0d1449393a69",
-      "new_md5": "9f391d889e28d3c40092fabb562f408c",
+      "new_md5": null,
       "match": false,
-      "bytes": 685892,
-      "ok": true
+      "ok": false,
+      "why": "HTTP Error 403: Forbidden"
     }
   ],
   "vod_lines": [
     {
       "api": "http://slapibf.com/api.php/provide/vod",
       "alive": true,
-      "ms": 1062,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://lovedan.net/api.php/provide/vod",
-      "alive": true,
-      "ms": 1081,
+      "ms": 833,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://api.xjzyapi.com/provide/vod",
       "alive": true,
-      "ms": 1090,
+      "ms": 1301,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "https://lovedan.net/api.php/provide/vod",
+      "alive": true,
+      "ms": 1447,
       "total": null,
       "why": "ok"
     },
@@ -281,7 +281,7 @@
       "file": "live.txt",
       "ok": true,
       "bytes": 115633,
-      "source": "https://cdn.jsdelivr.net/gh/yoursmile66/TVBox@main/live.txt",
+      "source": "https://raw.githubusercontent.com/yoursmile66/TVBox/main/live.txt",
       "note": ""
     },
     {
@@ -374,20 +374,23 @@
   "channels": [
     {
       "name": "pages",
-      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_ext\\_site\\x/f1345f4a17efd9",
+      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_final\\_site\\x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
       "files": 15
     },
     {
       "name": "cdn",
-      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_ext\\x/f1345f4a17efd9",
+      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_final\\x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
       "files": 15
     }
   ],
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
-    "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> 9f391d889e28d3c40092fabb562f408c",
+    "spider md5 已自动修正 custom_spider.jar: 41c87635d7592069884a5dafa12acabe -> None",
+    "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> None",
+    "spider jar 下载失败，已去掉 md5 校验段",
+    "spider jar 下载失败，已去掉 md5 校验段",
     "已剔除 6 条失活点播线路（正常自愈）"
   ],
   "url_fixes": [
@@ -678,7 +681,7 @@
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
-    "issues": 3,
+    "issues": 6,
     "dead_vod_removed": 6,
     "all_absolute": true
   },
