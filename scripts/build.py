@@ -1571,19 +1571,13 @@ K4MG_SPIDER = (PAGES_ROOT + "/jar/jg4k.jar;md5;"
 K4MG_SITES = [
     {"key": "mg_6v", "name": "新6V·磁力", "type": 3,
      "api": "csp_SixVGuard", "searchable": 1, "quickSearch": 1,
-     "changeable": 1, "ext": ""},
-    {"key": "mg_wogg", "name": "玩偶·4K弹幕", "type": 3,
-     "api": "csp_WoGGGuard", "searchable": 1, "quickSearch": 1,
-     "changeable": 1, "ext": ""},
+     "changeable": 1, "ext": "https://www.xb6v.com/"},
     {"key": "mg_bt", "name": "比特·秒播", "type": 3,
      "api": "csp_BttwooGuard", "searchable": 1, "quickSearch": 1,
      "changeable": 1, "ext": ""},
-    {"key": "mg_drive", "name": "我的云盘·配置", "type": 3,
-     "api": "csp_MyDriveGuard", "searchable": 1, "quickSearch": 1,
-     "changeable": 1, "ext": ""},
     {"key": "mg_bili", "name": "哔哔·合集", "type": 3,
      "api": "csp_BiliGuard", "searchable": 1, "quickSearch": 1,
-     "changeable": 1, "ext": ""},
+     "changeable": 1, "ext": PAGES_ROOT + "/jar/hj.txt"},
 ]
 
 # 不设 categories 白名单（实测白名单会过滤影片列表，推荐翻页会空）。

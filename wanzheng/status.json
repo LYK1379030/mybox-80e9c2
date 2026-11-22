@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-22T01:32:38Z",
+  "built_at": "2026-11-22T01:54:33Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,23 +36,23 @@
   ],
   "vod_lines": [
     {
-      "api": "https://api.xjzyapi.com/provide/vod",
+      "api": "http://slapibf.com/api.php/provide/vod",
       "alive": true,
-      "ms": 961,
+      "ms": 1062,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://lovedan.net/api.php/provide/vod",
       "alive": true,
-      "ms": 1594,
+      "ms": 1081,
       "total": null,
       "why": "ok"
     },
     {
-      "api": "http://slapibf.com/api.php/provide/vod",
+      "api": "https://api.xjzyapi.com/provide/vod",
       "alive": true,
-      "ms": 3883,
+      "ms": 1090,
       "total": null,
       "why": "ok"
     },
@@ -281,7 +281,7 @@
       "file": "live.txt",
       "ok": true,
       "bytes": 115633,
-      "source": "https://raw.githubusercontent.com/yoursmile66/TVBox/main/live.txt",
+      "source": "https://cdn.jsdelivr.net/gh/yoursmile66/TVBox@main/live.txt",
       "note": ""
     },
     {
@@ -311,14 +311,14 @@
   ],
   "parses": [
     {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
+      "name": "醉仙",
+      "url": "https://jx.zui.cm/?url=",
       "ok": false,
       "why": "DNS: [Errno 11001] getaddrinfo failed"
     },
     {
-      "name": "醉仙",
-      "url": "https://jx.zui.cm/?url=",
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
       "ok": false,
       "why": "DNS: [Errno 11001] getaddrinfo failed"
     },
@@ -374,13 +374,13 @@
   "channels": [
     {
       "name": "pages",
-      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_alias\\_site\\x/f1345f4a17efd9",
+      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_ext\\_site\\x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
       "files": 15
     },
     {
       "name": "cdn",
-      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_alias\\x/f1345f4a17efd9",
+      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_ext\\x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
       "files": 15
     }
@@ -656,7 +656,7 @@
     },
     {
       "file": "4kmg.json",
-      "sites": 5,
+      "sites": 3,
       "lives": 2,
       "problems": []
     },

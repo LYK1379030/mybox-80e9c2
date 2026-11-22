@@ -332,18 +332,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "ext": "",
-      "timeout": 20
-    },
-    {
-      "key": "mg_wogg",
-      "name": "玩偶·4K弹幕",
-      "type": 3,
-      "api": "csp_WoGGGuard",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "ext": "",
+      "ext": "https://www.xb6v.com/",
       "timeout": 20
     },
     {
@@ -358,17 +347,6 @@
       "timeout": 20
     },
     {
-      "key": "mg_drive",
-      "name": "我的云盘·配置",
-      "type": 3,
-      "api": "csp_MyDriveGuard",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "ext": "",
-      "timeout": 20
-    },
-    {
       "key": "mg_bili",
       "name": "哔哔·合集",
       "type": 3,
@@ -376,7 +354,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "ext": "",
+      "ext": "https://LYK1379030.github.io/mybox-80e9c2/jar/hj.txt",
       "timeout": 20
     }
   ],
