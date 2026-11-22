@@ -366,7 +366,7 @@
       "key": "fs_ff",
       "name": "非凡影视",
       "type": 1,
-      "api": "https://cj.ffzyapi.com/api.php/provide/vod",
+      "api": "http://ffzy.tv/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,

@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-11-21T15:14:12Z",
+  "built_at": "2026-11-22T00:29:12Z",
   "upstreams": [
     {
       "id": "c1",
@@ -36,44 +36,23 @@
   ],
   "vod_lines": [
     {
-      "api": "https://suoniapi.com/api.php/provide/vod",
+      "api": "https://api.xjzyapi.com/provide/vod",
       "alive": true,
-      "ms": 182,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 274,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "http://slapibf.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 336,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://bfzyapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 532,
-      "total": null,
-      "why": "ok"
-    },
-    {
-      "api": "https://cj.lziapi.com/api.php/provide/vod",
-      "alive": true,
-      "ms": 654,
+      "ms": 1385,
       "total": null,
       "why": "ok"
     },
     {
       "api": "https://lovedan.net/api.php/provide/vod",
       "alive": true,
-      "ms": 948,
+      "ms": 1515,
+      "total": null,
+      "why": "ok"
+    },
+    {
+      "api": "http://slapibf.com/api.php/provide/vod",
+      "alive": true,
+      "ms": 6300,
       "total": null,
       "why": "ok"
     },
@@ -81,13 +60,37 @@
       "api": "https://api.kuaifan.tv/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "<urlopen error [Errno -2] Name or service not known>"
+      "why": "<urlopen error [Errno 11001] getaddrinfo failed>"
     },
     {
       "api": "https://haiwaikan.com/api.php/provide/vod",
       "alive": false,
       "ms": 0,
-      "why": "非法 JSON"
+      "why": "<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>"
+    },
+    {
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "alive": false,
+      "ms": 0,
+      "why": "<urlopen error timed out>"
+    },
+    {
+      "api": "https://bfzyapi.com/api.php/provide/vod",
+      "alive": false,
+      "ms": 0,
+      "why": "<urlopen error timed out>"
+    },
+    {
+      "api": "https://cj.lziapi.com/api.php/provide/vod",
+      "alive": false,
+      "ms": 0,
+      "why": "<urlopen error timed out>"
+    },
+    {
+      "api": "http://cj.ffzyapi.com/api.php/provide/vod",
+      "alive": false,
+      "ms": 0,
+      "why": "<urlopen error timed out>"
     }
   ],
   "dropped": [
@@ -104,12 +107,12 @@
     {
       "name": "海外看",
       "api": "https://haiwaikan.com/api.php/provide/vod",
-      "why": "非法 JSON"
+      "why": "非JSON/连接失败"
     },
     {
       "name": "快帆",
       "api": "https://api.kuaifan.tv/api.php/provide/vod",
-      "why": "<urlopen error [Errno -2] Name or service not known>"
+      "why": "DNS/连接全通道失败"
     },
     {
       "name": "櫻花",
@@ -294,7 +297,7 @@
       "file": "live3.m3u",
       "ok": true,
       "bytes": 62491,
-      "source": "https://raw.githubusercontent.com/iptv-org/iptv/master/streams/cn.m3u",
+      "source": "https://cdn.jsdelivr.net/gh/iptv-org/iptv@master/streams/cn.m3u",
       "note": ""
     },
     {
@@ -311,7 +314,25 @@
       "name": "醉仙",
       "url": "https://jx.zui.cm/?url=",
       "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
+      "why": "DNS: [Errno 11001] getaddrinfo failed"
+    },
+    {
+      "name": "综合",
+      "url": "https://jx.jsonplayer.com/player/?url=",
+      "ok": false,
+      "why": "DNS: [Errno 11001] getaddrinfo failed"
+    },
+    {
+      "name": "爱酷",
+      "url": "https://jx.zhanlangbu.com/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
+    },
+    {
+      "name": "771949",
+      "url": "https://jx.771949.com/?url=",
+      "ok": false,
+      "why": "返回站点首页 HTML，非解析结果"
     },
     {
       "name": "西瓜",
@@ -324,24 +345,6 @@
       "url": "https://www.yemu.xyz/?url=",
       "ok": false,
       "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "爱酷",
-      "url": "https://jx.zhanlangbu.com/?url=",
-      "ok": false,
-      "why": "返回站点首页 HTML，非解析结果"
-    },
-    {
-      "name": "771949",
-      "url": "https://jx.771949.com/?url=",
-      "ok": false,
-      "why": "HTTP: HTTP Error 403: Forbidden"
-    },
-    {
-      "name": "综合",
-      "url": "https://jx.jsonplayer.com/player/?url=",
-      "ok": false,
-      "why": "DNS: [Errno -2] Name or service not known"
     }
   ],
   "doh": [
@@ -365,27 +368,27 @@
     {
       "name": "EPG",
       "ok": true,
-      "bytes": 2696
+      "bytes": 2913
     }
   ],
   "channels": [
     {
       "name": "pages",
-      "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/_site/x/f1345f4a17efd9",
+      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_fix2\\_site\\x/f1345f4a17efd9",
       "base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9",
-      "files": 14
+      "files": 15
     },
     {
       "name": "cdn",
-      "dest": "/home/runner/work/mybox-80e9c2/mybox-80e9c2/x/f1345f4a17efd9",
+      "dest": "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tvbox_fix2\\x/f1345f4a17efd9",
       "base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9",
-      "files": 14
+      "files": 15
     }
   ],
   "issues": [
     "所有第三方解析站均不可达，仅保留内置 Demo/Parallel/Sequence",
     "spider md5 已自动修正 candymuj.jar: ec8ab1bcb078290e4f5a0d1449393a69 -> 9f391d889e28d3c40092fabb562f408c",
-    "已剔除 2 条失活点播线路（正常自愈）"
+    "已剔除 6 条失活点播线路（正常自愈）"
   ],
   "url_fixes": [
     {
@@ -570,11 +573,30 @@
     }
   ],
   "epg_ok": true,
-  "vod_total": 8,
+  "vod_total": 9,
   "gateway": {
     "route": "B",
-    "variant_count": 30,
-    "notes": []
+    "variant_count": 12,
+    "notes": [
+      "bfzy/2024 剔除: 探测失败: <urlopen error timed out>",
+      "bfzy/2023 剔除: 探测失败: <urlopen error timed out>",
+      "bfzy/2022 剔除: 探测失败: <urlopen error timed out>",
+      "bfzy/2021 剔除: 探测失败: <urlopen error timed out>",
+      "bfzy/2020 剔除: 探测失败: <urlopen error timed out>",
+      "bfzy/2019 剔除: 探测失败: <urlopen error timed out>",
+      "lzi/2024 剔除: 探测失败: <urlopen error timed out>",
+      "lzi/2023 剔除: 探测失败: <urlopen error timed out>",
+      "lzi/2022 剔除: 探测失败: <urlopen error timed out>",
+      "lzi/2021 剔除: 探测失败: <urlopen error timed out>",
+      "lzi/2020 剔除: 探测失败: <urlopen error timed out>",
+      "lzi/2019 剔除: 探测失败: <urlopen error timed out>",
+      "dytt/2024 剔除: 探测失败: <urlopen error timed out>",
+      "dytt/2023 剔除: 探测失败: <urlopen error timed out>",
+      "dytt/2022 剔除: 探测失败: <urlopen error timed out>",
+      "dytt/2021 剔除: 探测失败: <urlopen error timed out>",
+      "dytt/2020 剔除: 探测失败: <urlopen error timed out>",
+      "dytt/2019 剔除: 探测失败: <urlopen error timed out>"
+    ]
   },
   "summary": {
     "sub_configs": [
@@ -587,10 +609,10 @@
         50
       ]
     ],
-    "4k_sites": 13,
+    "4k_sites": 11,
     "real4k_sites": 3,
-    "alive_vod": 6,
-    "dead_vod": 2,
+    "alive_vod": 3,
+    "dead_vod": 6,
     "live_files": 4,
     "alive_parses": 0,
     "alive_doh": 2
@@ -610,7 +632,7 @@
     },
     {
       "file": "4k.json",
-      "sites": 13,
+      "sites": 11,
       "lives": 4,
       "problems": []
     },
@@ -633,6 +655,12 @@
       "problems": []
     },
     {
+      "file": "4kmg.json",
+      "sites": 5,
+      "lives": 2,
+      "problems": []
+    },
+    {
       "file": "k4.json",
       "sites": 33,
       "lives": 0,
@@ -646,12 +674,12 @@
     }
   ],
   "verify": {
-    "files_checked": 8,
+    "files_checked": 9,
     "files_with_problems": 0,
     "total_problems": 0,
     "url_fixes_applied": 36,
     "issues": 3,
-    "dead_vod_removed": 2,
+    "dead_vod_removed": 6,
     "all_absolute": true
   },
   "entries": {
@@ -659,7 +687,7 @@
     "backup": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9/index.json",
     "status": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/status.json",
     "subdir": "x/f1345f4a17efd9",
-    "channel": "cdn",
-    "self_base": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/x/f1345f4a17efd9"
+    "channel": "pages",
+    "self_base": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9"
   }
 }

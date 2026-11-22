@@ -1265,7 +1265,7 @@ def main():
         # 不是 m3u8 直链，需要客户端解析器，不符合「点开即播」。
         {"key":"fs_fftv","name":"非凡直连", "type":1, "api":"https://ffzy.tv/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_bf",  "name":"暴风资源", "type":1, "api":"https://bfzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"fs_ff",  "name":"非凡影视", "type":1, "api":"https://cj.ffzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"fs_ff",  "name":"非凡影视", "type":1, "api":"http://ffzy.tv/api.php/provide/vod/", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_dytt","name":"电影天堂", "type":1, "api":"https://caiji.dyttzyapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_360", "name":"360资源",  "type":1, "api":"https://360zy.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
         {"key":"fs_lzi", "name":"量子资源", "type":1, "api":"https://cj.lziapi.com/api.php/provide/vod", "searchable":1,"quickSearch":1,"changeable":1},
@@ -1433,6 +1433,15 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
                 if obj.get("flags"):
                     obj["flags"] = []
                     changed = True
+                # 死站 URL 全局替换：cj.ffzyapi.com 已宕机，上游配置自动拉入的站
+                # 也命中。统一换成 ffzy.tv（实测可用镜像）。
+                for _s2 in obj["sites"]:
+                    _a2 = str(_s2.get("api") or "")
+                    if "cj.ffzyapi.com" in _a2:
+                        _s2["api"] = _a2.replace("cj.ffzyapi.com", "ffzy.tv").replace("/api.php/provide/vod/", "/api.php/provide/vod/")
+                        if _s2["api"].startswith("https://"):
+                            _s2["api"] = "http://" + _s2["api"][8:]
+                        changed = True
                 sp = str(obj.get("spider") or "")
                 if "gh-proxy.com" in sp or "raw.githubusercontent.com" in sp:
                     obj["spider"] = (PAGES_ROOT + "/jar/custom_spider.jar;md5;"
@@ -1578,7 +1587,7 @@ ADULT_ZONE_SITES = [
      "api": "https://suoniapi.com/api.php/provide/vod",
      "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
     {"key": "az_ff", "name": "非凡·全类", "type": 1,
-     "api": "https://cj.ffzyapi.com/api.php/provide/vod",
+     "api": "http://ffzy.tv/api.php/provide/vod/",
      "searchable": 1, "quickSearch": 1, "changeable": 1, "timeout": 30},
     {"key": "az_dytt", "name": "电影天堂·全类", "type": 1,
      "api": "https://caiji.dyttzyapi.com/api.php/provide/vod",
@@ -2190,7 +2199,7 @@ GATEWAY_VARIANT_BASES = [
     {"key": "360", "name": "360", "api": "https://caiji.360zy.com/api.php/provide/vod/"},
     {"key": "bfzy", "name": "暴风", "api": "https://bfzyapi.com/api.php/provide/vod/"},
     {"key": "lzi", "name": "量子", "api": "https://cj.lziapi.com/api.php/provide/vod/"},
-    {"key": "ffzy", "name": "非凡", "api": "http://cj.ffzyapi.com/api.php/provide/vod/"},
+    {"key": "ffzy", "name": "非凡", "api": "http://ffzy.tv/api.php/provide/vod/"},
     {"key": "dytt", "name": "电影天堂", "api": "https://caiji.dyttzyapi.com/api.php/provide/vod/"},
 ]
 
