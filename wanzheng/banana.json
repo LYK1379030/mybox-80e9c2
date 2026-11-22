@@ -1,0 +1,345 @@
+{
+  "wallpaper": "",
+  "spider": "https://LYK1379030.github.io/mybox-80e9c2/jar/custom_spider.jar;md5;41c87635d7592069884a5dafa12acabe",
+  "lives": [
+    {
+      "name": "直播·综合",
+      "type": 0,
+      "url": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/live.txt",
+      "playerType": 1,
+      "ua": "okhttp/3.15"
+    },
+    {
+      "name": "直播·官方台",
+      "type": 0,
+      "url": "https://LYK1379030.github.io/mybox-80e9c2/x/f1345f4a17efd9/live3.m3u",
+      "playerType": 1,
+      "ua": "okhttp/3.15"
+    }
+  ],
+  "parses": [
+    {
+      "name": "Json聚合",
+      "type": 3,
+      "url": "Demo"
+    },
+    {
+      "name": "Json并发",
+      "type": 2,
+      "url": "Parallel"
+    },
+    {
+      "name": "Json轮询",
+      "type": 2,
+      "url": "Sequence"
+    }
+  ],
+  "flags": [],
+  "ads": [
+    "static-mozai.4gtv.tv",
+    "s3t3d2y8.afcdn.net",
+    "iqiyi.hbuioo.com",
+    "vip.ffzyad.com",
+    "https://lf1-cdn-tos.bytegoofy.com/obj/tos-cn-i-dy/455ccf9e8ae744378118e4bd289288dd"
+  ],
+  "doh": [
+    {
+      "name": "阿里",
+      "url": "https://dns.alidns.com/dns-query",
+      "ips": [
+        "223.5.5.5",
+        "223.6.6.6"
+      ]
+    },
+    {
+      "name": "腾讯",
+      "url": "https://doh.pub/dns-query",
+      "ips": [
+        "119.29.29.29"
+      ]
+    }
+  ],
+  "ijk": [
+    {
+      "group": "① 硬解码·4K首选",
+      "options": [
+        {
+          "category": 4,
+          "name": "mediacodec",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-hevc",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-auto-rotate",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-handle-resolution-change",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "opensles",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "overlay-format",
+          "value": "842225234"
+        },
+        {
+          "category": 4,
+          "name": "framedrop",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "soundtouch",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "start-on-prepared",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "reconnect",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "enable-accurate-seek",
+          "value": "0"
+        },
+        {
+          "category": 1,
+          "name": "fflags",
+          "value": "fastseek"
+        },
+        {
+          "category": 1,
+          "name": "http-detect-range-support",
+          "value": "0"
+        },
+        {
+          "category": 1,
+          "name": "dns_cache_timeout",
+          "value": "600000000"
+        },
+        {
+          "category": 2,
+          "name": "skip_loop_filter",
+          "value": "48"
+        }
+      ]
+    },
+    {
+      "group": "② 软解码·兼容兜底",
+      "options": [
+        {
+          "category": 4,
+          "name": "mediacodec",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "mediacodec-hevc",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "opensles",
+          "value": "0"
+        },
+        {
+          "category": 4,
+          "name": "overlay-format",
+          "value": "842225234"
+        },
+        {
+          "category": 4,
+          "name": "framedrop",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "soundtouch",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "start-on-prepared",
+          "value": "1"
+        },
+        {
+          "category": 4,
+          "name": "reconnect",
+          "value": "1"
+        },
+        {
+          "category": 1,
+          "name": "fflags",
+          "value": "fastseek"
+        },
+        {
+          "category": 1,
+          "name": "http-detect-range-support",
+          "value": "0"
+        },
+        {
+          "category": 1,
+          "name": "dns_cache_timeout",
+          "value": "600000000"
+        },
+        {
+          "category": 2,
+          "name": "skip_loop_filter",
+          "value": "48"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "name": "proxy",
+      "hosts": [
+        "raw.githubusercontent.com",
+        "googlevideo.com",
+        "googleapis.com",
+        "cdn.v82u1l.com",
+        "cdn.iz8qkg.com",
+        "cdn.kin6c1.com",
+        "c.biggggg.com",
+        "c.olddddd.com",
+        "haiwaikan.com",
+        "www.histar.tv",
+        "youtube.com",
+        "uhibo.com",
+        ".*boku.*",
+        ".*nivod.*",
+        ".*ulivetv.*"
+      ]
+    },
+    {
+      "name": "海外看",
+      "hosts": [
+        "haiwaikan"
+      ]
+    },
+    {
+      "name": "索尼",
+      "hosts": [
+        "suoni"
+      ]
+    },
+    {
+      "name": "暴風",
+      "hosts": [
+        "bfzy"
+      ]
+    },
+    {
+      "name": "星星",
+      "hosts": [
+        "xingxing"
+      ]
+    },
+    {
+      "name": "量子",
+      "hosts": [
+        "lzi"
+      ]
+    },
+    {
+      "name": "非凡",
+      "hosts": [
+        "ffzy"
+      ]
+    }
+  ],
+  "sites": [
+    {
+      "key": "banana",
+      "name": "香蕉资源",
+      "type": 1,
+      "api": "https://api.xjzyapi.com/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 3,
+      "categories": [
+        "强奸迷奸",
+        "丝袜制服",
+        "国产厂牌",
+        "SM调教",
+        "乱伦",
+        "网曝黑料",
+        "主播网红",
+        "自拍偷拍",
+        "口交自慰",
+        "群交多P",
+        "AI换脸",
+        "素人特摄",
+        "无码高清",
+        "经典有码",
+        "中文字幕",
+        "性感网红",
+        "重口调教",
+        "厂牌经典",
+        "人兽",
+        "其他",
+        "东南亚",
+        "阿拉伯",
+        "印巴拉丁",
+        "激情H漫",
+        "3D",
+        "国产三级",
+        "学生萝莉",
+        "日韩三级",
+        "日韩精选",
+        "国产精选",
+        "欧美精选",
+        "VR专区"
+      ]
+    },
+    {
+      "key": "highquality",
+      "name": "高清精选",
+      "type": 1,
+      "api": "http://slapibf.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 3,
+      "categories": [
+        "精品推荐",
+        "亚洲无码",
+        "中文字幕",
+        "巨乳美乳",
+        "人妻熟女",
+        "欧美精品",
+        "日本精品",
+        "Cosplay",
+        "台湾辣妹",
+        "韩国御姐",
+        "唯美港姐",
+        "东南亚AV",
+        "古装扮演",
+        "女优系列",
+        "风情旗袍",
+        "瑜伽裤",
+        "闷骚护士",
+        "过膝袜",
+        "传媒出品",
+        "恋腿狂魔"
+      ]
+    }
+  ]
+}

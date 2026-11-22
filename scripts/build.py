@@ -1551,6 +1551,12 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
             _emit_4konly(site_root, templates)
         except Exception as e:
             print("  [warn] 4konly 生成失败：", e)
+        # 新地址：wanzheng/（完整版）+ chunjing/（纯净版）
+        # 完全独立的目录 + 独立 URL → 绕过 Pages 10 分钟缓存，全新加载。
+        try:
+            _emit_aliases(site_root, OUT)
+        except Exception as e:
+            print("  [warn] wanzheng/chunjing 生成失败：", e)
 
 
 # ---------------------------------------------------------------- 成人专区
@@ -2447,6 +2453,48 @@ def _emit_clean(site_root, templates):
         with open(os.path.join(d, "index.json"), "w", encoding="utf-8") as f:
             json.dump(index, f, ensure_ascii=False, indent=2)
     print("   a/index.json 已生成（_site/a + 仓库根 a，urls[] 多仓 + sites 兼容，%d 个直连站）" % len(sites))
+
+
+def _emit_aliases(site_root, out_root):
+    """生成 wanzheng/（完整版）和 chunjing/（纯净版）独立地址。
+    与旧地址 x/f1345f4a17efd9/ 和 a/ 内容一致，但 URL 完全独立，
+    绕过 Pages 10 分钟缓存 → 用户全新加载，不读旧缓存。"""
+    import shutil as _sh
+    BASE = "https://LYK1379030.github.io/mybox-80e9c2"
+    # --- 完整版 → wanzheng/ ---
+    src_x = os.path.join(site_root, "x", "f1345f4a17efd9")
+    dst_w = os.path.join(site_root, "wanzheng")
+    if os.path.isdir(src_x):
+        os.makedirs(dst_w, exist_ok=True)
+        for fn in os.listdir(src_x):
+            _sh.copy2(os.path.join(src_x, fn), os.path.join(dst_w, fn))
+        # 改 index.json 的 urls 为 wanzheng 路径
+        idx_p = os.path.join(dst_w, "index.json")
+        if os.path.isfile(idx_p):
+            idx = json.load(open(idx_p, encoding="utf-8"))
+            for u in idx.get("urls") or []:
+                old_url = u.get("url", "")
+                fn = old_url.rsplit("/", 1)[-1]
+                u["url"] = f"{BASE}/wanzheng/{fn}"
+            json.dump(idx, open(idx_p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        print("  wanzheng/ 已生成（完整版独立地址）")
+    # --- 纯净版 → chunjing/ ---
+    src_a = os.path.join(site_root, "a")
+    dst_c = os.path.join(site_root, "chunjing")
+    if os.path.isdir(src_a):
+        os.makedirs(dst_c, exist_ok=True)
+        for fn in os.listdir(src_a):
+            _sh.copy2(os.path.join(src_a, fn), os.path.join(dst_c, fn))
+        # 改 index.json 的 urls 为 chunjing 路径
+        idx_p = os.path.join(dst_c, "index.json")
+        if os.path.isfile(idx_p):
+            idx = json.load(open(idx_p, encoding="utf-8"))
+            for u in idx.get("urls") or []:
+                old_url = u.get("url", "")
+                fn = old_url.rsplit("/", 1)[-1]
+                u["url"] = f"{BASE}/chunjing/{fn}"
+            json.dump(idx, open(idx_p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        print("  chunjing/ 已生成（纯净版独立地址）")
 
 
 def _emit_4konly(site_root, templates):
