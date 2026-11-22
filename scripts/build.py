@@ -2372,6 +2372,11 @@ def _emit_clean(site_root, templates):
         # 一个连不上的站就能把整次搜索拖到 40s+，表现为一直转圈。
         item.setdefault("timeout", 20)
         sites.append(item)
+    # 追加 4K磁力/网盘直链插件站（csp_*，独立 jg4k.jar）
+    for _k4 in K4MG_SITES:
+        _k4copy = dict(_k4)
+        _k4copy.setdefault("timeout", 20)
+        sites.append(_k4copy)
     cfg = {
         "wallpaper": WALLPAPER,
         "sites": sites,
@@ -2388,8 +2393,8 @@ def _emit_clean(site_root, templates):
         "ads": ADS,
         "doh": CONF_DOH,
         "ijk": IJK,
-        "spider": (PAGES_ROOT + "/jar/custom_spider.jar;md5;"
-                   "41c87635d7592069884a5dafa12acabe"),
+        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
+                   "1d7a5147033044a81f91d5f4a510f9ed"),
         "rules": [],
     }
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
@@ -2425,8 +2430,8 @@ def _emit_clean(site_root, templates):
         # ijk 补齐：缺 ijk 时部分客户端会退回软解，4K 片源卡顿
         "ijk": IJK,
         # spider 补齐：与已验证可用的单仓结构一致（同源小 jar）
-        "spider": (PAGES_ROOT + "/jar/custom_spider.jar;md5;"
-                   "41c87635d7592069884a5dafa12acabe"),
+        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
+                   "1d7a5147033044a81f91d5f4a510f9ed"),
         "rules": [],
     }
     for d in (os.path.join(site_root, "a"), os.path.join(OUT, "a")):

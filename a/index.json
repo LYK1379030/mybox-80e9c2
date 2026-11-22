@@ -323,6 +323,61 @@
         "AI漫剧"
       ],
       "timeout": 20
+    },
+    {
+      "key": "mg_6v",
+      "name": "新6V·磁力",
+      "type": 3,
+      "api": "csp_SixVGuard",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "ext": "",
+      "timeout": 20
+    },
+    {
+      "key": "mg_wogg",
+      "name": "玩偶·4K弹幕",
+      "type": 3,
+      "api": "csp_WoGGGuard",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "ext": "",
+      "timeout": 20
+    },
+    {
+      "key": "mg_bt",
+      "name": "比特·秒播",
+      "type": 3,
+      "api": "csp_BttwooGuard",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "ext": "",
+      "timeout": 20
+    },
+    {
+      "key": "mg_drive",
+      "name": "我的云盘·配置",
+      "type": 3,
+      "api": "csp_MyDriveGuard",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "ext": "",
+      "timeout": 20
+    },
+    {
+      "key": "mg_bili",
+      "name": "哔哔·合集",
+      "type": 3,
+      "api": "csp_BiliGuard",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "ext": "",
+      "timeout": 20
     }
   ],
   "lives": [],
@@ -510,6 +565,6 @@
       ]
     }
   ],
-  "spider": "https://LYK1379030.github.io/mybox-80e9c2/jar/custom_spider.jar;md5;41c87635d7592069884a5dafa12acabe",
+  "spider": "https://LYK1379030.github.io/mybox-80e9c2/jar/jg4k.jar;md5;1d7a5147033044a81f91d5f4a510f9ed",
   "rules": []
 }
