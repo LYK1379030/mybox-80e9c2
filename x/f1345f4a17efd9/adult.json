@@ -273,7 +273,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动作片",
         "喜剧片",
@@ -339,7 +339,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动漫片",
         "动作片",
@@ -379,7 +379,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "连续剧",
         "动作片",
@@ -419,7 +419,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 8
+      "timeout": 3
     }
   ]
 }

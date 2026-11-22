@@ -274,7 +274,7 @@
       "quickSearch": 1,
       "changeable": 1,
       "ext": "",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "mg_wogg",
@@ -285,7 +285,7 @@
       "quickSearch": 1,
       "changeable": 1,
       "ext": "",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "mg_bt",
@@ -296,7 +296,7 @@
       "quickSearch": 1,
       "changeable": 1,
       "ext": "",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "mg_drive",
@@ -307,7 +307,7 @@
       "quickSearch": 1,
       "changeable": 1,
       "ext": "",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "mg_bili",
@@ -318,7 +318,7 @@
       "quickSearch": 1,
       "changeable": 1,
       "ext": "",
-      "timeout": 8
+      "timeout": 3
     }
   ]
 }

@@ -10,7 +10,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动作片",
         "喜剧片",
@@ -65,7 +65,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影片",
         "动作片",
@@ -123,7 +123,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "连续剧",
         "动作片",
@@ -162,7 +162,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影",
         "电视剧",
@@ -205,7 +205,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影",
         "电视剧",
@@ -256,7 +256,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影片",
         "连续剧",
@@ -307,7 +307,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动漫片",
         "动作片",
@@ -346,7 +346,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动漫片",
         "动作片",
@@ -388,7 +388,7 @@
         "ratio": 1
       },
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/310%E7%9B%B4%E6%92%AD.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_360影视",
@@ -396,7 +396,7 @@
       "type": 3,
       "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/360%E5%BD%B1%E8%A7%86.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_88看球",
@@ -409,7 +409,7 @@
         "ratio": 1
       },
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/88%E7%9C%8B%E7%90%83.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_JRKAN直播",
@@ -422,7 +422,7 @@
         "ratio": 1
       },
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/JRKAN%E7%9B%B4%E6%92%AD.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_优酷",
@@ -430,7 +430,7 @@
       "type": 3,
       "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E4%BC%98%E9%85%B7.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_兔小贝",
@@ -443,7 +443,7 @@
       },
       "changeable": 0,
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E5%85%94%E5%B0%8F%E8%B4%9D.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_抓饭体育",
@@ -456,7 +456,7 @@
         "ratio": 1
       },
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E6%8A%93%E9%A5%AD%E4%BD%93%E8%82%B2.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_菜狗",
@@ -464,7 +464,7 @@
       "type": 3,
       "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E8%8F%9C%E7%8B%97.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_有声绘本网",
@@ -477,7 +477,7 @@
         "ratio": 1
       },
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E6%9C%89%E5%A3%B0%E7%BB%98%E6%9C%AC%E7%BD%91.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_奇珍异兽",
@@ -485,7 +485,7 @@
       "type": 3,
       "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E5%A5%87%E7%8F%8D%E5%BC%82%E5%85%BD.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_CandyMuj_duanju",
@@ -495,7 +495,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_童趣",
@@ -508,7 +508,7 @@
         "ratio": 1.597
       },
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E7%AB%A5%E8%B6%A3.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_腾云驾雾",
@@ -516,7 +516,7 @@
       "type": 3,
       "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E8%85%BE%E4%BA%91%E9%A9%BE%E9%9B%BE.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "drpy_js_百忙无果",
@@ -524,7 +524,7 @@
       "type": 3,
       "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
       "ext": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/js/%E7%99%BE%E5%BF%99%E6%97%A0%E6%9E%9C.js",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_Bili_3",
@@ -540,7 +540,7 @@
         "ratio": 1.433
       },
       "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\"}",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_Bili",
@@ -555,7 +555,7 @@
         "ratio": 1.433
       },
       "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\"}",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_Bili_2",
@@ -571,7 +571,7 @@
         "ratio": 1.433
       },
       "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\"}",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_Bili_1",
@@ -587,7 +587,7 @@
         "ratio": 1.433
       },
       "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\"}",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_Bili_5",
@@ -603,7 +603,7 @@
         "ratio": 1.433
       },
       "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\"}",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_Local",
@@ -612,7 +612,7 @@
       "api": "csp_Local",
       "searchable": 0,
       "changeable": 0,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "csp_Bili_4",
@@ -628,7 +628,7 @@
         "ratio": 1.433
       },
       "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\"}",
-      "timeout": 8
+      "timeout": 3
     }
   ],
   "lives": [

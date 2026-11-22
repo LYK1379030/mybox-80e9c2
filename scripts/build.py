@@ -909,9 +909,8 @@ def tune(cfg, health, lives):
             continue
         r = health.get(a)
         # 不做自动剔除：本机 DNS 污染会误杀好站，无法可靠区分"真死"和"抖动"。
-        # 转圈问题用"统一短 timeout"解决——连不上的站最多 8 秒就跳过，
-        # 不依赖体检准确性，任何环境行为一致。
-        s["timeout"] = 8
+        # 转圈问题用"统一短 timeout"解决——连不上的站最多 3 秒就跳过。
+        s["timeout"] = 3
         if r and r["alive"] and r["ms"] > 0:
             pass  # 延迟不再改 timeout，统一 8 秒
         if r and not r["alive"]:
@@ -1476,10 +1475,10 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
                         if _cls not in _jar_classes(fn):
                             changed = True
                             continue     # jar 无此类 → 剔除，避免卡死
-                    # 统一压到 8 秒：连不上的站快速跳过，避免"切换线路转圈"。
-                    # 采集站正常响应都在 2 秒内，8 秒足够；慢站宁可跳过。
-                    if _s.get("timeout") != 8:
-                        _s["timeout"] = 8
+                    # 统一压到 3 秒：实测好站响应 500-900ms，3 秒足够；
+                    # 坏站 3 秒跳过，不让 DNS 污染/死站拖到 8 秒。
+                    if _s.get("timeout") != 3:
+                        _s["timeout"] = 3
                         changed = True
                     _kept.append(_s)
                 obj["sites"] = _kept

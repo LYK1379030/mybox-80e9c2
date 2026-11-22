@@ -302,7 +302,7 @@
         "海外动漫",
         "短剧"
       ],
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "fs_bf",
@@ -360,7 +360,7 @@
         "古装仙侠",
         "AI漫剧"
       ],
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "fs_ff",
@@ -399,7 +399,7 @@
         "海外动漫",
         "短剧"
       ],
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "fs_dytt",
@@ -438,7 +438,7 @@
         "短剧",
         "动画片"
       ],
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "fs_360",
@@ -493,7 +493,7 @@
         "女频恋爱",
         "成长逆袭"
       ],
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "fs_lzi",
@@ -544,7 +544,7 @@
         "动画片",
         "AI漫剧"
       ],
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "fs_sb",
@@ -595,7 +595,7 @@
         "脑洞悬疑",
         "AI漫剧"
       ],
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "fs_suoni",
@@ -653,7 +653,7 @@
         "漫剧",
         "儿童儿歌"
       ],
-      "timeout": 8
+      "timeout": 3
     }
   ]
 }

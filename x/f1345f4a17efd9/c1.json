@@ -10,7 +10,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动作片",
         "喜剧片",
@@ -65,7 +65,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影片",
         "动作片",
@@ -123,7 +123,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "连续剧",
         "动作片",
@@ -161,7 +161,7 @@
       "api": "https://suoniapi.com/api.php/provide/vod",
       "searchable": 1,
       "changeable": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动作片",
         "喜剧片",
@@ -219,7 +219,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影",
         "电视剧",
@@ -262,7 +262,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影",
         "电视剧",
@@ -313,7 +313,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "电影片",
         "连续剧",
@@ -363,7 +363,7 @@
       "api": "http://ffzy.tv/api.php/provide/vod",
       "searchable": 1,
       "changeable": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动漫片",
         "动作片",
@@ -402,7 +402,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动漫片",
         "动作片",
@@ -441,7 +441,7 @@
       "searchable": 1,
       "changeable": 1,
       "quickSearch": 1,
-      "timeout": 8,
+      "timeout": 3,
       "categories": [
         "动漫片",
         "动作片",
@@ -480,7 +480,7 @@
       "searchable": 1,
       "changeable": 0,
       "ext": "{\"categories\":\"短剧#沙雕动画#沙雕穿越#沙雕\",\"cookie\":\"\"}",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "JustLive",
@@ -489,7 +489,7 @@
       "api": "csp_JustLive",
       "searchable": 1,
       "changeable": 0,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "哔哩",
@@ -503,7 +503,7 @@
         "ratio": 1.433
       },
       "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\",\"type\":\"帕梅拉#太极拳#广场舞#演唱会\",\"cookie\":\"\"}",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "商店",
@@ -513,7 +513,7 @@
       "searchable": 0,
       "changeable": 0,
       "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/market.json",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "巴士",
@@ -522,7 +522,7 @@
       "api": "csp_Dm84",
       "searchable": 1,
       "changeable": 1,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "找資源",
@@ -532,7 +532,7 @@
       "searchable": 1,
       "changeable": 0,
       "ext": "影視天下第一$$$test2$$$test2",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "push_agent",
@@ -541,7 +541,7 @@
       "api": "csp_Push",
       "searchable": 0,
       "changeable": 0,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "新6V",
@@ -550,7 +550,7 @@
       "api": "csp_Xb6v",
       "searchable": 1,
       "changeable": 0,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "星星",
@@ -559,7 +559,7 @@
       "api": "csp_Star",
       "searchable": 1,
       "changeable": 1,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "本地",
@@ -568,7 +568,7 @@
       "api": "csp_Local",
       "searchable": 0,
       "changeable": 0,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "獨播",
@@ -578,7 +578,7 @@
       "searchable": 1,
       "changeable": 1,
       "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/duboku.json",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "異界",
@@ -587,7 +587,7 @@
       "api": "csp_Ysj",
       "searchable": 1,
       "changeable": 1,
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "看球",
@@ -599,7 +599,7 @@
       "style": {
         "type": "list"
       },
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "豆瓣",
@@ -609,7 +609,7 @@
       "searchable": 0,
       "changeable": 1,
       "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/douban.json",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "賤賤",
@@ -619,7 +619,7 @@
       "searchable": 1,
       "changeable": 1,
       "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/jianpian.json",
-      "timeout": 8
+      "timeout": 3
     },
     {
       "key": "酷狗",
@@ -628,7 +628,7 @@
       "api": "csp_Kugou",
       "searchable": 0,
       "changeable": 0,
-      "timeout": 8
+      "timeout": 3
     }
   ],
   "lives": [
