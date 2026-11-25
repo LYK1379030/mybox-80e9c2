@@ -2419,26 +2419,32 @@ def _emit_clean(site_root, templates):
     _EXTRA_DIRECT = [
         {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v",
          "ext":"https://www.xb6v.com/","searchable":1,"quickSearch":1,"changeable":1},
-        # 2026-11-25 真实分片ffprobe实测码率(非声明)：
-        # 醉影 2560kbps 1920x1080 真1080P(内容正常) —— 全库最高
-        # 关键修复：醉影必须用 https（http 在电视盒子上被系统拦截导致搜不出）
-        # categories 白名单只放行正常分类，杜绝"里番/伦理/三级"等成人内容
-        {"key":"zuid_hd","name":"①醉影1080P","type":1,
-         "api":"https://api.zuidapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
+        # 2026-11-26 关键修复：先实测"真搜索"判据(两个不同关键词返回是否匹配)，
+        # 再叠加真实分片码率。醉影/zuidazy 虽2560k但 wd=参数被忽略=假搜索，已剔除。
+        # 以下都是真搜索(流浪地球/庆余年 返回匹配结果)+内容正常+较高码率：
+        # mdzy 1897k / xigua 1543k / maoyan / honniu / 爱奇艺 1863k
+        {"key":"mdzy_hd","name":"①漫督高清","type":1,
+         "api":"https://www.mdzyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
          "categories":HD_SAFE_CATS},
-        {"key":"zuidazy_hd","name":"②醉影备用1080P","type":1,
-         "api":"http://zuidazy.me/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
-         "categories":HD_SAFE_CATS},
-        {"key":"iqiyi_zy","name":"③爱奇艺720P","type":1,
+        {"key":"iqiyi_zy","name":"②爱奇艺720P","type":1,
          "api":"https://www.iqiyizyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
+         "categories":HD_SAFE_CATS},
+        {"key":"maoyan_hd","name":"③猫眼影视","type":1,
+         "api":"https://api.maoyanapi.top/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
+         "categories":HD_SAFE_CATS},
+        {"key":"honniu_hd","name":"④红牛影视","type":1,
+         "api":"https://www.hongniuzy3.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
+         "categories":HD_SAFE_CATS},
+        {"key":"xigua_hd","name":"⑤西瓜影视","type":1,
+         "api":"https://xiguazy.tv/api.php/provide/vod/","searchable":1,"quickSearch":1,"changeable":1,
          "categories":HD_SAFE_CATS},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
         if str(_ed["api"]).rstrip("/") not in _have_api:
             sites.append(dict(_ed))
-    # 实测高清源(名称带①②③)置顶，让用户打开即是最高画质
-    sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "①②③" else 1)
+    # 真搜索高清源(名称带①②③④⑤)置顶，让用户打开即是搜索可用源
+    sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "①②③④⑤" else 1)
     # 纯净版全部站统一 timeout=5（好站 500-900ms，坏站5秒跳过）
     for _s in sites:
         _s["timeout"] = 5
