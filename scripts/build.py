@@ -2408,6 +2408,16 @@ def _emit_clean(site_root, templates):
     _EXTRA_DIRECT = [
         {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v",
          "ext":"https://www.xb6v.com/","searchable":1,"quickSearch":1,"changeable":1},
+        # 找剧AI：drpy2规则（影视TV内置引擎支持）
+        {"key":"zhaoju","name":"找剧AI·搜索","type":3,
+         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
+         "ext":"https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
+         "searchable":1,"quickSearch":1,"changeable":0},
+        # 新6V搜索：官方drpy规则（so.php搜索接口）
+        {"key":"xb6v_search","name":"新6V·搜索","type":3,
+         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
+         "ext":"https://LYK1379030.github.io/mybox-80e9c2/xb6v.js",
+         "searchable":1,"quickSearch":1,"changeable":0},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
