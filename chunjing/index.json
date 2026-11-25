@@ -325,64 +325,36 @@
       "timeout": 5
     },
     {
-      "key": "zj_360b",
-      "name": "360备用",
-      "type": 1,
-      "api": "https://360zy.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
-      "key": "zj_ffb",
-      "name": "非凡备用",
-      "type": 1,
-      "api": "https://ffzy.tv/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
-      "key": "zj_sb",
-      "name": "速播",
-      "type": 1,
-      "api": "https://subocaiji.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
-      "key": "wm_open",
-      "name": "4K开源电影",
-      "type": 1,
-      "api": "https://LYK1379030.github.io/mybox-80e9c2/wm_movies.json",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
-      "key": "cctv4k",
-      "name": "央视4K·1080P",
-      "type": 1,
-      "api": "https://LYK1379030.github.io/mybox-80e9c2/cctv4k.json",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
-      "key": "zhaoju",
-      "name": "找剧AI·搜索",
+      "key": "mg_6v",
+      "name": "新6V·磁力",
       "type": 3,
-      "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-      "ext": "https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
+      "api": "csp_SixVGuard",
+      "ext": "https://www.xb6v.com/",
       "searchable": 1,
       "quickSearch": 1,
-      "changeable": 0,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "mg_bt",
+      "name": "比特·秒播",
+      "type": 3,
+      "api": "csp_BttwooGuard",
+      "ext": "",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "mg_bili",
+      "name": "哔哔·合集",
+      "type": 3,
+      "api": "csp_BiliGuard",
+      "ext": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/jar/hj.txt",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
       "timeout": 5
     }
   ],
@@ -571,6 +543,6 @@
       ]
     }
   ],
-  "spider": "",
+  "spider": "https://LYK1379030.github.io/mybox-80e9c2/jar/jg4k.jar;md5;1d7a5147033044a81f91d5f4a510f9ed",
   "rules": []
 }

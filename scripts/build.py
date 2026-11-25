@@ -2395,29 +2395,19 @@ def _emit_clean(site_root, templates):
         # 一个连不上的站就能把整次搜索拖到 40s+，表现为一直转圈。
         item.setdefault("timeout", 20)
         sites.append(item)
-    # 并入纯直连的额外站：让纯净版 = 全部直连站，零插件零jar依赖。
-    # 插件站（csp_*）已移除——它需要 jar + ext，是"换源卡死"的根源。
-    # 【纯净版铁律】只放普通影视采集站，绝不放成人站。
-    # 排除：香蕉资源(api.xjzyapi.com)、高清精选(slapibf.com) —— 成人内容站。
-    # 也排除所有 csp_ 磁力/网盘插件站（成人向且依赖 jar，是换源卡死根源）。
+    # 高清磁力/网盘插件站（新6V磁力等）——用户明确要保留的高清源。
+    # 之前误删，现恢复：csp_* 插件站来自 jg4k.jar，全部开启搜索。
     _EXTRA_DIRECT = [
-        {"key":"zj_360b","name":"360备用","type":1,"api":"https://360zy.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"zj_ffb","name":"非凡备用","type":1,"api":"https://ffzy.tv/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"zj_sb","name":"速播","type":1,"api":"https://subocaiji.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
-        # 真4K/1080P开源电影库（17部，Blender CC授权，MP4/WebM直链，无网盘无广告无授权）
-        {"key":"wm_open","name":"4K开源电影","type":1,
-         "api":"https://LYK1379030.github.io/mybox-80e9c2/wm_movies.json",
+        {"key":"mg_6v","name":"新6V·磁力","type":3,
+         "api":"csp_SixVGuard","ext":"https://www.xb6v.com/",
          "searchable":1,"quickSearch":1,"changeable":1},
-        # 央视4K正版点播库（211个节目，1080P，官方免费无广告无授权，实测211/211可播）
-        {"key":"cctv4k","name":"央视4K·1080P","type":1,
-         "api":"https://LYK1379030.github.io/mybox-80e9c2/cctv4k.json",
+        {"key":"mg_bt","name":"比特·秒播","type":3,
+         "api":"csp_BttwooGuard","ext":"",
          "searchable":1,"quickSearch":1,"changeable":1},
-        # 找剧AI：逆向签名HMAC-SHA256，支持关键词搜索（实测3词均返回结果）
-        # 播放需在找剧AI应用内二次resolve，TVBox点开跳转网页
-        {"key":"zhaoju","name":"找剧AI·搜索","type":3,
-         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-         "ext":"https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
-         "searchable":1,"quickSearch":1,"changeable":0},
+        {"key":"mg_bili","name":"哔哔·合集","type":3,
+         "api":"csp_BiliGuard",
+         "ext":"https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/jar/hj.txt",
+         "searchable":1,"quickSearch":1,"changeable":1},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
@@ -2442,8 +2432,9 @@ def _emit_clean(site_root, templates):
         "ads": ADS,
         "doh": CONF_DOH,
         "ijk": IJK,
-        # 纯净版全是 type=1 直连站，零插件 → 不需要 spider jar
-        "spider": "",
+        # 纯净版含 csp 插件站（新6V磁力等高清源）→ 需要 jg4k.jar
+        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
+                   "1d7a5147033044a81f91d5f4a510f9ed"),
         "rules": [],
     }
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
@@ -2479,8 +2470,9 @@ def _emit_clean(site_root, templates):
         # ijk 补齐：缺 ijk 时部分客户端会退回软解，4K 片源卡顿
         "ijk": IJK,
         # spider 补齐：与已验证可用的单仓结构一致（同源小 jar）
-        # 纯净版全是 type=1 直连站，零插件 → 不需要 spider jar
-        "spider": "",
+        # 纯净版含 csp 插件站（新6V磁力等高清源）→ 需要 jg4k.jar
+        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
+                   "1d7a5147033044a81f91d5f4a510f9ed"),
         "rules": [],
     }
     for d in (os.path.join(site_root, "a"), os.path.join(OUT, "a")):
