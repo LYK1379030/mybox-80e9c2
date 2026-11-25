@@ -15,7 +15,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 30,
+      "timeout": 5,
       "categories": [
         "电影",
         "电视剧",
@@ -101,7 +101,7 @@
         "女频恋爱",
         "成长逆袭"
       ],
-      "timeout": 20
+      "timeout": 5
     },
     {
       "key": "clean_dzzy",
@@ -111,7 +111,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 30,
+      "timeout": 5,
       "categories": [
         "综艺",
         "剧情片",
@@ -189,7 +189,7 @@
         "古装仙侠",
         "AI漫剧"
       ],
-      "timeout": 20
+      "timeout": 5
     },
     {
       "key": "clean_feifan",
@@ -232,7 +232,7 @@
         "海外动漫",
         "短剧"
       ],
-      "timeout": 20
+      "timeout": 5
     },
     {
       "key": "clean_dytt",
@@ -272,7 +272,7 @@
         "短剧",
         "动画片"
       ],
-      "timeout": 20
+      "timeout": 5
     },
     {
       "key": "clean_lzi",
@@ -322,62 +322,37 @@
         "动画片",
         "AI漫剧"
       ],
-      "timeout": 20
+      "timeout": 5
     },
     {
-      "key": "mg_6v",
-      "name": "新6V·磁力",
-      "type": 3,
-      "api": "csp_SixVGuard",
+      "key": "zj_360b",
+      "name": "360备用",
+      "type": 1,
+      "api": "https://360zy.com/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "ext": "",
-      "timeout": 20
+      "timeout": 5
     },
     {
-      "key": "mg_wogg",
-      "name": "玩偶·4K弹幕",
-      "type": 3,
-      "api": "csp_WoGGGuard",
+      "key": "zj_ffb",
+      "name": "非凡备用",
+      "type": 1,
+      "api": "https://ffzy.tv/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "ext": "",
-      "timeout": 20
+      "timeout": 5
     },
     {
-      "key": "mg_bt",
-      "name": "比特·秒播",
-      "type": 3,
-      "api": "csp_BttwooGuard",
+      "key": "zj_sb",
+      "name": "速播",
+      "type": 1,
+      "api": "https://subocaiji.com/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "ext": "",
-      "timeout": 20
-    },
-    {
-      "key": "mg_drive",
-      "name": "我的云盘·配置",
-      "type": 3,
-      "api": "csp_MyDriveGuard",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "ext": "",
-      "timeout": 20
-    },
-    {
-      "key": "mg_bili",
-      "name": "哔哔·合集",
-      "type": 3,
-      "api": "csp_BiliGuard",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "ext": "",
-      "timeout": 20
+      "timeout": 5
     }
   ],
   "lives": [],
@@ -565,6 +540,6 @@
       ]
     }
   ],
-  "spider": "https://LYK1379030.github.io/mybox-80e9c2/jar/jg4k.jar;md5;1d7a5147033044a81f91d5f4a510f9ed",
+  "spider": "",
   "rules": []
 }

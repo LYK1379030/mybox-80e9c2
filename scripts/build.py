@@ -2380,11 +2380,23 @@ def _emit_clean(site_root, templates):
         # 一个连不上的站就能把整次搜索拖到 40s+，表现为一直转圈。
         item.setdefault("timeout", 20)
         sites.append(item)
-    # 追加 4K磁力/网盘直链插件站（csp_*，独立 jg4k.jar）
-    for _k4 in K4MG_SITES:
-        _k4copy = dict(_k4)
-        _k4copy.setdefault("timeout", 20)
-        sites.append(_k4copy)
+    # 并入纯直连的额外站：让纯净版 = 全部直连站，零插件零jar依赖。
+    # 插件站（csp_*）已移除——它需要 jar + ext，是"换源卡死"的根源。
+    # 【纯净版铁律】只放普通影视采集站，绝不放成人站。
+    # 排除：香蕉资源(api.xjzyapi.com)、高清精选(slapibf.com) —— 成人内容站。
+    # 也排除所有 csp_ 磁力/网盘插件站（成人向且依赖 jar，是换源卡死根源）。
+    _EXTRA_DIRECT = [
+        {"key":"zj_360b","name":"360备用","type":1,"api":"https://360zy.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"zj_ffb","name":"非凡备用","type":1,"api":"https://ffzy.tv/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"zj_sb","name":"速播","type":1,"api":"https://subocaiji.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+    ]
+    _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
+    for _ed in _EXTRA_DIRECT:
+        if str(_ed["api"]).rstrip("/") not in _have_api:
+            sites.append(dict(_ed))
+    # 纯净版全部站统一 timeout=5（好站 500-900ms，坏站5秒跳过）
+    for _s in sites:
+        _s["timeout"] = 5
     cfg = {
         "wallpaper": WALLPAPER,
         "sites": sites,
@@ -2401,8 +2413,8 @@ def _emit_clean(site_root, templates):
         "ads": ADS,
         "doh": CONF_DOH,
         "ijk": IJK,
-        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
-                   "1d7a5147033044a81f91d5f4a510f9ed"),
+        # 纯净版全是 type=1 直连站，零插件 → 不需要 spider jar
+        "spider": "",
         "rules": [],
     }
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
@@ -2438,8 +2450,8 @@ def _emit_clean(site_root, templates):
         # ijk 补齐：缺 ijk 时部分客户端会退回软解，4K 片源卡顿
         "ijk": IJK,
         # spider 补齐：与已验证可用的单仓结构一致（同源小 jar）
-        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
-                   "1d7a5147033044a81f91d5f4a510f9ed"),
+        # 纯净版全是 type=1 直连站，零插件 → 不需要 spider jar
+        "spider": "",
         "rules": [],
     }
     for d in (os.path.join(site_root, "a"), os.path.join(OUT, "a")):
