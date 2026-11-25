@@ -1549,6 +1549,11 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         if os.path.isfile(_zj):
             shutil.copy2(_zj, os.path.join(site_root, "zhaoju1.js"))
             print("   zhaoju1.js 已发布（找剧AI搜索规则）")
+        # 新6V磁力 drpy规则（网页搜索逆向，支持搜索）
+        _xb = os.path.join(ROOT, "xb6v.js")
+        if os.path.isfile(_xb):
+            shutil.copy2(_xb, os.path.join(site_root, "xb6v.js"))
+            print("   xb6v.js 已发布（新6V磁力搜索规则）")
         # /clean/index.json：4 条 urls[] 多仓（壳 pa0.smali L557 支持 urls 展开、
         # L600 支持 sites 单仓，两者都支持时选 urls[] 与 x/ 结构一致）。
         # 旧生成器把它写进仓库根 clean/ 且只发 Pages 的 _site/ 子目录，
@@ -2416,6 +2421,16 @@ def _emit_clean(site_root, templates):
          "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/jianpian.json","searchable":1,"quickSearch":1,"changeable":1},
         {"key":"csp_db","name":"豆瓣","type":3,"api":"csp_Douban",
          "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/douban.json","searchable":1,"quickSearch":1,"changeable":1},
+        # 找剧AI：逆向HMAC签名的drpy规则，实测搜索"流浪地球"3秒返回真实结果
+        {"key":"zhaoju","name":"找剧AI·搜索","type":3,
+         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
+         "ext":"https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
+         "searchable":1,"quickSearch":1,"changeable":0},
+        # 新6V磁力搜索规则：网页搜索接口逆向，实测搜"流浪地球"3部+详情提取磁力
+        {"key":"xb6v_search","name":"新6V·搜索","type":3,
+         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
+         "ext":"https://LYK1379030.github.io/mybox-80e9c2/xb6v.js",
+         "searchable":1,"quickSearch":1,"changeable":0},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
