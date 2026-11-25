@@ -353,6 +353,26 @@
       "quickSearch": 1,
       "changeable": 1,
       "timeout": 5
+    },
+    {
+      "key": "wm_open",
+      "name": "4K开源电影",
+      "type": 1,
+      "api": "https://LYK1379030.github.io/mybox-80e9c2/wm_movies.json",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "cctv4k",
+      "name": "央视4K·1080P",
+      "type": 1,
+      "api": "https://LYK1379030.github.io/mybox-80e9c2/cctv4k.json",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
     }
   ],
   "lives": [],

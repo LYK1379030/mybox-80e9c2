@@ -1534,6 +1534,16 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         # 访问站点根不泄露任何信息
         with open(os.path.join(site_root, "index.html"), "w", encoding="utf-8") as f:
             f.write("<!doctype html><meta name=\"robots\" content=\"noindex,nofollow\">")
+        # 开源电影片库（17部真4K/1080P，Blender CC授权，直链无网盘）
+        _wm = os.path.join(ROOT, "wm_movies.json")
+        if os.path.isfile(_wm):
+            shutil.copy2(_wm, os.path.join(site_root, "wm_movies.json"))
+            print("   wm_movies.json 已发布（开源电影片库）")
+        # 央视4K点播库（211个正版节目，1080P，免费无授权，实测211/211可播）
+        _c4 = os.path.join(ROOT, "cctv4k.json")
+        if os.path.isfile(_c4):
+            shutil.copy2(_c4, os.path.join(site_root, "cctv4k.json"))
+            print("   cctv4k.json 已发布（央视4K点播库211个）")
         # /clean/index.json：4 条 urls[] 多仓（壳 pa0.smali L557 支持 urls 展开、
         # L600 支持 sites 单仓，两者都支持时选 urls[] 与 x/ 结构一致）。
         # 旧生成器把它写进仓库根 clean/ 且只发 Pages 的 _site/ 子目录，
@@ -2389,6 +2399,14 @@ def _emit_clean(site_root, templates):
         {"key":"zj_360b","name":"360备用","type":1,"api":"https://360zy.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
         {"key":"zj_ffb","name":"非凡备用","type":1,"api":"https://ffzy.tv/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
         {"key":"zj_sb","name":"速播","type":1,"api":"https://subocaiji.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+        # 真4K/1080P开源电影库（17部，Blender CC授权，MP4/WebM直链，无网盘无广告无授权）
+        {"key":"wm_open","name":"4K开源电影","type":1,
+         "api":"https://LYK1379030.github.io/mybox-80e9c2/wm_movies.json",
+         "searchable":1,"quickSearch":1,"changeable":1},
+        # 央视4K正版点播库（211个节目，1080P，官方免费无广告无授权，实测211/211可播）
+        {"key":"cctv4k","name":"央视4K·1080P","type":1,
+         "api":"https://LYK1379030.github.io/mybox-80e9c2/cctv4k.json",
+         "searchable":1,"quickSearch":1,"changeable":1},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
