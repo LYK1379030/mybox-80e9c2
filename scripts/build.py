@@ -2140,6 +2140,16 @@ CLEAN_FILTER_TYPES = {
 # 零 jar：全部 type:1 直连。构建期按 year 参数生成变体，并把源站不认的
 # 参数交给网关（路线 A）或干脆不暴露（路线 B 伪筛选）。
 
+# 高清源安全分类白名单：只放行普通影视分类，杜绝成人内容
+# （里番动漫/伦理/三级/福利/写真等一律不在此列，客户端只拉这些类目）
+HD_SAFE_CATS = [
+    "电影","电视剧","连续剧","综艺","动漫","动作片","喜剧片","爱情片","科幻片",
+    "恐怖片","剧情片","战争片","惊悚片","家庭片","古装片","历史片","悬疑片",
+    "犯罪片","灾难片","纪录片","记录片","短片","动画片","国产剧","香港剧","韩国剧",
+    "欧美剧","台湾剧","日剧","韩剧","港剧","泰剧","海外剧","大陆综艺","港台综艺",
+    "日韩综艺","欧美综艺","国产动漫","日韩动漫","欧美动漫","港台动漫","动漫电影","海外动漫",
+]
+
 CLEAN_SITES = [
 
     {"key": "clean_dzzy", "name": "大众资源", "type": 1,
@@ -2410,14 +2420,18 @@ def _emit_clean(site_root, templates):
         {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v",
          "ext":"https://www.xb6v.com/","searchable":1,"quickSearch":1,"changeable":1},
         # 2026-11-25 真实分片ffprobe实测码率(非声明)：
-        # 醉影/zuidazy 2560kbps 1920x1080 真1080P(内容正常,无成人) —— 全库最高
-        # 爱奇艺资源 1863kbps 1280x720
+        # 醉影 2560kbps 1920x1080 真1080P(内容正常) —— 全库最高
+        # 关键修复：醉影必须用 https（http 在电视盒子上被系统拦截导致搜不出）
+        # categories 白名单只放行正常分类，杜绝"里番/伦理/三级"等成人内容
         {"key":"zuid_hd","name":"①醉影1080P","type":1,
-         "api":"http://api.zuidapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+         "api":"https://api.zuidapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
+         "categories":HD_SAFE_CATS},
         {"key":"zuidazy_hd","name":"②醉影备用1080P","type":1,
-         "api":"http://zuidazy.me/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+         "api":"http://zuidazy.me/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
+         "categories":HD_SAFE_CATS},
         {"key":"iqiyi_zy","name":"③爱奇艺720P","type":1,
-         "api":"https://www.iqiyizyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+         "api":"https://www.iqiyizyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
+         "categories":HD_SAFE_CATS},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
