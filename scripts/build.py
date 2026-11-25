@@ -1544,6 +1544,11 @@ def _emit(templates, live_texts, report, ch, empty_ok=False):
         if os.path.isfile(_c4):
             shutil.copy2(_c4, os.path.join(site_root, "cctv4k.json"))
             print("   cctv4k.json 已发布（央视4K点播库211个）")
+        # 找剧AI drpy规则（逆向HMAC签名，支持搜索）
+        _zj = os.path.join(ROOT, "zhaoju1.js")
+        if os.path.isfile(_zj):
+            shutil.copy2(_zj, os.path.join(site_root, "zhaoju1.js"))
+            print("   zhaoju1.js 已发布（找剧AI搜索规则）")
         # /clean/index.json：4 条 urls[] 多仓（壳 pa0.smali L557 支持 urls 展开、
         # L600 支持 sites 单仓，两者都支持时选 urls[] 与 x/ 结构一致）。
         # 旧生成器把它写进仓库根 clean/ 且只发 Pages 的 _site/ 子目录，
@@ -2407,6 +2412,12 @@ def _emit_clean(site_root, templates):
         {"key":"cctv4k","name":"央视4K·1080P","type":1,
          "api":"https://LYK1379030.github.io/mybox-80e9c2/cctv4k.json",
          "searchable":1,"quickSearch":1,"changeable":1},
+        # 找剧AI：逆向签名HMAC-SHA256，支持关键词搜索（实测3词均返回结果）
+        # 播放需在找剧AI应用内二次resolve，TVBox点开跳转网页
+        {"key":"zhaoju","name":"找剧AI·搜索","type":3,
+         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
+         "ext":"https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
+         "searchable":1,"quickSearch":1,"changeable":0},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
