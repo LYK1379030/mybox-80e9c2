@@ -2402,34 +2402,12 @@ def _emit_clean(site_root, templates):
         # timeout 统一 5 秒：好站秒回，坏站快速跳过
         item["timeout"] = 5
         sites.append(item)
-    # 高清插件站（含新6V磁力）——用 custom_spider.jar（43个search token，
-    # 搜索能力远强于 jg4k.jar 的2个）。这些类在完整版c1已长期验证存在。
-    # 全部强制 searchable=1，让每个源都能搜索。
+    # 用户客户端实测：只有 type=1 苹果CMS 采集站能搜索；csp 插件只能平铺；
+    # drpy 外挂规则(zhaoju/xb6v)在客户端是空壳(引擎依赖加载失败)。
+    # 因此恢复用户唯一能看到的高清平铺源"新6V·磁力"，删掉两个 drpy 空壳站。
     _EXTRA_DIRECT = [
-        {"key":"csp_bili","name":"哔哩哔哩","type":3,"api":"csp_Bili",
-         "ext":'{"json":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json"}',"searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_shop","name":"影视商店","type":3,"api":"csp_Market",
-         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/market.json","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_bus","name":"巴士","type":3,"api":"csp_Dm84","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_zy","name":"找资源","type":3,"api":"csp_Zhaozy","ext":"影視天下第一$$$test2$$$test2","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_star","name":"星星","type":3,"api":"csp_Star","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_du","name":"独播","type":3,"api":"csp_XPathMacFilter",
-         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/duboku.json","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_ysj","name":"异界","type":3,"api":"csp_Ysj","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_jp","name":"贱贱","type":3,"api":"csp_Jianpian",
-         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/jianpian.json","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"csp_db","name":"豆瓣","type":3,"api":"csp_Douban",
-         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/douban.json","searchable":1,"quickSearch":1,"changeable":1},
-        # 找剧AI：逆向HMAC签名的drpy规则，实测搜索"流浪地球"3秒返回真实结果
-        {"key":"zhaoju","name":"找剧AI·搜索","type":3,
-         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-         "ext":"https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
-         "searchable":1,"quickSearch":1,"changeable":0},
-        # 新6V磁力搜索规则：网页搜索接口逆向，实测搜"流浪地球"3部+详情提取磁力
-        {"key":"xb6v_search","name":"新6V·搜索","type":3,
-         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-         "ext":"https://LYK1379030.github.io/mybox-80e9c2/xb6v.js",
-         "searchable":1,"quickSearch":1,"changeable":0},
+        {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v",
+         "ext":"https://www.xb6v.com/","searchable":1,"quickSearch":1,"changeable":1},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
