@@ -2208,18 +2208,7 @@ CLEAN_SITES = [
                        "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
                        "欧美动漫","港台动漫","海外动漫","短剧"],
     },
-    # 以下两条为2026-11实测：宣称4K的18个接口逐一ffprobe验码率，
-    # zuid实测1920x872(这批普通内容里分辨率最高)，iqiyizy为爱奇艺资源m3u8源站。
-    {
-        "key": "clean_zuid", "name": "醉影高清", "type": 1,
-        "api": "http://api.zuidapi.com/api.php/provide/vod",
-        "searchable": 1, "quickSearch": 1, "changeable": 1,
-    },
-    {
-        "key": "clean_iqiyi", "name": "爱奇艺资源", "type": 1,
-        "api": "https://www.iqiyizyapi.com/api.php/provide/vod",
-        "searchable": 1, "quickSearch": 1, "changeable": 1,
-    },
+    # 高清源统一在 _EXTRA_DIRECT 定义并置顶，避免与此处重复
 ]
 
 
