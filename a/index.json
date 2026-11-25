@@ -325,33 +325,106 @@
       "timeout": 5
     },
     {
-      "key": "mg_6v",
+      "key": "csp_6v",
       "name": "新6V·磁力",
       "type": 3,
-      "api": "csp_SixVGuard",
-      "ext": "https://www.xb6v.com/",
+      "api": "csp_Xb6v",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
       "timeout": 5
     },
     {
-      "key": "mg_bt",
-      "name": "比特·秒播",
+      "key": "csp_bili",
+      "name": "哔哩哔哩",
       "type": 3,
-      "api": "csp_BttwooGuard",
-      "ext": "",
+      "api": "csp_Bili",
+      "ext": "{\"json\":\"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json\"}",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
       "timeout": 5
     },
     {
-      "key": "mg_bili",
-      "name": "哔哔·合集",
+      "key": "csp_shop",
+      "name": "影视商店",
       "type": 3,
-      "api": "csp_BiliGuard",
-      "ext": "https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/jar/hj.txt",
+      "api": "csp_Market",
+      "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/market.json",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "csp_bus",
+      "name": "巴士",
+      "type": 3,
+      "api": "csp_Dm84",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "csp_zy",
+      "name": "找资源",
+      "type": 3,
+      "api": "csp_Zhaozy",
+      "ext": "影視天下第一$$$test2$$$test2",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "csp_star",
+      "name": "星星",
+      "type": 3,
+      "api": "csp_Star",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "csp_du",
+      "name": "独播",
+      "type": 3,
+      "api": "csp_XPathMacFilter",
+      "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/duboku.json",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "csp_ysj",
+      "name": "异界",
+      "type": 3,
+      "api": "csp_Ysj",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "csp_jp",
+      "name": "贱贱",
+      "type": 3,
+      "api": "csp_Jianpian",
+      "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/jianpian.json",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "csp_db",
+      "name": "豆瓣",
+      "type": 3,
+      "api": "csp_Douban",
+      "ext": "https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/douban.json",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
@@ -543,6 +616,6 @@
       ]
     }
   ],
-  "spider": "https://LYK1379030.github.io/mybox-80e9c2/jar/jg4k.jar;md5;1d7a5147033044a81f91d5f4a510f9ed",
+  "spider": "https://LYK1379030.github.io/mybox-80e9c2/jar/custom_spider.jar;md5;41c87635d7592069884a5dafa12acabe",
   "rules": []
 }

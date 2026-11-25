@@ -2391,23 +2391,31 @@ def _emit_clean(site_root, templates):
             continue
         # 没有 categories 的（如 csp 插件线）正常保留，靠插件自身分组成人内容
         item.pop("_wl_source", None)
-        # timeout 必须显式设置：缺失时客户端用默认长超时，
-        # 一个连不上的站就能把整次搜索拖到 40s+，表现为一直转圈。
-        item.setdefault("timeout", 20)
+        # 用户要求：能搜索的都做成搜索——全部强制开启搜索
+        item["searchable"] = 1
+        item["quickSearch"] = 1
+        # timeout 统一 5 秒：好站秒回，坏站快速跳过
+        item["timeout"] = 5
         sites.append(item)
-    # 高清磁力/网盘插件站（新6V磁力等）——用户明确要保留的高清源。
-    # 之前误删，现恢复：csp_* 插件站来自 jg4k.jar，全部开启搜索。
+    # 高清插件站（含新6V磁力）——用 custom_spider.jar（43个search token，
+    # 搜索能力远强于 jg4k.jar 的2个）。这些类在完整版c1已长期验证存在。
+    # 全部强制 searchable=1，让每个源都能搜索。
     _EXTRA_DIRECT = [
-        {"key":"mg_6v","name":"新6V·磁力","type":3,
-         "api":"csp_SixVGuard","ext":"https://www.xb6v.com/",
-         "searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"mg_bt","name":"比特·秒播","type":3,
-         "api":"csp_BttwooGuard","ext":"",
-         "searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"mg_bili","name":"哔哔·合集","type":3,
-         "api":"csp_BiliGuard",
-         "ext":"https://cdn.jsdelivr.net/gh/LYK1379030/mybox-80e9c2@main/jar/hj.txt",
-         "searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_bili","name":"哔哩哔哩","type":3,"api":"csp_Bili",
+         "ext":'{"json":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json"}',"searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_shop","name":"影视商店","type":3,"api":"csp_Market",
+         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/market.json","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_bus","name":"巴士","type":3,"api":"csp_Dm84","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_zy","name":"找资源","type":3,"api":"csp_Zhaozy","ext":"影視天下第一$$$test2$$$test2","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_star","name":"星星","type":3,"api":"csp_Star","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_du","name":"独播","type":3,"api":"csp_XPathMacFilter",
+         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/duboku.json","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_ysj","name":"异界","type":3,"api":"csp_Ysj","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_jp","name":"贱贱","type":3,"api":"csp_Jianpian",
+         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/jianpian.json","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"csp_db","name":"豆瓣","type":3,"api":"csp_Douban",
+         "ext":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/douban.json","searchable":1,"quickSearch":1,"changeable":1},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
@@ -2432,9 +2440,9 @@ def _emit_clean(site_root, templates):
         "ads": ADS,
         "doh": CONF_DOH,
         "ijk": IJK,
-        # 纯净版含 csp 插件站（新6V磁力等高清源）→ 需要 jg4k.jar
-        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
-                   "1d7a5147033044a81f91d5f4a510f9ed"),
+        # 纯净版含 csp 插件站（新6V磁力等）→ custom_spider.jar（搜索能力强）
+        "spider": (PAGES_ROOT + "/jar/custom_spider.jar;md5;"
+                   "41c87635d7592069884a5dafa12acabe"),
         "rules": [],
     }
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
@@ -2470,9 +2478,9 @@ def _emit_clean(site_root, templates):
         # ijk 补齐：缺 ijk 时部分客户端会退回软解，4K 片源卡顿
         "ijk": IJK,
         # spider 补齐：与已验证可用的单仓结构一致（同源小 jar）
-        # 纯净版含 csp 插件站（新6V磁力等高清源）→ 需要 jg4k.jar
-        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
-                   "1d7a5147033044a81f91d5f4a510f9ed"),
+        # 纯净版含 csp 插件站（新6V磁力等）→ custom_spider.jar（搜索能力强）
+        "spider": (PAGES_ROOT + "/jar/custom_spider.jar;md5;"
+                   "41c87635d7592069884a5dafa12acabe"),
         "rules": [],
     }
     for d in (os.path.join(site_root, "a"), os.path.join(OUT, "a")):
