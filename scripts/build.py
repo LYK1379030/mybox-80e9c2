@@ -2208,6 +2208,18 @@ CLEAN_SITES = [
                        "大陆综艺","港台综艺","日韩综艺","欧美综艺","国产动漫","日韩动漫",
                        "欧美动漫","港台动漫","海外动漫","短剧"],
     },
+    # 以下两条为2026-11实测：宣称4K的18个接口逐一ffprobe验码率，
+    # zuid实测1920x872(这批普通内容里分辨率最高)，iqiyizy为爱奇艺资源m3u8源站。
+    {
+        "key": "clean_zuid", "name": "醉影高清", "type": 1,
+        "api": "http://api.zuidapi.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1,
+    },
+    {
+        "key": "clean_iqiyi", "name": "爱奇艺资源", "type": 1,
+        "api": "https://www.iqiyizyapi.com/api.php/provide/vod",
+        "searchable": 1, "quickSearch": 1, "changeable": 1,
+    },
 ]
 
 
@@ -2408,16 +2420,11 @@ def _emit_clean(site_root, templates):
     _EXTRA_DIRECT = [
         {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v",
          "ext":"https://www.xb6v.com/","searchable":1,"quickSearch":1,"changeable":1},
-        # 找剧AI：drpy2规则（影视TV内置引擎支持）
-        {"key":"zhaoju","name":"找剧AI·搜索","type":3,
-         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-         "ext":"https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
-         "searchable":1,"quickSearch":1,"changeable":0},
-        # 新6V搜索：官方drpy规则（so.php搜索接口）
-        {"key":"xb6v_search","name":"新6V·搜索","type":3,
-         "api":"https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-         "ext":"https://LYK1379030.github.io/mybox-80e9c2/xb6v.js",
-         "searchable":1,"quickSearch":1,"changeable":0},
+        # 2026-11实测宣称4K的18接口里ffprobe验出的最高画质普通源
+        {"key":"zuid_hd","name":"醉影高清","type":1,
+         "api":"http://api.zuidapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"iqiyi_zy","name":"爱奇艺资源","type":1,
+         "api":"https://www.iqiyizyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:

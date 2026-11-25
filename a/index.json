@@ -336,25 +336,23 @@
       "timeout": 5
     },
     {
-      "key": "zhaoju",
-      "name": "找剧AI·搜索",
-      "type": 3,
-      "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-      "ext": "https://LYK1379030.github.io/mybox-80e9c2/zhaoju1.js",
+      "key": "zuid_hd",
+      "name": "醉影高清",
+      "type": 1,
+      "api": "http://api.zuidapi.com/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
-      "changeable": 0,
+      "changeable": 1,
       "timeout": 5
     },
     {
-      "key": "xb6v_search",
-      "name": "新6V·搜索",
-      "type": 3,
-      "api": "https://gh-proxy.com/raw.githubusercontent.com/gaotianliuyun/gao/master/lib/drpy2.min.js",
-      "ext": "https://LYK1379030.github.io/mybox-80e9c2/xb6v.js",
+      "key": "iqiyi_zy",
+      "name": "爱奇艺资源",
+      "type": 1,
+      "api": "https://www.iqiyizyapi.com/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
-      "changeable": 0,
+      "changeable": 1,
       "timeout": 5
     }
   ],
