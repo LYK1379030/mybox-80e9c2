@@ -2406,7 +2406,6 @@ def _emit_clean(site_root, templates):
     # 搜索能力远强于 jg4k.jar 的2个）。这些类在完整版c1已长期验证存在。
     # 全部强制 searchable=1，让每个源都能搜索。
     _EXTRA_DIRECT = [
-        {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v","searchable":1,"quickSearch":1,"changeable":1},
         {"key":"csp_bili","name":"哔哩哔哩","type":3,"api":"csp_Bili",
          "ext":'{"json":"https://cdn.jsdelivr.net/gh/gaotianliuyun/gao@master/json/bili.json"}',"searchable":1,"quickSearch":1,"changeable":1},
         {"key":"csp_shop","name":"影视商店","type":3,"api":"csp_Market",

@@ -325,16 +325,6 @@
       "timeout": 5
     },
     {
-      "key": "csp_6v",
-      "name": "新6V·磁力",
-      "type": 3,
-      "api": "csp_Xb6v",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
       "key": "csp_bili",
       "name": "哔哩哔哩",
       "type": 3,
