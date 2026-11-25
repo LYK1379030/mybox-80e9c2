@@ -2,6 +2,36 @@
   "wallpaper": "",
   "sites": [
     {
+      "key": "zuid_hd",
+      "name": "①醉影1080P",
+      "type": 1,
+      "api": "http://api.zuidapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "zuidazy_hd",
+      "name": "②醉影备用1080P",
+      "type": 1,
+      "api": "http://zuidazy.me/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
+      "key": "iqiyi_zy",
+      "name": "③爱奇艺720P",
+      "type": 1,
+      "api": "https://www.iqiyizyapi.com/api.php/provide/vod",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "timeout": 5
+    },
+    {
       "key": "clean_old",
       "name": "老剧专线",
       "type": 1,
@@ -324,26 +354,6 @@
       "type": 3,
       "api": "csp_Xb6v",
       "ext": "https://www.xb6v.com/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
-      "key": "zuid_hd",
-      "name": "醉影高清",
-      "type": 1,
-      "api": "http://api.zuidapi.com/api.php/provide/vod",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "timeout": 5
-    },
-    {
-      "key": "iqiyi_zy",
-      "name": "爱奇艺资源",
-      "type": 1,
-      "api": "https://www.iqiyizyapi.com/api.php/provide/vod",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,

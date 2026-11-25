@@ -2420,16 +2420,22 @@ def _emit_clean(site_root, templates):
     _EXTRA_DIRECT = [
         {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v",
          "ext":"https://www.xb6v.com/","searchable":1,"quickSearch":1,"changeable":1},
-        # 2026-11实测宣称4K的18接口里ffprobe验出的最高画质普通源
-        {"key":"zuid_hd","name":"醉影高清","type":1,
+        # 2026-11-25 真实分片ffprobe实测码率(非声明)：
+        # 醉影/zuidazy 2560kbps 1920x1080 真1080P(内容正常,无成人) —— 全库最高
+        # 爱奇艺资源 1863kbps 1280x720
+        {"key":"zuid_hd","name":"①醉影1080P","type":1,
          "api":"http://api.zuidapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
-        {"key":"iqiyi_zy","name":"爱奇艺资源","type":1,
+        {"key":"zuidazy_hd","name":"②醉影备用1080P","type":1,
+         "api":"http://zuidazy.me/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
+        {"key":"iqiyi_zy","name":"③爱奇艺720P","type":1,
          "api":"https://www.iqiyizyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1},
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
         if str(_ed["api"]).rstrip("/") not in _have_api:
             sites.append(dict(_ed))
+    # 实测高清源(名称带①②③)置顶，让用户打开即是最高画质
+    sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "①②③" else 1)
     # 纯净版全部站统一 timeout=5（好站 500-900ms，坏站5秒跳过）
     for _s in sites:
         _s["timeout"] = 5
