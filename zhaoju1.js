@@ -18,7 +18,8 @@ function uid(){let s="",h="0123456789abcdef";for(let i=0;i<32;i++)s+=h[Math.floo
 function signed(method,path,params,body){
 	let q="";if(params){let a=[];for(let k in params)a.push(encodeURIComponent(k)+"="+encodeURIComponent(params[k]));q="?"+a.join("&");}
 	let ts=String(Date.now()),nonce=uid();
-	let msg=method+"\n"+path+q+"\n"+ts+"\n"+nonce;
+	let NL=String.fromCharCode(10);
+	let msg=method+NL+path+q+NL+ts+NL+nonce;
 	let sig=CryptoJS.HmacSHA256(msg,S).toString(CryptoJS.enc.Hex);
 	let H={"User-Agent":"Mozilla/5.0","x-ai-movie-timestamp":ts,"x-ai-movie-nonce":nonce,
 		"x-ai-movie-signature":sig,"x-ai-movie-protocol-version":PROTO,

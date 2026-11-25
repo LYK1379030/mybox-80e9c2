@@ -1,18 +1,18 @@
 var rule = {
 	title:'新版6V[磁]',
-	host:'http://www.xb6v.com',
+	host:'https://www.xb6v.com',
 	homeUrl:'/',
 	url: '/fyclass/index_fypage.html?',
 	filter_url:'{{fl.class}}',
 	filter:{
 	},
-	searchUrl: '/e/search/index.php#tempid=1&tbname=article&mid=1&dopost=search&submit=&keyborad=**;post',
+	searchUrl: '/e/search/so.php#tempid=1&tbname=article&mid=1&dopost=search&submit=&keyborad=**;post',
 	searchable:2,
 	quickSearch:0,
 	filterable:0,
 	headers:{
 		'User-Agent': 'PC_UA',
-		'Referer': 'http://www.xb6v.com/'
+		'Referer': 'https://www.xb6v.com/'
 	},
 	timeout:5000,
 	class_name:'最新50部&喜剧片&动作片&爱情片&科幻片&恐怖片&剧情片&战争片&纪录片&动画片&电视剧&综艺',
@@ -214,7 +214,7 @@ let postData = {
 delete(_fetch_params.headers['Content-Type']);
 Object.assign(_fetch_params, postData);
 log("xb6v search postData>>>>>>>>>>>>>>>" + JSON.stringify(_fetch_params));
-let search_html = request( HOST + '/e/search/index.php', _fetch_params, true);
+let search_html = request( HOST + '/e/search/so.php', _fetch_params, true);
 //log("xb6v search result>>>>>>>>>>>>>>>" + search_html);
 let d=[];
 let dlist = pdfa(search_html, 'div.mainleft&&ul#post_container&&li');
