@@ -2480,6 +2480,11 @@ def _emit_clean(site_root, templates):
     # 返回前就被客户端放弃 → 搜索页只剩低清快站，高清线全丢。
     for _s in sites:
         _n = str(_s.get("name", ""))
+        # 苹果CMS采集站(type=1, api含 provide/vod)开启筛选，客户端才会显示
+        # "类型/地区/排序/年代"筛选条；api?ac=list 提供 filters 定义。
+        if str(_s.get("type")) == "1" and "provide/vod" in str(_s.get("api", "")):
+            _s["filterable"] = 1
+            _s.setdefault("changeable", 1)
         if ("★" in _n or "⓪" in _n or "4K" in _n or "1080P" in _n
                 or "磁力" in _n or "原盘" in _n):
             _s["timeout"] = 30          # 高清/磁力/平铺源：对齐行业 30s
