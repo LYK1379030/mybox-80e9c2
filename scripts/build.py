@@ -1074,7 +1074,7 @@ def main():
         _verify(report)
         chs = _channels()
         report["channels"] = [
-            {"name": c["name"], "dest": c["dest"], "base": c["base"],
+            {"name": c["name"], "dest": os.path.relpath(c["dest"], OUT), "base": c["base"],
              "files": len(live_texts) + 2} for c in chs
         ]
         for ch in chs:
