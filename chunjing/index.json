@@ -8,36 +8,6 @@
   ],
   "sites": [
     {
-      "key": "dg_4k",
-      "name": "★★4K原盘·2160P",
-      "type": 1,
-      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg4k",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 0,
-      "timeout": 30
-    },
-    {
-      "key": "dg_1080",
-      "name": "★★1080P蓝光原盘",
-      "type": 1,
-      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg1080",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 0,
-      "timeout": 30
-    },
-    {
-      "key": "dg_ys",
-      "name": "★★最新电影·原盘",
-      "type": 1,
-      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dgys",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 0,
-      "timeout": 30
-    },
-    {
       "key": "dy_hd",
       "name": "★新6V-4K磁力",
       "type": 1,
@@ -121,8 +91,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 30,
-      "filterable": 1
+      "filterable": 1,
+      "timeout": 30
     },
     {
       "key": "mdzy_hd",
@@ -177,8 +147,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15,
-      "filterable": 1
+      "filterable": 1,
+      "timeout": 15
     },
     {
       "key": "iqiyi_zy",
@@ -233,8 +203,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15,
-      "filterable": 1
+      "filterable": 1,
+      "timeout": 15
     },
     {
       "key": "maoyan_hd",
@@ -289,8 +259,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15,
-      "filterable": 1
+      "filterable": 1,
+      "timeout": 15
     },
     {
       "key": "honniu_hd",
@@ -345,8 +315,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15,
-      "filterable": 1
+      "filterable": 1,
+      "timeout": 15
     },
     {
       "key": "xigua_hd",
@@ -401,8 +371,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15,
-      "filterable": 1
+      "filterable": 1,
+      "timeout": 15
     },
     {
       "key": "clean_old",

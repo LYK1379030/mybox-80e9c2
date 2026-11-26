@@ -2417,28 +2417,19 @@ def _emit_clean(site_root, templates):
     # drpy 外挂规则(zhaoju/xb6v)在客户端是空壳(引擎依赖加载失败)。
     # 因此恢复用户唯一能看到的高清平铺源"新6V·磁力"，删掉两个 drpy 空壳站。
     _EXTRA_DIRECT = [
-        # 【★★4K原盘·2160P】dygang.net 4K区，真2160p原盘磁力（本地标题匹配）
-        {"key":"dg_4k","name":"★★4K原盘·2160P","type":1,
-         "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg4k",
-         "searchable":1,"quickSearch":1,"changeable":0},
-        # 【★★1080P蓝光原盘】dygang.net 1080p区
-        {"key":"dg_1080","name":"★★1080P蓝光原盘","type":1,
-         "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg1080",
-         "searchable":1,"quickSearch":1,"changeable":0},
-        # 【★★最新电影·原盘】dygang.net 最新电影区
-        {"key":"dg_ys","name":"★★最新电影·原盘","type":1,
-         "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dgys",
-         "searchable":1,"quickSearch":1,"changeable":0},
+        # 2026-11-26 晚 回滚说明：新窗口曾加 dg_4k/dg_1080/dg_ys 三条 dygang 线路，
+        # 实测 dygang 站搜索接口已废弃（任何关键词都返回"没有搜索到相关的内容"，固定1052B），
+        # 三条全是空壳且排在最前，导致用户以为"高清源全没了"。已全部删除。
         # 【★新6V-4K磁力搜索】只搜 dyg7，返回 4K 2160P + 1080P 磁力
         # 实测搜"四渡"→1条，返回2个磁力（2160p/1080p）；用户客户端实测能播磁力 3840x1608/296Mbps
         {"key":"dy_hd","name":"★新6V-4K磁力","type":1,
          "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dy",
-         "searchable":1,"quickSearch":1,"changeable":0},
+         "searchable":1,"quickSearch":1,"changeable":0,"timeout":30},
         # 【★找剧AI-1080P】只搜 zhaoju1，返回 m3u8 直链
         # 实测搜"凡人修仙传"→19条，详情取6条线路，1080x1916 / 2111-2521kbps
         {"key":"zj_hd","name":"★找剧AI-1080P","type":1,
          "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=zj",
-         "searchable":1,"quickSearch":1,"changeable":0},
+         "searchable":1,"quickSearch":1,"changeable":0,"timeout":30},
         # 恢复用户原本能看的高清平铺: 完整版第⑦条4kmg.json的原始配置
         # csp_SixVGuard + jg4k.jar（不是csp_Xb6v/custom_spider.jar，那套平铺是空的）
         {"key":"mg_6v","name":"⓪新6V·磁力4K","type":3,"api":"csp_SixVGuard",
