@@ -2417,10 +2417,12 @@ def _emit_clean(site_root, templates):
     # drpy 外挂规则(zhaoju/xb6v)在客户端是空壳(引擎依赖加载失败)。
     # 因此恢复用户唯一能看到的高清平铺源"新6V·磁力"，删掉两个 drpy 空壳站。
     _EXTRA_DIRECT = [
-        # 【找剧AI 高清搜索】Cloudflare Pages 转换器
-        # 实测：搜"凡人修仙传"返回10条，详情取6条线路，真实1080P 1080x1916 2111-2521kbps
-        # 全新6V搜索也走这里；带密码 tvbox2026hd；已过滤成人内容
-        {"key":"zj_hd","name":"★找剧AI高清1080P","type":1,
+        # 【★高清搜索】Cloudflare 转换器，一个接口同时覆盖：
+        #   1) dyg7(新6V) 4K/1080P 磁力 —— 实测搜"四渡"→1条，返回4K 2160P+1080P磁力
+        #      （用户客户端实测能播磁力：3840x1608 / 296.5Mbps）
+        #   2) 找剧AI 1080P m3u8 直链 —— 实测搜"凡人修仙传"→19条，1080x1916/2111-2521kbps
+        #   3) 360/爱奇艺/漫督/猫眼/红牛 五个采集站合并
+        {"key":"hd_search","name":"★高清搜索(4K磁力+1080P)","type":1,
          "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd",
          "searchable":1,"quickSearch":1,"changeable":0},
         # 恢复用户原本能看的高清平铺: 完整版第⑦条4kmg.json的原始配置

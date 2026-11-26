@@ -8,8 +8,8 @@
   ],
   "sites": [
     {
-      "key": "zj_hd",
-      "name": "★找剧AI高清1080P",
+      "key": "hd_search",
+      "name": "★高清搜索(4K磁力+1080P)",
       "type": 1,
       "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd",
       "searchable": 1,
