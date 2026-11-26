@@ -121,7 +121,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 30
+      "timeout": 30,
+      "filterable": 1
     },
     {
       "key": "mdzy_hd",
@@ -176,7 +177,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15
+      "timeout": 15,
+      "filterable": 1
     },
     {
       "key": "iqiyi_zy",
@@ -231,7 +233,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15
+      "timeout": 15,
+      "filterable": 1
     },
     {
       "key": "maoyan_hd",
@@ -286,7 +289,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15
+      "timeout": 15,
+      "filterable": 1
     },
     {
       "key": "honniu_hd",
@@ -341,7 +345,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15
+      "timeout": 15,
+      "filterable": 1
     },
     {
       "key": "xigua_hd",
@@ -396,7 +401,8 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 15
+      "timeout": 15,
+      "filterable": 1
     },
     {
       "key": "clean_old",
@@ -436,7 +442,8 @@
         "影视解说",
         "预告片",
         "网络电影"
-      ]
+      ],
+      "filterable": 1
     },
     {
       "key": "clean_360",
@@ -521,7 +528,8 @@
         "动作片",
         "犯罪片",
         "海外动漫"
-      ]
+      ],
+      "filterable": 1
     },
     {
       "key": "clean_bfzy",
