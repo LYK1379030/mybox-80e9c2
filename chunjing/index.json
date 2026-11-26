@@ -15,7 +15,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 0,
-      "timeout": 15
+      "timeout": 30
     },
     {
       "key": "zj_hd",
@@ -25,7 +25,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 0,
-      "timeout": 12
+      "timeout": 30
     },
     {
       "key": "mg_6v",
@@ -36,7 +36,7 @@
       "searchable": 0,
       "quickSearch": 0,
       "changeable": 0,
-      "timeout": 10
+      "timeout": 30
     },
     {
       "key": "zuid_hd",
@@ -91,7 +91,7 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 10
+      "timeout": 30
     },
     {
       "key": "mdzy_hd",
@@ -146,7 +146,7 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "iqiyi_zy",
@@ -201,7 +201,7 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "maoyan_hd",
@@ -256,7 +256,7 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "honniu_hd",
@@ -311,7 +311,7 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "xigua_hd",
@@ -366,7 +366,7 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "clean_old",
@@ -376,7 +376,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 5,
+      "timeout": 15,
       "categories": [
         "电影",
         "电视剧",
@@ -462,7 +462,7 @@
         "女频恋爱",
         "成长逆袭"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "clean_dzzy",
@@ -472,7 +472,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 1,
-      "timeout": 5,
+      "timeout": 15,
       "categories": [
         "综艺",
         "剧情片",
@@ -550,7 +550,7 @@
         "古装仙侠",
         "AI漫剧"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "clean_feifan",
@@ -593,7 +593,7 @@
         "海外动漫",
         "短剧"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "clean_dytt",
@@ -633,7 +633,7 @@
         "短剧",
         "动画片"
       ],
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "clean_lzi",
@@ -683,7 +683,7 @@
         "动画片",
         "AI漫剧"
       ],
-      "timeout": 5
+      "timeout": 15
     }
   ],
   "lives": [],
