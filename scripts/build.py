@@ -2417,8 +2417,10 @@ def _emit_clean(site_root, templates):
     # drpy 外挂规则(zhaoju/xb6v)在客户端是空壳(引擎依赖加载失败)。
     # 因此恢复用户唯一能看到的高清平铺源"新6V·磁力"，删掉两个 drpy 空壳站。
     _EXTRA_DIRECT = [
-        {"key":"csp_6v","name":"新6V·磁力","type":3,"api":"csp_Xb6v",
-         "ext":"https://www.xb6v.com/","searchable":1,"quickSearch":1,"changeable":1},
+        # 新6V·磁力 = 用户的高清1080P/4K平铺源（纯浏览，不触发搜索）
+        # searchable=0 保证点进去是高清片库列表，不跳搜索页
+        {"key":"csp_6v","name":"⓪新6V·磁力4K","type":3,"api":"csp_Xb6v",
+         "ext":"https://www.xb6v.com/","searchable":0,"quickSearch":0,"changeable":0},
         # 2026-11-26 关键修复：先实测"真搜索"判据(两个不同关键词返回是否匹配)，
         # 再叠加真实分片码率。醉影/zuidazy 虽2560k但 wd=参数被忽略=假搜索，已剔除。
         # 以下都是真搜索(流浪地球/庆余年 返回匹配结果)+内容正常+较高码率：
@@ -2443,8 +2445,8 @@ def _emit_clean(site_root, templates):
     for _ed in _EXTRA_DIRECT:
         if str(_ed["api"]).rstrip("/") not in _have_api:
             sites.append(dict(_ed))
-    # 真搜索高清源(名称带①②③④⑤)置顶，让用户打开即是搜索可用源
-    sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "①②③④⑤" else 1)
+    # 高清平铺源⓪置顶，其次是真搜索源①②③④⑤
+    sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "⓪①②③④⑤" else 1)
     # 纯净版全部站统一 timeout=5（好站 500-900ms，坏站5秒跳过）
     for _s in sites:
         _s["timeout"] = 5

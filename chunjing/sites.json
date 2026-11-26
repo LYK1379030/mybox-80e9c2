@@ -2,6 +2,17 @@
   "wallpaper": "",
   "sites": [
     {
+      "key": "csp_6v",
+      "name": "⓪新6V·磁力4K",
+      "type": 3,
+      "api": "csp_Xb6v",
+      "ext": "https://www.xb6v.com/",
+      "searchable": 0,
+      "quickSearch": 0,
+      "changeable": 0,
+      "timeout": 5
+    },
+    {
       "key": "mdzy_hd",
       "name": "①漫督高清",
       "type": 1,
@@ -591,17 +602,6 @@
         "动画片",
         "AI漫剧"
       ],
-      "timeout": 5
-    },
-    {
-      "key": "csp_6v",
-      "name": "新6V·磁力",
-      "type": 3,
-      "api": "csp_Xb6v",
-      "ext": "https://www.xb6v.com/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
       "timeout": 5
     }
   ],
