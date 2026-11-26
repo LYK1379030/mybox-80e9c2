@@ -15,7 +15,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 0,
-      "timeout": 5
+      "timeout": 15
     },
     {
       "key": "zj_hd",
@@ -25,7 +25,7 @@
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 0,
-      "timeout": 5
+      "timeout": 12
     },
     {
       "key": "mg_6v",
@@ -36,7 +36,7 @@
       "searchable": 0,
       "quickSearch": 0,
       "changeable": 0,
-      "timeout": 5
+      "timeout": 10
     },
     {
       "key": "zuid_hd",
@@ -91,7 +91,7 @@
         "动漫电影",
         "海外动漫"
       ],
-      "timeout": 5
+      "timeout": 10
     },
     {
       "key": "mdzy_hd",
