@@ -2,6 +2,36 @@
   "wallpaper": "",
   "sites": [
     {
+      "key": "dg_4k",
+      "name": "★★4K原盘·2160P",
+      "type": 1,
+      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg4k",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 0,
+      "timeout": 30
+    },
+    {
+      "key": "dg_1080",
+      "name": "★★1080P蓝光原盘",
+      "type": 1,
+      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg1080",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 0,
+      "timeout": 30
+    },
+    {
+      "key": "dg_ys",
+      "name": "★★最新电影·原盘",
+      "type": 1,
+      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dgys",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 0,
+      "timeout": 30
+    },
+    {
       "key": "dy_hd",
       "name": "★新6V-4K磁力",
       "type": 1,
