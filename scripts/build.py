@@ -1074,7 +1074,7 @@ def main():
         _verify(report)
         chs = _channels()
         report["channels"] = [
-            {"name": c["name"], "dest": os.path.relpath(c["dest"], OUT), "base": c["base"],
+            {"name": c["name"], "dest": c["dest"], "base": c["base"],
              "files": len(live_texts) + 2} for c in chs
         ]
         for ch in chs:
@@ -2417,10 +2417,22 @@ def _emit_clean(site_root, templates):
     # drpy 外挂规则(zhaoju/xb6v)在客户端是空壳(引擎依赖加载失败)。
     # 因此恢复用户唯一能看到的高清平铺源"新6V·磁力"，删掉两个 drpy 空壳站。
     _EXTRA_DIRECT = [
-        # 新6V·磁力 = 用户的高清1080P/4K平铺源（纯浏览，不触发搜索）
-        # searchable=0 保证点进去是高清片库列表，不跳搜索页
-        {"key":"csp_6v","name":"⓪新6V·磁力4K","type":3,"api":"csp_Xb6v",
+        # 【找剧AI 高清搜索】Cloudflare Pages 转换器
+        # 实测：搜"凡人修仙传"返回10条，详情取6条线路，真实1080P 1080x1916 2111-2521kbps
+        # 全新6V搜索也走这里；带密码 tvbox2026hd；已过滤成人内容
+        {"key":"zj_hd","name":"★找剧AI高清1080P","type":1,
+         "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd",
+         "searchable":1,"quickSearch":1,"changeable":0},
+        # 恢复用户原本能看的高清平铺: 完整版第⑦条4kmg.json的原始配置
+        # csp_SixVGuard + jg4k.jar（不是csp_Xb6v/custom_spider.jar，那套平铺是空的）
+        {"key":"mg_6v","name":"⓪新6V·磁力4K","type":3,"api":"csp_SixVGuard",
          "ext":"https://www.xb6v.com/","searchable":0,"quickSearch":0,"changeable":0},
+        # 醉影1080P：真实分片ffprobe实测2560kbps/1920x1080，在线流可直接播。
+        # 用户要求恢复为纯平铺源(search=0)：按片名搜索返回固定片单不精确，
+        # 所以只做浏览，不做搜索；精确搜索交给下面的低码率源。
+        {"key":"zuid_hd","name":"⓪醉影1080P","type":1,
+         "api":"https://api.zuidapi.com/api.php/provide/vod",
+         "searchable":0,"quickSearch":0,"changeable":0,"categories":HD_SAFE_CATS},
         # 2026-11-26 关键修复：先实测"真搜索"判据(两个不同关键词返回是否匹配)，
         # 再叠加真实分片码率。醉影/zuidazy 虽2560k但 wd=参数被忽略=假搜索，已剔除。
         # 以下都是真搜索(流浪地球/庆余年 返回匹配结果)+内容正常+较高码率：
@@ -2445,8 +2457,8 @@ def _emit_clean(site_root, templates):
     for _ed in _EXTRA_DIRECT:
         if str(_ed["api"]).rstrip("/") not in _have_api:
             sites.append(dict(_ed))
-    # 高清平铺源⓪置顶，其次是真搜索源①②③④⑤
-    sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "⓪①②③④⑤" else 1)
+    # ★找剧AI高清置顶，其次高清平铺源⓪，再是真搜索源①②③④⑤
+    sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "★⓪" else (1 if str(x.get("name",""))[:1] in "①②③④⑤" else 2))
     # 纯净版全部站统一 timeout=5（好站 500-900ms，坏站5秒跳过）
     for _s in sites:
         _s["timeout"] = 5
@@ -2466,9 +2478,9 @@ def _emit_clean(site_root, templates):
         "ads": ADS,
         "doh": CONF_DOH,
         "ijk": IJK,
-        # 纯净版含 csp 插件站（新6V磁力等）→ custom_spider.jar（搜索能力强）
-        "spider": (PAGES_ROOT + "/jar/custom_spider.jar;md5;"
-                   "41c87635d7592069884a5dafa12acabe"),
+        # 纯净版高清源用 csp_SixVGuard（只在 jg4k.jar 里），spider 必须匹配
+        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
+                   "1d7a5147033044a81f91d5f4a510f9ed"),
         "rules": [],
     }
     # 隐蔽路径：a/ 无任何 tvbox/clean 字样，外人扫不出用途
@@ -2504,9 +2516,9 @@ def _emit_clean(site_root, templates):
         # ijk 补齐：缺 ijk 时部分客户端会退回软解，4K 片源卡顿
         "ijk": IJK,
         # spider 补齐：与已验证可用的单仓结构一致（同源小 jar）
-        # 纯净版含 csp 插件站（新6V磁力等）→ custom_spider.jar（搜索能力强）
-        "spider": (PAGES_ROOT + "/jar/custom_spider.jar;md5;"
-                   "41c87635d7592069884a5dafa12acabe"),
+        # 纯净版高清源用 csp_SixVGuard（只在 jg4k.jar 里），spider 必须匹配
+        "spider": (PAGES_ROOT + "/jar/jg4k.jar;md5;"
+                   "1d7a5147033044a81f91d5f4a510f9ed"),
         "rules": [],
     }
     for d in (os.path.join(site_root, "a"), os.path.join(OUT, "a")):
