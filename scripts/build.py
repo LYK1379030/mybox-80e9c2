@@ -841,17 +841,31 @@ def prune_empty_categories(sites, report=None, strip_adult=True):
 
     # 主仓剥离成人分类：categories 里命中成人词的一律去掉，
     # 让成人内容只在「🔥成人专区」那条线里出现。
-    ADULT_WORDS = ("伦理", "三级", "理论", "福利", "写真", "两性", "擦边",
-                   "情色", "成人", "无码", "里番", "艳", "偷拍", "自拍",
-                   "少女", "嫩", "调教", "私房", "裸", "性爱", "爆乳",
-                   "胸", "大奶", "蕾丝", "美女", "乳", "丝袜")
+    # 主仓剥离非白名单分类（用白名单法，避免维护敏感词表）
+    SAFE_CAT_RE = re.compile(
+        r'movie|tv|anime|variety|documentary|short|sport|kids'
+        r'|电影|电视剧|连续剧|综艺|动漫|动画|纪录片|记录片|短片|剧集|少儿|体育|科教|戏曲'
+        r'|动作片|喜剧片|爱情片|科幻片|恐怖片|剧情片|战争片|惊悚片|家庭片|古装片|历史片'
+        r'|悬疑片|犯罪片|灾难片|冒险片|奇幻片|武侠片|枪战片|儿童片'
+        r'|国产剧|香港剧|韩国剧|欧美剧|台湾剧|日剧|韩剧|港剧|泰剧|海外剧'
+        r'|大陆综艺|港台综艺|日韩综艺|欧美综艺'
+        r'|国产动漫|日韩动漫|欧美动漫|港台动漫|动漫电影|海外动漫|短剧|微短剧',
+        re.I)
+    # 明确禁区（只列必要的排除词，避免误伤）
+    BAD_CAT_RE = re.compile(r'里番|无修正|无删减|限制级|r18|18禁|成年|未删|未审|私密|专区|里区', re.I)
+    def _safe_cat(s):
+        v = str(s or '').strip()
+        if not v:
+            return False
+        if BAD_CAT_RE.search(v):
+            return False
+        return bool(SAFE_CAT_RE.search(v))
     stripped = 0 if strip_adult else 0
     out2 = []
     for site in out:
         cats = site.get("categories")
         if strip_adult and isinstance(cats, list) and cats:
-            keep = [c for c in cats
-                    if not any(w in str(c) for w in ADULT_WORDS)]
+            keep = [c for c in cats if _safe_cat(c)]
             if len(keep) != len(cats):
                 stripped += len(cats) - len(keep)
                 site = dict(site)
