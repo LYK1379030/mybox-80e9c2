@@ -2,10 +2,20 @@
   "wallpaper": "",
   "sites": [
     {
-      "key": "hd_search",
-      "name": "★高清搜索(4K磁力+1080P)",
+      "key": "dy_hd",
+      "name": "★新6V-4K磁力",
       "type": 1,
-      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd",
+      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dy",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 0,
+      "timeout": 5
+    },
+    {
+      "key": "zj_hd",
+      "name": "★找剧AI-1080P",
+      "type": 1,
+      "api": "https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=zj",
       "searchable": 1,
       "quickSearch": 1,
       "changeable": 0,
