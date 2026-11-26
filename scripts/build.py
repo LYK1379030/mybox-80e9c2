@@ -2463,18 +2463,16 @@ def _emit_clean(site_root, templates):
             sites.append(dict(_ed))
     # ★找剧AI高清置顶，其次高清平铺源⓪，再是真搜索源①②③④⑤
     sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "★⓪" else (1 if str(x.get("name",""))[:1] in "①②③④⑤" else 2))
-    # timeout 分级：低清快站 5 秒跳过坏站；高清源跨境慢，单独放宽，
-    # 否则客户端 5 秒就放弃 → 4K 磁力还没返回就被跳过（截图里只剩低清站的根因）。
+    # timeout 对齐行业标准：实测主流影视仓配置(gao/wxrjck等)高清/磁力源
+    # 一律 30-60 秒，没有 5 秒这种值。之前设 5 秒导致跨境高清源在磁力
+    # 返回前就被客户端放弃 → 搜索页只剩低清快站，高清线全丢。
     for _s in sites:
         _n = str(_s.get("name", ""))
-        if "★新6V" in _n or "新6V-4K" in _n:
-            _s["timeout"] = 15          # dyg7 跨境实测 6-12s
-        elif "★找剧AI" in _n:
-            _s["timeout"] = 12          # zhaoju 签名搜索 3-8s
-        elif "⓪" in _n or "4K" in _n or "1080P" in _n:
-            _s["timeout"] = 10          # 高清平铺源
+        if ("★" in _n or "⓪" in _n or "4K" in _n or "1080P" in _n
+                or "磁力" in _n or "原盘" in _n):
+            _s["timeout"] = 30          # 高清/磁力/平铺源：对齐行业 30s
         else:
-            _s["timeout"] = 5           # 低清快站 500-900ms
+            _s["timeout"] = 15          # 普通采集站：15s（别人普遍30s，够用）
     cfg = {
         "wallpaper": WALLPAPER,
         "sites": sites,
