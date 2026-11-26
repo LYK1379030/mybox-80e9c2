@@ -2417,6 +2417,18 @@ def _emit_clean(site_root, templates):
     # drpy 外挂规则(zhaoju/xb6v)在客户端是空壳(引擎依赖加载失败)。
     # 因此恢复用户唯一能看到的高清平铺源"新6V·磁力"，删掉两个 drpy 空壳站。
     _EXTRA_DIRECT = [
+        # 【★★4K原盘·2160P】dygang.net 4K区，真2160p原盘磁力（本地标题匹配）
+        {"key":"dg_4k","name":"★★4K原盘·2160P","type":1,
+         "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg4k",
+         "searchable":1,"quickSearch":1,"changeable":0},
+        # 【★★1080P蓝光原盘】dygang.net 1080p区
+        {"key":"dg_1080","name":"★★1080P蓝光原盘","type":1,
+         "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dg1080",
+         "searchable":1,"quickSearch":1,"changeable":0},
+        # 【★★最新电影·原盘】dygang.net 最新电影区
+        {"key":"dg_ys","name":"★★最新电影·原盘","type":1,
+         "api":"https://hdsearch-pages.pages.dev/api?key=tvbox2026hd&src=dgys",
+         "searchable":1,"quickSearch":1,"changeable":0},
         # 【★新6V-4K磁力搜索】只搜 dyg7，返回 4K 2160P + 1080P 磁力
         # 实测搜"四渡"→1条，返回2个磁力（2160p/1080p）；用户客户端实测能播磁力 3840x1608/296Mbps
         {"key":"dy_hd","name":"★新6V-4K磁力","type":1,
