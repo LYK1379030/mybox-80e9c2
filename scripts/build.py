@@ -2452,15 +2452,15 @@ def _emit_clean(site_root, templates):
         # 2026-11-26 关键修复：先实测"真搜索"判据(两个不同关键词返回是否匹配)，
         # 再叠加真实分片码率。醉影/zuidazy 虽2560k但 wd=参数被忽略=假搜索，已剔除。
         # 以下都是真搜索(流浪地球/庆余年 返回匹配结果)+内容正常+较高码率：
-        # mdzy 1897k / xigua 1543k / maoyan / honniu / 爱奇艺 1863k
+        # mdzy 1897k / xigua 1543k / honniu / 爱奇艺 1863k
+        # 2026-11-27 移除猫眼(maoyan_hd)：实测其播放地址错配——
+        # 片名/封面/演员是《凡人修仙传》(国产动漫)，但 m3u8 时长仅 24 秒（正常单集应为20分52秒），
+        # 实际播放的是完全无关内容。已按用户要求从纯净版删除此源。
         {"key":"mdzy_hd","name":"①漫督高清","type":1,
          "api":"https://www.mdzyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
          "categories":HD_SAFE_CATS},
         {"key":"iqiyi_zy","name":"②爱奇艺720P","type":1,
          "api":"https://www.iqiyizyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
-         "categories":HD_SAFE_CATS},
-        {"key":"maoyan_hd","name":"③猫眼影视","type":1,
-         "api":"https://api.maoyanapi.top/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
          "categories":HD_SAFE_CATS},
         {"key":"honniu_hd","name":"④红牛影视","type":1,
          "api":"https://www.hongniuzy3.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,
