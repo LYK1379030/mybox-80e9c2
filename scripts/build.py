@@ -32,6 +32,85 @@ import urllib.error
 import concurrent.futures as cf
 from datetime import datetime, timezone
 
+
+# ======================================================================
+# 【模块级·唯一合规判定】全文件共用这一套，禁止各写各的
+# ======================================================================
+# 判定顺序：
+#   1) 命中 UNSAFE_CAT_RE → 不安全
+#   2) 命中 SAFE_CAT_RE   → 安全
+#   3) 都不命中           → 不安全（fail-closed）
+#
+# 关键设计：
+#   - SAFE 用"结尾锚定"避免「成人动漫」被「动漫」放行
+#   - UNSAFE 覆盖 20+ 高危前缀，优先于 SAFE 判断
+# ----------------------------------------------------------------------
+# 高危禁区词（命中即判不安全，优先级最高）
+UNSAFE_CAT_RE = re.compile(
+    r'里番|无修正|无删减|限制级|r18|18禁|成年|午夜|深夜|禁忌|禁播|未删|未审'
+    r'|私密|私房|写真|福利|专区|里区|隐藏|密码区|擦边|b级|血腥|猎奇|禁片'
+    r'|封禁|下架|地下|内部|私享|会员专享|付费区|打码|无码|有码|遮挡|露点'
+    r'|走光|偷拍|偷窥|偷摄|针孔|盗摄|外流|流出|泄露|自拍|私拍|网红|主播'
+    r'|热舞|艳舞|钢管舞|脱衣|裸|情色|色情|两性|性爱|性教育|成人|三级|伦理'
+    r'|理论片|理论|淫|猥|肉番|肉漫|h漫|工口|痴女|痴汉|调教|人兽|兽交|萝莉'
+    r'|正太|幼女|女优|av|口交|性交|肛|爆乳|巨乳|嫩模|艳照|人妻|素人|熟女'
+    r'|美艳|妖艳|艳妇|荡妇|荡|色欲|欲女|女体',
+    re.I)
+
+# 正常影视分类（结尾锚定，避免子串误放行）
+SAFE_CAT_RE = re.compile(
+    r'(?:^|[\s\-_])'
+    r'(?:电影|电视剧|连续剧|综艺|动漫|动画|纪录片|记录片|短片|剧集|少儿|体育|科教|戏曲'
+    r'|动作片|喜剧片|爱情片|科幻片|恐怖片|剧情片|战争片|惊悚片|家庭片|家庭篇|古装片'
+    r'|历史片|悬疑片|犯罪片|灾难片|冒险片|奇幻片|武侠片|枪战片|儿童片|西部片'
+    r'|国产剧|香港剧|韩国剧|欧美剧|台湾剧|大陆剧|美剧|日剧|韩剧|港剧|港澳剧|台剧'
+    r'|泰剧|海外剧|日本剧|泰国剧'
+    r'|大陆综艺|港台综艺|日韩综艺|欧美综艺|综艺片'
+    r'|国产动漫|日韩动漫|欧美动漫|港台动漫|动漫电影|海外动漫|动漫片'
+    r'|短剧|微短剧|短剧大全|爽文短剧|漫剧|ai漫剧'
+    r'|足球|篮球|网球|斯诺克|nba|体育赛事'
+    r'|电影解说|影视解说|预告片|预告解说|演唱会|科普学习|儿童儿歌'
+    r'|央视|卫视|直播'
+    r')(?:$|[\s\-_（(])',
+    re.I)
+
+# 英文分类（精确匹配）
+SAFE_CAT_EN_RE = re.compile(
+    r'^(?:movie|movies|tv|tvshow|tv\s+show|anime|animation|variety|documentary'
+    r'|short|sport|sports|kids|drama|comedy|action|romance|scifi|sci-fi'
+    r'|horror|thriller|war|history|mystery|crime|adventure|fantasy|western)$',
+    re.I)
+
+
+def safe_cat(s):
+    """判断单个分类名是否属于正常影视分类。fail-closed。"""
+    v = str(s or '').strip()
+    if not v:
+        return False
+    if UNSAFE_CAT_RE.search(v):
+        return False
+    return bool(SAFE_CAT_RE.search(v) or SAFE_CAT_EN_RE.match(v))
+
+
+def filter_cats(cats):
+    """过滤分类列表，返回安全分类。空输入返回空列表。"""
+    if not isinstance(cats, list):
+        return []
+    return [c for c in cats if safe_cat(c)]
+
+
+# 默认安全分类（48 项，覆盖主流采集站）
+DEFAULT_SAFE_CATS = [
+    "电影", "电视剧", "连续剧", "综艺", "动漫", "动作片", "喜剧片", "爱情片",
+    "科幻片", "恐怖片", "剧情片", "战争片", "惊悚片", "家庭片", "古装片",
+    "历史片", "悬疑片", "犯罪片", "灾难片", "纪录片", "记录片", "短片",
+    "动画片", "国产剧", "香港剧", "韩国剧", "欧美剧", "台湾剧", "日剧",
+    "韩剧", "港剧", "泰剧", "海外剧", "大陆综艺", "港台综艺", "日韩综艺",
+    "欧美综艺", "国产动漫", "日韩动漫", "欧美动漫", "港台动漫", "动漫电影",
+    "海外动漫", "体育", "体育赛事", "足球", "篮球", "预告片",
+]
+
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -864,12 +943,19 @@ def prune_empty_categories(sites, report=None, strip_adult=True):
     out2 = []
     for site in out:
         cats = site.get("categories")
-        if strip_adult and isinstance(cats, list) and cats:
-            keep = [c for c in cats if _safe_cat(c)]
+        if strip_adult and isinstance(cats, list):
+            if not cats:
+                # 【P0-fix】categories 为空列表 = FongMi isEmpty() → 全分类放行
+                # 必须整站剔除，不能让它带着空数组存活
+                continue
+            keep = [c for c in cats if safe_cat(c)]
             if len(keep) != len(cats):
                 stripped += len(cats) - len(keep)
-                site = dict(site)
-                site["categories"] = keep
+            if not keep:
+                # 【P0-fix】全部被过滤 → 该站只有成人内容，整站剔除
+                continue
+            site = dict(site)
+            site["categories"] = keep
         out2.append(site)
     out = out2
     if report is not None:
@@ -2412,14 +2498,16 @@ def _emit_clean(site_root, templates):
         if _hit and _hit.get("keep"):
             item["categories"] = list(_hit["keep"])
             item["_wl_source"] = "probe"
-        cats = [c for c in (item.get("categories") or [])
-                if not any(b.lower() in c.lower() for b in BAN)]
+        cats = [c for c in (item.get("categories") or []) if safe_cat(c)]
         if cats:
             item["categories"] = cats
-        elif item.get("categories"):
+        elif "categories" in item:
             # 原本有 categories 但全被禁 → 该站只有成人内容，整条剔除
             continue
-        # 没有 categories 的（如 csp 插件线）正常保留，靠插件自身分组成人内容
+        # 没有 categories 的（如 csp 插件线）→ 兜底注入默认白名单，
+        # 避免 FongMi 因缺 categories 而全分类放行
+        else:
+            item["categories"] = list(DEFAULT_SAFE_CATS)
         item.pop("_wl_source", None)
         # 用户要求：能搜索的都做成搜索——全部强制开启搜索
         item["searchable"] = 1
@@ -2485,8 +2573,22 @@ def _emit_clean(site_root, templates):
     ]
     _have_api = {str(x.get("api","")).rstrip("/") for x in sites}
     for _ed in _EXTRA_DIRECT:
-        if str(_ed["api"]).rstrip("/") not in _have_api:
-            sites.append(dict(_ed))
+        if str(_ed["api"]).rstrip("/") in _have_api:
+            continue
+        _e = dict(_ed)
+        # 【P0-fix】_EXTRA_DIRECT 也必须过白名单。
+        # 1) 有 categories → 过滤；全被禁则整站剔除
+        # 2) 无 categories → 兜底注入 DEFAULT_SAFE_CATS，防止全分类放行
+        if "categories" in _e and isinstance(_e.get("categories"), list):
+            _keep = filter_cats(_e["categories"])
+            if not _keep:
+                print("   [安全] _EXTRA_DIRECT 剔除全成人分类站: %s" % _e.get("name"))
+                continue
+            _e["categories"] = _keep
+        else:
+            _e["categories"] = list(DEFAULT_SAFE_CATS)
+        _have_api.add(str(_e["api"]).rstrip("/"))
+        sites.append(_e)
     # ★找剧AI高清置顶，其次高清平铺源⓪，再是真搜索源①②③④⑤
     sites.sort(key=lambda x: 0 if str(x.get("name",""))[:1] in "★⓪" else (1 if str(x.get("name",""))[:1] in "①②③④⑤" else 2))
     # timeout 对齐行业标准：实测主流影视仓配置(gao/wxrjck等)高清/磁力源
@@ -2592,6 +2694,15 @@ def _emit_aliases(site_root, out_root):
         {"key":"zj_dz","name":"大众资源","type":1,"api":"https://cdn.dzzyapi.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
         {"key":"zj_hq","name":"高清精选","type":1,"api":"http://slapibf.com/api.php/provide/vod","searchable":1,"quickSearch":1,"changeable":1,"timeout":5},
     ]
+    # 【P0-fix】ZHIJIE_SITES 全部无 categories → 必须兜底注入默认白名单，
+    # 否则 FongMi 因缺 categories 而全分类放行（含成人分类）。
+    for _z in ZHIJIE_SITES:
+        if "categories" in _z and isinstance(_z.get("categories"), list):
+            _zk = filter_cats(_z["categories"])
+            _z["categories"] = _zk if _zk else list(DEFAULT_SAFE_CATS)
+        else:
+            _z["categories"] = list(DEFAULT_SAFE_CATS)
+
     zhijie_cfg = {
         "wallpaper": "", "sites": ZHIJIE_SITES, "lives": [],
         "parses": [{"name":"聚合","type":0,"url":"Web"}],
