@@ -60,7 +60,7 @@ UNSAFE_CAT_RE = re.compile(
 # 正常影视分类（结尾锚定，避免子串误放行）
 SAFE_CAT_RE = re.compile(
     r'(?:^|[\s\-_])'
-    r'(?:电影|电视剧|连续剧|综艺|动漫|动画|纪录片|记录片|短片|剧集|少儿|体育|科教|戏曲'
+    r'(?:电影|电视剧|连续剧|综艺|动漫|动画|动画片|纪录片|记录片|短片|剧集|少儿|体育|科教|戏曲'
     r'|动作片|喜剧片|爱情片|科幻片|恐怖片|剧情片|战争片|惊悚片|家庭片|家庭篇|古装片'
     r'|历史片|悬疑片|犯罪片|灾难片|冒险片|奇幻片|武侠片|枪战片|儿童片|西部片'
     r'|国产剧|香港剧|韩国剧|欧美剧|台湾剧|大陆剧|美剧|日剧|韩剧|港剧|港澳剧|台剧'
@@ -942,6 +942,10 @@ def prune_empty_categories(sites, report=None, strip_adult=True):
     stripped = 0 if strip_adult else 0
     out2 = []
     for site in out:
+        # 【完整版豁免】用户明确要求"完整版的老剧不要限制"→ 跳过所有分类裁剪
+        if site.get("_full_unrestricted") and strip_adult:
+            out2.append(site)
+            continue
         cats = site.get("categories")
         if strip_adult and isinstance(cats, list):
             if not cats:
@@ -1204,10 +1208,28 @@ def main():
     report["vod_lines"] = lines
 
     # ---------- 6. 渲染模板 ----------
+    # 【完整版/纯净版硬隔离】
+    # 只有这些 uid 属于「完整版」，允许老剧站用全量分类（含成人）。
+    # 纯净版走 clean 路径（_emit_clean），永远不在此列表内 → 不可能被注入。
+    FULL_VERSION_UIDS = {"c1", "c2", "4k", "4kmg", "fs4k3", "banana", "adult"}
     templates = {}
     built = []
     for uid, cfg in configs.items():
         out, dropped = tune(cfg, health, live_entries)
+        # 【完整版专用】用户明确要求"完整版的老剧不要限制"
+        # 只在完整版 uid 上还原；纯净版(clean/a)绝不触碰
+        _restored = 0
+        if uid in FULL_VERSION_UIDS:
+            for _s in (out.get("sites") or []):
+                if "lovedan.net" in str(_s.get("api") or ""):
+                    if _s.get("categories") != OLD_DRAMA_ALL_CATS:
+                        _s["categories"] = list(OLD_DRAMA_ALL_CATS)
+                        _restored += 1
+            if _restored:
+                print("  [%s·完整版] 老剧分类还原全量 %d 类" % (uid, len(OLD_DRAMA_ALL_CATS)))
+        # 清理内部标记，不能写进最终配置
+        for _s in (out.get("sites") or []):
+            _s.pop("_full_unrestricted", None)
         templates[uid + ".json"] = json.dumps(out, ensure_ascii=False, indent=2)
         report["dropped"].extend(dropped)
         built.append((uid, len(out["sites"])))
@@ -1733,8 +1755,29 @@ BANANA_SITE = {
 # 老剧/经典剧专线（实测：189,482 片 70 分类，稳定性 30/30 = 100%）
 # 用户要看的 1993《神医朱丹溪》就在这站（vod_id=169189，全 8 集，
 # 8 集 m3u8 全 HTTP 200，TS 分片 759 个、无加密、真实可播）。
-# 该站含大量成人/写真分类，故用白名单只放行实测可用的正常分类。
+#
+# 【完整版 vs 纯净版分流】
+#   完整版（wanzheng/c1.json + olddrama 站）：用户明确要求"完整版的老剧不要限制"，
+#     保留该站全部 70 个原始分类，不做任何裁剪（含成人分类）。
+#   纯净版（chunjing）：仍用 OLD_DRAMA_CATS 白名单严格过滤。
 OLD_DRAMA_CATS = ["电影", "电视剧", "动作片", "喜剧片", "爱情片", "科幻片", "恐怖片", "犯罪片", "战争片", "国产剧", "港台剧", "日韩剧", "欧美剧", "动画电影", "剧情片", "纪录片", "综艺", "日韩综艺", "欧美综艺", "日韩动漫", "欧美动漫", "海外动漫", "海外剧", "央视", "卫视", "短剧", "影视解说", "预告片", "网络电影"]
+
+# 完整版专用：老剧站全量分类（2026-11-27 实测 ac=list 70 类，原样保留）
+# 用户明确要求："完整版的老剧没有限制的给我弄出来"
+OLD_DRAMA_ALL_CATS = [
+    "电影", "电视剧", "综艺", "动漫", "福利视频", "动作片", "喜剧片", "爱情片",
+    "科幻片", "恐怖片", "犯罪片", "战争片", "国产剧", "港台剧", "日韩剧",
+    "欧美剧", "三级伦理", "网红主播", "动画电影", "剧情片", "纪录片",
+    "日韩综艺", "港台综艺", "欧美综艺", "国产动漫", "日韩动漫", "欧美动漫",
+    "海外动漫", "海外剧", "大陆综艺", "明星", "福利图片", "爱蜜社",
+    "头条女神", "美媛馆", "海外抖音", "嗲囡囡", "波萝社", "魅妍社",
+    "爱尤物", "秀人网", "尤果网", "推女神", "DGC套图", "尤蜜荟",
+    "模范学院", "尤物馆", "优星馆", "蜜桃社", "影私荟", "顽味生活",
+    "星乐园", "花の颜", "御女郎", "糖果画报", "花漾", "星颜社",
+    "画语界", "直播", "央视", "卫视", "短剧", "影视解说",
+    "港台三级", "韩国伦理", "西方伦理", "日本伦理", "预告片",
+    "网络电影", "其他综艺",
+]
 
 # 新增站点：分类白名单经探测生成（身材/颜值向），明确禁止的分类已排除
 EXTRA_SITE = {
@@ -1747,7 +1790,10 @@ OLD_DRAMA_SITE = {
     "key": "olddrama", "name": "老剧专线", "type": 1,
     "api": "https://lovedan.net/api.php/provide/vod",
     "searchable": 1, "quickSearch": 1, "changeable": 1,
-    "timeout": 30, "categories": OLD_DRAMA_CATS,
+    "timeout": 30,
+    # 【完整版专用】用户要求不限制：用全量分类，不做任何裁剪
+    "categories": OLD_DRAMA_ALL_CATS,
+    "_full_unrestricted": True,
 }
 
 # ---------------------------------------------------------------- 4K 插件专线
@@ -2728,6 +2774,31 @@ def _emit_aliases(site_root, out_root):
                 fn = old_url.rsplit("/", 1)[-1]
                 u["url"] = f"{BASE}/wanzheng/{fn}"
             json.dump(idx, open(idx_p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+
+        # 【完整版专用】用户明确要求："完整版的老剧没有限制的给我弄出来"
+        # 把 wanzheng 下所有 json 里 lovedan(老剧) 站的 categories
+        # 换成该站全量 70 个原始分类，不做任何裁剪。
+        _old_fixed = 0
+        for _fn in os.listdir(dst_w):
+            if not _fn.endswith(".json"):
+                continue
+            _p = os.path.join(dst_w, _fn)
+            try:
+                _cfg = json.load(open(_p, encoding="utf-8"))
+            except Exception:
+                continue
+            _changed = False
+            for _s in (_cfg.get("sites") or []):
+                if "lovedan.net" in str(_s.get("api") or ""):
+                    if _s.get("categories") != OLD_DRAMA_ALL_CATS:
+                        _s["categories"] = list(OLD_DRAMA_ALL_CATS)
+                        _changed = True
+                        _old_fixed += 1
+            if _changed:
+                json.dump(_cfg, open(_p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+        if _old_fixed:
+            print("  [完整版] 老剧站分类已还原为全量 %d 类（%d 处）" % (len(OLD_DRAMA_ALL_CATS), _old_fixed))
+
         print("  wanzheng/ 已生成（完整版独立地址）")
     # --- 纯净版 → chunjing/ ---
     src_a = os.path.join(site_root, "a")
@@ -2906,6 +2977,63 @@ def _verify(report):
     report["verify"]["all_absolute"] = (
         report["verify"].get("total_problems", 0) == 0)
 
+    # ==================================================================
+    # 【硬断言·交叉污染熔断】纯净版绝不允许出现成人分类
+    # 一旦发现，构建直接失败（退出码 3），不发布有污染的产物。
+    # 这是最后一道防线：即使前面所有过滤逻辑被改坏，这里也会拦住。
+    # ==================================================================
+    _assert_pure_clean()
+
+
+def _assert_pure_clean():
+    """构建后自检：扫描 chunjing/ 与 a/ 下所有 json，发现成人分类即失败。"""
+    offenders = []
+    checked = 0
+    # 产物实际落盘位置：OUT/_site/<子目录>
+    for _rel in ("chunjing", "a"):
+        _dir = os.path.join(OUT, "_site", _rel)
+        if not os.path.isdir(_dir):
+            _dir = os.path.join(OUT, _rel)   # 兼容另一种目录布局
+        if not os.path.isdir(_dir):
+            continue
+        for _fn in os.listdir(_dir):
+            if not _fn.endswith(".json"):
+                continue
+            _p = os.path.join(_dir, _fn)
+            try:
+                _cfg = json.load(open(_p, encoding="utf-8"))
+            except Exception:
+                continue
+            checked += 1
+            for _s in (_cfg.get("sites") or []):
+                # 该站是否被误标为"完整版豁免"（不应出现在纯净版）
+                if _s.get("_full_unrestricted"):
+                    offenders.append((_rel + "/" + _fn, _s.get("key"), "带 _full_unrestricted 标记"))
+                _cats = _s.get("categories")
+                if _cats is None:
+                    # 缺 categories = FongMi 全放行 → 也算违规
+                    offenders.append((_rel + "/" + _fn, _s.get("key"), "缺 categories(会全放行)"))
+                    continue
+                if not isinstance(_cats, list) or not _cats:
+                    offenders.append((_rel + "/" + _fn, _s.get("key"), "categories 为空(会全放行)"))
+                    continue
+                for _c in _cats:
+                    if not safe_cat(_c):
+                        offenders.append((_rel + "/" + _fn, _s.get("key"), "分类不安全: %s" % _c))
+                        break
+
+    print("\n" + "=" * 62)
+    if offenders:
+        print("【熔断】纯净版自检失败，发现 %d 处问题：" % len(offenders))
+        for _f, _k, _why in offenders[:20]:
+            print("   %s | %s | %s" % (_f, _k, _why))
+        print("=" * 62)
+        raise SystemExit(3)
+    print("【自检通过】纯净版 %d 个文件，0 处成人分类残留。" % checked)
+    print("=" * 62)
+
 
 if __name__ == "__main__":
     main()
+    # 【硬断言·交叉污染熔断】必须放在 main() 全部产出之后
+    _assert_pure_clean()
